@@ -1,0 +1,6 @@
+[libraries]
+
+# Project files
+project.files = [
+  '**/*.vhd',
+]
