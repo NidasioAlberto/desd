@@ -2,6 +2,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
+-- This entity outputs a clock signal with Ton = Toff = threashold * clk_in
 entity ClockDivider is
     generic (
         COUNTER_WIDTH : positive := 8
@@ -16,14 +17,17 @@ end ClockDivider;
 
 architecture ClockDivider_arch of ClockDivider is
     signal counter        : unsigned(0 to COUNTER_WIDTH - 1) := to_unsigned(0, COUNTER_WIDTH);
+    signal old_threshold  : unsigned(0 to COUNTER_WIDTH - 1) := to_unsigned(0, COUNTER_WIDTH);
     signal clk_out_buffer : std_logic;
 begin
     clk_out <= clk_out_buffer;
 
-    process (reset, clk_in)
+    process (reset, clk_in, threshold)
     begin
-        if reset = '1' then
-            clk_out_buffer <= '1';
+        if reset = '1' or not(threshold = old_threshold) then
+            counter <= to_unsigned(0, counter'length);
+            clk_out_buffer <= '0';
+            old_threshold <= threshold;
         else
             if rising_edge(clk_in) then
                 -- Increment the counter

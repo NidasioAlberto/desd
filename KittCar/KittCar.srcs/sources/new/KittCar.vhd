@@ -4,10 +4,11 @@ use ieee.numeric_std.all;
 
 entity KittCar is
     generic (
+        SWITCHES_USED      : positive := 16;
         REGISTER_WIDTH     : positive := 16;
-        TAIL_LENGTH        : positive := 4;
+        TAIL_LENGTH        : positive := 5;
         MAIN_CLK_DIV_WIDTH : positive := 27;
-        MAIN_CLK_DIV_THR   : positive := 99999999;
+        MAIN_CLK_DIV_THR   : positive := 100000;
         PWM_CLK_DIV_WIDTH  : positive := 10;
         PWM_CLK_DIV_THR    : positive := 1
     );
@@ -15,6 +16,7 @@ entity KittCar is
         -- Reset and clock
         reset      : in std_logic;
         master_clk : in std_logic;
+        sw         : in std_logic_vector(SWITCHES_USED - 1 downto 0); -- Switches signals
 
         -- Output
         pwm_out : out std_logic_vector(0 to REGISTER_WIDTH - 1) -- PWM signals
@@ -59,8 +61,9 @@ architecture KittCar_arch of KittCar is
         );
     end component;
 
-    signal main_clk : std_logic;
-    signal pwm_clk  : std_logic;
+    signal prescaled_clk      : std_logic;
+    signal main_clk           : std_logic;
+    signal pwm_clk            : std_logic;
 
     type SHIFT_MATRIX_TYPE is array (0 to TAIL_LENGTH - 1) of std_logic_vector(0 to REGISTER_WIDTH - 1);
     signal shift_matrix : SHIFT_MATRIX_TYPE;
@@ -68,7 +71,7 @@ architecture KittCar_arch of KittCar is
     signal shift_matrix_transposed : SHIFT_MATRIC_TRANSPOSED_TYPE;
 begin
     -- Prepare clock dividers to generate the main and pwm clocks
-    main_clk_divider : ClockDivider
+    prescaled_clk_divider : ClockDivider
     generic map(
         COUNTER_WIDTH => MAIN_CLK_DIV_WIDTH
     )
@@ -76,6 +79,16 @@ begin
         reset     => reset,
         clk_in    => master_clk,
         threshold => to_unsigned(MAIN_CLK_DIV_THR, MAIN_CLK_DIV_WIDTH),
+        clk_out   => prescaled_clk
+    );
+    main_clk_divider : ClockDivider
+    generic map(
+        COUNTER_WIDTH => sw'length
+    )
+    port map(
+        reset     => reset,
+        clk_in    => prescaled_clk,
+        threshold => unsigned(sw),
         clk_out   => main_clk
     );
     pwm_clk_divider : ClockDivider
@@ -102,7 +115,7 @@ begin
         shifp_reg_cmp : BouncingShiftRegister
         generic map(
             REGISTER_WIDTH => REGISTER_WIDTH,
-            START_POSITION => i -- Make each element start at a different position
+            START_POSITION => TAIL_LENGTH - 1 - i -- Make each element start at a different position
         )
         port map(
             reset => reset,

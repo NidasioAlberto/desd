@@ -22,7 +22,7 @@ entity PWM is
 end PWM;
 
 architecture PWM_arch of PWM is
-    signal counter       : std_logic_vector(0 to COUNTER_WIDTH - 1) := (others => '0');
+    signal counter       : std_logic_vector(0 to COUNTER_WIDTH - 1) := (0 => '1', others => '0');
     signal threshold_buf : std_logic_vector(0 to COUNTER_WIDTH - 1);
 begin
     process (pwm_clk, reset)

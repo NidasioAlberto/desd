@@ -28,6 +28,7 @@ begin
         if reset = '1' then
             reg  <= (START_POSITION => '1', others => '0');
             dout <= (START_POSITION => '1', others => '0');
+            direction <= '0';
         else
             if rising_edge(clk) then
                 if (direction = '0' and reg(REGISTER_WIDTH - 1) = '0') or (direction = '1' and reg(0) = '1') then
