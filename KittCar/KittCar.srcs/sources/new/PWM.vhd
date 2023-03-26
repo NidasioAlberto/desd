@@ -14,16 +14,16 @@ entity PWM is
         pwm_clk   : in std_logic;
 
         -- Duty cycle threshold
-        threshold : in std_logic_vector(0 to COUNTER_WIDTH - 1); -- Clock cycles per period of the PWM signal
+        threshold : in std_logic_vector(COUNTER_WIDTH - 1 downto 0); -- Clock cycles per period of the PWM signal
 
         -- Output
-        pwm_out   : out std_logic                                -- PWM signal
+        pwm_out   : out std_logic                                    -- PWM signal
     );
 end PWM;
 
 architecture PWM_arch of PWM is
-    signal counter       : std_logic_vector(0 to COUNTER_WIDTH - 1) := (0 => '1', others => '0');
-    signal threshold_buf : std_logic_vector(0 to COUNTER_WIDTH - 1);
+    signal counter       : std_logic_vector(COUNTER_WIDTH - 1 downto 0) := (0 => '1', others => '0');
+    signal threshold_buf : std_logic_vector(COUNTER_WIDTH - 1 downto 0);
 begin
     process (pwm_clk, reset)
     begin
@@ -37,7 +37,7 @@ begin
                 counter <= (0 => '1', others => '0');
             else
                 -- Shift the counter
-                counter <= '0' & counter(0 to COUNTER_WIDTH - 2);
+                counter <= counter(COUNTER_WIDTH - 2 downto 0) & '0';
             end if;
 
             -- Check count and set the output

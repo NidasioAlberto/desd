@@ -32,12 +32,12 @@ architecture KittCarPWM_arch of KittCarPWM is
     component BouncingShiftRegister
         generic (
             REGISTER_WIDTH : positive;
-            START_POSITION : natural
+            START_DELAY    : natural
         );
         port (
             reset : in std_logic;
             clk   : in std_logic;
-            dout  : out std_logic_vector(0 to REGISTER_WIDTH - 1)
+            dout  : out std_logic_vector(REGISTER_WIDTH - 1 downto 0)
         );
     end component;
 
@@ -49,7 +49,7 @@ architecture KittCarPWM_arch of KittCarPWM is
             reset     : in std_logic;
             main_clk  : in std_logic;
             pwm_clk   : in std_logic;
-            threshold : in std_logic_vector(0 to COUNTER_WIDTH - 1);
+            threshold : in std_logic_vector(COUNTER_WIDTH - 1 downto 0);
             pwm_out   : out std_logic
         );
     end component;
@@ -70,14 +70,14 @@ architecture KittCarPWM_arch of KittCarPWM is
     signal main_clk      : std_logic;
     signal pwm_clk       : std_logic;
 
-    type SHIFT_MATRIX_TYPE is array (0 to TAIL_LENGTH - 1) of std_logic_vector(0 to NUM_OF_LEDS - 1);
-    signal shift_matrix : SHIFT_MATRIX_TYPE;
-    type SHIFT_MATRIC_TRANSPOSED_TYPE is array (0 to NUM_OF_LEDS - 1) of std_logic_vector(0 to TAIL_LENGTH - 1);
-    signal shift_matrix_transposed : SHIFT_MATRIC_TRANSPOSED_TYPE;
+    type SHIFT_MATRIX_TYPE is array (TAIL_LENGTH - 1 downto 0) of std_logic_vector(NUM_OF_LEDS - 1 downto 0);
+    signal shift_matrix_row : SHIFT_MATRIX_TYPE;
+    type SHIFT_MATRIC_TRANSPOSED_TYPE is array (NUM_OF_LEDS - 1 downto 0) of std_logic_vector(TAIL_LENGTH - 1 downto 0);
+    signal shift_matrix_columns : SHIFT_MATRIC_TRANSPOSED_TYPE;
 begin
     --
     -- external_clk ---> prescaled_clk_divider -> prescaled_clk ----> main_clk_divider -> main_clk -> [Shift registers]
-    --    (10ns)           (10ns -> 1ms)             (1ms)          (1ms -user-> >=1ms)     
+    --    (10ns)     |     (10ns -> 1ms)             (1ms)          (1ms -user-> >=1ms)     
     --               |
     --               \-> pwm_clk_divider -> pwm_clk -> [LEDS]
     --                   (10ns -> 10us)
@@ -114,25 +114,25 @@ begin
         clk_out   => pwm_clk
     );
 
-    -- Connect shift_matrix to shift_matrix_transposed
+    -- Connect shift_matrix to shift_matrix_columns
     TRANSPOSE_GEN : for i in 0 to TAIL_LENGTH - 1 generate
         TRANSPOSE_GEN_2 : for j in 0 to NUM_OF_LEDS - 1 generate
-            shift_matrix_transposed(j)(i) <= shift_matrix(i)(j);
+            shift_matrix_columns(j)(i) <= shift_matrix_row(i)(j);
         end generate TRANSPOSE_GEN_2;
     end generate TRANSPOSE_GEN;
 
     -- Generate one bouncing shift register for each element (intensity level) of the tail
     -- Start from the least bright and end at the bightest
-    SHIFT_REGISTERS_GEN : for i in 0 to TAIL_LENGTH - 1 generate
+    SHIFT_REGISTERS_GEN : for i in TAIL_LENGTH - 1 downto 0 generate
         shifp_reg_cmp : BouncingShiftRegister
         generic map(
             REGISTER_WIDTH => NUM_OF_LEDS,
-            START_POSITION => TAIL_LENGTH - 1 - i -- Make each element start at a different position
+            START_DELAY    => TAIL_LENGTH - 1 - i -- Make each element start at a different position
         )
         port map(
             reset => reset,
             clk   => main_clk,
-            dout  => shift_matrix(i)
+            dout  => shift_matrix_row(i)
         );
     end generate SHIFT_REGISTERS_GEN;
 
@@ -146,7 +146,7 @@ begin
             reset     => reset,
             main_clk  => main_clk,
             pwm_clk   => pwm_clk,
-            threshold => shift_matrix_transposed(i),
+            threshold => shift_matrix_columns(i),
             pwm_out   => pwm_out(i)
         );
     end generate PWM_GEN;
