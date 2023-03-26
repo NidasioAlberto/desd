@@ -30,31 +30,30 @@ begin
         if reset = '1' then
             counter <= (0 => '1', others => '0');
             pwm_out <= '1';
-            -- threshold_buf <= (others => '0');
-        else
-            if rising_edge(pwm_clk) then
-                -- Check if the counter will overflow
-                if counter(COUNTER_WIDTH - 1) = '1' then
-                    -- Reset
-                    counter <= (0 => '1', others => '0');
-                else
-                    -- Shift the counter
-                    counter <= '0' & counter(0 to COUNTER_WIDTH - 2);
-                end if;
+        elsif rising_edge(pwm_clk) then
+            -- Check if the counter will overflow
+            if counter(COUNTER_WIDTH - 1) = '1' then
+                -- Reset
+                counter <= (0 => '1', others => '0');
+            else
+                -- Shift the counter
+                counter <= '0' & counter(0 to COUNTER_WIDTH - 2);
+            end if;
 
-                -- Check count and set the output
-                if unsigned(counter) > unsigned(threshold_buf) then
-                    pwm_out <= '0';
-                else
-                    pwm_out <= '1';
-                end if;
+            -- Check count and set the output
+            if unsigned(counter) > unsigned(threshold_buf) then
+                pwm_out <= '0';
+            else
+                pwm_out <= '1';
             end if;
         end if;
     end process;
 
-    process (main_clk)
+    process (main_clk, reset)
     begin
-        if rising_edge(main_clk) then
+        if reset = '1' then
+            threshold_buf <= (others => '0');
+        elsif rising_edge(main_clk) then
             threshold_buf <= threshold;
         end if;
     end process;
