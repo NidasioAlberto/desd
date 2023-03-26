@@ -22,8 +22,7 @@ entity PWM is
 end PWM;
 
 architecture PWM_arch of PWM is
-    signal counter       : std_logic_vector(COUNTER_WIDTH - 1 downto 0) := (0 => '1', others => '0');
-    signal threshold_buf : std_logic_vector(COUNTER_WIDTH - 1 downto 0);
+    signal counter : std_logic_vector(COUNTER_WIDTH - 1 downto 0) := (0 => '1', others => '0');
 begin
     process (pwm_clk, reset)
     begin
@@ -31,30 +30,15 @@ begin
             counter <= (0 => '1', others => '0');
             pwm_out <= '1';
         elsif rising_edge(pwm_clk) then
-            -- Check if the counter will overflow
-            if counter(COUNTER_WIDTH - 1) = '1' then
-                -- Reset
-                counter <= (0 => '1', others => '0');
-            else
-                -- Shift the counter
-                counter <= counter(COUNTER_WIDTH - 2 downto 0) & '0';
-            end if;
+            -- Shift the buffer
+            counter <= counter(COUNTER_WIDTH - 2 downto 0) & counter(COUNTER_WIDTH - 1);
 
             -- Check count and set the output
-            if unsigned(counter) > unsigned(threshold_buf) then
+            if unsigned(counter) > unsigned(threshold) then
                 pwm_out <= '0';
             else
                 pwm_out <= '1';
             end if;
-        end if;
-    end process;
-
-    process (main_clk, reset)
-    begin
-        if reset = '1' then
-            threshold_buf <= (others => '0');
-        elsif rising_edge(main_clk) then
-            threshold_buf <= threshold;
         end if;
     end process;
 end;
