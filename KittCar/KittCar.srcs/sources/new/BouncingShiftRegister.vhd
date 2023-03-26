@@ -13,21 +13,21 @@ entity BouncingShiftRegister is
         clk   : in std_logic;
 
         -- Output
-        dout : out std_logic_vector(0 to REGISTER_WIDTH - 1)
+        dout  : out std_logic_vector(0 to REGISTER_WIDTH - 1)
     );
 end BouncingShiftRegister;
 
 architecture BouncingShiftRegister_arch of BouncingShiftRegister is
-    signal reg : std_logic_vector(0 to REGISTER_WIDTH - 1) := (START_POSITION => '1', others => '0');
+    signal reg       : std_logic_vector(0 to REGISTER_WIDTH - 1) := (START_POSITION => '1', others => '0');
 
     -- 0 if going forward, 1 if going backwards
-    signal direction : std_logic := '0';
+    signal direction : std_logic                                 := '0';
 begin
     process (clk, reset)
     begin
         if reset = '1' then
-            reg  <= (START_POSITION => '1', others => '0');
-            dout <= (START_POSITION => '1', others => '0');
+            reg       <= (START_POSITION => '1', others => '0');
+            dout      <= (START_POSITION => '1', others => '0');
             direction <= '0';
         else
             if rising_edge(clk) then

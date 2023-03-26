@@ -24,10 +24,10 @@ begin
 
     process (reset, clk_in, threshold)
     begin
-        if reset = '1' or not(threshold = old_threshold) then
-            counter <= to_unsigned(0, counter'length);
+        if reset = '1' or threshold /= old_threshold then
+            counter        <= to_unsigned(0, counter'length);
             clk_out_buffer <= '0';
-            old_threshold <= threshold;
+            old_threshold  <= threshold;
         else
             if rising_edge(clk_in) then
                 -- Increment the counter

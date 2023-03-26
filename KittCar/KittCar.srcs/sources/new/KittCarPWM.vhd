@@ -2,28 +2,33 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-entity KittCar is
+entity KittCarPWM is
     generic (
-        SWITCHES_USED      : positive := 16;
-        REGISTER_WIDTH     : positive := 16;
-        TAIL_LENGTH        : positive := 5;
-        MAIN_CLK_DIV_WIDTH : positive := 27;
-        MAIN_CLK_DIV_THR   : positive := 100000;
-        PWM_CLK_DIV_WIDTH  : positive := 10;
-        PWM_CLK_DIV_THR    : positive := 1
+        CLK_PERIOD_NS        : positive range 1 to 100  := 10;  -- External clk period in nanoseconds
+        MIN_KITT_CAR_STEP_MS : positive range 1 to 2000 := 1;   -- Minimum step period in milliseconds
+        PWM_CLK_PERIOD_US    : positive range 1 to 1000 := 100; -- PWM clk period in microsend
+
+        NUM_OF_SWS           : integer range 1 to 16    := 16;  -- Number of input switches
+        NUM_OF_LEDS          : integer range 1 to 16    := 16;  -- Number of output LEDs
+
+        TAIL_LENGTH          : integer range 1 to 16    := 16;  -- Tail length
+
+        MAIN_CLK_DIV_WIDTH   : positive                 := 32;
+        PWM_CLK_DIV_WIDTH    : positive                 := 16
+
     );
     port (
         -- Reset and clock
-        reset      : in std_logic;
-        master_clk : in std_logic;
-        sw         : in std_logic_vector(SWITCHES_USED - 1 downto 0); -- Switches signals
+        reset        : in std_logic;
+        external_clk : in std_logic;
 
-        -- Output
-        pwm_out : out std_logic_vector(0 to REGISTER_WIDTH - 1) -- PWM signals
+        -- LEDs/SWs
+        sw           : in std_logic_vector(NUM_OF_SWS - 1 downto 0);  -- Switches avaiable on Basys3
+        pwm_out      : out std_logic_vector(NUM_OF_LEDS - 1 downto 0) -- LEDs avaiable on Basys3
     );
-end KittCar;
+end KittCarPWM;
 
-architecture KittCar_arch of KittCar is
+architecture KittCarPWM_arch of KittCarPWM is
     component BouncingShiftRegister
         generic (
             REGISTER_WIDTH : positive;
@@ -61,15 +66,22 @@ architecture KittCar_arch of KittCar is
         );
     end component;
 
-    signal prescaled_clk      : std_logic;
-    signal main_clk           : std_logic;
-    signal pwm_clk            : std_logic;
+    signal prescaled_clk : std_logic;
+    signal main_clk      : std_logic;
+    signal pwm_clk       : std_logic;
 
-    type SHIFT_MATRIX_TYPE is array (0 to TAIL_LENGTH - 1) of std_logic_vector(0 to REGISTER_WIDTH - 1);
+    type SHIFT_MATRIX_TYPE is array (0 to TAIL_LENGTH - 1) of std_logic_vector(0 to NUM_OF_LEDS - 1);
     signal shift_matrix : SHIFT_MATRIX_TYPE;
-    type SHIFT_MATRIC_TRANSPOSED_TYPE is array (0 to REGISTER_WIDTH - 1) of std_logic_vector(0 to TAIL_LENGTH - 1);
+    type SHIFT_MATRIC_TRANSPOSED_TYPE is array (0 to NUM_OF_LEDS - 1) of std_logic_vector(0 to TAIL_LENGTH - 1);
     signal shift_matrix_transposed : SHIFT_MATRIC_TRANSPOSED_TYPE;
 begin
+    --
+    -- external_clk ---> prescaled_clk_divider -> prescaled_clk ----> main_clk_divider -> main_clk -> [Shift registers]
+    --    (10ns)           (10ns -> 1ms)             (1ms)          (1ms -user-> >=1ms)     
+    --               |
+    --               \-> pwm_clk_divider -> pwm_clk -> [LEDS]
+    --                   (10ns -> 10us)
+
     -- Prepare clock dividers to generate the main and pwm clocks
     prescaled_clk_divider : ClockDivider
     generic map(
@@ -77,8 +89,8 @@ begin
     )
     port map(
         reset     => reset,
-        clk_in    => master_clk,
-        threshold => to_unsigned(MAIN_CLK_DIV_THR, MAIN_CLK_DIV_WIDTH),
+        clk_in    => external_clk,
+        threshold => to_unsigned(MIN_KITT_CAR_STEP_MS * 1e6 / CLK_PERIOD_NS, MAIN_CLK_DIV_WIDTH),
         clk_out   => prescaled_clk
     );
     main_clk_divider : ClockDivider
@@ -97,14 +109,14 @@ begin
     )
     port map(
         reset     => reset,
-        clk_in    => master_clk,
-        threshold => to_unsigned(PWM_CLK_DIV_THR, PWM_CLK_DIV_WIDTH),
+        clk_in    => external_clk,
+        threshold => to_unsigned(PWM_CLK_PERIOD_US * 1e6 / CLK_PERIOD_NS, PWM_CLK_DIV_WIDTH),
         clk_out   => pwm_clk
     );
 
     -- Connect shift_matrix to shift_matrix_transposed
     TRANSPOSE_GEN : for i in 0 to TAIL_LENGTH - 1 generate
-        TRANSPOSE_GEN_2 : for j in 0 to REGISTER_WIDTH - 1 generate
+        TRANSPOSE_GEN_2 : for j in 0 to NUM_OF_LEDS - 1 generate
             shift_matrix_transposed(j)(i) <= shift_matrix(i)(j);
         end generate TRANSPOSE_GEN_2;
     end generate TRANSPOSE_GEN;
@@ -114,7 +126,7 @@ begin
     SHIFT_REGISTERS_GEN : for i in 0 to TAIL_LENGTH - 1 generate
         shifp_reg_cmp : BouncingShiftRegister
         generic map(
-            REGISTER_WIDTH => REGISTER_WIDTH,
+            REGISTER_WIDTH => NUM_OF_LEDS,
             START_POSITION => TAIL_LENGTH - 1 - i -- Make each element start at a different position
         )
         port map(
@@ -125,7 +137,7 @@ begin
     end generate SHIFT_REGISTERS_GEN;
 
     -- Generate the PWM modules
-    PWM_GEN : for i in 0 to REGISTER_WIDTH - 1 generate
+    PWM_GEN : for i in 0 to NUM_OF_LEDS - 1 generate
         pwm_cmp : PWM
         generic map(
             COUNTER_WIDTH => TAIL_LENGTH
@@ -138,4 +150,4 @@ begin
             pwm_out   => pwm_out(i)
         );
     end generate PWM_GEN;
-end KittCar_arch;
+end KittCarPWM_arch;

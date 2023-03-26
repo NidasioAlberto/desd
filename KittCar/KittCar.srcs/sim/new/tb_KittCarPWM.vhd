@@ -1,17 +1,17 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.all;
 
-entity tb_KittCar is
-end tb_KittCar;
+entity tb_KittCarPWM is
+end tb_KittCarPWM;
 
-architecture tb_KittCar_arch of tb_KittCar is
+architecture tb_KittCarPWM_arch of tb_KittCarPWM is
     constant REGISTER_WIDTH   : positive := 8;
     constant TAIL_LENGTH      : positive := 4;
     constant MAIN_CLK_DIV_THR : positive := 29;
     constant PWM_CLK_DIV_THR  : positive := 1;
 
-    constant MASTER_PERIOD : time := 10 ns;
-    constant RESET_WND     : time := MASTER_PERIOD;
+    constant MASTER_PERIOD    : time     := 10 ns;
+    constant RESET_WND        : time     := MASTER_PERIOD;
 
     component KittCar is
         generic (
@@ -58,4 +58,4 @@ begin
         reset <= '0';
         wait;
     end process;
-end tb_KittCar_arch;
+end tb_KittCarPWM_arch;
