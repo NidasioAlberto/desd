@@ -9,15 +9,15 @@ entity PWM is
     );
     port (
         -- Reset and clock
-        reset    : in std_logic;
-        main_clk : in std_logic;
-        pwm_clk  : in std_logic;
+        reset     : in std_logic;
+        main_clk  : in std_logic;
+        pwm_clk   : in std_logic;
 
         -- Duty cycle threshold
         threshold : in std_logic_vector(0 to COUNTER_WIDTH - 1); -- Clock cycles per period of the PWM signal
 
         -- Output
-        pwm_out : out std_logic -- PWM signal
+        pwm_out   : out std_logic                                -- PWM signal
     );
 end PWM;
 
@@ -29,7 +29,7 @@ begin
     begin
         if reset = '1' then
             counter <= (0 => '1', others => '0');
-            pwm_out <= '0';
+            pwm_out <= '1';
             -- threshold_buf <= (others => '0');
         else
             if rising_edge(pwm_clk) then
