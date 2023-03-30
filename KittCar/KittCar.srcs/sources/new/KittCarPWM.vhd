@@ -10,8 +10,8 @@ use ieee.numeric_std.all;
 -- The input, output vectors and the tail length are parametric and can be indipendently changed thanks to generics.
 -- Also the timing parameters of the module can be modified. By defualt they are configured for the Basys 3 development board.
 --
--- At reset the output wave restarts with a single bit at position 0.
 -- While keeping the reset signal asserted, all the output singals (the LEDs) are lit up.
+-- After reset the output wave starts with a single bit asserted at position 0.
 --
 -- Internally the entity generates 3 clocks:
 -- - The PWM clock used to generate the PWM signals
@@ -21,28 +21,28 @@ use ieee.numeric_std.all;
 -- Clock tree diagram (default periods shown):
 --
 -- external_clk ---> prescaled_clk_divider -> prescaled_clk ----> main_clk_divider -> main_clk -> [Shift registers]
---    (10ns)     |     (10ns -> 500us)          (500us)         (500us -user-> >=1ms)     
+--    (10ns)     |     (10ns -> 500us)          (500us)         (500us -switches-> >=1ms)     
 --               |
 --               \-> pwm_clk_divider -> pwm_clk -> [LEDS]
 --                   (10ns -> 10us)
 --
 -- N.B. The prescaler entity has the inherent limitation that it cannot reproduce the input clock, it has to divide at least by 2.
 --      So the internal prescaled clock period is generated to be half of MIN_KITT_CAR_STEP_MS.
---      This way we can generate the main clock correclty
+--      This way we can generate the main clock correctly
 --
--- The KittCarPWM enetity relies on 3 other entities:
+-- The KittCarPWM entity relies on 3 other entities:
 -- - PWM:                   Generates the output PWM signal based on a threshold
 -- - ClockDivider:          Divides an input clock by a division factor
 -- - BouncingShiftRegister: Models the movement of one bit making it bounce between the ends of the output vector
 --
--- Internally there is one BouncingShiftRegister for each tail section.
+-- Internally there is one BouncingShiftRegister for each tail element.
 -- This registers are connected through a matrix to the PWM modules in the following way:
 -- - The BouncingShiftRegisters are connected to the rows
 -- - The PWM modules are connected to the columns
 --
 -- Each column value represents the intensity of one LED and is used by the PWM modules to regulate the output. 
 --
--- Example (NUM_OF_LEDS = 8, TAIL_LENGTH = 3, t=3)
+-- Example (NUM_OF_LEDS = 6, TAIL_LENGTH = 3, time=3)
 --
 -- -------------------------
 -- | 0 | 0 | 1 | 0 | 0 | 0 | <- BouncingShiftRegister 2
@@ -52,12 +52,12 @@ use ieee.numeric_std.all;
 -- | 0 | 0 | 0 | 0 | 1 | 0 | <- BouncingShiftRegister 0
 -- -------------------------
 --   |   |   |   |   |   |
---   |   |   |   |   |   \----> PWM 0
---   |   |   |   |   \--------> PWM 1
---   |   |   |   \------------> PWM 2
---   |   |   \----------------> PWM 3
---   |   \--------------------> PWM 4
---   \------------------------> PWM 5
+--   |   |   |   |   |   \----> PWM 0   0%
+--   |   |   |   |   \--------> PWM 1  33%
+--   |   |   |   \------------> PWM 2  66%
+--   |   |   \----------------> PWM 3 100%
+--   |   \--------------------> PWM 4   0%
+--   \------------------------> PWM 5   0%
 --
 entity KittCarPWM is
     generic (
@@ -130,10 +130,10 @@ architecture KittCarPWM_arch of KittCarPWM is
     -- while the other (shift_matrix_columns) by columns.
     -- The two arrays are connected using two nested for generate statements that maps each bit of one array to the other.
 
-    type SHIFT_MATRIX_TYPE is array (TAIL_LENGTH - 1 downto 0) of std_logic_vector(NUM_OF_LEDS - 1 downto 0);
-    signal shift_matrix_row : SHIFT_MATRIX_TYPE;
-    type SHIFT_MATRIC_TRANSPOSED_TYPE is array (NUM_OF_LEDS - 1 downto 0) of std_logic_vector(TAIL_LENGTH - 1 downto 0);
-    signal shift_matrix_columns : SHIFT_MATRIC_TRANSPOSED_TYPE;
+    type SHIFT_MATRIX_ROW_TYPE is array (TAIL_LENGTH - 1 downto 0) of std_logic_vector(NUM_OF_LEDS - 1 downto 0);
+    signal shift_matrix_row : SHIFT_MATRIX_ROW_TYPE;
+    type SHIFT_MATRIC_COLUMN_TYPE is array (NUM_OF_LEDS - 1 downto 0) of std_logic_vector(TAIL_LENGTH - 1 downto 0);
+    signal shift_matrix_columns : SHIFT_MATRIC_COLUMN_TYPE;
 
     -- This signal contains the operation to adapt the input switch values to the main clock divider threshold.
     -- Basically: main_clk_threshold = sw * 2 + 1

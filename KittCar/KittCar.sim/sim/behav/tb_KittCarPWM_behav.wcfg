@@ -3,9 +3,9 @@
    <wave_state>
    </wave_state>
    <db_ref_list>
-      <db_ref path="tb_KittCarPWM_behav.wdb" id="1">
+      <db_ref path="tb_ClockDivider_behav.wdb" id="1">
          <top_modules>
-            <top_module name="tb_KittCarPWM" />
+            <top_module name="tb_ClockDivider" />
          </top_modules>
       </db_ref>
    </db_ref_list>
@@ -16,64 +16,35 @@
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="179"></NameColumnWidth>
-      <ValueColumnWidth column_width="130"></ValueColumnWidth>
+      <ValueColumnWidth column_width="126"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="14" />
-   <wvobject type="logic" fp_name="/tb_KittCarPWM/reset">
+   <WVObjectSize size="7" />
+   <wvobject type="logic" fp_name="/tb_ClockDivider/dut/reset">
       <obj_property name="ElementShortName">reset</obj_property>
       <obj_property name="ObjectShortName">reset</obj_property>
    </wvobject>
-   <wvobject type="logic" fp_name="/tb_KittCarPWM/external_clk">
-      <obj_property name="ElementShortName">external_clk</obj_property>
-      <obj_property name="ObjectShortName">external_clk</obj_property>
+   <wvobject type="logic" fp_name="/tb_ClockDivider/dut/clk_in">
+      <obj_property name="ElementShortName">clk_in</obj_property>
+      <obj_property name="ObjectShortName">clk_in</obj_property>
    </wvobject>
-   <wvobject type="array" fp_name="/tb_KittCarPWM/sw">
-      <obj_property name="ElementShortName">sw[15:0]</obj_property>
-      <obj_property name="ObjectShortName">sw[15:0]</obj_property>
+   <wvobject type="array" fp_name="/tb_ClockDivider/dut/threshold">
+      <obj_property name="ElementShortName">threshold[7:0]</obj_property>
+      <obj_property name="ObjectShortName">threshold[7:0]</obj_property>
    </wvobject>
-   <wvobject type="array" fp_name="/tb_KittCarPWM/pwm_out">
-      <obj_property name="ElementShortName">pwm_out[7:0]</obj_property>
-      <obj_property name="ObjectShortName">pwm_out[7:0]</obj_property>
-      <obj_property name="isExpanded"></obj_property>
+   <wvobject type="logic" fp_name="/tb_ClockDivider/dut/clk_out">
+      <obj_property name="ElementShortName">clk_out</obj_property>
+      <obj_property name="ObjectShortName">clk_out</obj_property>
    </wvobject>
-   <wvobject type="other" fp_name="/tb_KittCarPWM/MASTER_PERIOD">
-      <obj_property name="ElementShortName">MASTER_PERIOD</obj_property>
-      <obj_property name="ObjectShortName">MASTER_PERIOD</obj_property>
+   <wvobject type="array" fp_name="/tb_ClockDivider/dut/counter">
+      <obj_property name="ElementShortName">counter[7:0]</obj_property>
+      <obj_property name="ObjectShortName">counter[7:0]</obj_property>
    </wvobject>
-   <wvobject type="other" fp_name="/tb_KittCarPWM/RESET_WND">
-      <obj_property name="ElementShortName">RESET_WND</obj_property>
-      <obj_property name="ObjectShortName">RESET_WND</obj_property>
+   <wvobject type="logic" fp_name="/tb_ClockDivider/dut/clk_out_buffer">
+      <obj_property name="ElementShortName">clk_out_buffer</obj_property>
+      <obj_property name="ObjectShortName">clk_out_buffer</obj_property>
    </wvobject>
-   <wvobject type="other" fp_name="/tb_KittCarPWM/CLK_PERIOD_NS">
-      <obj_property name="ElementShortName">CLK_PERIOD_NS</obj_property>
-      <obj_property name="ObjectShortName">CLK_PERIOD_NS</obj_property>
-   </wvobject>
-   <wvobject type="other" fp_name="/tb_KittCarPWM/MIN_KITT_CAR_STEP_MS">
-      <obj_property name="ElementShortName">MIN_KITT_CAR_STEP_MS</obj_property>
-      <obj_property name="ObjectShortName">MIN_KITT_CAR_STEP_MS</obj_property>
-   </wvobject>
-   <wvobject type="other" fp_name="/tb_KittCarPWM/PWM_CLK_PERIOD_US">
-      <obj_property name="ElementShortName">PWM_CLK_PERIOD_US</obj_property>
-      <obj_property name="ObjectShortName">PWM_CLK_PERIOD_US</obj_property>
-   </wvobject>
-   <wvobject type="other" fp_name="/tb_KittCarPWM/NUM_OF_SWS">
-      <obj_property name="ElementShortName">NUM_OF_SWS</obj_property>
-      <obj_property name="ObjectShortName">NUM_OF_SWS</obj_property>
-   </wvobject>
-   <wvobject type="other" fp_name="/tb_KittCarPWM/NUM_OF_LEDS">
-      <obj_property name="ElementShortName">NUM_OF_LEDS</obj_property>
-      <obj_property name="ObjectShortName">NUM_OF_LEDS</obj_property>
-   </wvobject>
-   <wvobject type="other" fp_name="/tb_KittCarPWM/TAIL_LENGTH">
-      <obj_property name="ElementShortName">TAIL_LENGTH</obj_property>
-      <obj_property name="ObjectShortName">TAIL_LENGTH</obj_property>
-   </wvobject>
-   <wvobject type="other" fp_name="/tb_KittCarPWM/PRESCALED_CLK_DIV_WIDTH">
-      <obj_property name="ElementShortName">PRESCALED_CLK_DIV_WIDTH</obj_property>
-      <obj_property name="ObjectShortName">PRESCALED_CLK_DIV_WIDTH</obj_property>
-   </wvobject>
-   <wvobject type="other" fp_name="/tb_KittCarPWM/PWM_CLK_DIV_WIDTH">
-      <obj_property name="ElementShortName">PWM_CLK_DIV_WIDTH</obj_property>
-      <obj_property name="ObjectShortName">PWM_CLK_DIV_WIDTH</obj_property>
+   <wvobject type="other" fp_name="/tb_ClockDivider/dut/COUNTER_WIDTH">
+      <obj_property name="ElementShortName">COUNTER_WIDTH</obj_property>
+      <obj_property name="ObjectShortName">COUNTER_WIDTH</obj_property>
    </wvobject>
 </wave_config>
