@@ -4,17 +4,17 @@ use ieee.numeric_std.all;
 
 entity KittCarPWM is
     generic (
-        CLK_PERIOD_NS        : positive range 1 to 100  := 10;  -- External clk period in nanoseconds
-        MIN_KITT_CAR_STEP_MS : positive range 1 to 2000 := 1;   -- Minimum step period in milliseconds
-        PWM_CLK_PERIOD_US    : positive range 1 to 1000 := 100; -- PWM clk period in microsend
+        CLK_PERIOD_NS           : positive range 1 to 100  := 10;  -- External clk period in nanoseconds
+        MIN_KITT_CAR_STEP_MS    : positive range 1 to 2000 := 1;   -- Minimum step period in milliseconds
+        PWM_CLK_PERIOD_US       : positive range 1 to 1000 := 100; -- PWM clk period in microsend
 
-        NUM_OF_SWS           : integer range 1 to 16    := 16;  -- Number of input switches
-        NUM_OF_LEDS          : integer range 1 to 16    := 16;  -- Number of output LEDs
+        NUM_OF_SWS              : integer range 1 to 16    := 16;  -- Number of input switches
+        NUM_OF_LEDS             : integer range 1 to 16    := 16;  -- Number of output LEDs
 
-        TAIL_LENGTH          : integer range 1 to 16    := 4;   -- Tail length
+        TAIL_LENGTH             : integer range 1 to 16    := 4;   -- Tail length
 
-        MAIN_CLK_DIV_WIDTH   : positive                 := 32;
-        PWM_CLK_DIV_WIDTH    : positive                 := 16
+        PRESCALED_CLK_DIV_WIDTH : positive                 := 31;
+        PWM_CLK_DIV_WIDTH       : positive                 := 20
     );
     port (
         -- Reset and clock
@@ -73,6 +73,8 @@ architecture KittCarPWM_arch of KittCarPWM is
     signal shift_matrix_row : SHIFT_MATRIX_TYPE;
     type SHIFT_MATRIC_TRANSPOSED_TYPE is array (NUM_OF_LEDS - 1 downto 0) of std_logic_vector(TAIL_LENGTH - 1 downto 0);
     signal shift_matrix_columns : SHIFT_MATRIC_TRANSPOSED_TYPE;
+
+    signal main_clk_threshold   : unsigned(sw'length downto 0);
 begin
     --
     -- external_clk ---> prescaled_clk_divider -> prescaled_clk ----> main_clk_divider -> main_clk -> [Shift registers]
@@ -86,16 +88,17 @@ begin
     -- Prescaler divider (external freq. -> min freq. / 2)
     prescaled_clk_divider : ClockDivider
     generic map(
-        COUNTER_WIDTH => MAIN_CLK_DIV_WIDTH
+        COUNTER_WIDTH => PRESCALED_CLK_DIV_WIDTH
     )
     port map(
         reset     => reset,
         clk_in    => external_clk,
-        threshold => to_unsigned(MIN_KITT_CAR_STEP_MS * 1e6 / CLK_PERIOD_NS / 2 - 1, MAIN_CLK_DIV_WIDTH),
+        threshold => to_unsigned(MIN_KITT_CAR_STEP_MS * 1e6 / CLK_PERIOD_NS / 2 - 1, PRESCALED_CLK_DIV_WIDTH),
         clk_out   => prescaled_clk
     );
 
     -- Main divider (min freq. /2 -> moving freq.)
+    main_clk_threshold <= unsigned(sw & '0') + 1;
     main_clk_divider : ClockDivider
     generic map(
         COUNTER_WIDTH => sw'length + 1
@@ -103,7 +106,7 @@ begin
     port map(
         reset     => reset,
         clk_in    => prescaled_clk,
-        threshold => (unsigned(sw) & '0') + 1,
+        threshold => main_clk_threshold,
         clk_out   => main_clk
     );
 
