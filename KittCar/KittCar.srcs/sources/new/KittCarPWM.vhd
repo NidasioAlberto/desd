@@ -15,7 +15,6 @@ entity KittCarPWM is
 
         MAIN_CLK_DIV_WIDTH   : positive                 := 32;
         PWM_CLK_DIV_WIDTH    : positive                 := 16
-
     );
     port (
         -- Reset and clock
@@ -77,12 +76,14 @@ architecture KittCarPWM_arch of KittCarPWM is
 begin
     --
     -- external_clk ---> prescaled_clk_divider -> prescaled_clk ----> main_clk_divider -> main_clk -> [Shift registers]
-    --    (10ns)     |     (10ns -> 1ms)             (1ms)          (1ms -user-> >=1ms)     
+    --    (10ns)     |     (10ns -> 1ms)            (500us)         (500us -user-> >=1ms)     
     --               |
     --               \-> pwm_clk_divider -> pwm_clk -> [LEDS]
     --                   (10ns -> 10us)
 
     -- Prepare clock dividers to generate the main and pwm clocks
+
+    -- Prescaler divider (external freq. -> min freq. / 2)
     prescaled_clk_divider : ClockDivider
     generic map(
         COUNTER_WIDTH => MAIN_CLK_DIV_WIDTH
@@ -90,19 +91,23 @@ begin
     port map(
         reset     => reset,
         clk_in    => external_clk,
-        threshold => to_unsigned(MIN_KITT_CAR_STEP_MS * 1e6 / CLK_PERIOD_NS, MAIN_CLK_DIV_WIDTH),
+        threshold => to_unsigned(MIN_KITT_CAR_STEP_MS * 1e6 / CLK_PERIOD_NS / 2 - 1, MAIN_CLK_DIV_WIDTH),
         clk_out   => prescaled_clk
     );
+
+    -- Main divider (min freq. /2 -> moving freq.)
     main_clk_divider : ClockDivider
     generic map(
-        COUNTER_WIDTH => sw'length
+        COUNTER_WIDTH => sw'length + 1
     )
     port map(
         reset     => reset,
         clk_in    => prescaled_clk,
-        threshold => unsigned(sw),
+        threshold => (unsigned(sw) & '0') + 1,
         clk_out   => main_clk
     );
+
+    -- PWM divider (external freq. -> pwm freq.)
     pwm_clk_divider : ClockDivider
     generic map(
         COUNTER_WIDTH => PWM_CLK_DIV_WIDTH
@@ -110,7 +115,7 @@ begin
     port map(
         reset     => reset,
         clk_in    => external_clk,
-        threshold => to_unsigned(PWM_CLK_PERIOD_US * 1e6 / CLK_PERIOD_NS, PWM_CLK_DIV_WIDTH),
+        threshold => to_unsigned(PWM_CLK_PERIOD_US * 1e3 / CLK_PERIOD_NS - 1, PWM_CLK_DIV_WIDTH),
         clk_out   => pwm_clk
     );
 
