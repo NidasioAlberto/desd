@@ -44,13 +44,13 @@ begin
                 else
                     reg       <= reg(REGISTER_WIDTH - 2 downto 0) & '0'; -- Left shift
                     direction <= '1';
+                    started   <= '1';
                 end if;
             end if;
 
             if falling_edge(clk) then
                 if started = '1' or reg(0) = '1' then
-                    dout    <= reg;
-                    started <= '1';
+                    dout <= reg;
                 else
                     dout <= (others => '0');
                 end if;
