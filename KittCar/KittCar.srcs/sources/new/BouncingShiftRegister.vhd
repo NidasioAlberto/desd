@@ -1,11 +1,43 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
--- A bouncing shift register moves a single bit making in a vector making it bounce when it reaches the edges
+-- A bouncing shift register moves a single bit making in a vector making it bounce when it reaches the edges.
+--
+-- By output bit starts always from position 0. The START_DELAY generic allows to delay the output of the bit after reset.
+-- For example if START_DELAY = 2, there will be 2 clock cycles before the bit appears.
+--
+-- Example (REGISTER_WIDTH = 4, START_DELAY = 0)
+--
+--          -----------------
+-- t=0 dout=| 0 | 0 | 0 | 1 |
+--          -----------------
+-- t=1 dout=| 0 | 0 | 1 | 0 |
+--          -----------------
+-- t=2 dout=| 0 | 1 | 0 | 0 |
+--          -----------------
+-- t=3 dout=| 1 | 0 | 0 | 0 |
+--          -----------------
+-- t=4 dout=| 0 | 1 | 0 | 0 |
+--          -----------------
+--
+-- Example (REGISTER_WIDTH = 4, START_DELAY = 2)
+--
+--          -----------------
+-- t=0 dout=| 0 | 0 | 0 | 0 |
+--          -----------------
+-- t=1 dout=| 0 | 0 | 0 | 0 |
+--          -----------------
+-- t=2 dout=| 0 | 0 | 0 | 1 |
+--          -----------------
+-- t=3 dout=| 0 | 0 | 1 | 0 |
+--          -----------------
+-- t=4 dout=| 0 | 1 | 0 | 0 |
+--          -----------------
+--
 entity BouncingShiftRegister is
     generic (
         REGISTER_WIDTH : positive;
-        START_DELAY    : natural
+        START_DELAY    : natural -- Values must to be from 0 to REGISTER_WIDTH - 1
     );
     port (
         -- Reset and clock

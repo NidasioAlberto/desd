@@ -3,6 +3,24 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 -- PWM signal generation
+--
+-- This PWM signal generatior uses a shift register containing a single bit.
+-- When the bit is in a position higher than the threshold input, the output is high.
+-- 
+-- Example (COUNTER_WIDTH = 4):
+--
+--                 -----------------
+-- Shift register: | 0 | 1 | 0 | 0 |
+--                 -----------------
+--
+--                 -----------------
+-- Threshold:      | 0 | 1 | x | x |  => Output is 0
+--                 -----------------
+--
+--                 -----------------
+-- Threshold:      | 1 | x | x | x |  => Output is 1
+--                 -----------------
+--
 entity PWM is
     generic (
         COUNTER_WIDTH : integer -- Counter size in bits
@@ -26,13 +44,14 @@ begin
     process (pwm_clk, reset)
     begin
         if reset = '1' then
+            -- When the reset is triggered, reset the counter and turn on the output
             counter <= (0 => '1', others => '0');
             pwm_out <= '1';
         elsif rising_edge(pwm_clk) then
             -- Shift the buffer
             counter <= counter(COUNTER_WIDTH - 2 downto 0) & counter(COUNTER_WIDTH - 1);
 
-            -- Check count and set the output
+            -- Turn on the output when the counter is higher then the threshold
             if unsigned(counter) > unsigned(threshold) then
                 pwm_out <= '0';
             else
