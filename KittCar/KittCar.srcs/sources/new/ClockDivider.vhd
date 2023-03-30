@@ -17,12 +17,11 @@ end ClockDivider;
 
 architecture ClockDivider_arch of ClockDivider is
     signal counter        : unsigned(COUNTER_WIDTH - 1 downto 0) := to_unsigned(0, COUNTER_WIDTH);
-    signal old_threshold  : unsigned(COUNTER_WIDTH - 1 downto 0) := to_unsigned(0, COUNTER_WIDTH);
-    signal clk_out_buffer : std_logic                            := '1';
+    signal clk_out_buffer : std_logic;
 begin
     clk_out <= clk_out_buffer;
 
-    process (reset, clk_in, threshold, old_threshold)
+    process (reset, clk_in)
     begin
         if reset = '1' then
             counter        <= to_unsigned(0, counter'length);
@@ -30,16 +29,10 @@ begin
         else
             if rising_edge(clk_in) then
                 -- Increment the counter
-                if (threshold = old_threshold) then
-                    counter <= counter + 1;
-                else
-                    counter        <= to_unsigned(0, counter'length);
-                    old_threshold  <= threshold;
-                    clk_out_buffer <= '1';
-                end if;
+                counter <= counter + 1;
 
-                -- Check if if overflows
-                if counter = threshold / 2 then
+                -- Check if it overflows
+                if counter >= threshold / 2 then
                     counter        <= to_unsigned(0, counter'length);
                     clk_out_buffer <= not clk_out_buffer;
                 end if;

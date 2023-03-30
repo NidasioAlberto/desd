@@ -30,12 +30,12 @@ architecture tb_ClockDivider_arch of tb_ClockDivider is
 begin
     dut : ClockDivider
     generic map(
-        COUNTER_WIDTH => COUNTER_WIDTH + 1
+        COUNTER_WIDTH => COUNTER_WIDTH
     )
     port map(
         reset     => reset,
         clk_in    => clk_in,
-        threshold => (threshold & '0') + 1,
+        threshold => threshold,
         clk_out   => clk_out
     );
 
