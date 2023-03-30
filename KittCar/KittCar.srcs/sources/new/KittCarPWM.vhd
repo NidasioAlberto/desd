@@ -46,7 +46,6 @@ architecture KittCarPWM_arch of KittCarPWM is
         );
         port (
             reset     : in std_logic;
-            main_clk  : in std_logic;
             pwm_clk   : in std_logic;
             threshold : in std_logic_vector(COUNTER_WIDTH - 1 downto 0);
             pwm_out   : out std_logic
@@ -152,7 +151,6 @@ begin
         )
         port map(
             reset     => reset,
-            main_clk  => main_clk,
             pwm_clk   => pwm_clk,
             threshold => shift_matrix_columns(i),
             pwm_out   => pwm_out(i)

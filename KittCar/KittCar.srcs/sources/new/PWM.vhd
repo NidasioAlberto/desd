@@ -10,7 +10,6 @@ entity PWM is
     port (
         -- Reset and clock
         reset     : in std_logic;
-        main_clk  : in std_logic;
         pwm_clk   : in std_logic;
 
         -- Duty cycle threshold
