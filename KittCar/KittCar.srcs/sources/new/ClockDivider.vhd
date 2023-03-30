@@ -22,16 +22,21 @@ architecture ClockDivider_arch of ClockDivider is
 begin
     clk_out <= clk_out_buffer;
 
-    process (reset, clk_in, threshold)
+    process (reset, clk_in, threshold, old_threshold)
     begin
-        if reset = '1' or threshold /= old_threshold then
+        if reset = '1' then
             counter        <= to_unsigned(0, counter'length);
             clk_out_buffer <= '1';
-            old_threshold  <= threshold;
         else
             if rising_edge(clk_in) then
                 -- Increment the counter
-                counter <= counter + 1;
+                if (threshold = old_threshold) then
+                    counter <= counter + 1;
+                else
+                    counter        <= to_unsigned(0, counter'length);
+                    old_threshold  <= threshold;
+                    clk_out_buffer <= '1';
+                end if;
 
                 -- Check if if overflows
                 if counter = threshold / 2 then
