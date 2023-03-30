@@ -11,7 +11,7 @@ entity KittCarPWM is
         NUM_OF_SWS           : integer range 1 to 16    := 16;  -- Number of input switches
         NUM_OF_LEDS          : integer range 1 to 16    := 16;  -- Number of output LEDs
 
-        TAIL_LENGTH          : integer range 1 to 16    := 16;  -- Tail length
+        TAIL_LENGTH          : integer range 1 to 16    := 4;   -- Tail length
 
         MAIN_CLK_DIV_WIDTH   : positive                 := 32;
         PWM_CLK_DIV_WIDTH    : positive                 := 16
