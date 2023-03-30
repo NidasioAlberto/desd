@@ -10,15 +10,15 @@ entity ClockDivider is
     port (
         reset     : in std_logic;
         clk_in    : in std_logic;
-        threshold : in unsigned(0 to COUNTER_WIDTH - 1);
+        threshold : in unsigned(COUNTER_WIDTH - 1 downto 0);
         clk_out   : out std_logic
     );
 end ClockDivider;
 
 architecture ClockDivider_arch of ClockDivider is
-    signal counter        : unsigned(0 to COUNTER_WIDTH - 1) := to_unsigned(0, COUNTER_WIDTH);
-    signal old_threshold  : unsigned(0 to COUNTER_WIDTH - 1) := to_unsigned(0, COUNTER_WIDTH);
-    signal clk_out_buffer : std_logic;
+    signal counter        : unsigned(COUNTER_WIDTH - 1 downto 0) := to_unsigned(0, COUNTER_WIDTH);
+    signal old_threshold  : unsigned(COUNTER_WIDTH - 1 downto 0) := to_unsigned(0, COUNTER_WIDTH);
+    signal clk_out_buffer : std_logic                            := '1';
 begin
     clk_out <= clk_out_buffer;
 
@@ -26,7 +26,7 @@ begin
     begin
         if reset = '1' or threshold /= old_threshold then
             counter        <= to_unsigned(0, counter'length);
-            clk_out_buffer <= '0';
+            clk_out_buffer <= '1';
             old_threshold  <= threshold;
         else
             if rising_edge(clk_in) then
