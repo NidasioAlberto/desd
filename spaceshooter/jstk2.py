@@ -66,8 +66,7 @@ class jstk2:
 
                 else:
                     # Got a packet: extract the data, remove its bytes from rx_data and save the content
-                    jstk_x, jstk_y, buttons = struct.unpack(
-                        "xBBB", self.rx_data[:4])
+                    jstk_x, jstk_y, buttons = struct.unpack("xBBB", self.rx_data[:4])
                     self.rx_data = self.rx_data[4:]
 
                     with self.rx_lock:

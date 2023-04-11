@@ -608,12 +608,9 @@ while running:
             player.powerup()
 
     # Update the LED
-    if player.shield <= 33:
-        joystick.setLedColor((255, 0, 0))
-    elif player.shield <= 66:
-        joystick.setLedColor((255, 255, 0))
-    else:
-        joystick.setLedColor((0, 0, 255))
+    joystick.setLedColor((int(255 * (1 - player.shield / 100)),  # Red
+                          0,                                     # Green
+                          int(255 * (player.shield / 100))))     # Blue
 
     # If player used up all lives and the explosion has finished, end game
     if player.lives == 0 and not deathExplosion.alive():
@@ -658,8 +655,6 @@ while running:
 
     # Limit FPS
     clock.tick(FPS)
-
-    print("Lives: {}".format(player.lives))
 
 joystick.setLedColor((0, 0, 0))
 pygame.quit()
