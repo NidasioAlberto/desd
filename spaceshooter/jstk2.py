@@ -79,7 +79,7 @@ class jstk2:
                 # No header, drop all the data and do nothing
                 self.rx_data = bytearray()
 
-    def set_leds(self, leds: Tuple[int, int, int]) -> None:
+    def setLedColor(self, leds: Tuple[int, int, int]) -> None:
         with self.tx_lock:
             self.leds = leds
 
