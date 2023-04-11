@@ -70,32 +70,18 @@ def main_menu():
     title = pygame.transform.scale(title, (WIDTH, HEIGHT), screen)
 
     screen.blit(title, (0,0))
+    draw_text(screen, "Press [Enter] or [Trigger] to begin", 30, WIDTH//2, HEIGHT//2)
+    draw_text(screen, "Press [P] or [Joystick] to pause", 30, WIDTH//2, (HEIGHT//2)+40)
     pygame.display.update()
 
     while True:
         ev = pygame.event.poll()
-        if ev.type == pygame.KEYDOWN:
-            if ev.key == pygame.K_RETURN:
-                break
-            elif ev.key == pygame.K_q:
-                pygame.quit()
-                quit()
+        joystick_inputs = joystick.get_jstk()
+
+        if (ev.type == pygame.KEYDOWN and ev.key == pygame.K_RETURN) or joystick_inputs[1]:
+            return True
         elif ev.type == pygame.QUIT:
-                pygame.quit()
-                quit()
-        else:
-            draw_text(screen, "Press [ENTER] To Begin", 30, WIDTH//2, HEIGHT//2)
-            draw_text(screen, "or [P] To Pause", 30, WIDTH//2, (HEIGHT//2)+40)
-            draw_text(screen, "or [Q] To Quit", 30, WIDTH//2, (HEIGHT//2)+80)
-
-            pygame.display.update()
-
-    #pygame.mixer.music.stop()
-    ready = pygame.mixer.Sound(path.join(sound_folder,'getready.ogg'))
-    ready.play()
-    screen.fill(BLACK)
-    draw_text(screen, "GET READY!", 40, WIDTH//2, HEIGHT//2)
-    pygame.display.update()
+            return False
 
 
 def draw_text(surf, text, size, x, y):
@@ -127,7 +113,6 @@ def draw_lives(surf, x, y, lives, img):
         img_rect.x = x + 30 * i
         img_rect.y = y
         surf.blit(img, img_rect)
-
 
 
 def newmob():
@@ -210,8 +195,8 @@ class Player(pygame.sprite.Sprite):
 
         # Get the joystick position and change the speed
         joystick_inputs = joystick.get_jstk()
-        self.speedx += round((joystick_inputs[0][0] - 64) / 3)
-        self.speedy += round(-(joystick_inputs[0][1] - 64) / 3)
+        self.speedx += round(joystick_inputs[0][0] / 3)
+        self.speedy += round(-joystick_inputs[0][1] / 3)
 
         #Fire weapons by holding spacebar
         if keystate[pygame.K_SPACE] or joystick_inputs[1]:
@@ -233,19 +218,15 @@ class Player(pygame.sprite.Sprite):
         self.rect.y += self.speedy
 
     def pause(self):
-        paused = True
-        while paused:
+        while True:
             ev = pygame.event.poll()
-            if ev.type == pygame.KEYDOWN:
-                if ev.key == pygame.K_c:
-                    paused = False
-                elif ev.key == pygame.K_q:
-                    pygame.quit()
-                    quit()
+            joystick_inputs = joystick.get_jstk()
+            if (ev.type == pygame.KEYDOWN and ev.key == pygame.K_c) or joystick_inputs[1]:
+                break
 
             screen.fill(ALPHA_BLACK)
             draw_text(screen, "Paused", 30, WIDTH//2, HEIGHT//2 - 70)
-            draw_text(screen, "Press [C] to contiune and [Q] to exit!", 20, WIDTH//2, HEIGHT//2 + 10)
+            draw_text(screen, "Press [C] or [Trigger] to continue!", 20, WIDTH//2, HEIGHT//2 + 10)
             pygame.display.update()
 
     def shoot(self):
@@ -512,8 +493,18 @@ running = True
 menu_display = True
 while running:
     if menu_display:
-        main_menu()
-        pygame.time.wait(3000)
+        if not main_menu():
+            break
+
+        ready = pygame.mixer.Sound(path.join(sound_folder,'getready.ogg'))
+        ready.play()
+        for i in range(3, 0, -1):
+            screen.fill(BLACK)
+            draw_text(screen, "GET READY!", 40, WIDTH//2, HEIGHT//2)
+            draw_text(screen, "Starting in {}s".format(i), 40, WIDTH//2, HEIGHT//2+50)
+            pygame.display.update()
+            pygame.time.wait(1000)
+           
 
         #Stop menu music
         pygame.mixer.music.stop()
@@ -621,9 +612,9 @@ while running:
 
     ## if player died and the explosion has finished, end game
     if player.lives == 0 and not death_explosion.alive():
-        running = False
-        # menu_display = True
-        # pygame.display.update()
+        # running = False
+        menu_display = True
+        pygame.display.update()
 
     #3 Draw/render
     screen.fill(BLACK)

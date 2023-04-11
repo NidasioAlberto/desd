@@ -62,3 +62,6 @@ xvlog.*
 
 ## checkpoint files
 *.dcp
+
+## Python
+__pycache__/

@@ -67,7 +67,7 @@ class jstk2:
                     self.rx_data = self.rx_data[4:]
 
                     with self.rx_lock:
-                        self.jstk = (jstk_x & 0x7f, jstk_y & 0x7f)
+                        self.jstk = (jstk_x - 128, jstk_y - 128)
                         self.btn_trigger = bool(buttons & 0x02)
                         self.btn_jstk = bool(buttons & 0x01)
         
