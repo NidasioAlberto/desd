@@ -64,7 +64,7 @@ font_name = pygame.font.match_font('arial')
 def main_menu():
     global screen
 
-    menu_song = pygame.mixer.music.load(path.join(sound_folder, "menu.ogg"))
+    menu_song = pygame.mixer.music.load(path.join(sound_folder, "menu-music.ogg"))
     pygame.mixer.music.play(-1)
 
     title = pygame.image.load(path.join(img_dir, "main.png")).convert()
@@ -484,8 +484,6 @@ missile_sound = pygame.mixer.Sound(path.join(sound_folder, 'rocket.ogg'))
 explosionSounds = []
 for sound in ['expl3.wav', 'expl6.wav']:
     explosionSounds.append(pygame.mixer.Sound(path.join(sound_folder, sound)))
-# main background music
-# pygame.mixer.music.load(path.join(sound_folder, 'tgfcoder-FrozenJam-SeamlessLoop.ogg'))
 pygame.mixer.music.set_volume(0.2)  # simmered the sound down a little
 
 player_die_sound = pygame.mixer.Sound(path.join(sound_folder, 'rumble1.ogg'))
@@ -517,7 +515,7 @@ while running:
 
         # Play the gameplay music
         pygame.mixer.music.load(
-            path.join(sound_folder, 'tgfcoder-FrozenJam-SeamlessLoop.ogg'))
+            path.join(sound_folder, 'game-music.ogg'))
 
         # Makes the game play sound in an endless loop
         pygame.mixer.music.play(-1)
@@ -621,6 +619,13 @@ while running:
         screen.fill(BLACK)
         draw_text(screen, "YOU DIED!", 40, WIDTH//2, HEIGHT//2)
         pygame.display.update()
+
+        # Play death sound
+        pygame.mixer.music.stop()
+        ready = pygame.mixer.Sound(path.join(sound_folder, 'death.mp3'))
+        ready.play()
+
+        # Wait
         pygame.time.wait(2000)
 
         # Reset the lives for the next game
