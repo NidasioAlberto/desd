@@ -7,12 +7,14 @@ import time
 
 from typing import Tuple
 
+
 class jstk2:
     HEADER_CODE = 0xc0
     READ_CHUNK_SIZE = 4
 
     def __init__(self, serial_port: str, baud_rate: int, tx_period: int = 100, read_timeout: int = 50):
-        self.serial = serial.Serial(serial_port, baud_rate, timeout=read_timeout)
+        self.serial = serial.Serial(
+            serial_port, baud_rate, timeout=read_timeout)
         self.terminate = threading.Event()
 
         # TX resources
@@ -55,22 +57,24 @@ class jstk2:
 
             try:
                 # Drop leading bytes until HEADER_CODE
-                self.rx_data = self.rx_data[self.rx_data.index(self.HEADER_CODE):]
-                
+                self.rx_data = self.rx_data[self.rx_data.index(
+                    self.HEADER_CODE):]
+
                 if len(self.rx_data) < 4:
                     # Partial packet, do nothing
                     pass
 
                 else:
                     # Got a packet: extract the data, remove its bytes from rx_data and save the content
-                    jstk_x, jstk_y, buttons = struct.unpack("xBBB", self.rx_data[:4])
+                    jstk_x, jstk_y, buttons = struct.unpack(
+                        "xBBB", self.rx_data[:4])
                     self.rx_data = self.rx_data[4:]
 
                     with self.rx_lock:
                         self.jstk = (jstk_x - 128, jstk_y - 128)
                         self.btn_trigger = bool(buttons & 0x02)
                         self.btn_jstk = bool(buttons & 0x01)
-        
+
             except ValueError:
                 # No header, drop all the data and do nothing
                 self.rx_data = bytearray()
@@ -84,15 +88,15 @@ class jstk2:
             return self.jstk, self.btn_trigger, self.btn_jstk
 
 
-## Example:
+# Example:
 #
-#jstk_obj = jstk2('/dev/ttyUSB1', 115200)
-#jstk_obj.set_leds((255, 0, 0))
+# jstk_obj = jstk2('/dev/ttyUSB1', 115200)
+# jstk_obj.set_leds((255, 0, 0))
 #
-#time.sleep(0.1)
-#for i in range(2):
-#   
+# time.sleep(0.1)
+# for i in range(2):
+#
 #    print(jstk_obj.get_jstk())
 #    time.sleep(1)
 #
-#jstk_obj.close()
+# jstk_obj.close()
