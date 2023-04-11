@@ -615,6 +615,9 @@ while running:
         menu_display = True
         pygame.display.update()
 
+        # Reset the led color
+        joystick.setLedColor((0, 0, 0))
+
         # Show die screen
         screen.fill(BLACK)
         draw_text(screen, "YOU DIED!", 40, WIDTH//2, HEIGHT//2)
