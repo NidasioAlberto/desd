@@ -181,7 +181,7 @@ proc create_root_design { parentCell } {
   # Create instance: axi4stream_spi_master_0, and set properties
   set axi4stream_spi_master_0 [ create_bd_cell -type ip -vlnv DigiLAB:ip:axi4stream_spi_master:1.0 axi4stream_spi_master_0 ]
   set_property -dict [ list \
-   CONFIG.c_sclkfreq {500000} \
+   CONFIG.c_sclkfreq {66666} \
  ] $axi4stream_spi_master_0
 
   # Create instance: axi4stream_uart_0, and set properties

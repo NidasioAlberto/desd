@@ -523,7 +523,7 @@
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:f832fff5</spirit:value>
+            <spirit:value>9:61f6a88d</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -534,7 +534,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:f832fff5</spirit:value>
+            <spirit:value>9:61f6a88d</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -550,11 +550,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Wed Apr 05 06:14:54 UTC 2023</spirit:value>
+            <spirit:value>Tue Apr 11 07:41:08 UTC 2023</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:f832fff5</spirit:value>
+            <spirit:value>9:61f6a88d</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -573,7 +573,7 @@
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:975511bc</spirit:value>
+            <spirit:value>9:5cb74998</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -589,11 +589,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Wed Apr 05 06:14:54 UTC 2023</spirit:value>
+            <spirit:value>Tue Apr 11 07:41:08 UTC 2023</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:975511bc</spirit:value>
+            <spirit:value>9:5cb74998</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -607,11 +607,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Wed Apr 05 06:15:12 UTC 2023</spirit:value>
+            <spirit:value>Tue Apr 11 07:41:24 UTC 2023</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:f832fff5</spirit:value>
+            <spirit:value>9:61f6a88d</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -885,7 +885,7 @@
       <spirit:modelParameter spirit:dataType="integer">
         <spirit:name>c_sclkfreq</spirit:name>
         <spirit:displayName>C Sclkfreq</spirit:displayName>
-        <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.c_sclkfreq">500000</spirit:value>
+        <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.c_sclkfreq">66666</spirit:value>
       </spirit:modelParameter>
       <spirit:modelParameter spirit:dataType="integer">
         <spirit:name>c_cpol</spirit:name>
@@ -1005,7 +1005,7 @@
     <spirit:parameter>
       <spirit:name>c_sclkfreq</spirit:name>
       <spirit:displayName>Desired SCLK frequency</spirit:displayName>
-      <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="PARAM_VALUE.c_sclkfreq">500000</spirit:value>
+      <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="PARAM_VALUE.c_sclkfreq">66666</spirit:value>
     </spirit:parameter>
     <spirit:parameter>
       <spirit:name>c_cpol</spirit:name>

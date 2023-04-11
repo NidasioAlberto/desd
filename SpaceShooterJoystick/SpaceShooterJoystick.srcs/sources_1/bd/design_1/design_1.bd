@@ -112,7 +112,7 @@
         "inst_hier_path": "axi4stream_spi_master_0",
         "parameters": {
           "c_sclkfreq": {
-            "value": "500000"
+            "value": "66666"
           }
         }
       },
@@ -542,18 +542,6 @@
       }
     },
     "interface_nets": {
-      "axi4stream_uart_0_UART": {
-        "interface_ports": [
-          "usb_uart",
-          "axi4stream_uart_0/UART"
-        ]
-      },
-      "jstk_uart_bridge_0_m_axis": {
-        "interface_ports": [
-          "jstk_uart_bridge_0/m_axis",
-          "axi4stream_uart_0/S00_AXIS_TX"
-        ]
-      },
       "axi4stream_uart_0_M00_AXIS_RX": {
         "interface_ports": [
           "jstk_uart_bridge_0/s_axis",
@@ -576,6 +564,18 @@
         "interface_ports": [
           "SPI_M_0",
           "axi4stream_spi_master_0/SPI_M"
+        ]
+      },
+      "jstk_uart_bridge_0_m_axis": {
+        "interface_ports": [
+          "jstk_uart_bridge_0/m_axis",
+          "axi4stream_uart_0/S00_AXIS_TX"
+        ]
+      },
+      "axi4stream_uart_0_UART": {
+        "interface_ports": [
+          "usb_uart",
+          "axi4stream_uart_0/UART"
         ]
       }
     },
