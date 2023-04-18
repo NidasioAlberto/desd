@@ -1,10 +1,10 @@
 // Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
-// Tool Version: Vivado v.2020.2 (lin64) Build 3064766 Wed Nov 18 09:12:47 MST 2020
-// Date        : Wed Apr  5 08:01:04 2023
-// Host        : pop-os running 64-bit Pop!_OS 22.04 LTS
-// Command     : write_verilog -force -mode funcsim
-//               /home/alberton/Desktop/desd/SpaceShooterJoystick/SpaceShooterJoystick.gen/sources_1/bd/design_1/ip/design_1_jstk_uart_bridge_0_0/design_1_jstk_uart_bridge_0_0_sim_netlist.v
+// Tool Version: Vivado v.2020.2 (win64) Build 3064766 Wed Nov 18 09:12:45 MST 2020
+// Date        : Tue Apr 18 17:34:12 2023
+// Host        : DESKTOP-F4BLQ3F running 64-bit major release  (build 9200)
+// Command     : write_verilog -force -mode funcsim {c:/Users/emili/OneDrive - Politecnico di
+//               Milano/Documenti/desd/SpaceShooterJoystick/SpaceShooterJoystick.gen/sources_1/bd/design_1/ip/design_1_jstk_uart_bridge_0_0/design_1_jstk_uart_bridge_0_0_sim_netlist.v}
 // Design      : design_1_jstk_uart_bridge_0_0
 // Purpose     : This verilog netlist is a functional simulation representation of the design and should not be modified
 //               or synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -69,8 +69,8 @@ module design_1_jstk_uart_bridge_0_0
         .aresetn(aresetn),
         .btn_jstk(btn_jstk),
         .btn_trigger(btn_trigger),
-        .jstk_x(jstk_x[9:2]),
-        .jstk_y(jstk_y[9:2]),
+        .jstk_x(jstk_x[9:3]),
+        .jstk_y(jstk_y[9:3]),
         .led_b(led_b),
         .led_g(led_g),
         .led_r(led_r),
@@ -109,8 +109,8 @@ module design_1_jstk_uart_bridge_0_0_jstk_uart_bridge
   input [7:0]s_axis_tdata;
   input s_axis_tvalid;
   input aresetn;
-  input [7:0]jstk_x;
-  input [7:0]jstk_y;
+  input [6:0]jstk_x;
+  input [6:0]jstk_y;
   input btn_jstk;
   input btn_trigger;
 
@@ -170,7 +170,7 @@ module design_1_jstk_uart_bridge_0_0_jstk_uart_bridge
   wire \delay_counter[23]_i_1_n_0 ;
   wire \delay_counter[24]_i_1_n_0 ;
   wire \delay_counter[25]_i_1_n_0 ;
-  wire \delay_counter[26]_i_2_n_0 ;
+  wire \delay_counter[26]_i_1_n_0 ;
   wire \delay_counter[2]_i_1_n_0 ;
   wire \delay_counter[3]_i_1_n_0 ;
   wire \delay_counter[4]_i_1_n_0 ;
@@ -179,9 +179,8 @@ module design_1_jstk_uart_bridge_0_0_jstk_uart_bridge
   wire \delay_counter[7]_i_1_n_0 ;
   wire \delay_counter[8]_i_1_n_0 ;
   wire \delay_counter[9]_i_1_n_0 ;
-  wire delay_counter_0;
-  wire [7:0]jstk_x;
-  wire [7:0]jstk_y;
+  wire [6:0]jstk_x;
+  wire [6:0]jstk_y;
   wire [7:0]led_b;
   wire led_b0;
   wire [7:0]led_g;
@@ -514,19 +513,12 @@ module design_1_jstk_uart_bridge_0_0_jstk_uart_bridge
         .I2(data0[25]),
         .O(\delay_counter[25]_i_1_n_0 ));
   LUT3 #(
-    .INIT(8'h10)) 
-    \delay_counter[26]_i_1 
-       (.I0(tx_state__0[1]),
-        .I1(tx_state__0[0]),
-        .I2(tx_state__0[2]),
-        .O(delay_counter_0));
-  LUT3 #(
     .INIT(8'hE0)) 
-    \delay_counter[26]_i_2 
+    \delay_counter[26]_i_1 
        (.I0(delay_counter[0]),
         .I1(\m_axis_tdata[7]_i_3_n_0 ),
         .I2(data0[26]),
-        .O(\delay_counter[26]_i_2_n_0 ));
+        .O(\delay_counter[26]_i_1_n_0 ));
   (* SOFT_HLUTNM = "soft_lutpair3" *) 
   LUT3 #(
     .INIT(8'hE0)) 
@@ -593,163 +585,163 @@ module design_1_jstk_uart_bridge_0_0_jstk_uart_bridge
         .O(\delay_counter[9]_i_1_n_0 ));
   FDCE \delay_counter_reg[0] 
        (.C(aclk),
-        .CE(delay_counter_0),
+        .CE(\m_axis_tdata[7]_i_2_n_0 ),
         .CLR(\FSM_sequential_tx_state[2]_i_2_n_0 ),
         .D(\delay_counter[0]_i_1_n_0 ),
         .Q(delay_counter[0]));
   FDCE \delay_counter_reg[10] 
        (.C(aclk),
-        .CE(delay_counter_0),
+        .CE(\m_axis_tdata[7]_i_2_n_0 ),
         .CLR(\FSM_sequential_tx_state[2]_i_2_n_0 ),
         .D(\delay_counter[10]_i_1_n_0 ),
         .Q(delay_counter[10]));
   FDCE \delay_counter_reg[11] 
        (.C(aclk),
-        .CE(delay_counter_0),
+        .CE(\m_axis_tdata[7]_i_2_n_0 ),
         .CLR(\FSM_sequential_tx_state[2]_i_2_n_0 ),
         .D(\delay_counter[11]_i_1_n_0 ),
         .Q(delay_counter[11]));
   FDCE \delay_counter_reg[12] 
        (.C(aclk),
-        .CE(delay_counter_0),
+        .CE(\m_axis_tdata[7]_i_2_n_0 ),
         .CLR(\FSM_sequential_tx_state[2]_i_2_n_0 ),
         .D(\delay_counter[12]_i_1_n_0 ),
         .Q(delay_counter[12]));
   FDCE \delay_counter_reg[13] 
        (.C(aclk),
-        .CE(delay_counter_0),
+        .CE(\m_axis_tdata[7]_i_2_n_0 ),
         .CLR(\FSM_sequential_tx_state[2]_i_2_n_0 ),
         .D(\delay_counter[13]_i_1_n_0 ),
         .Q(delay_counter[13]));
   FDCE \delay_counter_reg[14] 
        (.C(aclk),
-        .CE(delay_counter_0),
+        .CE(\m_axis_tdata[7]_i_2_n_0 ),
         .CLR(\FSM_sequential_tx_state[2]_i_2_n_0 ),
         .D(\delay_counter[14]_i_1_n_0 ),
         .Q(delay_counter[14]));
   FDCE \delay_counter_reg[15] 
        (.C(aclk),
-        .CE(delay_counter_0),
+        .CE(\m_axis_tdata[7]_i_2_n_0 ),
         .CLR(\FSM_sequential_tx_state[2]_i_2_n_0 ),
         .D(\delay_counter[15]_i_1_n_0 ),
         .Q(delay_counter[15]));
   FDCE \delay_counter_reg[16] 
        (.C(aclk),
-        .CE(delay_counter_0),
+        .CE(\m_axis_tdata[7]_i_2_n_0 ),
         .CLR(\FSM_sequential_tx_state[2]_i_2_n_0 ),
         .D(\delay_counter[16]_i_1_n_0 ),
         .Q(delay_counter[16]));
   FDCE \delay_counter_reg[17] 
        (.C(aclk),
-        .CE(delay_counter_0),
+        .CE(\m_axis_tdata[7]_i_2_n_0 ),
         .CLR(\FSM_sequential_tx_state[2]_i_2_n_0 ),
         .D(\delay_counter[17]_i_1_n_0 ),
         .Q(delay_counter[17]));
   FDCE \delay_counter_reg[18] 
        (.C(aclk),
-        .CE(delay_counter_0),
+        .CE(\m_axis_tdata[7]_i_2_n_0 ),
         .CLR(\FSM_sequential_tx_state[2]_i_2_n_0 ),
         .D(\delay_counter[18]_i_1_n_0 ),
         .Q(delay_counter[18]));
   FDCE \delay_counter_reg[19] 
        (.C(aclk),
-        .CE(delay_counter_0),
+        .CE(\m_axis_tdata[7]_i_2_n_0 ),
         .CLR(\FSM_sequential_tx_state[2]_i_2_n_0 ),
         .D(\delay_counter[19]_i_1_n_0 ),
         .Q(delay_counter[19]));
   FDCE \delay_counter_reg[1] 
        (.C(aclk),
-        .CE(delay_counter_0),
+        .CE(\m_axis_tdata[7]_i_2_n_0 ),
         .CLR(\FSM_sequential_tx_state[2]_i_2_n_0 ),
         .D(\delay_counter[1]_i_1_n_0 ),
         .Q(delay_counter[1]));
   FDCE \delay_counter_reg[20] 
        (.C(aclk),
-        .CE(delay_counter_0),
+        .CE(\m_axis_tdata[7]_i_2_n_0 ),
         .CLR(\FSM_sequential_tx_state[2]_i_2_n_0 ),
         .D(\delay_counter[20]_i_1_n_0 ),
         .Q(delay_counter[20]));
   FDCE \delay_counter_reg[21] 
        (.C(aclk),
-        .CE(delay_counter_0),
+        .CE(\m_axis_tdata[7]_i_2_n_0 ),
         .CLR(\FSM_sequential_tx_state[2]_i_2_n_0 ),
         .D(\delay_counter[21]_i_1_n_0 ),
         .Q(delay_counter[21]));
   FDCE \delay_counter_reg[22] 
        (.C(aclk),
-        .CE(delay_counter_0),
+        .CE(\m_axis_tdata[7]_i_2_n_0 ),
         .CLR(\FSM_sequential_tx_state[2]_i_2_n_0 ),
         .D(\delay_counter[22]_i_1_n_0 ),
         .Q(delay_counter[22]));
   FDCE \delay_counter_reg[23] 
        (.C(aclk),
-        .CE(delay_counter_0),
+        .CE(\m_axis_tdata[7]_i_2_n_0 ),
         .CLR(\FSM_sequential_tx_state[2]_i_2_n_0 ),
         .D(\delay_counter[23]_i_1_n_0 ),
         .Q(delay_counter[23]));
   FDCE \delay_counter_reg[24] 
        (.C(aclk),
-        .CE(delay_counter_0),
+        .CE(\m_axis_tdata[7]_i_2_n_0 ),
         .CLR(\FSM_sequential_tx_state[2]_i_2_n_0 ),
         .D(\delay_counter[24]_i_1_n_0 ),
         .Q(delay_counter[24]));
   FDCE \delay_counter_reg[25] 
        (.C(aclk),
-        .CE(delay_counter_0),
+        .CE(\m_axis_tdata[7]_i_2_n_0 ),
         .CLR(\FSM_sequential_tx_state[2]_i_2_n_0 ),
         .D(\delay_counter[25]_i_1_n_0 ),
         .Q(delay_counter[25]));
   FDCE \delay_counter_reg[26] 
        (.C(aclk),
-        .CE(delay_counter_0),
+        .CE(\m_axis_tdata[7]_i_2_n_0 ),
         .CLR(\FSM_sequential_tx_state[2]_i_2_n_0 ),
-        .D(\delay_counter[26]_i_2_n_0 ),
+        .D(\delay_counter[26]_i_1_n_0 ),
         .Q(delay_counter[26]));
   FDCE \delay_counter_reg[2] 
        (.C(aclk),
-        .CE(delay_counter_0),
+        .CE(\m_axis_tdata[7]_i_2_n_0 ),
         .CLR(\FSM_sequential_tx_state[2]_i_2_n_0 ),
         .D(\delay_counter[2]_i_1_n_0 ),
         .Q(delay_counter[2]));
   FDCE \delay_counter_reg[3] 
        (.C(aclk),
-        .CE(delay_counter_0),
+        .CE(\m_axis_tdata[7]_i_2_n_0 ),
         .CLR(\FSM_sequential_tx_state[2]_i_2_n_0 ),
         .D(\delay_counter[3]_i_1_n_0 ),
         .Q(delay_counter[3]));
   FDCE \delay_counter_reg[4] 
        (.C(aclk),
-        .CE(delay_counter_0),
+        .CE(\m_axis_tdata[7]_i_2_n_0 ),
         .CLR(\FSM_sequential_tx_state[2]_i_2_n_0 ),
         .D(\delay_counter[4]_i_1_n_0 ),
         .Q(delay_counter[4]));
   FDCE \delay_counter_reg[5] 
        (.C(aclk),
-        .CE(delay_counter_0),
+        .CE(\m_axis_tdata[7]_i_2_n_0 ),
         .CLR(\FSM_sequential_tx_state[2]_i_2_n_0 ),
         .D(\delay_counter[5]_i_1_n_0 ),
         .Q(delay_counter[5]));
   FDCE \delay_counter_reg[6] 
        (.C(aclk),
-        .CE(delay_counter_0),
+        .CE(\m_axis_tdata[7]_i_2_n_0 ),
         .CLR(\FSM_sequential_tx_state[2]_i_2_n_0 ),
         .D(\delay_counter[6]_i_1_n_0 ),
         .Q(delay_counter[6]));
   FDCE \delay_counter_reg[7] 
        (.C(aclk),
-        .CE(delay_counter_0),
+        .CE(\m_axis_tdata[7]_i_2_n_0 ),
         .CLR(\FSM_sequential_tx_state[2]_i_2_n_0 ),
         .D(\delay_counter[7]_i_1_n_0 ),
         .Q(delay_counter[7]));
   FDCE \delay_counter_reg[8] 
        (.C(aclk),
-        .CE(delay_counter_0),
+        .CE(\m_axis_tdata[7]_i_2_n_0 ),
         .CLR(\FSM_sequential_tx_state[2]_i_2_n_0 ),
         .D(\delay_counter[8]_i_1_n_0 ),
         .Q(delay_counter[8]));
   FDCE \delay_counter_reg[9] 
        (.C(aclk),
-        .CE(delay_counter_0),
+        .CE(\m_axis_tdata[7]_i_2_n_0 ),
         .CLR(\FSM_sequential_tx_state[2]_i_2_n_0 ),
         .D(\delay_counter[9]_i_1_n_0 ),
         .Q(delay_counter[9]));
@@ -992,7 +984,7 @@ module design_1_jstk_uart_bridge_0_0_jstk_uart_bridge
     \m_axis_tdata[7]_i_1 
        (.I0(\m_axis_tdata[7]_i_3_n_0 ),
         .I1(delay_counter[0]),
-        .I2(delay_counter_0),
+        .I2(\m_axis_tdata[7]_i_2_n_0 ),
         .I3(aresetn),
         .I4(\m_axis_tdata[7]_i_4_n_0 ),
         .O(m_axis_tdata0));
@@ -1006,14 +998,12 @@ module design_1_jstk_uart_bridge_0_0_jstk_uart_bridge
         .I4(delay_counter[2]),
         .I5(delay_counter[1]),
         .O(\m_axis_tdata[7]_i_10_n_0 ));
-  LUT5 #(
-    .INIT(32'h000C00FA)) 
+  LUT3 #(
+    .INIT(8'h10)) 
     \m_axis_tdata[7]_i_2 
-       (.I0(jstk_x[7]),
-        .I1(jstk_y[7]),
+       (.I0(tx_state__0[1]),
+        .I1(tx_state__0[0]),
         .I2(tx_state__0[2]),
-        .I3(tx_state__0[1]),
-        .I4(tx_state__0[0]),
         .O(\m_axis_tdata[7]_i_2_n_0 ));
   LUT6 #(
     .INIT(64'hFFFFFFFFFFFFFFFE)) 

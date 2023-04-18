@@ -1,10 +1,10 @@
 -- Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
--- Tool Version: Vivado v.2020.2 (lin64) Build 3064766 Wed Nov 18 09:12:47 MST 2020
--- Date        : Wed Apr  5 08:01:04 2023
--- Host        : pop-os running 64-bit Pop!_OS 22.04 LTS
--- Command     : write_vhdl -force -mode funcsim
---               /home/alberton/Desktop/desd/SpaceShooterJoystick/SpaceShooterJoystick.gen/sources_1/bd/design_1/ip/design_1_jstk_uart_bridge_0_0/design_1_jstk_uart_bridge_0_0_sim_netlist.vhdl
+-- Tool Version: Vivado v.2020.2 (win64) Build 3064766 Wed Nov 18 09:12:45 MST 2020
+-- Date        : Tue Apr 18 17:34:12 2023
+-- Host        : DESKTOP-F4BLQ3F running 64-bit major release  (build 9200)
+-- Command     : write_vhdl -force -mode funcsim {c:/Users/emili/OneDrive - Politecnico di
+--               Milano/Documenti/desd/SpaceShooterJoystick/SpaceShooterJoystick.gen/sources_1/bd/design_1/ip/design_1_jstk_uart_bridge_0_0/design_1_jstk_uart_bridge_0_0_sim_netlist.vhdl}
 -- Design      : design_1_jstk_uart_bridge_0_0
 -- Purpose     : This VHDL netlist is a functional simulation representation of the design and should not be modified or
 --               synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -26,8 +26,8 @@ entity design_1_jstk_uart_bridge_0_0_jstk_uart_bridge is
     s_axis_tdata : in STD_LOGIC_VECTOR ( 7 downto 0 );
     s_axis_tvalid : in STD_LOGIC;
     aresetn : in STD_LOGIC;
-    jstk_x : in STD_LOGIC_VECTOR ( 7 downto 0 );
-    jstk_y : in STD_LOGIC_VECTOR ( 7 downto 0 );
+    jstk_x : in STD_LOGIC_VECTOR ( 6 downto 0 );
+    jstk_y : in STD_LOGIC_VECTOR ( 6 downto 0 );
     btn_jstk : in STD_LOGIC;
     btn_trigger : in STD_LOGIC
   );
@@ -88,7 +88,7 @@ architecture STRUCTURE of design_1_jstk_uart_bridge_0_0_jstk_uart_bridge is
   signal \delay_counter[23]_i_1_n_0\ : STD_LOGIC;
   signal \delay_counter[24]_i_1_n_0\ : STD_LOGIC;
   signal \delay_counter[25]_i_1_n_0\ : STD_LOGIC;
-  signal \delay_counter[26]_i_2_n_0\ : STD_LOGIC;
+  signal \delay_counter[26]_i_1_n_0\ : STD_LOGIC;
   signal \delay_counter[2]_i_1_n_0\ : STD_LOGIC;
   signal \delay_counter[3]_i_1_n_0\ : STD_LOGIC;
   signal \delay_counter[4]_i_1_n_0\ : STD_LOGIC;
@@ -97,7 +97,6 @@ architecture STRUCTURE of design_1_jstk_uart_bridge_0_0_jstk_uart_bridge is
   signal \delay_counter[7]_i_1_n_0\ : STD_LOGIC;
   signal \delay_counter[8]_i_1_n_0\ : STD_LOGIC;
   signal \delay_counter[9]_i_1_n_0\ : STD_LOGIC;
-  signal delay_counter_0 : STD_LOGIC;
   signal led_b0 : STD_LOGIC;
   signal led_g0 : STD_LOGIC;
   signal led_r0 : STD_LOGIC;
@@ -560,23 +559,13 @@ delay_counter0_carry: unisim.vcomponents.CARRY4
     );
 \delay_counter[26]_i_1\: unisim.vcomponents.LUT3
     generic map(
-      INIT => X"10"
-    )
-        port map (
-      I0 => \tx_state__0\(1),
-      I1 => \tx_state__0\(0),
-      I2 => \tx_state__0\(2),
-      O => delay_counter_0
-    );
-\delay_counter[26]_i_2\: unisim.vcomponents.LUT3
-    generic map(
       INIT => X"E0"
     )
         port map (
       I0 => delay_counter(0),
       I1 => \m_axis_tdata[7]_i_3_n_0\,
       I2 => data0(26),
-      O => \delay_counter[26]_i_2_n_0\
+      O => \delay_counter[26]_i_1_n_0\
     );
 \delay_counter[2]_i_1\: unisim.vcomponents.LUT3
     generic map(
@@ -661,7 +650,7 @@ delay_counter0_carry: unisim.vcomponents.CARRY4
 \delay_counter_reg[0]\: unisim.vcomponents.FDCE
      port map (
       C => aclk,
-      CE => delay_counter_0,
+      CE => \m_axis_tdata[7]_i_2_n_0\,
       CLR => \FSM_sequential_tx_state[2]_i_2_n_0\,
       D => \delay_counter[0]_i_1_n_0\,
       Q => delay_counter(0)
@@ -669,7 +658,7 @@ delay_counter0_carry: unisim.vcomponents.CARRY4
 \delay_counter_reg[10]\: unisim.vcomponents.FDCE
      port map (
       C => aclk,
-      CE => delay_counter_0,
+      CE => \m_axis_tdata[7]_i_2_n_0\,
       CLR => \FSM_sequential_tx_state[2]_i_2_n_0\,
       D => \delay_counter[10]_i_1_n_0\,
       Q => delay_counter(10)
@@ -677,7 +666,7 @@ delay_counter0_carry: unisim.vcomponents.CARRY4
 \delay_counter_reg[11]\: unisim.vcomponents.FDCE
      port map (
       C => aclk,
-      CE => delay_counter_0,
+      CE => \m_axis_tdata[7]_i_2_n_0\,
       CLR => \FSM_sequential_tx_state[2]_i_2_n_0\,
       D => \delay_counter[11]_i_1_n_0\,
       Q => delay_counter(11)
@@ -685,7 +674,7 @@ delay_counter0_carry: unisim.vcomponents.CARRY4
 \delay_counter_reg[12]\: unisim.vcomponents.FDCE
      port map (
       C => aclk,
-      CE => delay_counter_0,
+      CE => \m_axis_tdata[7]_i_2_n_0\,
       CLR => \FSM_sequential_tx_state[2]_i_2_n_0\,
       D => \delay_counter[12]_i_1_n_0\,
       Q => delay_counter(12)
@@ -693,7 +682,7 @@ delay_counter0_carry: unisim.vcomponents.CARRY4
 \delay_counter_reg[13]\: unisim.vcomponents.FDCE
      port map (
       C => aclk,
-      CE => delay_counter_0,
+      CE => \m_axis_tdata[7]_i_2_n_0\,
       CLR => \FSM_sequential_tx_state[2]_i_2_n_0\,
       D => \delay_counter[13]_i_1_n_0\,
       Q => delay_counter(13)
@@ -701,7 +690,7 @@ delay_counter0_carry: unisim.vcomponents.CARRY4
 \delay_counter_reg[14]\: unisim.vcomponents.FDCE
      port map (
       C => aclk,
-      CE => delay_counter_0,
+      CE => \m_axis_tdata[7]_i_2_n_0\,
       CLR => \FSM_sequential_tx_state[2]_i_2_n_0\,
       D => \delay_counter[14]_i_1_n_0\,
       Q => delay_counter(14)
@@ -709,7 +698,7 @@ delay_counter0_carry: unisim.vcomponents.CARRY4
 \delay_counter_reg[15]\: unisim.vcomponents.FDCE
      port map (
       C => aclk,
-      CE => delay_counter_0,
+      CE => \m_axis_tdata[7]_i_2_n_0\,
       CLR => \FSM_sequential_tx_state[2]_i_2_n_0\,
       D => \delay_counter[15]_i_1_n_0\,
       Q => delay_counter(15)
@@ -717,7 +706,7 @@ delay_counter0_carry: unisim.vcomponents.CARRY4
 \delay_counter_reg[16]\: unisim.vcomponents.FDCE
      port map (
       C => aclk,
-      CE => delay_counter_0,
+      CE => \m_axis_tdata[7]_i_2_n_0\,
       CLR => \FSM_sequential_tx_state[2]_i_2_n_0\,
       D => \delay_counter[16]_i_1_n_0\,
       Q => delay_counter(16)
@@ -725,7 +714,7 @@ delay_counter0_carry: unisim.vcomponents.CARRY4
 \delay_counter_reg[17]\: unisim.vcomponents.FDCE
      port map (
       C => aclk,
-      CE => delay_counter_0,
+      CE => \m_axis_tdata[7]_i_2_n_0\,
       CLR => \FSM_sequential_tx_state[2]_i_2_n_0\,
       D => \delay_counter[17]_i_1_n_0\,
       Q => delay_counter(17)
@@ -733,7 +722,7 @@ delay_counter0_carry: unisim.vcomponents.CARRY4
 \delay_counter_reg[18]\: unisim.vcomponents.FDCE
      port map (
       C => aclk,
-      CE => delay_counter_0,
+      CE => \m_axis_tdata[7]_i_2_n_0\,
       CLR => \FSM_sequential_tx_state[2]_i_2_n_0\,
       D => \delay_counter[18]_i_1_n_0\,
       Q => delay_counter(18)
@@ -741,7 +730,7 @@ delay_counter0_carry: unisim.vcomponents.CARRY4
 \delay_counter_reg[19]\: unisim.vcomponents.FDCE
      port map (
       C => aclk,
-      CE => delay_counter_0,
+      CE => \m_axis_tdata[7]_i_2_n_0\,
       CLR => \FSM_sequential_tx_state[2]_i_2_n_0\,
       D => \delay_counter[19]_i_1_n_0\,
       Q => delay_counter(19)
@@ -749,7 +738,7 @@ delay_counter0_carry: unisim.vcomponents.CARRY4
 \delay_counter_reg[1]\: unisim.vcomponents.FDCE
      port map (
       C => aclk,
-      CE => delay_counter_0,
+      CE => \m_axis_tdata[7]_i_2_n_0\,
       CLR => \FSM_sequential_tx_state[2]_i_2_n_0\,
       D => \delay_counter[1]_i_1_n_0\,
       Q => delay_counter(1)
@@ -757,7 +746,7 @@ delay_counter0_carry: unisim.vcomponents.CARRY4
 \delay_counter_reg[20]\: unisim.vcomponents.FDCE
      port map (
       C => aclk,
-      CE => delay_counter_0,
+      CE => \m_axis_tdata[7]_i_2_n_0\,
       CLR => \FSM_sequential_tx_state[2]_i_2_n_0\,
       D => \delay_counter[20]_i_1_n_0\,
       Q => delay_counter(20)
@@ -765,7 +754,7 @@ delay_counter0_carry: unisim.vcomponents.CARRY4
 \delay_counter_reg[21]\: unisim.vcomponents.FDCE
      port map (
       C => aclk,
-      CE => delay_counter_0,
+      CE => \m_axis_tdata[7]_i_2_n_0\,
       CLR => \FSM_sequential_tx_state[2]_i_2_n_0\,
       D => \delay_counter[21]_i_1_n_0\,
       Q => delay_counter(21)
@@ -773,7 +762,7 @@ delay_counter0_carry: unisim.vcomponents.CARRY4
 \delay_counter_reg[22]\: unisim.vcomponents.FDCE
      port map (
       C => aclk,
-      CE => delay_counter_0,
+      CE => \m_axis_tdata[7]_i_2_n_0\,
       CLR => \FSM_sequential_tx_state[2]_i_2_n_0\,
       D => \delay_counter[22]_i_1_n_0\,
       Q => delay_counter(22)
@@ -781,7 +770,7 @@ delay_counter0_carry: unisim.vcomponents.CARRY4
 \delay_counter_reg[23]\: unisim.vcomponents.FDCE
      port map (
       C => aclk,
-      CE => delay_counter_0,
+      CE => \m_axis_tdata[7]_i_2_n_0\,
       CLR => \FSM_sequential_tx_state[2]_i_2_n_0\,
       D => \delay_counter[23]_i_1_n_0\,
       Q => delay_counter(23)
@@ -789,7 +778,7 @@ delay_counter0_carry: unisim.vcomponents.CARRY4
 \delay_counter_reg[24]\: unisim.vcomponents.FDCE
      port map (
       C => aclk,
-      CE => delay_counter_0,
+      CE => \m_axis_tdata[7]_i_2_n_0\,
       CLR => \FSM_sequential_tx_state[2]_i_2_n_0\,
       D => \delay_counter[24]_i_1_n_0\,
       Q => delay_counter(24)
@@ -797,7 +786,7 @@ delay_counter0_carry: unisim.vcomponents.CARRY4
 \delay_counter_reg[25]\: unisim.vcomponents.FDCE
      port map (
       C => aclk,
-      CE => delay_counter_0,
+      CE => \m_axis_tdata[7]_i_2_n_0\,
       CLR => \FSM_sequential_tx_state[2]_i_2_n_0\,
       D => \delay_counter[25]_i_1_n_0\,
       Q => delay_counter(25)
@@ -805,15 +794,15 @@ delay_counter0_carry: unisim.vcomponents.CARRY4
 \delay_counter_reg[26]\: unisim.vcomponents.FDCE
      port map (
       C => aclk,
-      CE => delay_counter_0,
+      CE => \m_axis_tdata[7]_i_2_n_0\,
       CLR => \FSM_sequential_tx_state[2]_i_2_n_0\,
-      D => \delay_counter[26]_i_2_n_0\,
+      D => \delay_counter[26]_i_1_n_0\,
       Q => delay_counter(26)
     );
 \delay_counter_reg[2]\: unisim.vcomponents.FDCE
      port map (
       C => aclk,
-      CE => delay_counter_0,
+      CE => \m_axis_tdata[7]_i_2_n_0\,
       CLR => \FSM_sequential_tx_state[2]_i_2_n_0\,
       D => \delay_counter[2]_i_1_n_0\,
       Q => delay_counter(2)
@@ -821,7 +810,7 @@ delay_counter0_carry: unisim.vcomponents.CARRY4
 \delay_counter_reg[3]\: unisim.vcomponents.FDCE
      port map (
       C => aclk,
-      CE => delay_counter_0,
+      CE => \m_axis_tdata[7]_i_2_n_0\,
       CLR => \FSM_sequential_tx_state[2]_i_2_n_0\,
       D => \delay_counter[3]_i_1_n_0\,
       Q => delay_counter(3)
@@ -829,7 +818,7 @@ delay_counter0_carry: unisim.vcomponents.CARRY4
 \delay_counter_reg[4]\: unisim.vcomponents.FDCE
      port map (
       C => aclk,
-      CE => delay_counter_0,
+      CE => \m_axis_tdata[7]_i_2_n_0\,
       CLR => \FSM_sequential_tx_state[2]_i_2_n_0\,
       D => \delay_counter[4]_i_1_n_0\,
       Q => delay_counter(4)
@@ -837,7 +826,7 @@ delay_counter0_carry: unisim.vcomponents.CARRY4
 \delay_counter_reg[5]\: unisim.vcomponents.FDCE
      port map (
       C => aclk,
-      CE => delay_counter_0,
+      CE => \m_axis_tdata[7]_i_2_n_0\,
       CLR => \FSM_sequential_tx_state[2]_i_2_n_0\,
       D => \delay_counter[5]_i_1_n_0\,
       Q => delay_counter(5)
@@ -845,7 +834,7 @@ delay_counter0_carry: unisim.vcomponents.CARRY4
 \delay_counter_reg[6]\: unisim.vcomponents.FDCE
      port map (
       C => aclk,
-      CE => delay_counter_0,
+      CE => \m_axis_tdata[7]_i_2_n_0\,
       CLR => \FSM_sequential_tx_state[2]_i_2_n_0\,
       D => \delay_counter[6]_i_1_n_0\,
       Q => delay_counter(6)
@@ -853,7 +842,7 @@ delay_counter0_carry: unisim.vcomponents.CARRY4
 \delay_counter_reg[7]\: unisim.vcomponents.FDCE
      port map (
       C => aclk,
-      CE => delay_counter_0,
+      CE => \m_axis_tdata[7]_i_2_n_0\,
       CLR => \FSM_sequential_tx_state[2]_i_2_n_0\,
       D => \delay_counter[7]_i_1_n_0\,
       Q => delay_counter(7)
@@ -861,7 +850,7 @@ delay_counter0_carry: unisim.vcomponents.CARRY4
 \delay_counter_reg[8]\: unisim.vcomponents.FDCE
      port map (
       C => aclk,
-      CE => delay_counter_0,
+      CE => \m_axis_tdata[7]_i_2_n_0\,
       CLR => \FSM_sequential_tx_state[2]_i_2_n_0\,
       D => \delay_counter[8]_i_1_n_0\,
       Q => delay_counter(8)
@@ -869,7 +858,7 @@ delay_counter0_carry: unisim.vcomponents.CARRY4
 \delay_counter_reg[9]\: unisim.vcomponents.FDCE
      port map (
       C => aclk,
-      CE => delay_counter_0,
+      CE => \m_axis_tdata[7]_i_2_n_0\,
       CLR => \FSM_sequential_tx_state[2]_i_2_n_0\,
       D => \delay_counter[9]_i_1_n_0\,
       Q => delay_counter(9)
@@ -1192,7 +1181,7 @@ delay_counter0_carry: unisim.vcomponents.CARRY4
         port map (
       I0 => \m_axis_tdata[7]_i_3_n_0\,
       I1 => delay_counter(0),
-      I2 => delay_counter_0,
+      I2 => \m_axis_tdata[7]_i_2_n_0\,
       I3 => aresetn,
       I4 => \m_axis_tdata[7]_i_4_n_0\,
       O => m_axis_tdata0
@@ -1210,16 +1199,14 @@ delay_counter0_carry: unisim.vcomponents.CARRY4
       I5 => delay_counter(1),
       O => \m_axis_tdata[7]_i_10_n_0\
     );
-\m_axis_tdata[7]_i_2\: unisim.vcomponents.LUT5
+\m_axis_tdata[7]_i_2\: unisim.vcomponents.LUT3
     generic map(
-      INIT => X"000C00FA"
+      INIT => X"10"
     )
         port map (
-      I0 => jstk_x(7),
-      I1 => jstk_y(7),
+      I0 => \tx_state__0\(1),
+      I1 => \tx_state__0\(0),
       I2 => \tx_state__0\(2),
-      I3 => \tx_state__0\(1),
-      I4 => \tx_state__0\(0),
       O => \m_axis_tdata[7]_i_2_n_0\
     );
 \m_axis_tdata[7]_i_3\: unisim.vcomponents.LUT6
@@ -1433,8 +1420,8 @@ U0: entity work.design_1_jstk_uart_bridge_0_0_jstk_uart_bridge
       aresetn => aresetn,
       btn_jstk => btn_jstk,
       btn_trigger => btn_trigger,
-      jstk_x(7 downto 0) => jstk_x(9 downto 2),
-      jstk_y(7 downto 0) => jstk_y(9 downto 2),
+      jstk_x(6 downto 0) => jstk_x(9 downto 3),
+      jstk_y(6 downto 0) => jstk_y(9 downto 3),
       led_b(7 downto 0) => led_b(7 downto 0),
       led_g(7 downto 0) => led_g(7 downto 0),
       led_r(7 downto 0) => led_r(7 downto 0),
