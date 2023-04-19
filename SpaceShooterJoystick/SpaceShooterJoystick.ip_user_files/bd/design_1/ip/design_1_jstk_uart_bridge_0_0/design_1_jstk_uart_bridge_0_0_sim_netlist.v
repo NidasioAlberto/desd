@@ -1,7 +1,7 @@
 // Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2020.2 (win64) Build 3064766 Wed Nov 18 09:12:45 MST 2020
-// Date        : Wed Apr 19 16:12:27 2023
+// Date        : Wed Apr 19 16:02:32 2023
 // Host        : DESKTOP-F4BLQ3F running 64-bit major release  (build 9200)
 // Command     : write_verilog -force -mode funcsim {c:/Users/emili/OneDrive - Politecnico di
 //               Milano/Documenti/desd/SpaceShooterJoystick/SpaceShooterJoystick.gen/sources_1/bd/design_1/ip/design_1_jstk_uart_bridge_0_0/design_1_jstk_uart_bridge_0_0_sim_netlist.v}
@@ -31,12 +31,12 @@ module design_1_jstk_uart_bridge_0_0
     led_r,
     led_g,
     led_b);
-  (* x_interface_info = "xilinx.com:signal:clock:1.0 aclk CLK" *) (* x_interface_parameter = "XIL_INTERFACENAME aclk, ASSOCIATED_BUSIF m_axis:s_axis, ASSOCIATED_RESET aresetn, FREQ_HZ 100000000, FREQ_TOLERANCE_HZ 0, PHASE 0.0, CLK_DOMAIN /clk_wiz_0_clk_out1, INSERT_VIP 0" *) input aclk;
+  (* x_interface_info = "xilinx.com:signal:clock:1.0 aclk CLK" *) (* x_interface_parameter = "XIL_INTERFACENAME aclk, ASSOCIATED_BUSIF m_axis:s_axis, ASSOCIATED_RESET aresetn, FREQ_HZ 10000000, FREQ_TOLERANCE_HZ 0, PHASE 0.0, CLK_DOMAIN /clk_wiz_0_clk_out1, INSERT_VIP 0" *) input aclk;
   (* x_interface_info = "xilinx.com:signal:reset:1.0 aresetn RST" *) (* x_interface_parameter = "XIL_INTERFACENAME aresetn, POLARITY ACTIVE_LOW, INSERT_VIP 0" *) input aresetn;
-  (* x_interface_info = "xilinx.com:interface:axis:1.0 m_axis TVALID" *) (* x_interface_parameter = "XIL_INTERFACENAME m_axis, TDATA_NUM_BYTES 1, TDEST_WIDTH 0, TID_WIDTH 0, TUSER_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 0, FREQ_HZ 100000000, PHASE 0.0, CLK_DOMAIN /clk_wiz_0_clk_out1, LAYERED_METADATA undef, INSERT_VIP 0" *) output m_axis_tvalid;
+  (* x_interface_info = "xilinx.com:interface:axis:1.0 m_axis TVALID" *) (* x_interface_parameter = "XIL_INTERFACENAME m_axis, TDATA_NUM_BYTES 1, TDEST_WIDTH 0, TID_WIDTH 0, TUSER_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 0, FREQ_HZ 10000000, PHASE 0.0, CLK_DOMAIN /clk_wiz_0_clk_out1, LAYERED_METADATA undef, INSERT_VIP 0" *) output m_axis_tvalid;
   (* x_interface_info = "xilinx.com:interface:axis:1.0 m_axis TDATA" *) output [7:0]m_axis_tdata;
   (* x_interface_info = "xilinx.com:interface:axis:1.0 m_axis TREADY" *) input m_axis_tready;
-  (* x_interface_info = "xilinx.com:interface:axis:1.0 s_axis TVALID" *) (* x_interface_parameter = "XIL_INTERFACENAME s_axis, TDATA_NUM_BYTES 1, TDEST_WIDTH 0, TID_WIDTH 0, TUSER_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 0, FREQ_HZ 100000000, PHASE 0.0, CLK_DOMAIN /clk_wiz_0_clk_out1, LAYERED_METADATA undef, INSERT_VIP 0" *) input s_axis_tvalid;
+  (* x_interface_info = "xilinx.com:interface:axis:1.0 s_axis TVALID" *) (* x_interface_parameter = "XIL_INTERFACENAME s_axis, TDATA_NUM_BYTES 1, TDEST_WIDTH 0, TID_WIDTH 0, TUSER_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 0, FREQ_HZ 10000000, PHASE 0.0, CLK_DOMAIN /clk_wiz_0_clk_out1, LAYERED_METADATA undef, INSERT_VIP 0" *) input s_axis_tvalid;
   (* x_interface_info = "xilinx.com:interface:axis:1.0 s_axis TDATA" *) input [7:0]s_axis_tdata;
   (* x_interface_info = "xilinx.com:interface:axis:1.0 s_axis TREADY" *) output s_axis_tready;
   input [9:0]jstk_x;
@@ -47,6 +47,7 @@ module design_1_jstk_uart_bridge_0_0
   output [7:0]led_g;
   output [7:0]led_b;
 
+  wire \<const0> ;
   wire \<const1> ;
   wire aclk;
   wire aresetn;
@@ -57,24 +58,30 @@ module design_1_jstk_uart_bridge_0_0
   wire [7:0]led_b;
   wire [7:0]led_g;
   wire [7:0]led_r;
-  wire [7:0]m_axis_tdata;
+  wire [7:0]\^m_axis_tdata ;
   wire m_axis_tready;
   wire m_axis_tvalid;
   wire [7:0]s_axis_tdata;
   wire s_axis_tvalid;
 
+  assign m_axis_tdata[7:4] = \^m_axis_tdata [7:4];
+  assign m_axis_tdata[3] = \<const0> ;
+  assign m_axis_tdata[2] = \<const0> ;
+  assign m_axis_tdata[1:0] = \^m_axis_tdata [1:0];
   assign s_axis_tready = \<const1> ;
+  GND GND
+       (.G(\<const0> ));
   design_1_jstk_uart_bridge_0_0_jstk_uart_bridge U0
        (.aclk(aclk),
         .aresetn(aresetn),
         .btn_jstk(btn_jstk),
         .btn_trigger(btn_trigger),
-        .jstk_x(jstk_x[9:3]),
-        .jstk_y(jstk_y[9:3]),
+        .jstk_x(jstk_x[9:7]),
+        .jstk_y(jstk_y[9:7]),
         .led_b(led_b),
         .led_g(led_g),
         .led_r(led_r),
-        .m_axis_tdata(m_axis_tdata),
+        .m_axis_tdata({\^m_axis_tdata [7:4],\^m_axis_tdata [1:0]}),
         .m_axis_tready(m_axis_tready),
         .m_axis_tvalid(m_axis_tvalid),
         .s_axis_tdata(s_axis_tdata),
@@ -95,11 +102,11 @@ module design_1_jstk_uart_bridge_0_0_jstk_uart_bridge
     s_axis_tdata,
     s_axis_tvalid,
     aresetn,
-    jstk_x,
     jstk_y,
+    jstk_x,
     btn_jstk,
     btn_trigger);
-  output [7:0]m_axis_tdata;
+  output [5:0]m_axis_tdata;
   output [7:0]led_r;
   output [7:0]led_g;
   output [7:0]led_b;
@@ -109,8 +116,8 @@ module design_1_jstk_uart_bridge_0_0_jstk_uart_bridge
   input [7:0]s_axis_tdata;
   input s_axis_tvalid;
   input aresetn;
-  input [6:0]jstk_x;
-  input [6:0]jstk_y;
+  input [2:0]jstk_y;
+  input [2:0]jstk_x;
   input btn_jstk;
   input btn_trigger;
 
@@ -127,31 +134,31 @@ module design_1_jstk_uart_bridge_0_0_jstk_uart_bridge
   wire btn_trigger;
   wire [26:1]data0;
   wire [26:0]delay_counter;
-  wire delay_counter0_carry__0_n_0;
-  wire delay_counter0_carry__0_n_1;
-  wire delay_counter0_carry__0_n_2;
-  wire delay_counter0_carry__0_n_3;
-  wire delay_counter0_carry__1_n_0;
-  wire delay_counter0_carry__1_n_1;
-  wire delay_counter0_carry__1_n_2;
-  wire delay_counter0_carry__1_n_3;
-  wire delay_counter0_carry__2_n_0;
-  wire delay_counter0_carry__2_n_1;
-  wire delay_counter0_carry__2_n_2;
-  wire delay_counter0_carry__2_n_3;
-  wire delay_counter0_carry__3_n_0;
-  wire delay_counter0_carry__3_n_1;
-  wire delay_counter0_carry__3_n_2;
-  wire delay_counter0_carry__3_n_3;
-  wire delay_counter0_carry__4_n_0;
-  wire delay_counter0_carry__4_n_1;
-  wire delay_counter0_carry__4_n_2;
-  wire delay_counter0_carry__4_n_3;
-  wire delay_counter0_carry__5_n_3;
-  wire delay_counter0_carry_n_0;
-  wire delay_counter0_carry_n_1;
-  wire delay_counter0_carry_n_2;
-  wire delay_counter0_carry_n_3;
+  wire \delay_counter0_inferred__0/i__carry__0_n_0 ;
+  wire \delay_counter0_inferred__0/i__carry__0_n_1 ;
+  wire \delay_counter0_inferred__0/i__carry__0_n_2 ;
+  wire \delay_counter0_inferred__0/i__carry__0_n_3 ;
+  wire \delay_counter0_inferred__0/i__carry__1_n_0 ;
+  wire \delay_counter0_inferred__0/i__carry__1_n_1 ;
+  wire \delay_counter0_inferred__0/i__carry__1_n_2 ;
+  wire \delay_counter0_inferred__0/i__carry__1_n_3 ;
+  wire \delay_counter0_inferred__0/i__carry__2_n_0 ;
+  wire \delay_counter0_inferred__0/i__carry__2_n_1 ;
+  wire \delay_counter0_inferred__0/i__carry__2_n_2 ;
+  wire \delay_counter0_inferred__0/i__carry__2_n_3 ;
+  wire \delay_counter0_inferred__0/i__carry__3_n_0 ;
+  wire \delay_counter0_inferred__0/i__carry__3_n_1 ;
+  wire \delay_counter0_inferred__0/i__carry__3_n_2 ;
+  wire \delay_counter0_inferred__0/i__carry__3_n_3 ;
+  wire \delay_counter0_inferred__0/i__carry__4_n_0 ;
+  wire \delay_counter0_inferred__0/i__carry__4_n_1 ;
+  wire \delay_counter0_inferred__0/i__carry__4_n_2 ;
+  wire \delay_counter0_inferred__0/i__carry__4_n_3 ;
+  wire \delay_counter0_inferred__0/i__carry__5_n_3 ;
+  wire \delay_counter0_inferred__0/i__carry_n_0 ;
+  wire \delay_counter0_inferred__0/i__carry_n_1 ;
+  wire \delay_counter0_inferred__0/i__carry_n_2 ;
+  wire \delay_counter0_inferred__0/i__carry_n_3 ;
   wire \delay_counter[0]_i_1_n_0 ;
   wire \delay_counter[10]_i_1_n_0 ;
   wire \delay_counter[11]_i_1_n_0 ;
@@ -179,20 +186,18 @@ module design_1_jstk_uart_bridge_0_0_jstk_uart_bridge
   wire \delay_counter[7]_i_1_n_0 ;
   wire \delay_counter[8]_i_1_n_0 ;
   wire \delay_counter[9]_i_1_n_0 ;
-  wire [6:0]jstk_x;
-  wire [6:0]jstk_y;
+  wire [2:0]jstk_x;
+  wire [2:0]jstk_y;
   wire [7:0]led_b;
   wire led_b0;
   wire [7:0]led_g;
   wire led_g0;
   wire [7:0]led_r;
   wire led_r0;
-  wire [7:0]m_axis_tdata;
+  wire [5:0]m_axis_tdata;
   wire m_axis_tdata0;
   wire \m_axis_tdata[0]_i_1_n_0 ;
   wire \m_axis_tdata[1]_i_1_n_0 ;
-  wire \m_axis_tdata[2]_i_1_n_0 ;
-  wire \m_axis_tdata[3]_i_1_n_0 ;
   wire \m_axis_tdata[4]_i_1_n_0 ;
   wire \m_axis_tdata[5]_i_1_n_0 ;
   wire \m_axis_tdata[6]_i_1_n_0 ;
@@ -211,8 +216,8 @@ module design_1_jstk_uart_bridge_0_0_jstk_uart_bridge
   wire [7:0]s_axis_tdata;
   wire s_axis_tvalid;
   wire [2:0]tx_state__0;
-  wire [3:1]NLW_delay_counter0_carry__5_CO_UNCONNECTED;
-  wire [3:2]NLW_delay_counter0_carry__5_O_UNCONNECTED;
+  wire [3:1]\NLW_delay_counter0_inferred__0/i__carry__5_CO_UNCONNECTED ;
+  wire [3:2]\NLW_delay_counter0_inferred__0/i__carry__5_O_UNCONNECTED ;
 
   LUT6 #(
     .INIT(64'h22222232CCCCCCCC)) 
@@ -314,60 +319,60 @@ module design_1_jstk_uart_bridge_0_0_jstk_uart_bridge
         .D(\FSM_sequential_tx_state[2]_i_1_n_0 ),
         .Q(tx_state__0[2]));
   (* ADDER_THRESHOLD = "35" *) 
-  CARRY4 delay_counter0_carry
+  CARRY4 \delay_counter0_inferred__0/i__carry 
        (.CI(1'b0),
-        .CO({delay_counter0_carry_n_0,delay_counter0_carry_n_1,delay_counter0_carry_n_2,delay_counter0_carry_n_3}),
+        .CO({\delay_counter0_inferred__0/i__carry_n_0 ,\delay_counter0_inferred__0/i__carry_n_1 ,\delay_counter0_inferred__0/i__carry_n_2 ,\delay_counter0_inferred__0/i__carry_n_3 }),
         .CYINIT(delay_counter[0]),
         .DI({1'b0,1'b0,1'b0,1'b0}),
         .O(data0[4:1]),
         .S(delay_counter[4:1]));
   (* ADDER_THRESHOLD = "35" *) 
-  CARRY4 delay_counter0_carry__0
-       (.CI(delay_counter0_carry_n_0),
-        .CO({delay_counter0_carry__0_n_0,delay_counter0_carry__0_n_1,delay_counter0_carry__0_n_2,delay_counter0_carry__0_n_3}),
+  CARRY4 \delay_counter0_inferred__0/i__carry__0 
+       (.CI(\delay_counter0_inferred__0/i__carry_n_0 ),
+        .CO({\delay_counter0_inferred__0/i__carry__0_n_0 ,\delay_counter0_inferred__0/i__carry__0_n_1 ,\delay_counter0_inferred__0/i__carry__0_n_2 ,\delay_counter0_inferred__0/i__carry__0_n_3 }),
         .CYINIT(1'b0),
         .DI({1'b0,1'b0,1'b0,1'b0}),
         .O(data0[8:5]),
         .S(delay_counter[8:5]));
   (* ADDER_THRESHOLD = "35" *) 
-  CARRY4 delay_counter0_carry__1
-       (.CI(delay_counter0_carry__0_n_0),
-        .CO({delay_counter0_carry__1_n_0,delay_counter0_carry__1_n_1,delay_counter0_carry__1_n_2,delay_counter0_carry__1_n_3}),
+  CARRY4 \delay_counter0_inferred__0/i__carry__1 
+       (.CI(\delay_counter0_inferred__0/i__carry__0_n_0 ),
+        .CO({\delay_counter0_inferred__0/i__carry__1_n_0 ,\delay_counter0_inferred__0/i__carry__1_n_1 ,\delay_counter0_inferred__0/i__carry__1_n_2 ,\delay_counter0_inferred__0/i__carry__1_n_3 }),
         .CYINIT(1'b0),
         .DI({1'b0,1'b0,1'b0,1'b0}),
         .O(data0[12:9]),
         .S(delay_counter[12:9]));
   (* ADDER_THRESHOLD = "35" *) 
-  CARRY4 delay_counter0_carry__2
-       (.CI(delay_counter0_carry__1_n_0),
-        .CO({delay_counter0_carry__2_n_0,delay_counter0_carry__2_n_1,delay_counter0_carry__2_n_2,delay_counter0_carry__2_n_3}),
+  CARRY4 \delay_counter0_inferred__0/i__carry__2 
+       (.CI(\delay_counter0_inferred__0/i__carry__1_n_0 ),
+        .CO({\delay_counter0_inferred__0/i__carry__2_n_0 ,\delay_counter0_inferred__0/i__carry__2_n_1 ,\delay_counter0_inferred__0/i__carry__2_n_2 ,\delay_counter0_inferred__0/i__carry__2_n_3 }),
         .CYINIT(1'b0),
         .DI({1'b0,1'b0,1'b0,1'b0}),
         .O(data0[16:13]),
         .S(delay_counter[16:13]));
   (* ADDER_THRESHOLD = "35" *) 
-  CARRY4 delay_counter0_carry__3
-       (.CI(delay_counter0_carry__2_n_0),
-        .CO({delay_counter0_carry__3_n_0,delay_counter0_carry__3_n_1,delay_counter0_carry__3_n_2,delay_counter0_carry__3_n_3}),
+  CARRY4 \delay_counter0_inferred__0/i__carry__3 
+       (.CI(\delay_counter0_inferred__0/i__carry__2_n_0 ),
+        .CO({\delay_counter0_inferred__0/i__carry__3_n_0 ,\delay_counter0_inferred__0/i__carry__3_n_1 ,\delay_counter0_inferred__0/i__carry__3_n_2 ,\delay_counter0_inferred__0/i__carry__3_n_3 }),
         .CYINIT(1'b0),
         .DI({1'b0,1'b0,1'b0,1'b0}),
         .O(data0[20:17]),
         .S(delay_counter[20:17]));
   (* ADDER_THRESHOLD = "35" *) 
-  CARRY4 delay_counter0_carry__4
-       (.CI(delay_counter0_carry__3_n_0),
-        .CO({delay_counter0_carry__4_n_0,delay_counter0_carry__4_n_1,delay_counter0_carry__4_n_2,delay_counter0_carry__4_n_3}),
+  CARRY4 \delay_counter0_inferred__0/i__carry__4 
+       (.CI(\delay_counter0_inferred__0/i__carry__3_n_0 ),
+        .CO({\delay_counter0_inferred__0/i__carry__4_n_0 ,\delay_counter0_inferred__0/i__carry__4_n_1 ,\delay_counter0_inferred__0/i__carry__4_n_2 ,\delay_counter0_inferred__0/i__carry__4_n_3 }),
         .CYINIT(1'b0),
         .DI({1'b0,1'b0,1'b0,1'b0}),
         .O(data0[24:21]),
         .S(delay_counter[24:21]));
   (* ADDER_THRESHOLD = "35" *) 
-  CARRY4 delay_counter0_carry__5
-       (.CI(delay_counter0_carry__4_n_0),
-        .CO({NLW_delay_counter0_carry__5_CO_UNCONNECTED[3:1],delay_counter0_carry__5_n_3}),
+  CARRY4 \delay_counter0_inferred__0/i__carry__5 
+       (.CI(\delay_counter0_inferred__0/i__carry__4_n_0 ),
+        .CO({\NLW_delay_counter0_inferred__0/i__carry__5_CO_UNCONNECTED [3:1],\delay_counter0_inferred__0/i__carry__5_n_3 }),
         .CYINIT(1'b0),
         .DI({1'b0,1'b0,1'b0,1'b0}),
-        .O({NLW_delay_counter0_carry__5_O_UNCONNECTED[3:2],data0[26:25]}),
+        .O({\NLW_delay_counter0_inferred__0/i__carry__5_O_UNCONNECTED [3:2],data0[26:25]}),
         .S({1'b0,1'b0,delay_counter[26:25]}));
   (* SOFT_HLUTNM = "soft_lutpair2" *) 
   LUT2 #(
@@ -913,71 +918,49 @@ module design_1_jstk_uart_bridge_0_0_jstk_uart_bridge
         .D(s_axis_tdata[7]),
         .Q(led_r[7]),
         .R(1'b0));
-  LUT6 #(
-    .INIT(64'h00000000FF00E4E4)) 
+  (* SOFT_HLUTNM = "soft_lutpair15" *) 
+  LUT3 #(
+    .INIT(8'h40)) 
     \m_axis_tdata[0]_i_1 
-       (.I0(tx_state__0[0]),
-        .I1(jstk_x[0]),
-        .I2(jstk_y[0]),
-        .I3(btn_jstk),
-        .I4(tx_state__0[1]),
-        .I5(tx_state__0[2]),
+       (.I0(tx_state__0[2]),
+        .I1(tx_state__0[1]),
+        .I2(btn_jstk),
         .O(\m_axis_tdata[0]_i_1_n_0 ));
-  LUT6 #(
-    .INIT(64'h00000000FF00E4E4)) 
+  (* SOFT_HLUTNM = "soft_lutpair15" *) 
+  LUT3 #(
+    .INIT(8'h40)) 
     \m_axis_tdata[1]_i_1 
-       (.I0(tx_state__0[0]),
-        .I1(jstk_x[1]),
-        .I2(jstk_y[1]),
-        .I3(btn_trigger),
-        .I4(tx_state__0[1]),
-        .I5(tx_state__0[2]),
+       (.I0(tx_state__0[2]),
+        .I1(tx_state__0[1]),
+        .I2(btn_trigger),
         .O(\m_axis_tdata[1]_i_1_n_0 ));
   (* SOFT_HLUTNM = "soft_lutpair1" *) 
   LUT5 #(
-    .INIT(32'h000A000C)) 
-    \m_axis_tdata[2]_i_1 
-       (.I0(jstk_y[2]),
-        .I1(jstk_x[2]),
-        .I2(tx_state__0[2]),
-        .I3(tx_state__0[1]),
-        .I4(tx_state__0[0]),
-        .O(\m_axis_tdata[2]_i_1_n_0 ));
-  LUT5 #(
-    .INIT(32'h000A000C)) 
-    \m_axis_tdata[3]_i_1 
-       (.I0(jstk_y[3]),
-        .I1(jstk_x[3]),
-        .I2(tx_state__0[2]),
-        .I3(tx_state__0[1]),
-        .I4(tx_state__0[0]),
-        .O(\m_axis_tdata[3]_i_1_n_0 ));
-  LUT5 #(
-    .INIT(32'h000A000C)) 
+    .INIT(32'h00000B08)) 
     \m_axis_tdata[4]_i_1 
-       (.I0(jstk_y[4]),
-        .I1(jstk_x[4]),
-        .I2(tx_state__0[2]),
-        .I3(tx_state__0[1]),
-        .I4(tx_state__0[0]),
+       (.I0(jstk_y[0]),
+        .I1(tx_state__0[0]),
+        .I2(tx_state__0[1]),
+        .I3(jstk_x[0]),
+        .I4(tx_state__0[2]),
         .O(\m_axis_tdata[4]_i_1_n_0 ));
   LUT5 #(
-    .INIT(32'h000A000C)) 
+    .INIT(32'h00000B08)) 
     \m_axis_tdata[5]_i_1 
-       (.I0(jstk_y[5]),
-        .I1(jstk_x[5]),
-        .I2(tx_state__0[2]),
-        .I3(tx_state__0[1]),
-        .I4(tx_state__0[0]),
+       (.I0(jstk_y[1]),
+        .I1(tx_state__0[0]),
+        .I2(tx_state__0[1]),
+        .I3(jstk_x[1]),
+        .I4(tx_state__0[2]),
         .O(\m_axis_tdata[5]_i_1_n_0 ));
   LUT5 #(
-    .INIT(32'h000C00FA)) 
+    .INIT(32'h000F0C0A)) 
     \m_axis_tdata[6]_i_1 
-       (.I0(jstk_x[6]),
-        .I1(jstk_y[6]),
-        .I2(tx_state__0[2]),
-        .I3(tx_state__0[1]),
-        .I4(tx_state__0[0]),
+       (.I0(jstk_x[2]),
+        .I1(jstk_y[2]),
+        .I2(tx_state__0[1]),
+        .I3(tx_state__0[0]),
+        .I4(tx_state__0[2]),
         .O(\m_axis_tdata[6]_i_1_n_0 ));
   LUT5 #(
     .INIT(32'hFFFF1000)) 
@@ -1017,13 +1000,13 @@ module design_1_jstk_uart_bridge_0_0_jstk_uart_bridge
         .O(\m_axis_tdata[7]_i_3_n_0 ));
   (* SOFT_HLUTNM = "soft_lutpair0" *) 
   LUT5 #(
-    .INIT(32'h07000000)) 
+    .INIT(32'h00080808)) 
     \m_axis_tdata[7]_i_4 
-       (.I0(tx_state__0[1]),
-        .I1(tx_state__0[0]),
+       (.I0(aresetn),
+        .I1(m_axis_tready),
         .I2(tx_state__0[2]),
-        .I3(m_axis_tready),
-        .I4(aresetn),
+        .I3(tx_state__0[1]),
+        .I4(tx_state__0[0]),
         .O(\m_axis_tdata[7]_i_4_n_0 ));
   LUT4 #(
     .INIT(16'hDFFF)) 
@@ -1077,41 +1060,29 @@ module design_1_jstk_uart_bridge_0_0_jstk_uart_bridge
         .D(\m_axis_tdata[1]_i_1_n_0 ),
         .Q(m_axis_tdata[1]),
         .R(1'b0));
-  FDRE \m_axis_tdata_reg[2] 
-       (.C(aclk),
-        .CE(m_axis_tdata0),
-        .D(\m_axis_tdata[2]_i_1_n_0 ),
-        .Q(m_axis_tdata[2]),
-        .R(1'b0));
-  FDRE \m_axis_tdata_reg[3] 
-       (.C(aclk),
-        .CE(m_axis_tdata0),
-        .D(\m_axis_tdata[3]_i_1_n_0 ),
-        .Q(m_axis_tdata[3]),
-        .R(1'b0));
   FDRE \m_axis_tdata_reg[4] 
        (.C(aclk),
         .CE(m_axis_tdata0),
         .D(\m_axis_tdata[4]_i_1_n_0 ),
-        .Q(m_axis_tdata[4]),
+        .Q(m_axis_tdata[2]),
         .R(1'b0));
   FDRE \m_axis_tdata_reg[5] 
        (.C(aclk),
         .CE(m_axis_tdata0),
         .D(\m_axis_tdata[5]_i_1_n_0 ),
-        .Q(m_axis_tdata[5]),
+        .Q(m_axis_tdata[3]),
         .R(1'b0));
   FDRE \m_axis_tdata_reg[6] 
        (.C(aclk),
         .CE(m_axis_tdata0),
         .D(\m_axis_tdata[6]_i_1_n_0 ),
-        .Q(m_axis_tdata[6]),
+        .Q(m_axis_tdata[4]),
         .R(1'b0));
   FDRE \m_axis_tdata_reg[7] 
        (.C(aclk),
         .CE(m_axis_tdata0),
         .D(\m_axis_tdata[7]_i_2_n_0 ),
-        .Q(m_axis_tdata[7]),
+        .Q(m_axis_tdata[5]),
         .R(1'b0));
   (* SOFT_HLUTNM = "soft_lutpair1" *) 
   LUT1 #(

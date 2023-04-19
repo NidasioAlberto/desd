@@ -74,8 +74,26 @@
         "xci_path": "ip\\design_1_clk_wiz_0_0\\design_1_clk_wiz_0_0.xci",
         "inst_hier_path": "clk_wiz_0",
         "parameters": {
+          "CLKOUT1_JITTER": {
+            "value": "130.958"
+          },
+          "CLKOUT1_PHASE_ERROR": {
+            "value": "98.575"
+          },
+          "CLKOUT1_REQUESTED_OUT_FREQ": {
+            "value": "100.000"
+          },
           "CLK_IN1_BOARD_INTERFACE": {
             "value": "sys_clock"
+          },
+          "MMCM_CLKFBOUT_MULT_F": {
+            "value": "10.000"
+          },
+          "MMCM_CLKOUT0_DIVIDE_F": {
+            "value": "10.000"
+          },
+          "MMCM_DIVCLK_DIVIDE": {
+            "value": "1"
           },
           "RESET_BOARD_INTERFACE": {
             "value": "reset"
@@ -111,6 +129,9 @@
         "xci_path": "ip\\design_1_axi4stream_spi_master_0_0\\design_1_axi4stream_spi_master_0_0.xci",
         "inst_hier_path": "axi4stream_spi_master_0",
         "parameters": {
+          "c_clkfreq": {
+            "value": "100000000"
+          },
           "c_sclkfreq": {
             "value": "66666"
           }
@@ -121,6 +142,14 @@
         "xci_name": "design_1_digilent_jstk2_0_0",
         "xci_path": "ip\\design_1_digilent_jstk2_0_0\\design_1_digilent_jstk2_0_0.xci",
         "inst_hier_path": "digilent_jstk2_0",
+        "parameters": {
+          "CLKFREQ": {
+            "value": "100000000"
+          },
+          "SPI_SCLKFREQ": {
+            "value": "66666"
+          }
+        },
         "reference_info": {
           "ref_type": "hdl",
           "ref_name": "digilent_jstk2",
@@ -331,6 +360,11 @@
         "xci_name": "design_1_jstk_uart_bridge_0_0",
         "xci_path": "ip\\design_1_jstk_uart_bridge_0_0\\design_1_jstk_uart_bridge_0_0.xci",
         "inst_hier_path": "jstk_uart_bridge_0",
+        "parameters": {
+          "JSTK_BITS": {
+            "value": "7"
+          }
+        },
         "reference_info": {
           "ref_type": "hdl",
           "ref_name": "jstk_uart_bridge",
@@ -542,16 +576,10 @@
       }
     },
     "interface_nets": {
-      "axi4stream_uart_0_UART": {
+      "axi4stream_spi_master_0_M_AXIS": {
         "interface_ports": [
-          "usb_uart",
-          "axi4stream_uart_0/UART"
-        ]
-      },
-      "digilent_jstk2_0_m_axis": {
-        "interface_ports": [
-          "digilent_jstk2_0/m_axis",
-          "axi4stream_spi_master_0/S_AXIS"
+          "digilent_jstk2_0/s_axis",
+          "axi4stream_spi_master_0/M_AXIS"
         ]
       },
       "axi4stream_spi_master_0_SPI_M": {
@@ -560,22 +588,28 @@
           "axi4stream_spi_master_0/SPI_M"
         ]
       },
-      "axi4stream_spi_master_0_M_AXIS": {
+      "axi4stream_uart_0_UART": {
         "interface_ports": [
-          "digilent_jstk2_0/s_axis",
-          "axi4stream_spi_master_0/M_AXIS"
-        ]
-      },
-      "axi4stream_uart_0_M00_AXIS_RX": {
-        "interface_ports": [
-          "jstk_uart_bridge_0/s_axis",
-          "axi4stream_uart_0/M00_AXIS_RX"
+          "usb_uart",
+          "axi4stream_uart_0/UART"
         ]
       },
       "jstk_uart_bridge_0_m_axis": {
         "interface_ports": [
           "jstk_uart_bridge_0/m_axis",
           "axi4stream_uart_0/S00_AXIS_TX"
+        ]
+      },
+      "digilent_jstk2_0_m_axis": {
+        "interface_ports": [
+          "digilent_jstk2_0/m_axis",
+          "axi4stream_spi_master_0/S_AXIS"
+        ]
+      },
+      "axi4stream_uart_0_M00_AXIS_RX": {
+        "interface_ports": [
+          "jstk_uart_bridge_0/s_axis",
+          "axi4stream_uart_0/M00_AXIS_RX"
         ]
       }
     },

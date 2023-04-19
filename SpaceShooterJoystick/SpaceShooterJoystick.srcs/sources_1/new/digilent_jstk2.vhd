@@ -4,9 +4,9 @@ use ieee.numeric_std.all;
 
 entity digilent_jstk2 is
     generic (
-        DELAY_US     : integer := 25;          -- Delay (in us) between two packets
+        DELAY_US     : integer := 25;         -- Delay (in us) between two packets
         CLKFREQ      : integer := 100_000_000; -- Frequency of the aclk signal (in Hz)
-        SPI_SCLKFREQ : integer := 66_666       -- Frequency of the SPI SCLK clock signal (in Hz)
+        SPI_SCLKFREQ : integer := 66_666      -- Frequency of the SPI SCLK clock signal (in Hz)
     );
     port (
         aclk          : in std_logic;
@@ -42,7 +42,7 @@ architecture Behavioral of digilent_jstk2 is
     -- Do not forget that you MUST wait a bit between two packets. See the JSTK2 datasheet (and the SPI IP-Core README).
     -- Inter-packet delay plus the time needed to transfer 1 byte (for the CS de-assertion)
     constant DELAY_CYCLES : integer                      := DELAY_US * (CLKFREQ / 1_000_000) + CLKFREQ / SPI_SCLKFREQ;
-    signal delay_counter  : natural range 0 to 100_000_000;
+    signal delay_counter  : natural range 0 to CLKFREQ;
 
     type state_cmd_type is (WAIT_DELAY, SEND_CMD, SEND_RED, SEND_GREEN, SEND_BLUE, SEND_DUMMY);
     signal state_cmd : state_cmd_type := SEND_CMD;

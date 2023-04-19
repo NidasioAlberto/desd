@@ -1,10 +1,10 @@
 -- Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
--- Tool Version: Vivado v.2020.2 (lin64) Build 3064766 Wed Nov 18 09:12:47 MST 2020
--- Date        : Tue Apr 11 09:38:40 2023
--- Host        : pop-os running 64-bit Pop!_OS 22.04 LTS
--- Command     : write_vhdl -force -mode funcsim
---               /home/alberton/Desktop/desd/SpaceShooterJoystick/SpaceShooterJoystick.gen/sources_1/bd/design_1/ip/design_1_digilent_jstk2_0_0/design_1_digilent_jstk2_0_0_sim_netlist.vhdl
+-- Tool Version: Vivado v.2020.2 (win64) Build 3064766 Wed Nov 18 09:12:45 MST 2020
+-- Date        : Wed Apr 19 16:12:28 2023
+-- Host        : DESKTOP-F4BLQ3F running 64-bit major release  (build 9200)
+-- Command     : write_vhdl -force -mode funcsim {c:/Users/emili/OneDrive - Politecnico di
+--               Milano/Documenti/desd/SpaceShooterJoystick/SpaceShooterJoystick.gen/sources_1/bd/design_1/ip/design_1_digilent_jstk2_0_0/design_1_digilent_jstk2_0_0_sim_netlist.vhdl}
 -- Design      : design_1_digilent_jstk2_0_0
 -- Purpose     : This VHDL netlist is a functional simulation representation of the design and should not be modified or
 --               synthesized. This netlist cannot be used for SDF annotated simulation.

@@ -181,6 +181,7 @@ proc create_root_design { parentCell } {
   # Create instance: axi4stream_spi_master_0, and set properties
   set axi4stream_spi_master_0 [ create_bd_cell -type ip -vlnv DigiLAB:ip:axi4stream_spi_master:1.0 axi4stream_spi_master_0 ]
   set_property -dict [ list \
+   CONFIG.c_clkfreq {100000000} \
    CONFIG.c_sclkfreq {66666} \
  ] $axi4stream_spi_master_0
 
@@ -194,7 +195,13 @@ proc create_root_design { parentCell } {
   # Create instance: clk_wiz_0, and set properties
   set clk_wiz_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:clk_wiz:6.0 clk_wiz_0 ]
   set_property -dict [ list \
+   CONFIG.CLKOUT1_JITTER {130.958} \
+   CONFIG.CLKOUT1_PHASE_ERROR {98.575} \
+   CONFIG.CLKOUT1_REQUESTED_OUT_FREQ {100.000} \
    CONFIG.CLK_IN1_BOARD_INTERFACE {sys_clock} \
+   CONFIG.MMCM_CLKFBOUT_MULT_F {10.000} \
+   CONFIG.MMCM_CLKOUT0_DIVIDE_F {10.000} \
+   CONFIG.MMCM_DIVCLK_DIVIDE {1} \
    CONFIG.RESET_BOARD_INTERFACE {reset} \
    CONFIG.USE_BOARD_FLOW {true} \
  ] $clk_wiz_0
@@ -209,7 +216,11 @@ proc create_root_design { parentCell } {
      catch {common::send_gid_msg -ssname BD::TCL -id 2096 -severity "ERROR" "Unable to referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
      return 1
    }
-  
+    set_property -dict [ list \
+   CONFIG.CLKFREQ {100000000} \
+   CONFIG.SPI_SCLKFREQ {66666} \
+ ] $digilent_jstk2_0
+
   # Create instance: jstk_uart_bridge_0, and set properties
   set block_name jstk_uart_bridge
   set block_cell_name jstk_uart_bridge_0
@@ -220,7 +231,10 @@ proc create_root_design { parentCell } {
      catch {common::send_gid_msg -ssname BD::TCL -id 2096 -severity "ERROR" "Unable to referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
      return 1
    }
-  
+    set_property -dict [ list \
+   CONFIG.JSTK_BITS {7} \
+ ] $jstk_uart_bridge_0
+
   # Create instance: proc_sys_reset_0, and set properties
   set proc_sys_reset_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:proc_sys_reset:5.0 proc_sys_reset_0 ]
 

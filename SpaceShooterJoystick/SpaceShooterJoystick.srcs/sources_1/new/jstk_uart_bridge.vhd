@@ -69,12 +69,12 @@ begin
                 when SEND_HEADER =>
                     if m_axis_tready = '1' then
                         tx_state     <= SEND_JSTK_X;
-                        m_axis_tdata <= std_logic_vector(to_unsigned(0, 8 - JSTK_BITS)) & jstk_x(9 downto 10 - JSTK_BITS);
+                        m_axis_tdata <= '0' & jstk_x(9 downto 10 - JSTK_BITS) & std_logic_vector(to_unsigned(0, 7 - JSTK_BITS));
                     end if;
                 when SEND_JSTK_X =>
                     if m_axis_tready = '1' then
                         tx_state     <= SEND_JSTK_Y;
-                        m_axis_tdata <= std_logic_vector(to_unsigned(0, 8 - JSTK_BITS)) & jstk_y(9 downto 10 - JSTK_BITS);
+                        m_axis_tdata <= '0' & jstk_y(9 downto 10 - JSTK_BITS) & std_logic_vector(to_unsigned(0, 7 - JSTK_BITS));
                     end if;
                 when SEND_JSTK_Y =>
                     if m_axis_tready = '1' then

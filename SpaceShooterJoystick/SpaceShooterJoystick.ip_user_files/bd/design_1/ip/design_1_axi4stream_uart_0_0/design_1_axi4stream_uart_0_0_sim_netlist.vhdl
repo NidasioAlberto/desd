@@ -1,10 +1,10 @@
 -- Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
--- Tool Version: Vivado v.2020.2 (lin64) Build 3064766 Wed Nov 18 09:12:47 MST 2020
--- Date        : Wed Apr  5 08:01:06 2023
--- Host        : pop-os running 64-bit Pop!_OS 22.04 LTS
--- Command     : write_vhdl -force -mode funcsim
---               /home/alberton/Desktop/desd/SpaceShooterJoystick/SpaceShooterJoystick.gen/sources_1/bd/design_1/ip/design_1_axi4stream_uart_0_0/design_1_axi4stream_uart_0_0_sim_netlist.vhdl
+-- Tool Version: Vivado v.2020.2 (win64) Build 3064766 Wed Nov 18 09:12:45 MST 2020
+-- Date        : Tue Apr 11 18:46:43 2023
+-- Host        : DESKTOP-F4BLQ3F running 64-bit major release  (build 9200)
+-- Command     : write_vhdl -force -mode funcsim -rename_top design_1_axi4stream_uart_0_0 -prefix
+--               design_1_axi4stream_uart_0_0_ design_1_axi4stream_uart_0_0_sim_netlist.vhdl
 -- Design      : design_1_axi4stream_uart_0_0
 -- Purpose     : This VHDL netlist is a functional simulation representation of the design and should not be modified or
 --               synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -30,8 +30,6 @@ entity design_1_axi4stream_uart_0_0_UART_Engine is
     Q : in STD_LOGIC_VECTOR ( 7 downto 0 );
     UART_RX : in STD_LOGIC
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of design_1_axi4stream_uart_0_0_UART_Engine : entity is "UART_Engine";
 end design_1_axi4stream_uart_0_0_UART_Engine;
 
 architecture STRUCTURE of design_1_axi4stream_uart_0_0_UART_Engine is
@@ -1644,8 +1642,6 @@ entity design_1_axi4stream_uart_0_0_xpm_cdc_gray is
   attribute DEST_SYNC_FF of design_1_axi4stream_uart_0_0_xpm_cdc_gray : entity is 2;
   attribute INIT_SYNC_FF : integer;
   attribute INIT_SYNC_FF of design_1_axi4stream_uart_0_0_xpm_cdc_gray : entity is 1;
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of design_1_axi4stream_uart_0_0_xpm_cdc_gray : entity is "xpm_cdc_gray";
   attribute REG_OUTPUT : integer;
   attribute REG_OUTPUT of design_1_axi4stream_uart_0_0_xpm_cdc_gray : entity is 0;
   attribute SIM_ASSERT_CHK : integer;
@@ -7151,8 +7147,6 @@ entity design_1_axi4stream_uart_0_0_xpm_cdc_sync_rst is
   attribute INIT of design_1_axi4stream_uart_0_0_xpm_cdc_sync_rst : entity is "0";
   attribute INIT_SYNC_FF : integer;
   attribute INIT_SYNC_FF of design_1_axi4stream_uart_0_0_xpm_cdc_sync_rst : entity is 1;
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of design_1_axi4stream_uart_0_0_xpm_cdc_sync_rst : entity is "xpm_cdc_sync_rst";
   attribute SIM_ASSERT_CHK : integer;
   attribute SIM_ASSERT_CHK of design_1_axi4stream_uart_0_0_xpm_cdc_sync_rst : entity is 0;
   attribute VERSION : integer;
@@ -7433,8 +7427,6 @@ entity design_1_axi4stream_uart_0_0_xpm_counter_updn is
     E : in STD_LOGIC_VECTOR ( 0 to 0 );
     wr_clk : in STD_LOGIC
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of design_1_axi4stream_uart_0_0_xpm_counter_updn : entity is "xpm_counter_updn";
 end design_1_axi4stream_uart_0_0_xpm_counter_updn;
 
 architecture STRUCTURE of design_1_axi4stream_uart_0_0_xpm_counter_updn is
@@ -10705,8 +10697,6 @@ entity design_1_axi4stream_uart_0_0_xpm_fifo_reg_bit is
     \count_value_i_reg[3]_1\ : in STD_LOGIC_VECTOR ( 0 to 0 );
     \count_value_i_reg[3]_2\ : in STD_LOGIC_VECTOR ( 0 to 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of design_1_axi4stream_uart_0_0_xpm_fifo_reg_bit : entity is "xpm_fifo_reg_bit";
 end design_1_axi4stream_uart_0_0_xpm_fifo_reg_bit;
 
 architecture STRUCTURE of design_1_axi4stream_uart_0_0_xpm_fifo_reg_bit is
@@ -10905,8 +10895,6 @@ entity design_1_axi4stream_uart_0_0_xpm_fifo_reg_vec is
     D : in STD_LOGIC_VECTOR ( 10 downto 0 );
     wr_clk : in STD_LOGIC
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of design_1_axi4stream_uart_0_0_xpm_fifo_reg_vec : entity is "xpm_fifo_reg_vec";
 end design_1_axi4stream_uart_0_0_xpm_fifo_reg_vec;
 
 architecture STRUCTURE of design_1_axi4stream_uart_0_0_xpm_fifo_reg_vec is
@@ -12377,8 +12365,6 @@ entity design_1_axi4stream_uart_0_0_xpm_memory_base is
   attribute MESSAGE_CONTROL of design_1_axi4stream_uart_0_0_xpm_memory_base : entity is 0;
   attribute NUM_CHAR_LOC : integer;
   attribute NUM_CHAR_LOC of design_1_axi4stream_uart_0_0_xpm_memory_base : entity is 0;
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of design_1_axi4stream_uart_0_0_xpm_memory_base : entity is "xpm_memory_base";
   attribute P_ECC_MODE : string;
   attribute P_ECC_MODE of design_1_axi4stream_uart_0_0_xpm_memory_base : entity is "no_ecc";
   attribute P_ENABLE_BYTE_WRITE_A : integer;
@@ -13043,8 +13029,6 @@ entity design_1_axi4stream_uart_0_0_UART_Manager is
     dout : in STD_LOGIC_VECTOR ( 7 downto 0 );
     UART_RX : in STD_LOGIC
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of design_1_axi4stream_uart_0_0_UART_Manager : entity is "UART_Manager";
 end design_1_axi4stream_uart_0_0_UART_Manager;
 
 architecture STRUCTURE of design_1_axi4stream_uart_0_0_UART_Manager is
@@ -13409,8 +13393,6 @@ entity design_1_axi4stream_uart_0_0_xpm_fifo_rst is
     \count_value_i_reg[10]\ : in STD_LOGIC;
     rst_d1 : in STD_LOGIC
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of design_1_axi4stream_uart_0_0_xpm_fifo_rst : entity is "xpm_fifo_rst";
 end design_1_axi4stream_uart_0_0_xpm_fifo_rst;
 
 architecture STRUCTURE of design_1_axi4stream_uart_0_0_xpm_fifo_rst is
@@ -14448,8 +14430,6 @@ entity design_1_axi4stream_uart_0_0_xpm_fifo_base is
   attribute FULL_RESET_VALUE of design_1_axi4stream_uart_0_0_xpm_fifo_base : entity is 0;
   attribute FULL_RST_VAL : string;
   attribute FULL_RST_VAL of design_1_axi4stream_uart_0_0_xpm_fifo_base : entity is "1'b0";
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of design_1_axi4stream_uart_0_0_xpm_fifo_base : entity is "xpm_fifo_base";
   attribute PE_THRESH_ADJ : integer;
   attribute PE_THRESH_ADJ of design_1_axi4stream_uart_0_0_xpm_fifo_base : entity is 8;
   attribute PE_THRESH_MAX : integer;
@@ -16209,8 +16189,6 @@ entity design_1_axi4stream_uart_0_0_xpm_fifo_async is
   attribute FIFO_WRITE_DEPTH of design_1_axi4stream_uart_0_0_xpm_fifo_async : entity is 2048;
   attribute FULL_RESET_VALUE : integer;
   attribute FULL_RESET_VALUE of design_1_axi4stream_uart_0_0_xpm_fifo_async : entity is 0;
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of design_1_axi4stream_uart_0_0_xpm_fifo_async : entity is "xpm_fifo_async";
   attribute PROG_EMPTY_THRESH : integer;
   attribute PROG_EMPTY_THRESH of design_1_axi4stream_uart_0_0_xpm_fifo_async : entity is 10;
   attribute PROG_FULL_THRESH : integer;
@@ -16699,8 +16677,6 @@ entity design_1_axi4stream_uart_0_0_AXI4Stream_UART_v1_0 is
   attribute C_M00_AXIS_RX_TDATA_WIDTH of design_1_axi4stream_uart_0_0_AXI4Stream_UART_v1_0 : entity is 8;
   attribute C_S00_AXIS_TX_TDATA_WIDTH : integer;
   attribute C_S00_AXIS_TX_TDATA_WIDTH of design_1_axi4stream_uart_0_0_AXI4Stream_UART_v1_0 : entity is 8;
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of design_1_axi4stream_uart_0_0_AXI4Stream_UART_v1_0 : entity is "AXI4Stream_UART_v1_0";
   attribute UART_BAUD_RATE : integer;
   attribute UART_BAUD_RATE of design_1_axi4stream_uart_0_0_AXI4Stream_UART_v1_0 : entity is 115200;
   attribute UART_CLOCK_FREQUENCY : integer;

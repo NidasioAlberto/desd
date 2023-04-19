@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Tue Apr 18 17:33:09 2023" VIVADOVERSION="2020.2">
+<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Wed Apr 19 16:10:59 2023" VIVADOVERSION="2020.2">
 
   <SYSTEMINFO ARCH="artix7" BOARD="digilentinc.com:basys3:part0:1.1" DEVICE="7a35t" NAME="design_1" PACKAGE="cpg236" SPEEDGRADE="-1"/>
 
@@ -13,6 +13,16 @@
       <CONNECTIONS>
         <CONNECTION INSTANCE="clk_wiz_0" PORT="reset"/>
         <CONNECTION INSTANCE="proc_sys_reset_0" PORT="ext_reset_in"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="O" NAME="usb_uart_txd" SIGIS="undef" SIGNAME="axi4stream_uart_0_UART_TX">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="axi4stream_uart_0" PORT="UART_TX"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="I" NAME="usb_uart_rxd" SIGIS="undef" SIGNAME="axi4stream_uart_0_UART_RX">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="axi4stream_uart_0" PORT="UART_RX"/>
       </CONNECTIONS>
     </PORT>
     <PORT DIR="O" NAME="SPI_M_0_sck_t" SIGIS="undef" SIGNAME="axi4stream_spi_master_0_sclk_t">
@@ -73,16 +83,6 @@
     <PORT DIR="I" NAME="SPI_M_0_io0_i" SIGIS="undef" SIGNAME="axi4stream_spi_master_0_mosi_i">
       <CONNECTIONS>
         <CONNECTION INSTANCE="axi4stream_spi_master_0" PORT="mosi_i"/>
-      </CONNECTIONS>
-    </PORT>
-    <PORT DIR="O" NAME="usb_uart_txd" SIGIS="undef" SIGNAME="axi4stream_uart_0_UART_TX">
-      <CONNECTIONS>
-        <CONNECTION INSTANCE="axi4stream_uart_0" PORT="UART_TX"/>
-      </CONNECTIONS>
-    </PORT>
-    <PORT DIR="I" NAME="usb_uart_rxd" SIGIS="undef" SIGNAME="axi4stream_uart_0_UART_RX">
-      <CONNECTIONS>
-        <CONNECTION INSTANCE="axi4stream_uart_0" PORT="UART_RX"/>
       </CONNECTIONS>
     </PORT>
   </EXTERNALPORTS>
