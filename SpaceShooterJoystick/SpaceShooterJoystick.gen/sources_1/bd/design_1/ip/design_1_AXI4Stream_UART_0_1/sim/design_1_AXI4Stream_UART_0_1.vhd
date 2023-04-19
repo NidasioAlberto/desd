@@ -46,14 +46,14 @@
 -- 
 -- DO NOT MODIFY THIS FILE.
 
--- IP VLNV: DigiLAB:ip:axi4stream_uart:1.1
+-- IP VLNV: DigiLAB:ip:AXI4Stream_UART:1.1
 -- IP Revision: 1
 
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 USE ieee.numeric_std.ALL;
 
-ENTITY design_1_axi4stream_uart_0_0 IS
+ENTITY design_1_AXI4Stream_UART_0_1 IS
   PORT (
     clk_uart : IN STD_LOGIC;
     rst : IN STD_LOGIC;
@@ -70,11 +70,11 @@ ENTITY design_1_axi4stream_uart_0_0 IS
     s00_axis_tx_tdata : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
     s00_axis_tx_tvalid : IN STD_LOGIC
   );
-END design_1_axi4stream_uart_0_0;
+END design_1_AXI4Stream_UART_0_1;
 
-ARCHITECTURE design_1_axi4stream_uart_0_0_arch OF design_1_axi4stream_uart_0_0 IS
+ARCHITECTURE design_1_AXI4Stream_UART_0_1_arch OF design_1_AXI4Stream_UART_0_1 IS
   ATTRIBUTE DowngradeIPIdentifiedWarnings : STRING;
-  ATTRIBUTE DowngradeIPIdentifiedWarnings OF design_1_axi4stream_uart_0_0_arch: ARCHITECTURE IS "yes";
+  ATTRIBUTE DowngradeIPIdentifiedWarnings OF design_1_AXI4Stream_UART_0_1_arch: ARCHITECTURE IS "yes";
   COMPONENT AXI4Stream_UART_v1_0 IS
     GENERIC (
       UART_BAUD_RATE : INTEGER;
@@ -99,10 +99,6 @@ ARCHITECTURE design_1_axi4stream_uart_0_0_arch OF design_1_axi4stream_uart_0_0 I
       s00_axis_tx_tvalid : IN STD_LOGIC
     );
   END COMPONENT AXI4Stream_UART_v1_0;
-  ATTRIBUTE X_CORE_INFO : STRING;
-  ATTRIBUTE X_CORE_INFO OF design_1_axi4stream_uart_0_0_arch: ARCHITECTURE IS "AXI4Stream_UART_v1_0,Vivado 2020.2";
-  ATTRIBUTE CHECK_LICENSE_TYPE : STRING;
-  ATTRIBUTE CHECK_LICENSE_TYPE OF design_1_axi4stream_uart_0_0_arch : ARCHITECTURE IS "design_1_axi4stream_uart_0_0,AXI4Stream_UART_v1_0,{}";
   ATTRIBUTE X_INTERFACE_INFO : STRING;
   ATTRIBUTE X_INTERFACE_PARAMETER : STRING;
   ATTRIBUTE X_INTERFACE_INFO OF s00_axis_tx_tvalid: SIGNAL IS "xilinx.com:interface:axis:1.0 S00_AXIS_TX TVALID";
@@ -152,4 +148,4 @@ BEGIN
       s00_axis_tx_tdata => s00_axis_tx_tdata,
       s00_axis_tx_tvalid => s00_axis_tx_tvalid
     );
-END design_1_axi4stream_uart_0_0_arch;
+END design_1_AXI4Stream_UART_0_1_arch;

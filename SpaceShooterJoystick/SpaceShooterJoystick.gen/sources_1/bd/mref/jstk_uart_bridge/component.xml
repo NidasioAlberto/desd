@@ -129,7 +129,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>4673de54</spirit:value>
+            <spirit:value>72e8d457</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -142,7 +142,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>4673de54</spirit:value>
+            <spirit:value>72e8d457</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -400,7 +400,7 @@
       <spirit:modelParameter spirit:dataType="integer">
         <spirit:name>JSTK_BITS</spirit:name>
         <spirit:displayName>Jstk Bits</spirit:displayName>
-        <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.JSTK_BITS" spirit:minimum="1" spirit:maximum="7" spirit:rangeType="long">6</spirit:value>
+        <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.JSTK_BITS" spirit:minimum="1" spirit:maximum="7" spirit:rangeType="long">7</spirit:value>
       </spirit:modelParameter>
     </spirit:modelParameters>
   </spirit:model>
@@ -417,7 +417,7 @@
       <spirit:file>
         <spirit:name>xgui/jstk_uart_bridge_v1_0.tcl</spirit:name>
         <spirit:fileType>tclSource</spirit:fileType>
-        <spirit:userFileType>CHECKSUM_471f8f57</spirit:userFileType>
+        <spirit:userFileType>CHECKSUM_1a60c0af</spirit:userFileType>
         <spirit:userFileType>XGUI_VERSION_2</spirit:userFileType>
       </spirit:file>
     </spirit:fileSet>
@@ -437,7 +437,7 @@
     <spirit:parameter>
       <spirit:name>JSTK_BITS</spirit:name>
       <spirit:displayName>Jstk Bits</spirit:displayName>
-      <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="PARAM_VALUE.JSTK_BITS" spirit:minimum="1" spirit:maximum="7" spirit:rangeType="long">6</spirit:value>
+      <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="PARAM_VALUE.JSTK_BITS" spirit:minimum="1" spirit:maximum="7" spirit:rangeType="long">7</spirit:value>
     </spirit:parameter>
     <spirit:parameter>
       <spirit:name>Component_Name</spirit:name>
@@ -459,7 +459,7 @@
         <xilinx:designToolContext>IPI</xilinx:designToolContext>
       </xilinx:designToolContexts>
       <xilinx:coreRevision>1</xilinx:coreRevision>
-      <xilinx:coreCreationDateTime>2023-04-19T13:45:51Z</xilinx:coreCreationDateTime>
+      <xilinx:coreCreationDateTime>2023-04-19T14:52:45Z</xilinx:coreCreationDateTime>
     </xilinx:coreExtensions>
     <xilinx:packagingInfo>
       <xilinx:xilinxVersion>2020.2</xilinx:xilinxVersion>

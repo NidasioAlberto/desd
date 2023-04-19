@@ -178,19 +178,19 @@ proc create_root_design { parentCell } {
    CONFIG.PHASE {0.000} \
  ] $sys_clock
 
+  # Create instance: AXI4Stream_UART_0, and set properties
+  set AXI4Stream_UART_0 [ create_bd_cell -type ip -vlnv DigiLAB:ip:AXI4Stream_UART:1.1 AXI4Stream_UART_0 ]
+  set_property -dict [ list \
+   CONFIG.UART_BOARD_INTERFACE {usb_uart} \
+   CONFIG.USE_BOARD_FLOW {true} \
+ ] $AXI4Stream_UART_0
+
   # Create instance: axi4stream_spi_master_0, and set properties
   set axi4stream_spi_master_0 [ create_bd_cell -type ip -vlnv DigiLAB:ip:axi4stream_spi_master:1.0 axi4stream_spi_master_0 ]
   set_property -dict [ list \
    CONFIG.c_clkfreq {100000000} \
    CONFIG.c_sclkfreq {66666} \
  ] $axi4stream_spi_master_0
-
-  # Create instance: axi4stream_uart_0, and set properties
-  set axi4stream_uart_0 [ create_bd_cell -type ip -vlnv DigiLAB:ip:axi4stream_uart:1.1 axi4stream_uart_0 ]
-  set_property -dict [ list \
-   CONFIG.UART_BOARD_INTERFACE {usb_uart} \
-   CONFIG.USE_BOARD_FLOW {true} \
- ] $axi4stream_uart_0
 
   # Create instance: clk_wiz_0, and set properties
   set clk_wiz_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:clk_wiz:6.0 clk_wiz_0 ]
@@ -239,15 +239,15 @@ proc create_root_design { parentCell } {
   set proc_sys_reset_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:proc_sys_reset:5.0 proc_sys_reset_0 ]
 
   # Create interface connections
+  connect_bd_intf_net -intf_net AXI4Stream_UART_0_M00_AXIS_RX [get_bd_intf_pins AXI4Stream_UART_0/M00_AXIS_RX] [get_bd_intf_pins jstk_uart_bridge_0/s_axis]
+  connect_bd_intf_net -intf_net AXI4Stream_UART_0_UART [get_bd_intf_ports usb_uart] [get_bd_intf_pins AXI4Stream_UART_0/UART]
   connect_bd_intf_net -intf_net axi4stream_spi_master_0_M_AXIS [get_bd_intf_pins axi4stream_spi_master_0/M_AXIS] [get_bd_intf_pins digilent_jstk2_0/s_axis]
   connect_bd_intf_net -intf_net axi4stream_spi_master_0_SPI_M [get_bd_intf_ports SPI_M_0] [get_bd_intf_pins axi4stream_spi_master_0/SPI_M]
-  connect_bd_intf_net -intf_net axi4stream_uart_0_M00_AXIS_RX [get_bd_intf_pins axi4stream_uart_0/M00_AXIS_RX] [get_bd_intf_pins jstk_uart_bridge_0/s_axis]
-  connect_bd_intf_net -intf_net axi4stream_uart_0_UART [get_bd_intf_ports usb_uart] [get_bd_intf_pins axi4stream_uart_0/UART]
   connect_bd_intf_net -intf_net digilent_jstk2_0_m_axis [get_bd_intf_pins axi4stream_spi_master_0/S_AXIS] [get_bd_intf_pins digilent_jstk2_0/m_axis]
-  connect_bd_intf_net -intf_net jstk_uart_bridge_0_m_axis [get_bd_intf_pins axi4stream_uart_0/S00_AXIS_TX] [get_bd_intf_pins jstk_uart_bridge_0/m_axis]
+  connect_bd_intf_net -intf_net jstk_uart_bridge_0_m_axis [get_bd_intf_pins AXI4Stream_UART_0/S00_AXIS_TX] [get_bd_intf_pins jstk_uart_bridge_0/m_axis]
 
   # Create port connections
-  connect_bd_net -net clk_wiz_0_clk_out1 [get_bd_pins axi4stream_spi_master_0/aclk] [get_bd_pins axi4stream_uart_0/clk_uart] [get_bd_pins axi4stream_uart_0/m00_axis_rx_aclk] [get_bd_pins axi4stream_uart_0/s00_axis_tx_aclk] [get_bd_pins clk_wiz_0/clk_out1] [get_bd_pins digilent_jstk2_0/aclk] [get_bd_pins jstk_uart_bridge_0/aclk] [get_bd_pins proc_sys_reset_0/slowest_sync_clk]
+  connect_bd_net -net clk_wiz_0_clk_out1 [get_bd_pins AXI4Stream_UART_0/clk_uart] [get_bd_pins AXI4Stream_UART_0/m00_axis_rx_aclk] [get_bd_pins AXI4Stream_UART_0/s00_axis_tx_aclk] [get_bd_pins axi4stream_spi_master_0/aclk] [get_bd_pins clk_wiz_0/clk_out1] [get_bd_pins digilent_jstk2_0/aclk] [get_bd_pins jstk_uart_bridge_0/aclk] [get_bd_pins proc_sys_reset_0/slowest_sync_clk]
   connect_bd_net -net clk_wiz_0_locked [get_bd_pins clk_wiz_0/locked] [get_bd_pins proc_sys_reset_0/dcm_locked]
   connect_bd_net -net digilent_jstk2_0_btn_jstk [get_bd_pins digilent_jstk2_0/btn_jstk] [get_bd_pins jstk_uart_bridge_0/btn_jstk]
   connect_bd_net -net digilent_jstk2_0_btn_trigger [get_bd_pins digilent_jstk2_0/btn_trigger] [get_bd_pins jstk_uart_bridge_0/btn_trigger]
@@ -256,8 +256,8 @@ proc create_root_design { parentCell } {
   connect_bd_net -net jstk_uart_bridge_0_led_b [get_bd_pins digilent_jstk2_0/led_b] [get_bd_pins jstk_uart_bridge_0/led_b]
   connect_bd_net -net jstk_uart_bridge_0_led_g [get_bd_pins digilent_jstk2_0/led_g] [get_bd_pins jstk_uart_bridge_0/led_g]
   connect_bd_net -net jstk_uart_bridge_0_led_r [get_bd_pins digilent_jstk2_0/led_r] [get_bd_pins jstk_uart_bridge_0/led_r]
-  connect_bd_net -net proc_sys_reset_0_peripheral_aresetn [get_bd_pins axi4stream_spi_master_0/aresetn] [get_bd_pins axi4stream_uart_0/m00_axis_rx_aresetn] [get_bd_pins axi4stream_uart_0/s00_axis_tx_aresetn] [get_bd_pins digilent_jstk2_0/aresetn] [get_bd_pins jstk_uart_bridge_0/aresetn] [get_bd_pins proc_sys_reset_0/peripheral_aresetn]
-  connect_bd_net -net proc_sys_reset_0_peripheral_reset [get_bd_pins axi4stream_uart_0/rst] [get_bd_pins proc_sys_reset_0/peripheral_reset]
+  connect_bd_net -net proc_sys_reset_0_peripheral_aresetn [get_bd_pins AXI4Stream_UART_0/m00_axis_rx_aresetn] [get_bd_pins AXI4Stream_UART_0/s00_axis_tx_aresetn] [get_bd_pins axi4stream_spi_master_0/aresetn] [get_bd_pins digilent_jstk2_0/aresetn] [get_bd_pins jstk_uart_bridge_0/aresetn] [get_bd_pins proc_sys_reset_0/peripheral_aresetn]
+  connect_bd_net -net proc_sys_reset_0_peripheral_reset [get_bd_pins AXI4Stream_UART_0/rst] [get_bd_pins proc_sys_reset_0/peripheral_reset]
   connect_bd_net -net reset_1 [get_bd_ports reset] [get_bd_pins clk_wiz_0/reset] [get_bd_pins proc_sys_reset_0/ext_reset_in]
   connect_bd_net -net sys_clock_1 [get_bd_ports sys_clock] [get_bd_pins clk_wiz_0/clk_in1]
 

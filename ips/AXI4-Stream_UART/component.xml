@@ -2,7 +2,7 @@
 <spirit:component xmlns:xilinx="http://www.xilinx.com" xmlns:spirit="http://www.spiritconsortium.org/XMLSchema/SPIRIT/1685-2009" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <spirit:vendor>DigiLAB</spirit:vendor>
   <spirit:library>ip</spirit:library>
-  <spirit:name>axi4stream_uart</spirit:name>
+  <spirit:name>AXI4Stream_UART</spirit:name>
   <spirit:version>1.1</spirit:version>
   <spirit:busInterfaces>
     <spirit:busInterface>

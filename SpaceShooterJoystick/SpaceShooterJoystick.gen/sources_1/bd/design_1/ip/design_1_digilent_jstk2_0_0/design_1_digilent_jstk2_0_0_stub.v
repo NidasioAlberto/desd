@@ -1,10 +1,10 @@
 // Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
-// Tool Version: Vivado v.2020.2 (win64) Build 3064766 Wed Nov 18 09:12:45 MST 2020
-// Date        : Wed Apr 19 16:12:28 2023
-// Host        : DESKTOP-F4BLQ3F running 64-bit major release  (build 9200)
-// Command     : write_verilog -force -mode synth_stub {c:/Users/emili/OneDrive - Politecnico di
-//               Milano/Documenti/desd/SpaceShooterJoystick/SpaceShooterJoystick.gen/sources_1/bd/design_1/ip/design_1_digilent_jstk2_0_0/design_1_digilent_jstk2_0_0_stub.v}
+// Tool Version: Vivado v.2020.2 (lin64) Build 3064766 Wed Nov 18 09:12:47 MST 2020
+// Date        : Wed Apr 19 17:27:11 2023
+// Host        : pop-os running 64-bit Pop!_OS 22.04 LTS
+// Command     : write_verilog -force -mode synth_stub
+//               /home/alberton/Desktop/desd/SpaceShooterJoystick/SpaceShooterJoystick.gen/sources_1/bd/design_1/ip/design_1_digilent_jstk2_0_0/design_1_digilent_jstk2_0_0_stub.v
 // Design      : design_1_digilent_jstk2_0_0
 // Purpose     : Stub declaration of top-level module interface
 // Device      : xc7a35tcpg236-1

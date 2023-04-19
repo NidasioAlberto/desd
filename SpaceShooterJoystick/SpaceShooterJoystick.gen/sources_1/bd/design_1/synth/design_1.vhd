@@ -1,8 +1,8 @@
 --Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
---Tool Version: Vivado v.2020.2 (win64) Build 3064766 Wed Nov 18 09:12:45 MST 2020
---Date        : Wed Apr 19 16:10:57 2023
---Host        : DESKTOP-F4BLQ3F running 64-bit major release  (build 9200)
+--Tool Version: Vivado v.2020.2 (lin64) Build 3064766 Wed Nov 18 09:12:47 MST 2020
+--Date        : Wed Apr 19 17:26:52 2023
+--Host        : pop-os running 64-bit Pop!_OS 22.04 LTS
 --Command     : generate_target design_1.bd
 --Design      : design_1
 --Purpose     : IP block netlist
@@ -59,24 +59,6 @@ architecture STRUCTURE of design_1 is
     peripheral_aresetn : out STD_LOGIC_VECTOR ( 0 to 0 )
   );
   end component design_1_proc_sys_reset_0_0;
-  component design_1_axi4stream_uart_0_0 is
-  port (
-    clk_uart : in STD_LOGIC;
-    rst : in STD_LOGIC;
-    UART_TX : out STD_LOGIC;
-    UART_RX : in STD_LOGIC;
-    m00_axis_rx_aclk : in STD_LOGIC;
-    m00_axis_rx_aresetn : in STD_LOGIC;
-    m00_axis_rx_tvalid : out STD_LOGIC;
-    m00_axis_rx_tdata : out STD_LOGIC_VECTOR ( 7 downto 0 );
-    m00_axis_rx_tready : in STD_LOGIC;
-    s00_axis_tx_aclk : in STD_LOGIC;
-    s00_axis_tx_aresetn : in STD_LOGIC;
-    s00_axis_tx_tready : out STD_LOGIC;
-    s00_axis_tx_tdata : in STD_LOGIC_VECTOR ( 7 downto 0 );
-    s00_axis_tx_tvalid : in STD_LOGIC
-  );
-  end component design_1_axi4stream_uart_0_0;
   component design_1_axi4stream_spi_master_0_0 is
   port (
     aclk : in STD_LOGIC;
@@ -100,24 +82,6 @@ architecture STRUCTURE of design_1 is
     miso_t : out STD_LOGIC
   );
   end component design_1_axi4stream_spi_master_0_0;
-  component design_1_digilent_jstk2_0_0 is
-  port (
-    aclk : in STD_LOGIC;
-    aresetn : in STD_LOGIC;
-    m_axis_tvalid : out STD_LOGIC;
-    m_axis_tdata : out STD_LOGIC_VECTOR ( 7 downto 0 );
-    m_axis_tready : in STD_LOGIC;
-    s_axis_tvalid : in STD_LOGIC;
-    s_axis_tdata : in STD_LOGIC_VECTOR ( 7 downto 0 );
-    jstk_x : out STD_LOGIC_VECTOR ( 9 downto 0 );
-    jstk_y : out STD_LOGIC_VECTOR ( 9 downto 0 );
-    btn_jstk : out STD_LOGIC;
-    btn_trigger : out STD_LOGIC;
-    led_r : in STD_LOGIC_VECTOR ( 7 downto 0 );
-    led_g : in STD_LOGIC_VECTOR ( 7 downto 0 );
-    led_b : in STD_LOGIC_VECTOR ( 7 downto 0 )
-  );
-  end component design_1_digilent_jstk2_0_0;
   component design_1_jstk_uart_bridge_0_0 is
   port (
     aclk : in STD_LOGIC;
@@ -137,6 +101,47 @@ architecture STRUCTURE of design_1 is
     led_b : out STD_LOGIC_VECTOR ( 7 downto 0 )
   );
   end component design_1_jstk_uart_bridge_0_0;
+  component design_1_digilent_jstk2_0_0 is
+  port (
+    aclk : in STD_LOGIC;
+    aresetn : in STD_LOGIC;
+    m_axis_tvalid : out STD_LOGIC;
+    m_axis_tdata : out STD_LOGIC_VECTOR ( 7 downto 0 );
+    m_axis_tready : in STD_LOGIC;
+    s_axis_tvalid : in STD_LOGIC;
+    s_axis_tdata : in STD_LOGIC_VECTOR ( 7 downto 0 );
+    jstk_x : out STD_LOGIC_VECTOR ( 9 downto 0 );
+    jstk_y : out STD_LOGIC_VECTOR ( 9 downto 0 );
+    btn_jstk : out STD_LOGIC;
+    btn_trigger : out STD_LOGIC;
+    led_r : in STD_LOGIC_VECTOR ( 7 downto 0 );
+    led_g : in STD_LOGIC_VECTOR ( 7 downto 0 );
+    led_b : in STD_LOGIC_VECTOR ( 7 downto 0 )
+  );
+  end component design_1_digilent_jstk2_0_0;
+  component design_1_AXI4Stream_UART_0_1 is
+  port (
+    clk_uart : in STD_LOGIC;
+    rst : in STD_LOGIC;
+    UART_TX : out STD_LOGIC;
+    UART_RX : in STD_LOGIC;
+    m00_axis_rx_aclk : in STD_LOGIC;
+    m00_axis_rx_aresetn : in STD_LOGIC;
+    m00_axis_rx_tvalid : out STD_LOGIC;
+    m00_axis_rx_tdata : out STD_LOGIC_VECTOR ( 7 downto 0 );
+    m00_axis_rx_tready : in STD_LOGIC;
+    s00_axis_tx_aclk : in STD_LOGIC;
+    s00_axis_tx_aresetn : in STD_LOGIC;
+    s00_axis_tx_tready : out STD_LOGIC;
+    s00_axis_tx_tdata : in STD_LOGIC_VECTOR ( 7 downto 0 );
+    s00_axis_tx_tvalid : in STD_LOGIC
+  );
+  end component design_1_AXI4Stream_UART_0_1;
+  signal AXI4Stream_UART_0_M00_AXIS_RX_TDATA : STD_LOGIC_VECTOR ( 7 downto 0 );
+  signal AXI4Stream_UART_0_M00_AXIS_RX_TREADY : STD_LOGIC;
+  signal AXI4Stream_UART_0_M00_AXIS_RX_TVALID : STD_LOGIC;
+  signal AXI4Stream_UART_0_UART_RxD : STD_LOGIC;
+  signal AXI4Stream_UART_0_UART_TxD : STD_LOGIC;
   signal axi4stream_spi_master_0_M_AXIS_TDATA : STD_LOGIC_VECTOR ( 7 downto 0 );
   signal axi4stream_spi_master_0_M_AXIS_TVALID : STD_LOGIC;
   signal axi4stream_spi_master_0_SPI_M_IO0_I : STD_LOGIC;
@@ -151,11 +156,6 @@ architecture STRUCTURE of design_1 is
   signal axi4stream_spi_master_0_SPI_M_SS_I : STD_LOGIC;
   signal axi4stream_spi_master_0_SPI_M_SS_O : STD_LOGIC;
   signal axi4stream_spi_master_0_SPI_M_SS_T : STD_LOGIC;
-  signal axi4stream_uart_0_M00_AXIS_RX_TDATA : STD_LOGIC_VECTOR ( 7 downto 0 );
-  signal axi4stream_uart_0_M00_AXIS_RX_TREADY : STD_LOGIC;
-  signal axi4stream_uart_0_M00_AXIS_RX_TVALID : STD_LOGIC;
-  signal axi4stream_uart_0_UART_RxD : STD_LOGIC;
-  signal axi4stream_uart_0_UART_TxD : STD_LOGIC;
   signal clk_wiz_0_clk_out1 : STD_LOGIC;
   signal clk_wiz_0_locked : STD_LOGIC;
   signal digilent_jstk2_0_btn_jstk : STD_LOGIC;
@@ -199,6 +199,7 @@ architecture STRUCTURE of design_1 is
   attribute X_INTERFACE_INFO of usb_uart_rxd : signal is "xilinx.com:interface:uart:1.0 usb_uart RxD";
   attribute X_INTERFACE_INFO of usb_uart_txd : signal is "xilinx.com:interface:uart:1.0 usb_uart TxD";
 begin
+  AXI4Stream_UART_0_UART_RxD <= usb_uart_rxd;
   SPI_M_0_io0_o <= axi4stream_spi_master_0_SPI_M_IO0_O;
   SPI_M_0_io0_t <= axi4stream_spi_master_0_SPI_M_IO0_T;
   SPI_M_0_io1_o <= axi4stream_spi_master_0_SPI_M_IO1_O;
@@ -211,10 +212,26 @@ begin
   axi4stream_spi_master_0_SPI_M_IO1_I <= SPI_M_0_io1_i;
   axi4stream_spi_master_0_SPI_M_SCK_I <= SPI_M_0_sck_i;
   axi4stream_spi_master_0_SPI_M_SS_I <= SPI_M_0_ss_i;
-  axi4stream_uart_0_UART_RxD <= usb_uart_rxd;
   reset_1 <= reset;
   sys_clock_1 <= sys_clock;
-  usb_uart_txd <= axi4stream_uart_0_UART_TxD;
+  usb_uart_txd <= AXI4Stream_UART_0_UART_TxD;
+AXI4Stream_UART_0: component design_1_AXI4Stream_UART_0_1
+     port map (
+      UART_RX => AXI4Stream_UART_0_UART_RxD,
+      UART_TX => AXI4Stream_UART_0_UART_TxD,
+      clk_uart => clk_wiz_0_clk_out1,
+      m00_axis_rx_aclk => clk_wiz_0_clk_out1,
+      m00_axis_rx_aresetn => proc_sys_reset_0_peripheral_aresetn(0),
+      m00_axis_rx_tdata(7 downto 0) => AXI4Stream_UART_0_M00_AXIS_RX_TDATA(7 downto 0),
+      m00_axis_rx_tready => AXI4Stream_UART_0_M00_AXIS_RX_TREADY,
+      m00_axis_rx_tvalid => AXI4Stream_UART_0_M00_AXIS_RX_TVALID,
+      rst => proc_sys_reset_0_peripheral_reset(0),
+      s00_axis_tx_aclk => clk_wiz_0_clk_out1,
+      s00_axis_tx_aresetn => proc_sys_reset_0_peripheral_aresetn(0),
+      s00_axis_tx_tdata(7 downto 0) => jstk_uart_bridge_0_m_axis_TDATA(7 downto 0),
+      s00_axis_tx_tready => jstk_uart_bridge_0_m_axis_TREADY,
+      s00_axis_tx_tvalid => jstk_uart_bridge_0_m_axis_TVALID
+    );
 axi4stream_spi_master_0: component design_1_axi4stream_spi_master_0_0
      port map (
       aclk => clk_wiz_0_clk_out1,
@@ -236,23 +253,6 @@ axi4stream_spi_master_0: component design_1_axi4stream_spi_master_0_0
       sclk_i => axi4stream_spi_master_0_SPI_M_SCK_I,
       sclk_o => axi4stream_spi_master_0_SPI_M_SCK_O,
       sclk_t => axi4stream_spi_master_0_SPI_M_SCK_T
-    );
-axi4stream_uart_0: component design_1_axi4stream_uart_0_0
-     port map (
-      UART_RX => axi4stream_uart_0_UART_RxD,
-      UART_TX => axi4stream_uart_0_UART_TxD,
-      clk_uart => clk_wiz_0_clk_out1,
-      m00_axis_rx_aclk => clk_wiz_0_clk_out1,
-      m00_axis_rx_aresetn => proc_sys_reset_0_peripheral_aresetn(0),
-      m00_axis_rx_tdata(7 downto 0) => axi4stream_uart_0_M00_AXIS_RX_TDATA(7 downto 0),
-      m00_axis_rx_tready => axi4stream_uart_0_M00_AXIS_RX_TREADY,
-      m00_axis_rx_tvalid => axi4stream_uart_0_M00_AXIS_RX_TVALID,
-      rst => proc_sys_reset_0_peripheral_reset(0),
-      s00_axis_tx_aclk => clk_wiz_0_clk_out1,
-      s00_axis_tx_aresetn => proc_sys_reset_0_peripheral_aresetn(0),
-      s00_axis_tx_tdata(7 downto 0) => jstk_uart_bridge_0_m_axis_TDATA(7 downto 0),
-      s00_axis_tx_tready => jstk_uart_bridge_0_m_axis_TREADY,
-      s00_axis_tx_tvalid => jstk_uart_bridge_0_m_axis_TVALID
     );
 clk_wiz_0: component design_1_clk_wiz_0_0
      port map (
@@ -292,9 +292,9 @@ jstk_uart_bridge_0: component design_1_jstk_uart_bridge_0_0
       m_axis_tdata(7 downto 0) => jstk_uart_bridge_0_m_axis_TDATA(7 downto 0),
       m_axis_tready => jstk_uart_bridge_0_m_axis_TREADY,
       m_axis_tvalid => jstk_uart_bridge_0_m_axis_TVALID,
-      s_axis_tdata(7 downto 0) => axi4stream_uart_0_M00_AXIS_RX_TDATA(7 downto 0),
-      s_axis_tready => axi4stream_uart_0_M00_AXIS_RX_TREADY,
-      s_axis_tvalid => axi4stream_uart_0_M00_AXIS_RX_TVALID
+      s_axis_tdata(7 downto 0) => AXI4Stream_UART_0_M00_AXIS_RX_TDATA(7 downto 0),
+      s_axis_tready => AXI4Stream_UART_0_M00_AXIS_RX_TREADY,
+      s_axis_tvalid => AXI4Stream_UART_0_M00_AXIS_RX_TVALID
     );
 proc_sys_reset_0: component design_1_proc_sys_reset_0_0
      port map (

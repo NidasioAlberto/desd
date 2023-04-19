@@ -1,20 +1,88 @@
 // Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
-// Tool Version: Vivado v.2020.2 (win64) Build 3064766 Wed Nov 18 09:12:45 MST 2020
-// Date        : Tue Apr 11 18:46:42 2023
-// Host        : DESKTOP-F4BLQ3F running 64-bit major release  (build 9200)
-// Command     : write_verilog -force -mode funcsim -rename_top design_1_axi4stream_uart_0_0 -prefix
-//               design_1_axi4stream_uart_0_0_ design_1_axi4stream_uart_0_0_sim_netlist.v
-// Design      : design_1_axi4stream_uart_0_0
+// Tool Version: Vivado v.2020.2 (lin64) Build 3064766 Wed Nov 18 09:12:47 MST 2020
+// Date        : Wed Apr 19 17:25:25 2023
+// Host        : pop-os running 64-bit Pop!_OS 22.04 LTS
+// Command     : write_verilog -force -mode funcsim
+//               /home/alberton/Desktop/desd/SpaceShooterJoystick/SpaceShooterJoystick.gen/sources_1/bd/design_1/ip/design_1_AXI4Stream_UART_0_1/design_1_AXI4Stream_UART_0_1_sim_netlist.v
+// Design      : design_1_AXI4Stream_UART_0_1
 // Purpose     : This verilog netlist is a functional simulation representation of the design and should not be modified
 //               or synthesized. This netlist cannot be used for SDF annotated simulation.
 // Device      : xc7a35tcpg236-1
 // --------------------------------------------------------------------------------
 `timescale 1 ps / 1 ps
 
-(* C_M00_AXIS_RX_TDATA_WIDTH = "8" *) (* C_S00_AXIS_TX_TDATA_WIDTH = "8" *) (* UART_BAUD_RATE = "115200" *) 
-(* UART_CLOCK_FREQUENCY = "100000000" *) 
-module design_1_axi4stream_uart_0_0_AXI4Stream_UART_v1_0
+(* CHECK_LICENSE_TYPE = "design_1_AXI4Stream_UART_0_1,AXI4Stream_UART_v1_0,{}" *) (* downgradeipidentifiedwarnings = "yes" *) (* x_core_info = "AXI4Stream_UART_v1_0,Vivado 2020.2" *) 
+(* NotValidForBitStream *)
+module design_1_AXI4Stream_UART_0_1
+   (clk_uart,
+    rst,
+    UART_TX,
+    UART_RX,
+    m00_axis_rx_aclk,
+    m00_axis_rx_aresetn,
+    m00_axis_rx_tvalid,
+    m00_axis_rx_tdata,
+    m00_axis_rx_tready,
+    s00_axis_tx_aclk,
+    s00_axis_tx_aresetn,
+    s00_axis_tx_tready,
+    s00_axis_tx_tdata,
+    s00_axis_tx_tvalid);
+  (* x_interface_info = "xilinx.com:signal:clock:1.0 ClockUART CLK" *) (* x_interface_parameter = "XIL_INTERFACENAME ClockUART, ASSOCIATED_BUSIF UART, ASSOCIATED_RESET rst, FREQ_HZ 100000000, FREQ_TOLERANCE_HZ 0, PHASE 0.0, CLK_DOMAIN /clk_wiz_0_clk_out1, INSERT_VIP 0" *) input clk_uart;
+  (* x_interface_info = "xilinx.com:signal:reset:1.0 reset RST" *) (* x_interface_parameter = "XIL_INTERFACENAME reset, POLARITY ACTIVE_HIGH, INSERT_VIP 0" *) input rst;
+  (* x_interface_info = "xilinx.com:interface:uart:1.0 UART TxD" *) (* x_interface_parameter = "XIL_INTERFACENAME UART, BOARD.ASSOCIATED_PARAM UART_BOARD_INTERFACE" *) output UART_TX;
+  (* x_interface_info = "xilinx.com:interface:uart:1.0 UART RxD" *) input UART_RX;
+  (* x_interface_info = "xilinx.com:signal:clock:1.0 M00_AXIS_RX_CLK CLK" *) (* x_interface_parameter = "XIL_INTERFACENAME M00_AXIS_RX_CLK, ASSOCIATED_BUSIF M00_AXIS_RX, ASSOCIATED_RESET m00_axis_rx_aresetn, FREQ_HZ 100000000, FREQ_TOLERANCE_HZ 0, PHASE 0.0, CLK_DOMAIN /clk_wiz_0_clk_out1, INSERT_VIP 0" *) input m00_axis_rx_aclk;
+  (* x_interface_info = "xilinx.com:signal:reset:1.0 M00_AXIS_RX_RST RST" *) (* x_interface_parameter = "XIL_INTERFACENAME M00_AXIS_RX_RST, POLARITY ACTIVE_LOW, INSERT_VIP 0" *) input m00_axis_rx_aresetn;
+  (* x_interface_info = "xilinx.com:interface:axis:1.0 M00_AXIS_RX TVALID" *) (* x_interface_parameter = "XIL_INTERFACENAME M00_AXIS_RX, WIZ_DATA_WIDTH 32, TDATA_NUM_BYTES 1, TDEST_WIDTH 0, TID_WIDTH 0, TUSER_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 0, FREQ_HZ 100000000, PHASE 0.0, CLK_DOMAIN /clk_wiz_0_clk_out1, LAYERED_METADATA undef, INSERT_VIP 0" *) output m00_axis_rx_tvalid;
+  (* x_interface_info = "xilinx.com:interface:axis:1.0 M00_AXIS_RX TDATA" *) output [7:0]m00_axis_rx_tdata;
+  (* x_interface_info = "xilinx.com:interface:axis:1.0 M00_AXIS_RX TREADY" *) input m00_axis_rx_tready;
+  (* x_interface_info = "xilinx.com:signal:clock:1.0 S00_AXIS_TX_CLK CLK" *) (* x_interface_parameter = "XIL_INTERFACENAME S00_AXIS_TX_CLK, ASSOCIATED_BUSIF S00_AXIS_TX, ASSOCIATED_RESET s00_axis_tx_aresetn, FREQ_HZ 100000000, FREQ_TOLERANCE_HZ 0, PHASE 0.0, CLK_DOMAIN /clk_wiz_0_clk_out1, INSERT_VIP 0" *) input s00_axis_tx_aclk;
+  (* x_interface_info = "xilinx.com:signal:reset:1.0 S00_AXIS_TX_RST RST" *) (* x_interface_parameter = "XIL_INTERFACENAME S00_AXIS_TX_RST, POLARITY ACTIVE_LOW, INSERT_VIP 0" *) input s00_axis_tx_aresetn;
+  (* x_interface_info = "xilinx.com:interface:axis:1.0 S00_AXIS_TX TREADY" *) (* x_interface_parameter = "XIL_INTERFACENAME S00_AXIS_TX, WIZ_DATA_WIDTH 32, TDATA_NUM_BYTES 1, TDEST_WIDTH 0, TID_WIDTH 0, TUSER_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 0, FREQ_HZ 100000000, PHASE 0.0, CLK_DOMAIN /clk_wiz_0_clk_out1, LAYERED_METADATA undef, INSERT_VIP 0" *) output s00_axis_tx_tready;
+  (* x_interface_info = "xilinx.com:interface:axis:1.0 S00_AXIS_TX TDATA" *) input [7:0]s00_axis_tx_tdata;
+  (* x_interface_info = "xilinx.com:interface:axis:1.0 S00_AXIS_TX TVALID" *) input s00_axis_tx_tvalid;
+
+  (* RTL_KEEP = "yes" *) (* x_interface_info = "xilinx.com:interface:uart:1.0 UART RxD" *) wire UART_RX;
+  wire UART_TX;
+  wire clk_uart;
+  wire m00_axis_rx_aclk;
+  wire m00_axis_rx_aresetn;
+  wire [7:0]m00_axis_rx_tdata;
+  wire m00_axis_rx_tready;
+  wire m00_axis_rx_tvalid;
+  wire rst;
+  wire s00_axis_tx_aclk;
+  wire s00_axis_tx_aresetn;
+  wire [7:0]s00_axis_tx_tdata;
+  wire s00_axis_tx_tready;
+  wire s00_axis_tx_tvalid;
+
+  (* C_M00_AXIS_RX_TDATA_WIDTH = "8" *) 
+  (* C_S00_AXIS_TX_TDATA_WIDTH = "8" *) 
+  (* UART_BAUD_RATE = "115200" *) 
+  (* UART_CLOCK_FREQUENCY = "100000000" *) 
+  design_1_AXI4Stream_UART_0_1_AXI4Stream_UART_v1_0 U0
+       (.UART_RX(UART_RX),
+        .UART_TX(UART_TX),
+        .clk_uart(clk_uart),
+        .m00_axis_rx_aclk(m00_axis_rx_aclk),
+        .m00_axis_rx_aresetn(m00_axis_rx_aresetn),
+        .m00_axis_rx_tdata(m00_axis_rx_tdata),
+        .m00_axis_rx_tready(m00_axis_rx_tready),
+        .m00_axis_rx_tvalid(m00_axis_rx_tvalid),
+        .rst(rst),
+        .s00_axis_tx_aclk(s00_axis_tx_aclk),
+        .s00_axis_tx_aresetn(s00_axis_tx_aresetn),
+        .s00_axis_tx_tdata(s00_axis_tx_tdata),
+        .s00_axis_tx_tready(s00_axis_tx_tready),
+        .s00_axis_tx_tvalid(s00_axis_tx_tvalid));
+endmodule
+
+(* C_M00_AXIS_RX_TDATA_WIDTH = "8" *) (* C_S00_AXIS_TX_TDATA_WIDTH = "8" *) (* ORIG_REF_NAME = "AXI4Stream_UART_v1_0" *) 
+(* UART_BAUD_RATE = "115200" *) (* UART_CLOCK_FREQUENCY = "100000000" *) 
+module design_1_AXI4Stream_UART_0_1_AXI4Stream_UART_v1_0
    (clk_uart,
     rst,
     UART_TX,
@@ -124,7 +192,7 @@ module design_1_axi4stream_uart_0_0_AXI4Stream_UART_v1_0
   (* WRITE_DATA_WIDTH = "8" *) 
   (* WR_DATA_COUNT_WIDTH = "1" *) 
   (* XPM_MODULE = "TRUE" *) 
-  design_1_axi4stream_uart_0_0_xpm_fifo_async FIFO_DATA_RX
+  design_1_AXI4Stream_UART_0_1_xpm_fifo_async FIFO_DATA_RX
        (.almost_empty(FIFO_DATA_RX_almost_empty),
         .almost_full(FIFO_DATA_RX_almost_full),
         .data_valid(NLW_FIFO_DATA_RX_data_valid_UNCONNECTED),
@@ -185,7 +253,7 @@ module design_1_axi4stream_uart_0_0_AXI4Stream_UART_v1_0
   (* WRITE_DATA_WIDTH = "8" *) 
   (* WR_DATA_COUNT_WIDTH = "1" *) 
   (* XPM_MODULE = "TRUE" *) 
-  design_1_axi4stream_uart_0_0_xpm_fifo_async__xdcDup__1 FIFO_DATA_TX
+  design_1_AXI4Stream_UART_0_1_xpm_fifo_async__xdcDup__1 FIFO_DATA_TX
        (.almost_empty(FIFO_DATA_TX_almost_empty),
         .almost_full(FIFO_DATA_TX_almost_full),
         .data_valid(NLW_FIFO_DATA_TX_data_valid_UNCONNECTED),
@@ -225,7 +293,7 @@ module design_1_axi4stream_uart_0_0_AXI4Stream_UART_v1_0
         .I1(s00_axis_tx_aresetn),
         .I2(s00_axis_tx_tvalid),
         .O(FIFO_DATA_TX_wr_en));
-  design_1_axi4stream_uart_0_0_UART_Manager UART_Manager_inst
+  design_1_AXI4Stream_UART_0_1_UART_Manager UART_Manager_inst
        (.Q(FIFO_DATA_RX_din),
         .UART_RX(UART_RX),
         .UART_TX(UART_TX),
@@ -251,7 +319,8 @@ module design_1_axi4stream_uart_0_0_AXI4Stream_UART_v1_0
         .O(s00_axis_tx_tready));
 endmodule
 
-module design_1_axi4stream_uart_0_0_UART_Engine
+(* ORIG_REF_NAME = "UART_Engine" *) 
+module design_1_AXI4Stream_UART_0_1_UART_Engine
    (UART_TX,
     E,
     \gen_fwft.empty_fwft_i_reg ,
@@ -1485,7 +1554,8 @@ module design_1_axi4stream_uart_0_0_UART_Engine
         .R(rst));
 endmodule
 
-module design_1_axi4stream_uart_0_0_UART_Manager
+(* ORIG_REF_NAME = "UART_Manager" *) 
+module design_1_AXI4Stream_UART_0_1_UART_Manager
    (UART_TX,
     wr_en,
     rd_en,
@@ -1619,7 +1689,7 @@ module design_1_axi4stream_uart_0_0_UART_Manager
         .CLR(rst),
         .D(Inst_uart_n_3),
         .Q(state_TX[1]));
-  design_1_axi4stream_uart_0_0_UART_Engine Inst_uart
+  design_1_AXI4Stream_UART_0_1_UART_Engine Inst_uart
        (.E(uart_rx_data_out_stb),
         .\FSM_onehot_uart_tx_state_reg[2]_0 (data_stream_in_stb_reg_n_0),
         .Q(data_stream_in),
@@ -1770,79 +1840,11 @@ module design_1_axi4stream_uart_0_0_UART_Manager
         .Q(data_stream_in_stb_reg_n_0));
 endmodule
 
-(* CHECK_LICENSE_TYPE = "design_1_axi4stream_uart_0_0,AXI4Stream_UART_v1_0,{}" *) (* downgradeipidentifiedwarnings = "yes" *) (* x_core_info = "AXI4Stream_UART_v1_0,Vivado 2020.2" *) 
-(* NotValidForBitStream *)
-module design_1_axi4stream_uart_0_0
-   (clk_uart,
-    rst,
-    UART_TX,
-    UART_RX,
-    m00_axis_rx_aclk,
-    m00_axis_rx_aresetn,
-    m00_axis_rx_tvalid,
-    m00_axis_rx_tdata,
-    m00_axis_rx_tready,
-    s00_axis_tx_aclk,
-    s00_axis_tx_aresetn,
-    s00_axis_tx_tready,
-    s00_axis_tx_tdata,
-    s00_axis_tx_tvalid);
-  (* x_interface_info = "xilinx.com:signal:clock:1.0 ClockUART CLK" *) (* x_interface_parameter = "XIL_INTERFACENAME ClockUART, ASSOCIATED_BUSIF UART, ASSOCIATED_RESET rst, FREQ_HZ 100000000, FREQ_TOLERANCE_HZ 0, PHASE 0.0, CLK_DOMAIN /clk_wiz_0_clk_out1, INSERT_VIP 0" *) input clk_uart;
-  (* x_interface_info = "xilinx.com:signal:reset:1.0 reset RST" *) (* x_interface_parameter = "XIL_INTERFACENAME reset, POLARITY ACTIVE_HIGH, INSERT_VIP 0" *) input rst;
-  (* x_interface_info = "xilinx.com:interface:uart:1.0 UART TxD" *) (* x_interface_parameter = "XIL_INTERFACENAME UART, BOARD.ASSOCIATED_PARAM UART_BOARD_INTERFACE" *) output UART_TX;
-  (* x_interface_info = "xilinx.com:interface:uart:1.0 UART RxD" *) input UART_RX;
-  (* x_interface_info = "xilinx.com:signal:clock:1.0 M00_AXIS_RX_CLK CLK" *) (* x_interface_parameter = "XIL_INTERFACENAME M00_AXIS_RX_CLK, ASSOCIATED_BUSIF M00_AXIS_RX, ASSOCIATED_RESET m00_axis_rx_aresetn, FREQ_HZ 100000000, FREQ_TOLERANCE_HZ 0, PHASE 0.0, CLK_DOMAIN /clk_wiz_0_clk_out1, INSERT_VIP 0" *) input m00_axis_rx_aclk;
-  (* x_interface_info = "xilinx.com:signal:reset:1.0 M00_AXIS_RX_RST RST" *) (* x_interface_parameter = "XIL_INTERFACENAME M00_AXIS_RX_RST, POLARITY ACTIVE_LOW, INSERT_VIP 0" *) input m00_axis_rx_aresetn;
-  (* x_interface_info = "xilinx.com:interface:axis:1.0 M00_AXIS_RX TVALID" *) (* x_interface_parameter = "XIL_INTERFACENAME M00_AXIS_RX, WIZ_DATA_WIDTH 32, TDATA_NUM_BYTES 1, TDEST_WIDTH 0, TID_WIDTH 0, TUSER_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 0, FREQ_HZ 100000000, PHASE 0.0, CLK_DOMAIN /clk_wiz_0_clk_out1, LAYERED_METADATA undef, INSERT_VIP 0" *) output m00_axis_rx_tvalid;
-  (* x_interface_info = "xilinx.com:interface:axis:1.0 M00_AXIS_RX TDATA" *) output [7:0]m00_axis_rx_tdata;
-  (* x_interface_info = "xilinx.com:interface:axis:1.0 M00_AXIS_RX TREADY" *) input m00_axis_rx_tready;
-  (* x_interface_info = "xilinx.com:signal:clock:1.0 S00_AXIS_TX_CLK CLK" *) (* x_interface_parameter = "XIL_INTERFACENAME S00_AXIS_TX_CLK, ASSOCIATED_BUSIF S00_AXIS_TX, ASSOCIATED_RESET s00_axis_tx_aresetn, FREQ_HZ 100000000, FREQ_TOLERANCE_HZ 0, PHASE 0.0, CLK_DOMAIN /clk_wiz_0_clk_out1, INSERT_VIP 0" *) input s00_axis_tx_aclk;
-  (* x_interface_info = "xilinx.com:signal:reset:1.0 S00_AXIS_TX_RST RST" *) (* x_interface_parameter = "XIL_INTERFACENAME S00_AXIS_TX_RST, POLARITY ACTIVE_LOW, INSERT_VIP 0" *) input s00_axis_tx_aresetn;
-  (* x_interface_info = "xilinx.com:interface:axis:1.0 S00_AXIS_TX TREADY" *) (* x_interface_parameter = "XIL_INTERFACENAME S00_AXIS_TX, WIZ_DATA_WIDTH 32, TDATA_NUM_BYTES 1, TDEST_WIDTH 0, TID_WIDTH 0, TUSER_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 0, FREQ_HZ 100000000, PHASE 0.0, CLK_DOMAIN /clk_wiz_0_clk_out1, LAYERED_METADATA undef, INSERT_VIP 0" *) output s00_axis_tx_tready;
-  (* x_interface_info = "xilinx.com:interface:axis:1.0 S00_AXIS_TX TDATA" *) input [7:0]s00_axis_tx_tdata;
-  (* x_interface_info = "xilinx.com:interface:axis:1.0 S00_AXIS_TX TVALID" *) input s00_axis_tx_tvalid;
-
-  (* RTL_KEEP = "yes" *) (* x_interface_info = "xilinx.com:interface:uart:1.0 UART RxD" *) wire UART_RX;
-  wire UART_TX;
-  wire clk_uart;
-  wire m00_axis_rx_aclk;
-  wire m00_axis_rx_aresetn;
-  wire [7:0]m00_axis_rx_tdata;
-  wire m00_axis_rx_tready;
-  wire m00_axis_rx_tvalid;
-  wire rst;
-  wire s00_axis_tx_aclk;
-  wire s00_axis_tx_aresetn;
-  wire [7:0]s00_axis_tx_tdata;
-  wire s00_axis_tx_tready;
-  wire s00_axis_tx_tvalid;
-
-  (* C_M00_AXIS_RX_TDATA_WIDTH = "8" *) 
-  (* C_S00_AXIS_TX_TDATA_WIDTH = "8" *) 
-  (* UART_BAUD_RATE = "115200" *) 
-  (* UART_CLOCK_FREQUENCY = "100000000" *) 
-  design_1_axi4stream_uart_0_0_AXI4Stream_UART_v1_0 U0
-       (.UART_RX(UART_RX),
-        .UART_TX(UART_TX),
-        .clk_uart(clk_uart),
-        .m00_axis_rx_aclk(m00_axis_rx_aclk),
-        .m00_axis_rx_aresetn(m00_axis_rx_aresetn),
-        .m00_axis_rx_tdata(m00_axis_rx_tdata),
-        .m00_axis_rx_tready(m00_axis_rx_tready),
-        .m00_axis_rx_tvalid(m00_axis_rx_tvalid),
-        .rst(rst),
-        .s00_axis_tx_aclk(s00_axis_tx_aclk),
-        .s00_axis_tx_aresetn(s00_axis_tx_aresetn),
-        .s00_axis_tx_tdata(s00_axis_tx_tdata),
-        .s00_axis_tx_tready(s00_axis_tx_tready),
-        .s00_axis_tx_tvalid(s00_axis_tx_tvalid));
-endmodule
-
-(* DEST_SYNC_FF = "2" *) (* INIT_SYNC_FF = "1" *) (* REG_OUTPUT = "0" *) 
-(* SIM_ASSERT_CHK = "0" *) (* SIM_LOSSLESS_GRAY_CHK = "0" *) (* VERSION = "0" *) 
-(* WIDTH = "11" *) (* XPM_MODULE = "TRUE" *) (* keep_hierarchy = "true" *) 
-(* xpm_cdc = "GRAY" *) 
-module design_1_axi4stream_uart_0_0_xpm_cdc_gray
+(* DEST_SYNC_FF = "2" *) (* INIT_SYNC_FF = "1" *) (* ORIG_REF_NAME = "xpm_cdc_gray" *) 
+(* REG_OUTPUT = "0" *) (* SIM_ASSERT_CHK = "0" *) (* SIM_LOSSLESS_GRAY_CHK = "0" *) 
+(* VERSION = "0" *) (* WIDTH = "11" *) (* XPM_MODULE = "TRUE" *) 
+(* keep_hierarchy = "true" *) (* xpm_cdc = "GRAY" *) 
+module design_1_AXI4Stream_UART_0_1_xpm_cdc_gray
    (src_clk,
     src_in_bin,
     dest_clk,
@@ -2283,7 +2285,7 @@ endmodule
 (* REG_OUTPUT = "0" *) (* SIM_ASSERT_CHK = "0" *) (* SIM_LOSSLESS_GRAY_CHK = "0" *) 
 (* VERSION = "0" *) (* WIDTH = "11" *) (* XPM_MODULE = "TRUE" *) 
 (* keep_hierarchy = "true" *) (* xpm_cdc = "GRAY" *) 
-module design_1_axi4stream_uart_0_0_xpm_cdc_gray__4
+module design_1_AXI4Stream_UART_0_1_xpm_cdc_gray__4
    (src_clk,
     src_in_bin,
     dest_clk,
@@ -2724,7 +2726,7 @@ endmodule
 (* REG_OUTPUT = "0" *) (* SIM_ASSERT_CHK = "0" *) (* SIM_LOSSLESS_GRAY_CHK = "0" *) 
 (* VERSION = "0" *) (* WIDTH = "11" *) (* XPM_MODULE = "TRUE" *) 
 (* keep_hierarchy = "true" *) (* xpm_cdc = "GRAY" *) 
-module design_1_axi4stream_uart_0_0_xpm_cdc_gray__5
+module design_1_AXI4Stream_UART_0_1_xpm_cdc_gray__5
    (src_clk,
     src_in_bin,
     dest_clk,
@@ -3165,7 +3167,7 @@ endmodule
 (* REG_OUTPUT = "0" *) (* SIM_ASSERT_CHK = "0" *) (* SIM_LOSSLESS_GRAY_CHK = "0" *) 
 (* VERSION = "0" *) (* WIDTH = "11" *) (* XPM_MODULE = "TRUE" *) 
 (* keep_hierarchy = "true" *) (* xpm_cdc = "GRAY" *) 
-module design_1_axi4stream_uart_0_0_xpm_cdc_gray__6
+module design_1_AXI4Stream_UART_0_1_xpm_cdc_gray__6
    (src_clk,
     src_in_bin,
     dest_clk,
@@ -3606,7 +3608,7 @@ endmodule
 (* REG_OUTPUT = "0" *) (* SIM_ASSERT_CHK = "0" *) (* SIM_LOSSLESS_GRAY_CHK = "0" *) 
 (* VERSION = "0" *) (* WIDTH = "12" *) (* XPM_MODULE = "TRUE" *) 
 (* keep_hierarchy = "true" *) (* xpm_cdc = "GRAY" *) 
-module design_1_axi4stream_uart_0_0_xpm_cdc_gray__parameterized0
+module design_1_AXI4Stream_UART_0_1_xpm_cdc_gray__parameterized0
    (src_clk,
     src_in_bin,
     dest_clk,
@@ -4301,7 +4303,7 @@ endmodule
 (* REG_OUTPUT = "0" *) (* SIM_ASSERT_CHK = "0" *) (* SIM_LOSSLESS_GRAY_CHK = "0" *) 
 (* VERSION = "0" *) (* WIDTH = "12" *) (* XPM_MODULE = "TRUE" *) 
 (* keep_hierarchy = "true" *) (* xpm_cdc = "GRAY" *) 
-module design_1_axi4stream_uart_0_0_xpm_cdc_gray__parameterized0__2
+module design_1_AXI4Stream_UART_0_1_xpm_cdc_gray__parameterized0__2
    (src_clk,
     src_in_bin,
     dest_clk,
@@ -4996,7 +4998,7 @@ endmodule
 (* REG_OUTPUT = "0" *) (* SIM_ASSERT_CHK = "0" *) (* SIM_LOSSLESS_GRAY_CHK = "0" *) 
 (* VERSION = "0" *) (* WIDTH = "12" *) (* XPM_MODULE = "TRUE" *) 
 (* keep_hierarchy = "true" *) (* xpm_cdc = "GRAY" *) 
-module design_1_axi4stream_uart_0_0_xpm_cdc_gray__parameterized1
+module design_1_AXI4Stream_UART_0_1_xpm_cdc_gray__parameterized1
    (src_clk,
     src_in_bin,
     dest_clk,
@@ -5473,7 +5475,7 @@ endmodule
 (* REG_OUTPUT = "0" *) (* SIM_ASSERT_CHK = "0" *) (* SIM_LOSSLESS_GRAY_CHK = "0" *) 
 (* VERSION = "0" *) (* WIDTH = "12" *) (* XPM_MODULE = "TRUE" *) 
 (* keep_hierarchy = "true" *) (* xpm_cdc = "GRAY" *) 
-module design_1_axi4stream_uart_0_0_xpm_cdc_gray__parameterized1__2
+module design_1_AXI4Stream_UART_0_1_xpm_cdc_gray__parameterized1__2
    (src_clk,
     src_in_bin,
     dest_clk,
@@ -5947,9 +5949,10 @@ module design_1_axi4stream_uart_0_0_xpm_cdc_gray__parameterized1__2
 endmodule
 
 (* DEF_VAL = "1'b0" *) (* DEST_SYNC_FF = "2" *) (* INIT = "0" *) 
-(* INIT_SYNC_FF = "1" *) (* SIM_ASSERT_CHK = "0" *) (* VERSION = "0" *) 
-(* XPM_MODULE = "TRUE" *) (* keep_hierarchy = "true" *) (* xpm_cdc = "SYNC_RST" *) 
-module design_1_axi4stream_uart_0_0_xpm_cdc_sync_rst
+(* INIT_SYNC_FF = "1" *) (* ORIG_REF_NAME = "xpm_cdc_sync_rst" *) (* SIM_ASSERT_CHK = "0" *) 
+(* VERSION = "0" *) (* XPM_MODULE = "TRUE" *) (* keep_hierarchy = "true" *) 
+(* xpm_cdc = "SYNC_RST" *) 
+module design_1_AXI4Stream_UART_0_1_xpm_cdc_sync_rst
    (src_rst,
     dest_clk,
     dest_rst);
@@ -5990,7 +5993,7 @@ endmodule
 (* INIT_SYNC_FF = "1" *) (* ORIG_REF_NAME = "xpm_cdc_sync_rst" *) (* SIM_ASSERT_CHK = "0" *) 
 (* VERSION = "0" *) (* XPM_MODULE = "TRUE" *) (* keep_hierarchy = "true" *) 
 (* xpm_cdc = "SYNC_RST" *) 
-module design_1_axi4stream_uart_0_0_xpm_cdc_sync_rst__4
+module design_1_AXI4Stream_UART_0_1_xpm_cdc_sync_rst__4
    (src_rst,
     dest_clk,
     dest_rst);
@@ -6031,7 +6034,7 @@ endmodule
 (* INIT_SYNC_FF = "1" *) (* ORIG_REF_NAME = "xpm_cdc_sync_rst" *) (* SIM_ASSERT_CHK = "0" *) 
 (* VERSION = "0" *) (* XPM_MODULE = "TRUE" *) (* keep_hierarchy = "true" *) 
 (* xpm_cdc = "SYNC_RST" *) 
-module design_1_axi4stream_uart_0_0_xpm_cdc_sync_rst__5
+module design_1_AXI4Stream_UART_0_1_xpm_cdc_sync_rst__5
    (src_rst,
     dest_clk,
     dest_rst);
@@ -6072,7 +6075,7 @@ endmodule
 (* INIT_SYNC_FF = "1" *) (* ORIG_REF_NAME = "xpm_cdc_sync_rst" *) (* SIM_ASSERT_CHK = "0" *) 
 (* VERSION = "0" *) (* XPM_MODULE = "TRUE" *) (* keep_hierarchy = "true" *) 
 (* xpm_cdc = "SYNC_RST" *) 
-module design_1_axi4stream_uart_0_0_xpm_cdc_sync_rst__6
+module design_1_AXI4Stream_UART_0_1_xpm_cdc_sync_rst__6
    (src_rst,
     dest_clk,
     dest_rst);
@@ -6109,7 +6112,8 @@ module design_1_axi4stream_uart_0_0_xpm_cdc_sync_rst__6
         .R(1'b0));
 endmodule
 
-module design_1_axi4stream_uart_0_0_xpm_counter_updn
+(* ORIG_REF_NAME = "xpm_counter_updn" *) 
+module design_1_AXI4Stream_UART_0_1_xpm_counter_updn
    (Q,
     S,
     wrst_busy,
@@ -6265,7 +6269,7 @@ module design_1_axi4stream_uart_0_0_xpm_counter_updn
 endmodule
 
 (* ORIG_REF_NAME = "xpm_counter_updn" *) 
-module design_1_axi4stream_uart_0_0_xpm_counter_updn_3
+module design_1_AXI4Stream_UART_0_1_xpm_counter_updn_3
    (Q,
     S,
     wrst_busy,
@@ -6421,7 +6425,7 @@ module design_1_axi4stream_uart_0_0_xpm_counter_updn_3
 endmodule
 
 (* ORIG_REF_NAME = "xpm_counter_updn" *) 
-module design_1_axi4stream_uart_0_0_xpm_counter_updn__parameterized0
+module design_1_AXI4Stream_UART_0_1_xpm_counter_updn__parameterized0
    (Q,
     S,
     wrst_busy,
@@ -6577,7 +6581,7 @@ module design_1_axi4stream_uart_0_0_xpm_counter_updn__parameterized0
 endmodule
 
 (* ORIG_REF_NAME = "xpm_counter_updn" *) 
-module design_1_axi4stream_uart_0_0_xpm_counter_updn__parameterized0_12
+module design_1_AXI4Stream_UART_0_1_xpm_counter_updn__parameterized0_12
    (Q,
     S,
     wrst_busy,
@@ -6733,7 +6737,7 @@ module design_1_axi4stream_uart_0_0_xpm_counter_updn__parameterized0_12
 endmodule
 
 (* ORIG_REF_NAME = "xpm_counter_updn" *) 
-module design_1_axi4stream_uart_0_0_xpm_counter_updn__parameterized1
+module design_1_AXI4Stream_UART_0_1_xpm_counter_updn__parameterized1
    (S,
     \count_value_i_reg[0]_0 ,
     \count_value_i_reg[7] ,
@@ -6895,7 +6899,7 @@ module design_1_axi4stream_uart_0_0_xpm_counter_updn__parameterized1
 endmodule
 
 (* ORIG_REF_NAME = "xpm_counter_updn" *) 
-module design_1_axi4stream_uart_0_0_xpm_counter_updn__parameterized1_6
+module design_1_AXI4Stream_UART_0_1_xpm_counter_updn__parameterized1_6
    (S,
     \count_value_i_reg[0]_0 ,
     \count_value_i_reg[7] ,
@@ -7057,7 +7061,7 @@ module design_1_axi4stream_uart_0_0_xpm_counter_updn__parameterized1_6
 endmodule
 
 (* ORIG_REF_NAME = "xpm_counter_updn" *) 
-module design_1_axi4stream_uart_0_0_xpm_counter_updn__parameterized2
+module design_1_AXI4Stream_UART_0_1_xpm_counter_updn__parameterized2
    (Q,
     src_in_bin,
     E,
@@ -7304,7 +7308,7 @@ module design_1_axi4stream_uart_0_0_xpm_counter_updn__parameterized2
 endmodule
 
 (* ORIG_REF_NAME = "xpm_counter_updn" *) 
-module design_1_axi4stream_uart_0_0_xpm_counter_updn__parameterized2_1
+module design_1_AXI4Stream_UART_0_1_xpm_counter_updn__parameterized2_1
    (Q,
     \count_value_i_reg[3]_0 ,
     wrst_busy,
@@ -7469,7 +7473,7 @@ module design_1_axi4stream_uart_0_0_xpm_counter_updn__parameterized2_1
 endmodule
 
 (* ORIG_REF_NAME = "xpm_counter_updn" *) 
-module design_1_axi4stream_uart_0_0_xpm_counter_updn__parameterized2_10
+module design_1_AXI4Stream_UART_0_1_xpm_counter_updn__parameterized2_10
    (Q,
     \count_value_i_reg[3]_0 ,
     wrst_busy,
@@ -7634,7 +7638,7 @@ module design_1_axi4stream_uart_0_0_xpm_counter_updn__parameterized2_10
 endmodule
 
 (* ORIG_REF_NAME = "xpm_counter_updn" *) 
-module design_1_axi4stream_uart_0_0_xpm_counter_updn__parameterized2_7
+module design_1_AXI4Stream_UART_0_1_xpm_counter_updn__parameterized2_7
    (Q,
     src_in_bin,
     E,
@@ -7881,7 +7885,7 @@ module design_1_axi4stream_uart_0_0_xpm_counter_updn__parameterized2_7
 endmodule
 
 (* ORIG_REF_NAME = "xpm_counter_updn" *) 
-module design_1_axi4stream_uart_0_0_xpm_counter_updn__parameterized3
+module design_1_AXI4Stream_UART_0_1_xpm_counter_updn__parameterized3
    (Q,
     ram_empty_i,
     rd_en,
@@ -8053,7 +8057,7 @@ module design_1_axi4stream_uart_0_0_xpm_counter_updn__parameterized3
 endmodule
 
 (* ORIG_REF_NAME = "xpm_counter_updn" *) 
-module design_1_axi4stream_uart_0_0_xpm_counter_updn__parameterized3_11
+module design_1_AXI4Stream_UART_0_1_xpm_counter_updn__parameterized3_11
    (Q,
     \count_value_i_reg[3]_0 ,
     wrst_busy,
@@ -8209,7 +8213,7 @@ module design_1_axi4stream_uart_0_0_xpm_counter_updn__parameterized3_11
 endmodule
 
 (* ORIG_REF_NAME = "xpm_counter_updn" *) 
-module design_1_axi4stream_uart_0_0_xpm_counter_updn__parameterized3_2
+module design_1_AXI4Stream_UART_0_1_xpm_counter_updn__parameterized3_2
    (Q,
     \count_value_i_reg[3]_0 ,
     wrst_busy,
@@ -8365,7 +8369,7 @@ module design_1_axi4stream_uart_0_0_xpm_counter_updn__parameterized3_2
 endmodule
 
 (* ORIG_REF_NAME = "xpm_counter_updn" *) 
-module design_1_axi4stream_uart_0_0_xpm_counter_updn__parameterized3_8
+module design_1_AXI4Stream_UART_0_1_xpm_counter_updn__parameterized3_8
    (Q,
     ram_empty_i,
     rd_en,
@@ -8539,13 +8543,14 @@ endmodule
 (* CASCADE_HEIGHT = "0" *) (* CDC_SYNC_STAGES = "2" *) (* DOUT_RESET_VALUE = "0" *) 
 (* ECC_MODE = "no_ecc" *) (* EN_ADV_FEATURE_ASYNC = "16'b0000100000001000" *) (* FIFO_MEMORY_TYPE = "block" *) 
 (* FIFO_READ_LATENCY = "0" *) (* FIFO_WRITE_DEPTH = "2048" *) (* FULL_RESET_VALUE = "0" *) 
-(* PROG_EMPTY_THRESH = "10" *) (* PROG_FULL_THRESH = "10" *) (* P_COMMON_CLOCK = "0" *) 
-(* P_ECC_MODE = "0" *) (* P_FIFO_MEMORY_TYPE = "2" *) (* P_READ_MODE = "1" *) 
-(* P_WAKEUP_TIME = "2" *) (* RD_DATA_COUNT_WIDTH = "1" *) (* READ_DATA_WIDTH = "8" *) 
-(* READ_MODE = "fwft" *) (* RELATED_CLOCKS = "0" *) (* SIM_ASSERT_CHK = "0" *) 
-(* USE_ADV_FEATURES = "0808" *) (* WAKEUP_TIME = "0" *) (* WRITE_DATA_WIDTH = "8" *) 
-(* WR_DATA_COUNT_WIDTH = "1" *) (* XPM_MODULE = "TRUE" *) (* dont_touch = "true" *) 
-module design_1_axi4stream_uart_0_0_xpm_fifo_async
+(* ORIG_REF_NAME = "xpm_fifo_async" *) (* PROG_EMPTY_THRESH = "10" *) (* PROG_FULL_THRESH = "10" *) 
+(* P_COMMON_CLOCK = "0" *) (* P_ECC_MODE = "0" *) (* P_FIFO_MEMORY_TYPE = "2" *) 
+(* P_READ_MODE = "1" *) (* P_WAKEUP_TIME = "2" *) (* RD_DATA_COUNT_WIDTH = "1" *) 
+(* READ_DATA_WIDTH = "8" *) (* READ_MODE = "fwft" *) (* RELATED_CLOCKS = "0" *) 
+(* SIM_ASSERT_CHK = "0" *) (* USE_ADV_FEATURES = "0808" *) (* WAKEUP_TIME = "0" *) 
+(* WRITE_DATA_WIDTH = "8" *) (* WR_DATA_COUNT_WIDTH = "1" *) (* XPM_MODULE = "TRUE" *) 
+(* dont_touch = "true" *) 
+module design_1_AXI4Stream_UART_0_1_xpm_fifo_async
    (sleep,
     rst,
     wr_clk,
@@ -8700,7 +8705,7 @@ module design_1_axi4stream_uart_0_0_xpm_fifo_async
   (* invalid = "0" *) 
   (* stage1_valid = "2" *) 
   (* stage2_valid = "1" *) 
-  design_1_axi4stream_uart_0_0_xpm_fifo_base \gnuram_async_fifo.xpm_fifo_base_inst 
+  design_1_AXI4Stream_UART_0_1_xpm_fifo_base \gnuram_async_fifo.xpm_fifo_base_inst 
        (.almost_empty(almost_empty),
         .almost_full(almost_full),
         .data_valid(\NLW_gnuram_async_fifo.xpm_fifo_base_inst_data_valid_UNCONNECTED ),
@@ -8740,7 +8745,7 @@ endmodule
 (* SIM_ASSERT_CHK = "0" *) (* USE_ADV_FEATURES = "0808" *) (* WAKEUP_TIME = "0" *) 
 (* WRITE_DATA_WIDTH = "8" *) (* WR_DATA_COUNT_WIDTH = "1" *) (* XPM_MODULE = "TRUE" *) 
 (* dont_touch = "true" *) 
-module design_1_axi4stream_uart_0_0_xpm_fifo_async__xdcDup__1
+module design_1_AXI4Stream_UART_0_1_xpm_fifo_async__xdcDup__1
    (sleep,
     rst,
     wr_clk,
@@ -8895,7 +8900,7 @@ module design_1_axi4stream_uart_0_0_xpm_fifo_async__xdcDup__1
   (* invalid = "0" *) 
   (* stage1_valid = "2" *) 
   (* stage2_valid = "1" *) 
-  design_1_axi4stream_uart_0_0_xpm_fifo_base__xdcDup__1 \gnuram_async_fifo.xpm_fifo_base_inst 
+  design_1_AXI4Stream_UART_0_1_xpm_fifo_base__xdcDup__1 \gnuram_async_fifo.xpm_fifo_base_inst 
        (.almost_empty(almost_empty),
         .almost_full(almost_full),
         .data_valid(\NLW_gnuram_async_fifo.xpm_fifo_base_inst_data_valid_UNCONNECTED ),
@@ -8933,20 +8938,20 @@ endmodule
 (* EN_WACK = "1'b0" *) (* EN_WDC = "1'b0" *) (* FG_EQ_ASYM_DOUT = "1'b0" *) 
 (* FIFO_MEMORY_TYPE = "2" *) (* FIFO_MEM_TYPE = "2" *) (* FIFO_READ_DEPTH = "2048" *) 
 (* FIFO_READ_LATENCY = "0" *) (* FIFO_SIZE = "16384" *) (* FIFO_WRITE_DEPTH = "2048" *) 
-(* FULL_RESET_VALUE = "0" *) (* FULL_RST_VAL = "1'b0" *) (* PE_THRESH_ADJ = "8" *) 
-(* PE_THRESH_MAX = "2043" *) (* PE_THRESH_MIN = "5" *) (* PF_THRESH_ADJ = "8" *) 
-(* PF_THRESH_MAX = "2043" *) (* PF_THRESH_MIN = "7" *) (* PROG_EMPTY_THRESH = "10" *) 
-(* PROG_FULL_THRESH = "10" *) (* RD_DATA_COUNT_WIDTH = "1" *) (* RD_DC_WIDTH_EXT = "12" *) 
-(* RD_LATENCY = "2" *) (* RD_MODE = "1" *) (* RD_PNTR_WIDTH = "11" *) 
-(* READ_DATA_WIDTH = "8" *) (* READ_MODE = "1" *) (* READ_MODE_LL = "1" *) 
-(* RELATED_CLOCKS = "0" *) (* REMOVE_WR_RD_PROT_LOGIC = "0" *) (* SIM_ASSERT_CHK = "0" *) 
-(* USE_ADV_FEATURES = "0808" *) (* VERSION = "0" *) (* WAKEUP_TIME = "0" *) 
-(* WIDTH_RATIO = "1" *) (* WRITE_DATA_WIDTH = "8" *) (* WR_DATA_COUNT_WIDTH = "1" *) 
-(* WR_DC_WIDTH_EXT = "12" *) (* WR_DEPTH_LOG = "11" *) (* WR_PNTR_WIDTH = "11" *) 
-(* WR_RD_RATIO = "0" *) (* WR_WIDTH_LOG = "3" *) (* XPM_MODULE = "TRUE" *) 
-(* both_stages_valid = "3" *) (* invalid = "0" *) (* keep_hierarchy = "soft" *) 
-(* stage1_valid = "2" *) (* stage2_valid = "1" *) 
-module design_1_axi4stream_uart_0_0_xpm_fifo_base
+(* FULL_RESET_VALUE = "0" *) (* FULL_RST_VAL = "1'b0" *) (* ORIG_REF_NAME = "xpm_fifo_base" *) 
+(* PE_THRESH_ADJ = "8" *) (* PE_THRESH_MAX = "2043" *) (* PE_THRESH_MIN = "5" *) 
+(* PF_THRESH_ADJ = "8" *) (* PF_THRESH_MAX = "2043" *) (* PF_THRESH_MIN = "7" *) 
+(* PROG_EMPTY_THRESH = "10" *) (* PROG_FULL_THRESH = "10" *) (* RD_DATA_COUNT_WIDTH = "1" *) 
+(* RD_DC_WIDTH_EXT = "12" *) (* RD_LATENCY = "2" *) (* RD_MODE = "1" *) 
+(* RD_PNTR_WIDTH = "11" *) (* READ_DATA_WIDTH = "8" *) (* READ_MODE = "1" *) 
+(* READ_MODE_LL = "1" *) (* RELATED_CLOCKS = "0" *) (* REMOVE_WR_RD_PROT_LOGIC = "0" *) 
+(* SIM_ASSERT_CHK = "0" *) (* USE_ADV_FEATURES = "0808" *) (* VERSION = "0" *) 
+(* WAKEUP_TIME = "0" *) (* WIDTH_RATIO = "1" *) (* WRITE_DATA_WIDTH = "8" *) 
+(* WR_DATA_COUNT_WIDTH = "1" *) (* WR_DC_WIDTH_EXT = "12" *) (* WR_DEPTH_LOG = "11" *) 
+(* WR_PNTR_WIDTH = "11" *) (* WR_RD_RATIO = "0" *) (* WR_WIDTH_LOG = "3" *) 
+(* XPM_MODULE = "TRUE" *) (* both_stages_valid = "3" *) (* invalid = "0" *) 
+(* keep_hierarchy = "soft" *) (* stage1_valid = "2" *) (* stage2_valid = "1" *) 
+module design_1_AXI4Stream_UART_0_1_xpm_fifo_base
    (sleep,
     rst,
     wr_clk,
@@ -9155,7 +9160,7 @@ module design_1_axi4stream_uart_0_0_xpm_fifo_base
         .R(rd_rst_busy));
   GND GND
        (.G(\<const0> ));
-  design_1_axi4stream_uart_0_0_xpm_counter_updn \gaf_wptr_p3.wrpp3_inst 
+  design_1_AXI4Stream_UART_0_1_xpm_counter_updn \gaf_wptr_p3.wrpp3_inst 
        (.E(ram_wr_en_i),
         .Q(count_value_i),
         .S(rst_d1_inst_n_4),
@@ -9170,7 +9175,7 @@ module design_1_axi4stream_uart_0_0_xpm_fifo_base
   (* WIDTH = "12" *) 
   (* XPM_CDC = "GRAY" *) 
   (* XPM_MODULE = "TRUE" *) 
-  design_1_axi4stream_uart_0_0_xpm_cdc_gray__parameterized1 \gen_cdc_pntr.rd_pntr_cdc_dc_inst 
+  design_1_AXI4Stream_UART_0_1_xpm_cdc_gray__parameterized1 \gen_cdc_pntr.rd_pntr_cdc_dc_inst 
        (.dest_clk(wr_clk),
         .dest_out_bin(\NLW_gen_cdc_pntr.rd_pntr_cdc_dc_inst_dest_out_bin_UNCONNECTED [11:0]),
         .src_clk(rd_clk),
@@ -9184,12 +9189,12 @@ module design_1_axi4stream_uart_0_0_xpm_fifo_base
   (* WIDTH = "11" *) 
   (* XPM_CDC = "GRAY" *) 
   (* XPM_MODULE = "TRUE" *) 
-  design_1_axi4stream_uart_0_0_xpm_cdc_gray \gen_cdc_pntr.rd_pntr_cdc_inst 
+  design_1_AXI4Stream_UART_0_1_xpm_cdc_gray \gen_cdc_pntr.rd_pntr_cdc_inst 
        (.dest_clk(wr_clk),
         .dest_out_bin(rd_pntr_wr_cdc),
         .src_clk(rd_clk),
         .src_in_bin(rd_pntr_ext));
-  design_1_axi4stream_uart_0_0_xpm_fifo_reg_vec \gen_cdc_pntr.rpw_gray_reg 
+  design_1_AXI4Stream_UART_0_1_xpm_fifo_reg_vec \gen_cdc_pntr.rpw_gray_reg 
        (.D(rd_pntr_wr_cdc),
         .E(ram_wr_en_i),
         .Q({wrpp2_inst_n_0,wrpp2_inst_n_1,wrpp2_inst_n_2,wrpp2_inst_n_3,wrpp2_inst_n_4,wrpp2_inst_n_5,wrpp2_inst_n_6,wrpp2_inst_n_7,wrpp2_inst_n_8,wrpp2_inst_n_9,wrpp2_inst_n_10}),
@@ -9205,7 +9210,7 @@ module design_1_axi4stream_uart_0_0_xpm_fifo_base
         .wr_clk(wr_clk),
         .wr_en(wr_en),
         .wrst_busy(wrst_busy));
-  design_1_axi4stream_uart_0_0_xpm_fifo_reg_vec_0 \gen_cdc_pntr.wpr_gray_reg 
+  design_1_AXI4Stream_UART_0_1_xpm_fifo_reg_vec_0 \gen_cdc_pntr.wpr_gray_reg 
        (.D(wr_pntr_rd_cdc),
         .Q(curr_fwft_state),
         .\gen_pf_ic_rc.ram_empty_i_reg_i_2_0 ({rdpp1_inst_n_0,rdpp1_inst_n_1,rdpp1_inst_n_2,rdpp1_inst_n_3,rdpp1_inst_n_4,rdpp1_inst_n_5,rdpp1_inst_n_6,rdpp1_inst_n_7,rdpp1_inst_n_8,rdpp1_inst_n_9,rdpp1_inst_n_10}),
@@ -9224,7 +9229,7 @@ module design_1_axi4stream_uart_0_0_xpm_fifo_base
   (* WIDTH = "12" *) 
   (* XPM_CDC = "GRAY" *) 
   (* XPM_MODULE = "TRUE" *) 
-  design_1_axi4stream_uart_0_0_xpm_cdc_gray__parameterized0 \gen_cdc_pntr.wr_pntr_cdc_dc_inst 
+  design_1_AXI4Stream_UART_0_1_xpm_cdc_gray__parameterized0 \gen_cdc_pntr.wr_pntr_cdc_dc_inst 
        (.dest_clk(rd_clk),
         .dest_out_bin(\NLW_gen_cdc_pntr.wr_pntr_cdc_dc_inst_dest_out_bin_UNCONNECTED [11:0]),
         .src_clk(wr_clk),
@@ -9238,7 +9243,7 @@ module design_1_axi4stream_uart_0_0_xpm_fifo_base
   (* WIDTH = "11" *) 
   (* XPM_CDC = "GRAY" *) 
   (* XPM_MODULE = "TRUE" *) 
-  design_1_axi4stream_uart_0_0_xpm_cdc_gray__6 \gen_cdc_pntr.wr_pntr_cdc_inst 
+  design_1_AXI4Stream_UART_0_1_xpm_cdc_gray__6 \gen_cdc_pntr.wr_pntr_cdc_inst 
        (.dest_clk(rd_clk),
         .dest_out_bin(wr_pntr_rd_cdc),
         .src_clk(wr_clk),
@@ -9276,7 +9281,7 @@ module design_1_axi4stream_uart_0_0_xpm_fifo_base
         .D(aempty_fwft_i0),
         .Q(almost_empty),
         .S(rd_rst_busy));
-  design_1_axi4stream_uart_0_0_xpm_counter_updn__parameterized1 \gen_fwft.rdpp1_inst 
+  design_1_AXI4Stream_UART_0_1_xpm_counter_updn__parameterized1 \gen_fwft.rdpp1_inst 
        (.Q({rdp_inst_n_0,rd_pntr_ext[10:1]}),
         .S({\gen_fwft.rdpp1_inst_n_0 ,\gen_fwft.rdpp1_inst_n_1 ,\gen_fwft.rdpp1_inst_n_2 }),
         .\count_value_i_reg[0]_0 (\gen_fwft.rdpp1_inst_n_3 ),
@@ -9392,7 +9397,7 @@ module design_1_axi4stream_uart_0_0_xpm_fifo_base
   (* XPM_MODULE = "TRUE" *) 
   (* rsta_loop_iter = "8" *) 
   (* rstb_loop_iter = "8" *) 
-  design_1_axi4stream_uart_0_0_xpm_memory_base \gen_sdpram.xpm_memory_base_inst 
+  design_1_AXI4Stream_UART_0_1_xpm_memory_base \gen_sdpram.xpm_memory_base_inst 
        (.addra(wr_pntr_ext[10:0]),
         .addrb(rd_pntr_ext),
         .clka(wr_clk),
@@ -9425,7 +9430,7 @@ module design_1_axi4stream_uart_0_0_xpm_fifo_base
         .I1(curr_fwft_state[1]),
         .I2(rd_en),
         .O(\gen_fwft.ram_regout_en ));
-  design_1_axi4stream_uart_0_0_xpm_counter_updn__parameterized2 rdp_inst
+  design_1_AXI4Stream_UART_0_1_xpm_counter_updn__parameterized2 rdp_inst
        (.E(rdp_inst_n_24),
         .Q({rdp_inst_n_0,rd_pntr_ext}),
         .S({\gen_fwft.rdpp1_inst_n_0 ,\gen_fwft.rdpp1_inst_n_1 ,\gen_fwft.rdpp1_inst_n_2 }),
@@ -9438,7 +9443,7 @@ module design_1_axi4stream_uart_0_0_xpm_fifo_base
         .\src_gray_ff_reg[11] ({\gen_fwft.rdpp1_inst_n_4 ,\gen_fwft.rdpp1_inst_n_5 ,\gen_fwft.rdpp1_inst_n_6 ,\gen_fwft.rdpp1_inst_n_7 }),
         .\src_gray_ff_reg[11]_0 ({\gen_fwft.rdpp1_inst_n_8 ,\gen_fwft.rdpp1_inst_n_9 ,\gen_fwft.rdpp1_inst_n_10 ,\gen_fwft.rdpp1_inst_n_11 }),
         .src_in_bin({rdp_inst_n_12,rdp_inst_n_13,rdp_inst_n_14,rdp_inst_n_15,rdp_inst_n_16,rdp_inst_n_17,rdp_inst_n_18,rdp_inst_n_19,rdp_inst_n_20,rdp_inst_n_21,rdp_inst_n_22,rdp_inst_n_23}));
-  design_1_axi4stream_uart_0_0_xpm_counter_updn__parameterized3 rdpp1_inst
+  design_1_AXI4Stream_UART_0_1_xpm_counter_updn__parameterized3 rdpp1_inst
        (.E(rdp_inst_n_24),
         .Q({rdpp1_inst_n_0,rdpp1_inst_n_1,rdpp1_inst_n_2,rdpp1_inst_n_3,rdpp1_inst_n_4,rdpp1_inst_n_5,rdpp1_inst_n_6,rdpp1_inst_n_7,rdpp1_inst_n_8,rdpp1_inst_n_9,rdpp1_inst_n_10}),
         .\count_value_i_reg[0]_0 (rd_rst_busy),
@@ -9446,7 +9451,7 @@ module design_1_axi4stream_uart_0_0_xpm_fifo_base
         .ram_empty_i(ram_empty_i),
         .rd_clk(rd_clk),
         .rd_en(rd_en));
-  design_1_axi4stream_uart_0_0_xpm_fifo_reg_bit rst_d1_inst
+  design_1_AXI4Stream_UART_0_1_xpm_fifo_reg_bit rst_d1_inst
        (.Q(wrpp2_inst_n_10),
         .S(rst_d1_inst_n_2),
         .\count_value_i_reg[3] (full),
@@ -9462,25 +9467,25 @@ module design_1_axi4stream_uart_0_0_xpm_fifo_base
         .wr_clk(wr_clk),
         .wr_en(wr_en),
         .wrst_busy(wrst_busy));
-  design_1_axi4stream_uart_0_0_xpm_counter_updn__parameterized2_1 wrp_inst
+  design_1_AXI4Stream_UART_0_1_xpm_counter_updn__parameterized2_1 wrp_inst
        (.E(ram_wr_en_i),
         .Q(wr_pntr_ext),
         .\count_value_i_reg[3]_0 (rst_d1_inst_n_5),
         .wr_clk(wr_clk),
         .wrst_busy(wrst_busy));
-  design_1_axi4stream_uart_0_0_xpm_counter_updn__parameterized3_2 wrpp1_inst
+  design_1_AXI4Stream_UART_0_1_xpm_counter_updn__parameterized3_2 wrpp1_inst
        (.E(ram_wr_en_i),
         .Q({wrpp1_inst_n_0,wrpp1_inst_n_1,wrpp1_inst_n_2,wrpp1_inst_n_3,wrpp1_inst_n_4,wrpp1_inst_n_5,wrpp1_inst_n_6,wrpp1_inst_n_7,wrpp1_inst_n_8,wrpp1_inst_n_9,wrpp1_inst_n_10}),
         .\count_value_i_reg[3]_0 (rst_d1_inst_n_3),
         .wr_clk(wr_clk),
         .wrst_busy(wrst_busy));
-  design_1_axi4stream_uart_0_0_xpm_counter_updn__parameterized0 wrpp2_inst
+  design_1_AXI4Stream_UART_0_1_xpm_counter_updn__parameterized0 wrpp2_inst
        (.E(ram_wr_en_i),
         .Q({wrpp2_inst_n_0,wrpp2_inst_n_1,wrpp2_inst_n_2,wrpp2_inst_n_3,wrpp2_inst_n_4,wrpp2_inst_n_5,wrpp2_inst_n_6,wrpp2_inst_n_7,wrpp2_inst_n_8,wrpp2_inst_n_9,wrpp2_inst_n_10}),
         .S(rst_d1_inst_n_2),
         .wr_clk(wr_clk),
         .wrst_busy(wrst_busy));
-  design_1_axi4stream_uart_0_0_xpm_fifo_rst xpm_fifo_rst_inst
+  design_1_AXI4Stream_UART_0_1_xpm_fifo_rst xpm_fifo_rst_inst
        (.E(ram_wr_en_i),
         .\count_value_i_reg[10] (full),
         .\gen_rst_ic.fifo_rd_rst_ic_reg_0 (rd_rst_busy),
@@ -9514,7 +9519,7 @@ endmodule
 (* WR_PNTR_WIDTH = "11" *) (* WR_RD_RATIO = "0" *) (* WR_WIDTH_LOG = "3" *) 
 (* XPM_MODULE = "TRUE" *) (* both_stages_valid = "3" *) (* invalid = "0" *) 
 (* keep_hierarchy = "soft" *) (* stage1_valid = "2" *) (* stage2_valid = "1" *) 
-module design_1_axi4stream_uart_0_0_xpm_fifo_base__xdcDup__1
+module design_1_AXI4Stream_UART_0_1_xpm_fifo_base__xdcDup__1
    (sleep,
     rst,
     wr_clk,
@@ -9723,7 +9728,7 @@ module design_1_axi4stream_uart_0_0_xpm_fifo_base__xdcDup__1
         .R(rd_rst_busy));
   GND GND
        (.G(\<const0> ));
-  design_1_axi4stream_uart_0_0_xpm_counter_updn_3 \gaf_wptr_p3.wrpp3_inst 
+  design_1_AXI4Stream_UART_0_1_xpm_counter_updn_3 \gaf_wptr_p3.wrpp3_inst 
        (.E(ram_wr_en_i),
         .Q(count_value_i),
         .S(rst_d1_inst_n_4),
@@ -9738,7 +9743,7 @@ module design_1_axi4stream_uart_0_0_xpm_fifo_base__xdcDup__1
   (* WIDTH = "12" *) 
   (* XPM_CDC = "GRAY" *) 
   (* XPM_MODULE = "TRUE" *) 
-  design_1_axi4stream_uart_0_0_xpm_cdc_gray__parameterized1__2 \gen_cdc_pntr.rd_pntr_cdc_dc_inst 
+  design_1_AXI4Stream_UART_0_1_xpm_cdc_gray__parameterized1__2 \gen_cdc_pntr.rd_pntr_cdc_dc_inst 
        (.dest_clk(wr_clk),
         .dest_out_bin(\NLW_gen_cdc_pntr.rd_pntr_cdc_dc_inst_dest_out_bin_UNCONNECTED [11:0]),
         .src_clk(rd_clk),
@@ -9752,12 +9757,12 @@ module design_1_axi4stream_uart_0_0_xpm_fifo_base__xdcDup__1
   (* WIDTH = "11" *) 
   (* XPM_CDC = "GRAY" *) 
   (* XPM_MODULE = "TRUE" *) 
-  design_1_axi4stream_uart_0_0_xpm_cdc_gray__5 \gen_cdc_pntr.rd_pntr_cdc_inst 
+  design_1_AXI4Stream_UART_0_1_xpm_cdc_gray__5 \gen_cdc_pntr.rd_pntr_cdc_inst 
        (.dest_clk(wr_clk),
         .dest_out_bin(rd_pntr_wr_cdc),
         .src_clk(rd_clk),
         .src_in_bin(rd_pntr_ext));
-  design_1_axi4stream_uart_0_0_xpm_fifo_reg_vec_4 \gen_cdc_pntr.rpw_gray_reg 
+  design_1_AXI4Stream_UART_0_1_xpm_fifo_reg_vec_4 \gen_cdc_pntr.rpw_gray_reg 
        (.D(rd_pntr_wr_cdc),
         .E(ram_wr_en_i),
         .Q({wrpp2_inst_n_0,wrpp2_inst_n_1,wrpp2_inst_n_2,wrpp2_inst_n_3,wrpp2_inst_n_4,wrpp2_inst_n_5,wrpp2_inst_n_6,wrpp2_inst_n_7,wrpp2_inst_n_8,wrpp2_inst_n_9,wrpp2_inst_n_10}),
@@ -9773,7 +9778,7 @@ module design_1_axi4stream_uart_0_0_xpm_fifo_base__xdcDup__1
         .wr_clk(wr_clk),
         .wr_en(wr_en),
         .wrst_busy(wrst_busy));
-  design_1_axi4stream_uart_0_0_xpm_fifo_reg_vec_5 \gen_cdc_pntr.wpr_gray_reg 
+  design_1_AXI4Stream_UART_0_1_xpm_fifo_reg_vec_5 \gen_cdc_pntr.wpr_gray_reg 
        (.D(wr_pntr_rd_cdc),
         .Q(curr_fwft_state),
         .\gen_pf_ic_rc.ram_empty_i_reg_i_2_0 ({rdpp1_inst_n_0,rdpp1_inst_n_1,rdpp1_inst_n_2,rdpp1_inst_n_3,rdpp1_inst_n_4,rdpp1_inst_n_5,rdpp1_inst_n_6,rdpp1_inst_n_7,rdpp1_inst_n_8,rdpp1_inst_n_9,rdpp1_inst_n_10}),
@@ -9792,7 +9797,7 @@ module design_1_axi4stream_uart_0_0_xpm_fifo_base__xdcDup__1
   (* WIDTH = "12" *) 
   (* XPM_CDC = "GRAY" *) 
   (* XPM_MODULE = "TRUE" *) 
-  design_1_axi4stream_uart_0_0_xpm_cdc_gray__parameterized0__2 \gen_cdc_pntr.wr_pntr_cdc_dc_inst 
+  design_1_AXI4Stream_UART_0_1_xpm_cdc_gray__parameterized0__2 \gen_cdc_pntr.wr_pntr_cdc_dc_inst 
        (.dest_clk(rd_clk),
         .dest_out_bin(\NLW_gen_cdc_pntr.wr_pntr_cdc_dc_inst_dest_out_bin_UNCONNECTED [11:0]),
         .src_clk(wr_clk),
@@ -9806,7 +9811,7 @@ module design_1_axi4stream_uart_0_0_xpm_fifo_base__xdcDup__1
   (* WIDTH = "11" *) 
   (* XPM_CDC = "GRAY" *) 
   (* XPM_MODULE = "TRUE" *) 
-  design_1_axi4stream_uart_0_0_xpm_cdc_gray__4 \gen_cdc_pntr.wr_pntr_cdc_inst 
+  design_1_AXI4Stream_UART_0_1_xpm_cdc_gray__4 \gen_cdc_pntr.wr_pntr_cdc_inst 
        (.dest_clk(rd_clk),
         .dest_out_bin(wr_pntr_rd_cdc),
         .src_clk(wr_clk),
@@ -9844,7 +9849,7 @@ module design_1_axi4stream_uart_0_0_xpm_fifo_base__xdcDup__1
         .D(aempty_fwft_i0),
         .Q(almost_empty),
         .S(rd_rst_busy));
-  design_1_axi4stream_uart_0_0_xpm_counter_updn__parameterized1_6 \gen_fwft.rdpp1_inst 
+  design_1_AXI4Stream_UART_0_1_xpm_counter_updn__parameterized1_6 \gen_fwft.rdpp1_inst 
        (.Q({rdp_inst_n_0,rd_pntr_ext[10:1]}),
         .S({\gen_fwft.rdpp1_inst_n_0 ,\gen_fwft.rdpp1_inst_n_1 ,\gen_fwft.rdpp1_inst_n_2 }),
         .\count_value_i_reg[0]_0 (\gen_fwft.rdpp1_inst_n_3 ),
@@ -9960,7 +9965,7 @@ module design_1_axi4stream_uart_0_0_xpm_fifo_base__xdcDup__1
   (* XPM_MODULE = "TRUE" *) 
   (* rsta_loop_iter = "8" *) 
   (* rstb_loop_iter = "8" *) 
-  design_1_axi4stream_uart_0_0_xpm_memory_base__2 \gen_sdpram.xpm_memory_base_inst 
+  design_1_AXI4Stream_UART_0_1_xpm_memory_base__2 \gen_sdpram.xpm_memory_base_inst 
        (.addra(wr_pntr_ext[10:0]),
         .addrb(rd_pntr_ext),
         .clka(wr_clk),
@@ -9993,7 +9998,7 @@ module design_1_axi4stream_uart_0_0_xpm_fifo_base__xdcDup__1
         .I1(curr_fwft_state[1]),
         .I2(rd_en),
         .O(\gen_fwft.ram_regout_en ));
-  design_1_axi4stream_uart_0_0_xpm_counter_updn__parameterized2_7 rdp_inst
+  design_1_AXI4Stream_UART_0_1_xpm_counter_updn__parameterized2_7 rdp_inst
        (.E(rdp_inst_n_24),
         .Q({rdp_inst_n_0,rd_pntr_ext}),
         .S({\gen_fwft.rdpp1_inst_n_0 ,\gen_fwft.rdpp1_inst_n_1 ,\gen_fwft.rdpp1_inst_n_2 }),
@@ -10006,7 +10011,7 @@ module design_1_axi4stream_uart_0_0_xpm_fifo_base__xdcDup__1
         .\src_gray_ff_reg[11] ({\gen_fwft.rdpp1_inst_n_4 ,\gen_fwft.rdpp1_inst_n_5 ,\gen_fwft.rdpp1_inst_n_6 ,\gen_fwft.rdpp1_inst_n_7 }),
         .\src_gray_ff_reg[11]_0 ({\gen_fwft.rdpp1_inst_n_8 ,\gen_fwft.rdpp1_inst_n_9 ,\gen_fwft.rdpp1_inst_n_10 ,\gen_fwft.rdpp1_inst_n_11 }),
         .src_in_bin({rdp_inst_n_12,rdp_inst_n_13,rdp_inst_n_14,rdp_inst_n_15,rdp_inst_n_16,rdp_inst_n_17,rdp_inst_n_18,rdp_inst_n_19,rdp_inst_n_20,rdp_inst_n_21,rdp_inst_n_22,rdp_inst_n_23}));
-  design_1_axi4stream_uart_0_0_xpm_counter_updn__parameterized3_8 rdpp1_inst
+  design_1_AXI4Stream_UART_0_1_xpm_counter_updn__parameterized3_8 rdpp1_inst
        (.E(rdp_inst_n_24),
         .Q({rdpp1_inst_n_0,rdpp1_inst_n_1,rdpp1_inst_n_2,rdpp1_inst_n_3,rdpp1_inst_n_4,rdpp1_inst_n_5,rdpp1_inst_n_6,rdpp1_inst_n_7,rdpp1_inst_n_8,rdpp1_inst_n_9,rdpp1_inst_n_10}),
         .\count_value_i_reg[0]_0 (rd_rst_busy),
@@ -10014,7 +10019,7 @@ module design_1_axi4stream_uart_0_0_xpm_fifo_base__xdcDup__1
         .ram_empty_i(ram_empty_i),
         .rd_clk(rd_clk),
         .rd_en(rd_en));
-  design_1_axi4stream_uart_0_0_xpm_fifo_reg_bit_9 rst_d1_inst
+  design_1_AXI4Stream_UART_0_1_xpm_fifo_reg_bit_9 rst_d1_inst
        (.Q(wrpp2_inst_n_10),
         .S(rst_d1_inst_n_2),
         .\count_value_i_reg[3] (full),
@@ -10030,25 +10035,25 @@ module design_1_axi4stream_uart_0_0_xpm_fifo_base__xdcDup__1
         .wr_clk(wr_clk),
         .wr_en(wr_en),
         .wrst_busy(wrst_busy));
-  design_1_axi4stream_uart_0_0_xpm_counter_updn__parameterized2_10 wrp_inst
+  design_1_AXI4Stream_UART_0_1_xpm_counter_updn__parameterized2_10 wrp_inst
        (.E(ram_wr_en_i),
         .Q(wr_pntr_ext),
         .\count_value_i_reg[3]_0 (rst_d1_inst_n_5),
         .wr_clk(wr_clk),
         .wrst_busy(wrst_busy));
-  design_1_axi4stream_uart_0_0_xpm_counter_updn__parameterized3_11 wrpp1_inst
+  design_1_AXI4Stream_UART_0_1_xpm_counter_updn__parameterized3_11 wrpp1_inst
        (.E(ram_wr_en_i),
         .Q({wrpp1_inst_n_0,wrpp1_inst_n_1,wrpp1_inst_n_2,wrpp1_inst_n_3,wrpp1_inst_n_4,wrpp1_inst_n_5,wrpp1_inst_n_6,wrpp1_inst_n_7,wrpp1_inst_n_8,wrpp1_inst_n_9,wrpp1_inst_n_10}),
         .\count_value_i_reg[3]_0 (rst_d1_inst_n_3),
         .wr_clk(wr_clk),
         .wrst_busy(wrst_busy));
-  design_1_axi4stream_uart_0_0_xpm_counter_updn__parameterized0_12 wrpp2_inst
+  design_1_AXI4Stream_UART_0_1_xpm_counter_updn__parameterized0_12 wrpp2_inst
        (.E(ram_wr_en_i),
         .Q({wrpp2_inst_n_0,wrpp2_inst_n_1,wrpp2_inst_n_2,wrpp2_inst_n_3,wrpp2_inst_n_4,wrpp2_inst_n_5,wrpp2_inst_n_6,wrpp2_inst_n_7,wrpp2_inst_n_8,wrpp2_inst_n_9,wrpp2_inst_n_10}),
         .S(rst_d1_inst_n_2),
         .wr_clk(wr_clk),
         .wrst_busy(wrst_busy));
-  design_1_axi4stream_uart_0_0_xpm_fifo_rst__xdcDup__1 xpm_fifo_rst_inst
+  design_1_AXI4Stream_UART_0_1_xpm_fifo_rst__xdcDup__1 xpm_fifo_rst_inst
        (.E(ram_wr_en_i),
         .\count_value_i_reg[10] (full),
         .\gen_rst_ic.fifo_rd_rst_ic_reg_0 (rd_rst_busy),
@@ -10061,7 +10066,8 @@ module design_1_axi4stream_uart_0_0_xpm_fifo_base__xdcDup__1
         .wrst_busy(wrst_busy));
 endmodule
 
-module design_1_axi4stream_uart_0_0_xpm_fifo_reg_bit
+(* ORIG_REF_NAME = "xpm_fifo_reg_bit" *) 
+module design_1_AXI4Stream_UART_0_1_xpm_fifo_reg_bit
    (rst_d1,
     rst_0,
     S,
@@ -10163,7 +10169,7 @@ module design_1_axi4stream_uart_0_0_xpm_fifo_reg_bit
 endmodule
 
 (* ORIG_REF_NAME = "xpm_fifo_reg_bit" *) 
-module design_1_axi4stream_uart_0_0_xpm_fifo_reg_bit_9
+module design_1_AXI4Stream_UART_0_1_xpm_fifo_reg_bit_9
    (rst_d1,
     d_out_reg_0,
     S,
@@ -10264,7 +10270,8 @@ module design_1_axi4stream_uart_0_0_xpm_fifo_reg_bit_9
         .O(d_out_reg_0));
 endmodule
 
-module design_1_axi4stream_uart_0_0_xpm_fifo_reg_vec
+(* ORIG_REF_NAME = "xpm_fifo_reg_vec" *) 
+module design_1_AXI4Stream_UART_0_1_xpm_fifo_reg_vec
    (\gen_pf_ic_rc.gaf_ic.ram_afull_i_reg ,
     ram_full_i0,
     almost_full,
@@ -10595,7 +10602,7 @@ module design_1_axi4stream_uart_0_0_xpm_fifo_reg_vec
 endmodule
 
 (* ORIG_REF_NAME = "xpm_fifo_reg_vec" *) 
-module design_1_axi4stream_uart_0_0_xpm_fifo_reg_vec_0
+module design_1_AXI4Stream_UART_0_1_xpm_fifo_reg_vec_0
    (ram_empty_i0,
     Q,
     rd_en,
@@ -10835,7 +10842,7 @@ module design_1_axi4stream_uart_0_0_xpm_fifo_reg_vec_0
 endmodule
 
 (* ORIG_REF_NAME = "xpm_fifo_reg_vec" *) 
-module design_1_axi4stream_uart_0_0_xpm_fifo_reg_vec_4
+module design_1_AXI4Stream_UART_0_1_xpm_fifo_reg_vec_4
    (\gen_pf_ic_rc.gaf_ic.ram_afull_i_reg ,
     ram_full_i0,
     almost_full,
@@ -11166,7 +11173,7 @@ module design_1_axi4stream_uart_0_0_xpm_fifo_reg_vec_4
 endmodule
 
 (* ORIG_REF_NAME = "xpm_fifo_reg_vec" *) 
-module design_1_axi4stream_uart_0_0_xpm_fifo_reg_vec_5
+module design_1_AXI4Stream_UART_0_1_xpm_fifo_reg_vec_5
    (ram_empty_i0,
     Q,
     rd_en,
@@ -11405,7 +11412,8 @@ module design_1_axi4stream_uart_0_0_xpm_fifo_reg_vec_5
         .R(\reg_out_i_reg[0]_0 ));
 endmodule
 
-module design_1_axi4stream_uart_0_0_xpm_fifo_rst
+(* ORIG_REF_NAME = "xpm_fifo_rst" *) 
+module design_1_AXI4Stream_UART_0_1_xpm_fifo_rst
    (\gen_rst_ic.fifo_rd_rst_ic_reg_0 ,
     wrst_busy,
     E,
@@ -11676,7 +11684,7 @@ module design_1_axi4stream_uart_0_0_xpm_fifo_rst
   (* VERSION = "0" *) 
   (* XPM_CDC = "SYNC_RST" *) 
   (* XPM_MODULE = "TRUE" *) 
-  design_1_axi4stream_uart_0_0_xpm_cdc_sync_rst \gen_rst_ic.rrst_wr_inst 
+  design_1_AXI4Stream_UART_0_1_xpm_cdc_sync_rst \gen_rst_ic.rrst_wr_inst 
        (.dest_clk(wr_clk),
         .dest_rst(\gen_rst_ic.fifo_rd_rst_wr_i ),
         .src_rst(\gen_rst_ic.fifo_rd_rst_ic_reg_0 ));
@@ -11740,7 +11748,7 @@ module design_1_axi4stream_uart_0_0_xpm_fifo_rst
   (* VERSION = "0" *) 
   (* XPM_CDC = "SYNC_RST" *) 
   (* XPM_MODULE = "TRUE" *) 
-  design_1_axi4stream_uart_0_0_xpm_cdc_sync_rst__6 \gen_rst_ic.wrst_rd_inst 
+  design_1_AXI4Stream_UART_0_1_xpm_cdc_sync_rst__6 \gen_rst_ic.wrst_rd_inst 
        (.dest_clk(rd_clk),
         .dest_rst(\gen_rst_ic.fifo_wr_rst_rd ),
         .src_rst(\gen_rst_ic.fifo_wr_rst_ic ));
@@ -11777,7 +11785,7 @@ module design_1_axi4stream_uart_0_0_xpm_fifo_rst
 endmodule
 
 (* ORIG_REF_NAME = "xpm_fifo_rst" *) 
-module design_1_axi4stream_uart_0_0_xpm_fifo_rst__xdcDup__1
+module design_1_AXI4Stream_UART_0_1_xpm_fifo_rst__xdcDup__1
    (\gen_rst_ic.fifo_rd_rst_ic_reg_0 ,
     wrst_busy,
     E,
@@ -12048,7 +12056,7 @@ module design_1_axi4stream_uart_0_0_xpm_fifo_rst__xdcDup__1
   (* VERSION = "0" *) 
   (* XPM_CDC = "SYNC_RST" *) 
   (* XPM_MODULE = "TRUE" *) 
-  design_1_axi4stream_uart_0_0_xpm_cdc_sync_rst__5 \gen_rst_ic.rrst_wr_inst 
+  design_1_AXI4Stream_UART_0_1_xpm_cdc_sync_rst__5 \gen_rst_ic.rrst_wr_inst 
        (.dest_clk(wr_clk),
         .dest_rst(\gen_rst_ic.fifo_rd_rst_wr_i ),
         .src_rst(\gen_rst_ic.fifo_rd_rst_ic_reg_0 ));
@@ -12112,7 +12120,7 @@ module design_1_axi4stream_uart_0_0_xpm_fifo_rst__xdcDup__1
   (* VERSION = "0" *) 
   (* XPM_CDC = "SYNC_RST" *) 
   (* XPM_MODULE = "TRUE" *) 
-  design_1_axi4stream_uart_0_0_xpm_cdc_sync_rst__4 \gen_rst_ic.wrst_rd_inst 
+  design_1_AXI4Stream_UART_0_1_xpm_cdc_sync_rst__4 \gen_rst_ic.wrst_rd_inst 
        (.dest_clk(rd_clk),
         .dest_rst(\gen_rst_ic.fifo_wr_rst_rd ),
         .src_rst(\gen_rst_ic.fifo_wr_rst_ic ));
@@ -12153,25 +12161,26 @@ endmodule
 (* CLOCKING_MODE = "1" *) (* ECC_MODE = "0" *) (* MAX_NUM_CHAR = "0" *) 
 (* MEMORY_INIT_FILE = "none" *) (* MEMORY_INIT_PARAM = "" *) (* MEMORY_OPTIMIZATION = "true" *) 
 (* MEMORY_PRIMITIVE = "2" *) (* MEMORY_SIZE = "16384" *) (* MEMORY_TYPE = "1" *) 
-(* MESSAGE_CONTROL = "0" *) (* NUM_CHAR_LOC = "0" *) (* P_ECC_MODE = "no_ecc" *) 
-(* P_ENABLE_BYTE_WRITE_A = "0" *) (* P_ENABLE_BYTE_WRITE_B = "0" *) (* P_MAX_DEPTH_DATA = "2048" *) 
-(* P_MEMORY_OPT = "yes" *) (* P_MEMORY_PRIMITIVE = "block" *) (* P_MIN_WIDTH_DATA = "8" *) 
-(* P_MIN_WIDTH_DATA_A = "8" *) (* P_MIN_WIDTH_DATA_B = "8" *) (* P_MIN_WIDTH_DATA_ECC = "8" *) 
-(* P_MIN_WIDTH_DATA_LDW = "4" *) (* P_MIN_WIDTH_DATA_SHFT = "8" *) (* P_NUM_COLS_WRITE_A = "1" *) 
-(* P_NUM_COLS_WRITE_B = "1" *) (* P_NUM_ROWS_READ_A = "1" *) (* P_NUM_ROWS_READ_B = "1" *) 
-(* P_NUM_ROWS_WRITE_A = "1" *) (* P_NUM_ROWS_WRITE_B = "1" *) (* P_SDP_WRITE_MODE = "no" *) 
-(* P_WIDTH_ADDR_LSB_READ_A = "0" *) (* P_WIDTH_ADDR_LSB_READ_B = "0" *) (* P_WIDTH_ADDR_LSB_WRITE_A = "0" *) 
-(* P_WIDTH_ADDR_LSB_WRITE_B = "0" *) (* P_WIDTH_ADDR_READ_A = "11" *) (* P_WIDTH_ADDR_READ_B = "11" *) 
-(* P_WIDTH_ADDR_WRITE_A = "11" *) (* P_WIDTH_ADDR_WRITE_B = "11" *) (* P_WIDTH_COL_WRITE_A = "8" *) 
-(* P_WIDTH_COL_WRITE_B = "8" *) (* READ_DATA_WIDTH_A = "8" *) (* READ_DATA_WIDTH_B = "8" *) 
-(* READ_LATENCY_A = "2" *) (* READ_LATENCY_B = "2" *) (* READ_RESET_VALUE_A = "0" *) 
-(* READ_RESET_VALUE_B = "0" *) (* RST_MODE_A = "SYNC" *) (* RST_MODE_B = "SYNC" *) 
-(* SIM_ASSERT_CHK = "0" *) (* USE_EMBEDDED_CONSTRAINT = "0" *) (* USE_MEM_INIT = "0" *) 
-(* USE_MEM_INIT_MMI = "0" *) (* VERSION = "0" *) (* WAKEUP_TIME = "0" *) 
-(* WRITE_DATA_WIDTH_A = "8" *) (* WRITE_DATA_WIDTH_B = "8" *) (* WRITE_MODE_A = "2" *) 
-(* WRITE_MODE_B = "2" *) (* WRITE_PROTECT = "1" *) (* XPM_MODULE = "TRUE" *) 
-(* keep_hierarchy = "soft" *) (* rsta_loop_iter = "8" *) (* rstb_loop_iter = "8" *) 
-module design_1_axi4stream_uart_0_0_xpm_memory_base
+(* MESSAGE_CONTROL = "0" *) (* NUM_CHAR_LOC = "0" *) (* ORIG_REF_NAME = "xpm_memory_base" *) 
+(* P_ECC_MODE = "no_ecc" *) (* P_ENABLE_BYTE_WRITE_A = "0" *) (* P_ENABLE_BYTE_WRITE_B = "0" *) 
+(* P_MAX_DEPTH_DATA = "2048" *) (* P_MEMORY_OPT = "yes" *) (* P_MEMORY_PRIMITIVE = "block" *) 
+(* P_MIN_WIDTH_DATA = "8" *) (* P_MIN_WIDTH_DATA_A = "8" *) (* P_MIN_WIDTH_DATA_B = "8" *) 
+(* P_MIN_WIDTH_DATA_ECC = "8" *) (* P_MIN_WIDTH_DATA_LDW = "4" *) (* P_MIN_WIDTH_DATA_SHFT = "8" *) 
+(* P_NUM_COLS_WRITE_A = "1" *) (* P_NUM_COLS_WRITE_B = "1" *) (* P_NUM_ROWS_READ_A = "1" *) 
+(* P_NUM_ROWS_READ_B = "1" *) (* P_NUM_ROWS_WRITE_A = "1" *) (* P_NUM_ROWS_WRITE_B = "1" *) 
+(* P_SDP_WRITE_MODE = "no" *) (* P_WIDTH_ADDR_LSB_READ_A = "0" *) (* P_WIDTH_ADDR_LSB_READ_B = "0" *) 
+(* P_WIDTH_ADDR_LSB_WRITE_A = "0" *) (* P_WIDTH_ADDR_LSB_WRITE_B = "0" *) (* P_WIDTH_ADDR_READ_A = "11" *) 
+(* P_WIDTH_ADDR_READ_B = "11" *) (* P_WIDTH_ADDR_WRITE_A = "11" *) (* P_WIDTH_ADDR_WRITE_B = "11" *) 
+(* P_WIDTH_COL_WRITE_A = "8" *) (* P_WIDTH_COL_WRITE_B = "8" *) (* READ_DATA_WIDTH_A = "8" *) 
+(* READ_DATA_WIDTH_B = "8" *) (* READ_LATENCY_A = "2" *) (* READ_LATENCY_B = "2" *) 
+(* READ_RESET_VALUE_A = "0" *) (* READ_RESET_VALUE_B = "0" *) (* RST_MODE_A = "SYNC" *) 
+(* RST_MODE_B = "SYNC" *) (* SIM_ASSERT_CHK = "0" *) (* USE_EMBEDDED_CONSTRAINT = "0" *) 
+(* USE_MEM_INIT = "0" *) (* USE_MEM_INIT_MMI = "0" *) (* VERSION = "0" *) 
+(* WAKEUP_TIME = "0" *) (* WRITE_DATA_WIDTH_A = "8" *) (* WRITE_DATA_WIDTH_B = "8" *) 
+(* WRITE_MODE_A = "2" *) (* WRITE_MODE_B = "2" *) (* WRITE_PROTECT = "1" *) 
+(* XPM_MODULE = "TRUE" *) (* keep_hierarchy = "soft" *) (* rsta_loop_iter = "8" *) 
+(* rstb_loop_iter = "8" *) 
+module design_1_AXI4Stream_UART_0_1_xpm_memory_base
    (sleep,
     clka,
     rsta,
@@ -12413,7 +12422,7 @@ endmodule
 (* WRITE_MODE_A = "2" *) (* WRITE_MODE_B = "2" *) (* WRITE_PROTECT = "1" *) 
 (* XPM_MODULE = "TRUE" *) (* keep_hierarchy = "soft" *) (* rsta_loop_iter = "8" *) 
 (* rstb_loop_iter = "8" *) 
-module design_1_axi4stream_uart_0_0_xpm_memory_base__2
+module design_1_AXI4Stream_UART_0_1_xpm_memory_base__2
    (sleep,
     clka,
     rsta,

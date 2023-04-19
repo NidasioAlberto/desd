@@ -1,79 +1,16 @@
 // Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
-// Tool Version: Vivado v.2020.2 (win64) Build 3064766 Wed Nov 18 09:12:45 MST 2020
-// Date        : Tue Apr 11 18:46:37 2023
-// Host        : DESKTOP-F4BLQ3F running 64-bit major release  (build 9200)
-// Command     : write_verilog -force -mode funcsim -rename_top design_1_axi4stream_spi_master_0_0 -prefix
-//               design_1_axi4stream_spi_master_0_0_ design_1_axi4stream_spi_master_0_0_sim_netlist.v
+// Tool Version: Vivado v.2020.2 (lin64) Build 3064766 Wed Nov 18 09:12:47 MST 2020
+// Date        : Wed Apr 19 17:27:11 2023
+// Host        : pop-os running 64-bit Pop!_OS 22.04 LTS
+// Command     : write_verilog -force -mode funcsim
+//               /home/alberton/Desktop/desd/SpaceShooterJoystick/SpaceShooterJoystick.gen/sources_1/bd/design_1/ip/design_1_axi4stream_spi_master_0_0/design_1_axi4stream_spi_master_0_0_sim_netlist.v
 // Design      : design_1_axi4stream_spi_master_0_0
 // Purpose     : This verilog netlist is a functional simulation representation of the design and should not be modified
 //               or synthesized. This netlist cannot be used for SDF annotated simulation.
 // Device      : xc7a35tcpg236-1
 // --------------------------------------------------------------------------------
 `timescale 1 ps / 1 ps
-
-module design_1_axi4stream_spi_master_0_0_axis_lw_spi_master
-   (m_axis_tdata,
-    sclk_o,
-    cs_o,
-    mosi_o,
-    m_axis_tvalid,
-    aclk,
-    miso_i,
-    s_axis_tdata,
-    aresetn,
-    s_axis_tvalid);
-  output [7:0]m_axis_tdata;
-  output sclk_o;
-  output cs_o;
-  output mosi_o;
-  output m_axis_tvalid;
-  input aclk;
-  input miso_i;
-  input [7:0]s_axis_tdata;
-  input aresetn;
-  input s_axis_tvalid;
-
-  wire aclk;
-  wire aresetn;
-  wire cs_o;
-  wire data_ready_reg;
-  wire inst_lw_spi_master_n_3;
-  wire inst_lw_spi_master_n_4;
-  wire [7:0]m_axis_tdata;
-  wire m_axis_tvalid;
-  wire miso_i;
-  wire mosi_o;
-  wire [7:0]s_axis_tdata;
-  wire s_axis_tvalid;
-  wire sclk_o;
-
-  FDRE data_ready_reg_reg
-       (.C(aclk),
-        .CE(1'b1),
-        .D(inst_lw_spi_master_n_4),
-        .Q(data_ready_reg),
-        .R(1'b0));
-  design_1_axi4stream_spi_master_0_0_lw_spi_master inst_lw_spi_master
-       (.aclk(aclk),
-        .aresetn(aresetn),
-        .cs_o(cs_o),
-        .data_ready_o_reg_0(inst_lw_spi_master_n_4),
-        .data_ready_reg(data_ready_reg),
-        .data_ready_reg_reg(inst_lw_spi_master_n_3),
-        .m_axis_tdata(m_axis_tdata),
-        .miso_i(miso_i),
-        .mosi_o(mosi_o),
-        .s_axis_tdata(s_axis_tdata),
-        .s_axis_tvalid(s_axis_tvalid),
-        .sclk_o(sclk_o));
-  FDRE new_data_reg
-       (.C(aclk),
-        .CE(1'b1),
-        .D(inst_lw_spi_master_n_3),
-        .Q(m_axis_tvalid),
-        .R(1'b0));
-endmodule
 
 (* CHECK_LICENSE_TYPE = "design_1_axi4stream_spi_master_0_0,ipi_axis_lw_spi_master,{}" *) (* downgradeipidentifiedwarnings = "yes" *) (* ip_definition_source = "package_project" *) 
 (* x_core_info = "ipi_axis_lw_spi_master,Vivado 2020.2" *) 
@@ -154,6 +91,71 @@ module design_1_axi4stream_spi_master_0_0
        (.P(\<const1> ));
 endmodule
 
+(* ORIG_REF_NAME = "axis_lw_spi_master" *) 
+module design_1_axi4stream_spi_master_0_0_axis_lw_spi_master
+   (m_axis_tdata,
+    sclk_o,
+    cs_o,
+    mosi_o,
+    m_axis_tvalid,
+    aclk,
+    miso_i,
+    s_axis_tdata,
+    aresetn,
+    s_axis_tvalid);
+  output [7:0]m_axis_tdata;
+  output sclk_o;
+  output cs_o;
+  output mosi_o;
+  output m_axis_tvalid;
+  input aclk;
+  input miso_i;
+  input [7:0]s_axis_tdata;
+  input aresetn;
+  input s_axis_tvalid;
+
+  wire aclk;
+  wire aresetn;
+  wire cs_o;
+  wire data_ready_reg;
+  wire inst_lw_spi_master_n_3;
+  wire inst_lw_spi_master_n_4;
+  wire [7:0]m_axis_tdata;
+  wire m_axis_tvalid;
+  wire miso_i;
+  wire mosi_o;
+  wire [7:0]s_axis_tdata;
+  wire s_axis_tvalid;
+  wire sclk_o;
+
+  FDRE data_ready_reg_reg
+       (.C(aclk),
+        .CE(1'b1),
+        .D(inst_lw_spi_master_n_4),
+        .Q(data_ready_reg),
+        .R(1'b0));
+  design_1_axi4stream_spi_master_0_0_lw_spi_master inst_lw_spi_master
+       (.aclk(aclk),
+        .aresetn(aresetn),
+        .cs_o(cs_o),
+        .data_ready_o_reg_0(inst_lw_spi_master_n_4),
+        .data_ready_reg(data_ready_reg),
+        .data_ready_reg_reg(inst_lw_spi_master_n_3),
+        .m_axis_tdata(m_axis_tdata),
+        .miso_i(miso_i),
+        .mosi_o(mosi_o),
+        .s_axis_tdata(s_axis_tdata),
+        .s_axis_tvalid(s_axis_tvalid),
+        .sclk_o(sclk_o));
+  FDRE new_data_reg
+       (.C(aclk),
+        .CE(1'b1),
+        .D(inst_lw_spi_master_n_3),
+        .Q(m_axis_tvalid),
+        .R(1'b0));
+endmodule
+
+(* ORIG_REF_NAME = "ipi_axis_lw_spi_master" *) 
 module design_1_axi4stream_spi_master_0_0_ipi_axis_lw_spi_master
    (m_axis_tdata,
     sclk_o,
@@ -200,6 +202,7 @@ module design_1_axi4stream_spi_master_0_0_ipi_axis_lw_spi_master
         .sclk_o(sclk_o));
 endmodule
 
+(* ORIG_REF_NAME = "lw_spi_master" *) 
 module design_1_axi4stream_spi_master_0_0_lw_spi_master
    (cs_o,
     sclk_o,
