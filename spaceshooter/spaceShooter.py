@@ -199,8 +199,8 @@ class Player(pygame.sprite.Sprite):
 
         # Get the joystick position and change the speed
         joystick_inputs = joystick.get_jstk()
-        self.speedx += round(joystick_inputs[0][0] / 3)
-        self.speedy += round(-joystick_inputs[0][1] / 3)
+        self.speedx += round((joystick_inputs[0][0] - 64) / 3)
+        self.speedy += round(-(joystick_inputs[0][1] - 64) / 3)
 
         # Fire weapons by holding spacebar
         if keystate[pygame.K_SPACE] or joystick_inputs[1]:
