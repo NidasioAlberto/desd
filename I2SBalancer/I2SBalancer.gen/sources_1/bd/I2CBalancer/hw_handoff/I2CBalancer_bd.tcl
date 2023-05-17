@@ -37,6 +37,13 @@ if { [string first $scripts_vivado_version $current_vivado_version] == -1 } {
 # To test this script, run the following commands from Vivado Tcl console:
 # source I2CBalancer_script.tcl
 
+
+# The design that will be created by this Tcl script contains the following 
+# module references:
+# digilent_jstk2, mute, stub
+
+# Please add the sources of those modules before sourcing this Tcl script.
+
 # If there is no project opened, this script will create a
 # project, but make sure you do not have an existing project
 # <./myproj/project_1.xpr> in the current working folder.
@@ -155,6 +162,8 @@ proc create_root_design { parentCell } {
 
 
   # Create interface ports
+  set SPI_M_0 [ create_bd_intf_port -mode Master -vlnv xilinx.com:interface:spi_rtl:1.0 SPI_M_0 ]
+
 
   # Create ports
   set reset [ create_bd_port -dir I -type rst reset ]
@@ -166,13 +175,16 @@ proc create_root_design { parentCell } {
   set rx_sclk_0 [ create_bd_port -dir O rx_sclk_0 ]
   set rx_sdin_0 [ create_bd_port -dir I rx_sdin_0 ]
   set sys_clock [ create_bd_port -dir I -type clk sys_clock ]
-  set_property -dict [ list \
-   CONFIG.ASSOCIATED_RESET {} \
- ] $sys_clock
   set tx_lrck_0 [ create_bd_port -dir O tx_lrck_0 ]
   set tx_mclk_0 [ create_bd_port -dir O tx_mclk_0 ]
   set tx_sclk_0 [ create_bd_port -dir O tx_sclk_0 ]
   set tx_sdout_0 [ create_bd_port -dir O tx_sdout_0 ]
+
+  # Create instance: axi4stream_spi_master_0, and set properties
+  set axi4stream_spi_master_0 [ create_bd_cell -type ip -vlnv DigiLAB:ip:axi4stream_spi_master:1.0 axi4stream_spi_master_0 ]
+  set_property -dict [ list \
+   CONFIG.c_sclkfreq {66666} \
+ ] $axi4stream_spi_master_0
 
   # Create instance: axis_dual_i2s_0, and set properties
   set axis_dual_i2s_0 [ create_bd_cell -type ip -vlnv DigiLAB:ip:axis_dual_i2s:1.0 axis_dual_i2s_0 ]
@@ -192,14 +204,54 @@ proc create_root_design { parentCell } {
    CONFIG.NUM_OUT_CLKS {2} \
  ] $clk_wiz_0
 
+  # Create instance: digilent_jstk2_0, and set properties
+  set block_name digilent_jstk2
+  set block_cell_name digilent_jstk2_0
+  if { [catch {set digilent_jstk2_0 [create_bd_cell -type module -reference $block_name $block_cell_name] } errmsg] } {
+     catch {common::send_gid_msg -ssname BD::TCL -id 2095 -severity "ERROR" "Unable to add referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
+     return 1
+   } elseif { $digilent_jstk2_0 eq "" } {
+     catch {common::send_gid_msg -ssname BD::TCL -id 2096 -severity "ERROR" "Unable to referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
+     return 1
+   }
+    set_property -dict [ list \
+   CONFIG.SPI_SCLKFREQ {66666} \
+ ] $digilent_jstk2_0
+
+  # Create instance: mute_0, and set properties
+  set block_name mute
+  set block_cell_name mute_0
+  if { [catch {set mute_0 [create_bd_cell -type module -reference $block_name $block_cell_name] } errmsg] } {
+     catch {common::send_gid_msg -ssname BD::TCL -id 2095 -severity "ERROR" "Unable to add referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
+     return 1
+   } elseif { $mute_0 eq "" } {
+     catch {common::send_gid_msg -ssname BD::TCL -id 2096 -severity "ERROR" "Unable to referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
+     return 1
+   }
+  
   # Create instance: proc_sys_reset_0, and set properties
   set proc_sys_reset_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:proc_sys_reset:5.0 proc_sys_reset_0 ]
 
   # Create instance: proc_sys_reset_1, and set properties
   set proc_sys_reset_1 [ create_bd_cell -type ip -vlnv xilinx.com:ip:proc_sys_reset:5.0 proc_sys_reset_1 ]
 
+  # Create instance: stub_0, and set properties
+  set block_name stub
+  set block_cell_name stub_0
+  if { [catch {set stub_0 [create_bd_cell -type module -reference $block_name $block_cell_name] } errmsg] } {
+     catch {common::send_gid_msg -ssname BD::TCL -id 2095 -severity "ERROR" "Unable to add referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
+     return 1
+   } elseif { $stub_0 eq "" } {
+     catch {common::send_gid_msg -ssname BD::TCL -id 2096 -severity "ERROR" "Unable to referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
+     return 1
+   }
+  
   # Create interface connections
-  connect_bd_intf_net -intf_net axis_dual_i2s_0_m_axis [get_bd_intf_pins axis_dual_i2s_0/m_axis] [get_bd_intf_pins axis_dual_i2s_0/s_axis]
+  connect_bd_intf_net -intf_net axi4stream_spi_master_0_M_AXIS [get_bd_intf_pins axi4stream_spi_master_0/M_AXIS] [get_bd_intf_pins digilent_jstk2_0/s_axis]
+  connect_bd_intf_net -intf_net axi4stream_spi_master_0_SPI_M [get_bd_intf_ports SPI_M_0] [get_bd_intf_pins axi4stream_spi_master_0/SPI_M]
+  connect_bd_intf_net -intf_net axis_dual_i2s_0_m_axis [get_bd_intf_pins axis_dual_i2s_0/m_axis] [get_bd_intf_pins mute_0/s_axis]
+  connect_bd_intf_net -intf_net digilent_jstk2_0_m_axis [get_bd_intf_pins axi4stream_spi_master_0/S_AXIS] [get_bd_intf_pins digilent_jstk2_0/m_axis]
+  connect_bd_intf_net -intf_net mute_0_m_axis [get_bd_intf_pins axis_dual_i2s_0/s_axis] [get_bd_intf_pins mute_0/m_axis]
 
   # Create port connections
   connect_bd_net -net axis_dual_i2s_0_rx_lrck [get_bd_ports rx_lrck_0] [get_bd_pins axis_dual_i2s_0/rx_lrck]
@@ -210,13 +262,18 @@ proc create_root_design { parentCell } {
   connect_bd_net -net axis_dual_i2s_0_tx_sclk [get_bd_ports tx_sclk_0] [get_bd_pins axis_dual_i2s_0/tx_sclk]
   connect_bd_net -net axis_dual_i2s_0_tx_sdout [get_bd_ports tx_sdout_0] [get_bd_pins axis_dual_i2s_0/tx_sdout]
   connect_bd_net -net clk_in1_0_1 [get_bd_ports sys_clock] [get_bd_pins clk_wiz_0/clk_in1]
-  connect_bd_net -net clk_wiz_0_clk_out1 [get_bd_pins axis_dual_i2s_0/aclk] [get_bd_pins clk_wiz_0/clk_out1] [get_bd_pins proc_sys_reset_0/slowest_sync_clk]
+  connect_bd_net -net clk_wiz_0_clk_out1 [get_bd_pins axi4stream_spi_master_0/aclk] [get_bd_pins axis_dual_i2s_0/aclk] [get_bd_pins clk_wiz_0/clk_out1] [get_bd_pins digilent_jstk2_0/aclk] [get_bd_pins proc_sys_reset_0/slowest_sync_clk]
   connect_bd_net -net clk_wiz_0_clk_out2 [get_bd_pins axis_dual_i2s_0/i2s_clk] [get_bd_pins clk_wiz_0/clk_out2] [get_bd_pins proc_sys_reset_1/slowest_sync_clk]
   connect_bd_net -net clk_wiz_0_locked [get_bd_pins clk_wiz_0/locked] [get_bd_pins proc_sys_reset_0/dcm_locked] [get_bd_pins proc_sys_reset_1/dcm_locked]
-  connect_bd_net -net proc_sys_reset_0_peripheral_aresetn [get_bd_pins axis_dual_i2s_0/aresetn] [get_bd_pins proc_sys_reset_0/peripheral_aresetn]
+  connect_bd_net -net digilent_jstk2_0_btn_trigger [get_bd_pins digilent_jstk2_0/btn_trigger] [get_bd_pins stub_0/en]
+  connect_bd_net -net proc_sys_reset_0_peripheral_aresetn [get_bd_pins axi4stream_spi_master_0/aresetn] [get_bd_pins axis_dual_i2s_0/aresetn] [get_bd_pins digilent_jstk2_0/aresetn] [get_bd_pins proc_sys_reset_0/peripheral_aresetn]
   connect_bd_net -net proc_sys_reset_1_peripheral_aresetn [get_bd_pins axis_dual_i2s_0/i2s_resetn] [get_bd_pins proc_sys_reset_1/peripheral_aresetn]
   connect_bd_net -net reset_0_1 [get_bd_ports reset] [get_bd_pins clk_wiz_0/reset] [get_bd_pins proc_sys_reset_0/ext_reset_in] [get_bd_pins proc_sys_reset_1/ext_reset_in]
   connect_bd_net -net rx_sdin_0_1 [get_bd_ports rx_sdin_0] [get_bd_pins axis_dual_i2s_0/rx_sdin]
+  connect_bd_net -net stub_0_b [get_bd_pins digilent_jstk2_0/led_b] [get_bd_pins stub_0/b]
+  connect_bd_net -net stub_0_g [get_bd_pins digilent_jstk2_0/led_g] [get_bd_pins stub_0/g]
+  connect_bd_net -net stub_0_mute_enable [get_bd_pins mute_0/mute_enable] [get_bd_pins stub_0/mute_enable]
+  connect_bd_net -net stub_0_r [get_bd_pins digilent_jstk2_0/led_r] [get_bd_pins stub_0/r]
 
   # Create address segments
 

@@ -1,7 +1,7 @@
 --Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2020.2 (win64) Build 3064766 Wed Nov 18 09:12:45 MST 2020
---Date        : Wed May 17 18:22:55 2023
+--Date        : Wed May 17 23:34:37 2023
 --Host        : DESKTOP-F4BLQ3F running 64-bit major release  (build 9200)
 --Command     : generate_target I2CBalancer.bd
 --Design      : I2CBalancer
@@ -13,6 +13,18 @@ library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
 entity I2CBalancer is
   port (
+    SPI_M_0_io0_i : in STD_LOGIC;
+    SPI_M_0_io0_o : out STD_LOGIC;
+    SPI_M_0_io0_t : out STD_LOGIC;
+    SPI_M_0_io1_i : in STD_LOGIC;
+    SPI_M_0_io1_o : out STD_LOGIC;
+    SPI_M_0_io1_t : out STD_LOGIC;
+    SPI_M_0_sck_i : in STD_LOGIC;
+    SPI_M_0_sck_o : out STD_LOGIC;
+    SPI_M_0_sck_t : out STD_LOGIC;
+    SPI_M_0_ss_i : in STD_LOGIC;
+    SPI_M_0_ss_o : out STD_LOGIC;
+    SPI_M_0_ss_t : out STD_LOGIC;
     reset : in STD_LOGIC;
     rx_lrck_0 : out STD_LOGIC;
     rx_mclk_0 : out STD_LOGIC;
@@ -25,7 +37,7 @@ entity I2CBalancer is
     tx_sdout_0 : out STD_LOGIC
   );
   attribute CORE_GENERATION_INFO : string;
-  attribute CORE_GENERATION_INFO of I2CBalancer : entity is "I2CBalancer,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=I2CBalancer,x_ipVersion=1.00.a,x_ipLanguage=VHDL,numBlks=4,numReposBlks=4,numNonXlnxBlks=1,numHierBlks=0,maxHierDepth=0,numSysgenBlks=0,numHlsBlks=0,numHdlrefBlks=0,numPkgbdBlks=0,bdsource=USER,da_board_cnt=3,synth_mode=OOC_per_IP}";
+  attribute CORE_GENERATION_INFO of I2CBalancer : entity is "I2CBalancer,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=I2CBalancer,x_ipVersion=1.00.a,x_ipLanguage=VHDL,numBlks=8,numReposBlks=8,numNonXlnxBlks=2,numHierBlks=0,maxHierDepth=0,numSysgenBlks=0,numHlsBlks=0,numHdlrefBlks=3,numPkgbdBlks=0,bdsource=USER,da_board_cnt=3,synth_mode=OOC_per_IP}";
   attribute HW_HANDOFF : string;
   attribute HW_HANDOFF of I2CBalancer : entity is "I2CBalancer.hwdef";
 end I2CBalancer;
@@ -60,8 +72,8 @@ architecture STRUCTURE of I2CBalancer is
     reset : in STD_LOGIC;
     clk_in1 : in STD_LOGIC;
     clk_out1 : out STD_LOGIC;
-    locked : out STD_LOGIC;
-    clk_out2 : out STD_LOGIC
+    clk_out2 : out STD_LOGIC;
+    locked : out STD_LOGIC
   );
   end component I2CBalancer_clk_wiz_0_0;
   component I2CBalancer_proc_sys_reset_0_0 is
@@ -92,6 +104,83 @@ architecture STRUCTURE of I2CBalancer is
     peripheral_aresetn : out STD_LOGIC_VECTOR ( 0 to 0 )
   );
   end component I2CBalancer_proc_sys_reset_0_1;
+  component I2CBalancer_digilent_jstk2_0_0 is
+  port (
+    aclk : in STD_LOGIC;
+    aresetn : in STD_LOGIC;
+    m_axis_tvalid : out STD_LOGIC;
+    m_axis_tdata : out STD_LOGIC_VECTOR ( 7 downto 0 );
+    m_axis_tready : in STD_LOGIC;
+    s_axis_tvalid : in STD_LOGIC;
+    s_axis_tdata : in STD_LOGIC_VECTOR ( 7 downto 0 );
+    jstk_x : out STD_LOGIC_VECTOR ( 9 downto 0 );
+    jstk_y : out STD_LOGIC_VECTOR ( 9 downto 0 );
+    btn_jstk : out STD_LOGIC;
+    btn_trigger : out STD_LOGIC;
+    led_r : in STD_LOGIC_VECTOR ( 7 downto 0 );
+    led_g : in STD_LOGIC_VECTOR ( 7 downto 0 );
+    led_b : in STD_LOGIC_VECTOR ( 7 downto 0 )
+  );
+  end component I2CBalancer_digilent_jstk2_0_0;
+  component I2CBalancer_axi4stream_spi_master_0_0 is
+  port (
+    aclk : in STD_LOGIC;
+    aresetn : in STD_LOGIC;
+    s_axis_tvalid : in STD_LOGIC;
+    s_axis_tdata : in STD_LOGIC_VECTOR ( 7 downto 0 );
+    s_axis_tready : out STD_LOGIC;
+    m_axis_tvalid : out STD_LOGIC;
+    m_axis_tdata : out STD_LOGIC_VECTOR ( 7 downto 0 );
+    cs_i : in STD_LOGIC;
+    cs_o : out STD_LOGIC;
+    cs_t : out STD_LOGIC;
+    sclk_i : in STD_LOGIC;
+    sclk_o : out STD_LOGIC;
+    sclk_t : out STD_LOGIC;
+    mosi_i : in STD_LOGIC;
+    mosi_o : out STD_LOGIC;
+    mosi_t : out STD_LOGIC;
+    miso_i : in STD_LOGIC;
+    miso_o : out STD_LOGIC;
+    miso_t : out STD_LOGIC
+  );
+  end component I2CBalancer_axi4stream_spi_master_0_0;
+  component I2CBalancer_mute_0_0 is
+  port (
+    m_axis_tvalid : out STD_LOGIC;
+    m_axis_tlast : out STD_LOGIC;
+    m_axis_tdata : out STD_LOGIC_VECTOR ( 23 downto 0 );
+    m_axis_tready : in STD_LOGIC;
+    s_axis_tvalid : in STD_LOGIC;
+    s_axis_tlast : in STD_LOGIC;
+    s_axis_tdata : in STD_LOGIC_VECTOR ( 23 downto 0 );
+    s_axis_tready : out STD_LOGIC;
+    mute_enable : in STD_LOGIC
+  );
+  end component I2CBalancer_mute_0_0;
+  component I2CBalancer_stub_0_0 is
+  port (
+    en : in STD_LOGIC;
+    r : out STD_LOGIC_VECTOR ( 7 downto 0 );
+    g : out STD_LOGIC_VECTOR ( 7 downto 0 );
+    b : out STD_LOGIC_VECTOR ( 7 downto 0 );
+    mute_enable : out STD_LOGIC
+  );
+  end component I2CBalancer_stub_0_0;
+  signal axi4stream_spi_master_0_M_AXIS_TDATA : STD_LOGIC_VECTOR ( 7 downto 0 );
+  signal axi4stream_spi_master_0_M_AXIS_TVALID : STD_LOGIC;
+  signal axi4stream_spi_master_0_SPI_M_IO0_I : STD_LOGIC;
+  signal axi4stream_spi_master_0_SPI_M_IO0_O : STD_LOGIC;
+  signal axi4stream_spi_master_0_SPI_M_IO0_T : STD_LOGIC;
+  signal axi4stream_spi_master_0_SPI_M_IO1_I : STD_LOGIC;
+  signal axi4stream_spi_master_0_SPI_M_IO1_O : STD_LOGIC;
+  signal axi4stream_spi_master_0_SPI_M_IO1_T : STD_LOGIC;
+  signal axi4stream_spi_master_0_SPI_M_SCK_I : STD_LOGIC;
+  signal axi4stream_spi_master_0_SPI_M_SCK_O : STD_LOGIC;
+  signal axi4stream_spi_master_0_SPI_M_SCK_T : STD_LOGIC;
+  signal axi4stream_spi_master_0_SPI_M_SS_I : STD_LOGIC;
+  signal axi4stream_spi_master_0_SPI_M_SS_O : STD_LOGIC;
+  signal axi4stream_spi_master_0_SPI_M_SS_T : STD_LOGIC;
   signal axis_dual_i2s_0_m_axis_TDATA : STD_LOGIC_VECTOR ( 23 downto 0 );
   signal axis_dual_i2s_0_m_axis_TLAST : STD_LOGIC;
   signal axis_dual_i2s_0_m_axis_TREADY : STD_LOGIC;
@@ -107,10 +196,25 @@ architecture STRUCTURE of I2CBalancer is
   signal clk_wiz_0_clk_out1 : STD_LOGIC;
   signal clk_wiz_0_clk_out2 : STD_LOGIC;
   signal clk_wiz_0_locked : STD_LOGIC;
+  signal digilent_jstk2_0_btn_trigger : STD_LOGIC;
+  signal digilent_jstk2_0_m_axis_TDATA : STD_LOGIC_VECTOR ( 7 downto 0 );
+  signal digilent_jstk2_0_m_axis_TREADY : STD_LOGIC;
+  signal digilent_jstk2_0_m_axis_TVALID : STD_LOGIC;
+  signal mute_0_m_axis_TDATA : STD_LOGIC_VECTOR ( 23 downto 0 );
+  signal mute_0_m_axis_TLAST : STD_LOGIC;
+  signal mute_0_m_axis_TREADY : STD_LOGIC;
+  signal mute_0_m_axis_TVALID : STD_LOGIC;
   signal proc_sys_reset_0_peripheral_aresetn : STD_LOGIC_VECTOR ( 0 to 0 );
   signal proc_sys_reset_1_peripheral_aresetn : STD_LOGIC_VECTOR ( 0 to 0 );
   signal reset_0_1 : STD_LOGIC;
   signal rx_sdin_0_1 : STD_LOGIC;
+  signal stub_0_b : STD_LOGIC_VECTOR ( 7 downto 0 );
+  signal stub_0_g : STD_LOGIC_VECTOR ( 7 downto 0 );
+  signal stub_0_mute_enable : STD_LOGIC;
+  signal stub_0_r : STD_LOGIC_VECTOR ( 7 downto 0 );
+  signal NLW_digilent_jstk2_0_btn_jstk_UNCONNECTED : STD_LOGIC;
+  signal NLW_digilent_jstk2_0_jstk_x_UNCONNECTED : STD_LOGIC_VECTOR ( 9 downto 0 );
+  signal NLW_digilent_jstk2_0_jstk_y_UNCONNECTED : STD_LOGIC_VECTOR ( 9 downto 0 );
   signal NLW_proc_sys_reset_0_mb_reset_UNCONNECTED : STD_LOGIC;
   signal NLW_proc_sys_reset_0_bus_struct_reset_UNCONNECTED : STD_LOGIC_VECTOR ( 0 to 0 );
   signal NLW_proc_sys_reset_0_interconnect_aresetn_UNCONNECTED : STD_LOGIC_VECTOR ( 0 to 0 );
@@ -120,12 +224,36 @@ architecture STRUCTURE of I2CBalancer is
   signal NLW_proc_sys_reset_1_interconnect_aresetn_UNCONNECTED : STD_LOGIC_VECTOR ( 0 to 0 );
   signal NLW_proc_sys_reset_1_peripheral_reset_UNCONNECTED : STD_LOGIC_VECTOR ( 0 to 0 );
   attribute X_INTERFACE_INFO : string;
+  attribute X_INTERFACE_INFO of SPI_M_0_io0_i : signal is "xilinx.com:interface:spi:1.0 SPI_M_0 IO0_I";
+  attribute X_INTERFACE_INFO of SPI_M_0_io0_o : signal is "xilinx.com:interface:spi:1.0 SPI_M_0 IO0_O";
+  attribute X_INTERFACE_INFO of SPI_M_0_io0_t : signal is "xilinx.com:interface:spi:1.0 SPI_M_0 IO0_T";
+  attribute X_INTERFACE_INFO of SPI_M_0_io1_i : signal is "xilinx.com:interface:spi:1.0 SPI_M_0 IO1_I";
+  attribute X_INTERFACE_INFO of SPI_M_0_io1_o : signal is "xilinx.com:interface:spi:1.0 SPI_M_0 IO1_O";
+  attribute X_INTERFACE_INFO of SPI_M_0_io1_t : signal is "xilinx.com:interface:spi:1.0 SPI_M_0 IO1_T";
+  attribute X_INTERFACE_INFO of SPI_M_0_sck_i : signal is "xilinx.com:interface:spi:1.0 SPI_M_0 SCK_I";
+  attribute X_INTERFACE_INFO of SPI_M_0_sck_o : signal is "xilinx.com:interface:spi:1.0 SPI_M_0 SCK_O";
+  attribute X_INTERFACE_INFO of SPI_M_0_sck_t : signal is "xilinx.com:interface:spi:1.0 SPI_M_0 SCK_T";
+  attribute X_INTERFACE_INFO of SPI_M_0_ss_i : signal is "xilinx.com:interface:spi:1.0 SPI_M_0 SS_I";
+  attribute X_INTERFACE_INFO of SPI_M_0_ss_o : signal is "xilinx.com:interface:spi:1.0 SPI_M_0 SS_O";
+  attribute X_INTERFACE_INFO of SPI_M_0_ss_t : signal is "xilinx.com:interface:spi:1.0 SPI_M_0 SS_T";
   attribute X_INTERFACE_INFO of reset : signal is "xilinx.com:signal:reset:1.0 RST.RESET RST";
   attribute X_INTERFACE_PARAMETER : string;
   attribute X_INTERFACE_PARAMETER of reset : signal is "XIL_INTERFACENAME RST.RESET, INSERT_VIP 0, POLARITY ACTIVE_HIGH";
   attribute X_INTERFACE_INFO of sys_clock : signal is "xilinx.com:signal:clock:1.0 CLK.SYS_CLOCK CLK";
   attribute X_INTERFACE_PARAMETER of sys_clock : signal is "XIL_INTERFACENAME CLK.SYS_CLOCK, CLK_DOMAIN I2CBalancer_clk_in1_0, FREQ_HZ 100000000, FREQ_TOLERANCE_HZ 0, INSERT_VIP 0, PHASE 0.000";
 begin
+  SPI_M_0_io0_o <= axi4stream_spi_master_0_SPI_M_IO0_O;
+  SPI_M_0_io0_t <= axi4stream_spi_master_0_SPI_M_IO0_T;
+  SPI_M_0_io1_o <= axi4stream_spi_master_0_SPI_M_IO1_O;
+  SPI_M_0_io1_t <= axi4stream_spi_master_0_SPI_M_IO1_T;
+  SPI_M_0_sck_o <= axi4stream_spi_master_0_SPI_M_SCK_O;
+  SPI_M_0_sck_t <= axi4stream_spi_master_0_SPI_M_SCK_T;
+  SPI_M_0_ss_o <= axi4stream_spi_master_0_SPI_M_SS_O;
+  SPI_M_0_ss_t <= axi4stream_spi_master_0_SPI_M_SS_T;
+  axi4stream_spi_master_0_SPI_M_IO0_I <= SPI_M_0_io0_i;
+  axi4stream_spi_master_0_SPI_M_IO1_I <= SPI_M_0_io1_i;
+  axi4stream_spi_master_0_SPI_M_SCK_I <= SPI_M_0_sck_i;
+  axi4stream_spi_master_0_SPI_M_SS_I <= SPI_M_0_ss_i;
   clk_in1_0_1 <= sys_clock;
   reset_0_1 <= reset;
   rx_lrck_0 <= axis_dual_i2s_0_rx_lrck;
@@ -136,6 +264,28 @@ begin
   tx_mclk_0 <= axis_dual_i2s_0_tx_mclk;
   tx_sclk_0 <= axis_dual_i2s_0_tx_sclk;
   tx_sdout_0 <= axis_dual_i2s_0_tx_sdout;
+axi4stream_spi_master_0: component I2CBalancer_axi4stream_spi_master_0_0
+     port map (
+      aclk => clk_wiz_0_clk_out1,
+      aresetn => proc_sys_reset_0_peripheral_aresetn(0),
+      cs_i => axi4stream_spi_master_0_SPI_M_SS_I,
+      cs_o => axi4stream_spi_master_0_SPI_M_SS_O,
+      cs_t => axi4stream_spi_master_0_SPI_M_SS_T,
+      m_axis_tdata(7 downto 0) => axi4stream_spi_master_0_M_AXIS_TDATA(7 downto 0),
+      m_axis_tvalid => axi4stream_spi_master_0_M_AXIS_TVALID,
+      miso_i => axi4stream_spi_master_0_SPI_M_IO1_I,
+      miso_o => axi4stream_spi_master_0_SPI_M_IO1_O,
+      miso_t => axi4stream_spi_master_0_SPI_M_IO1_T,
+      mosi_i => axi4stream_spi_master_0_SPI_M_IO0_I,
+      mosi_o => axi4stream_spi_master_0_SPI_M_IO0_O,
+      mosi_t => axi4stream_spi_master_0_SPI_M_IO0_T,
+      s_axis_tdata(7 downto 0) => digilent_jstk2_0_m_axis_TDATA(7 downto 0),
+      s_axis_tready => digilent_jstk2_0_m_axis_TREADY,
+      s_axis_tvalid => digilent_jstk2_0_m_axis_TVALID,
+      sclk_i => axi4stream_spi_master_0_SPI_M_SCK_I,
+      sclk_o => axi4stream_spi_master_0_SPI_M_SCK_O,
+      sclk_t => axi4stream_spi_master_0_SPI_M_SCK_T
+    );
 axis_dual_i2s_0: component I2CBalancer_axis_dual_i2s_0_0
      port map (
       aclk => clk_wiz_0_clk_out1,
@@ -150,10 +300,10 @@ axis_dual_i2s_0: component I2CBalancer_axis_dual_i2s_0_0
       rx_mclk => axis_dual_i2s_0_rx_mclk,
       rx_sclk => axis_dual_i2s_0_rx_sclk,
       rx_sdin => rx_sdin_0_1,
-      s_axis_tdata(23 downto 0) => axis_dual_i2s_0_m_axis_TDATA(23 downto 0),
-      s_axis_tlast => axis_dual_i2s_0_m_axis_TLAST,
-      s_axis_tready => axis_dual_i2s_0_m_axis_TREADY,
-      s_axis_tvalid => axis_dual_i2s_0_m_axis_TVALID,
+      s_axis_tdata(23 downto 0) => mute_0_m_axis_TDATA(23 downto 0),
+      s_axis_tlast => mute_0_m_axis_TLAST,
+      s_axis_tready => mute_0_m_axis_TREADY,
+      s_axis_tvalid => mute_0_m_axis_TVALID,
       tx_lrck => axis_dual_i2s_0_tx_lrck,
       tx_mclk => axis_dual_i2s_0_tx_mclk,
       tx_sclk => axis_dual_i2s_0_tx_sclk,
@@ -166,6 +316,35 @@ clk_wiz_0: component I2CBalancer_clk_wiz_0_0
       clk_out2 => clk_wiz_0_clk_out2,
       locked => clk_wiz_0_locked,
       reset => reset_0_1
+    );
+digilent_jstk2_0: component I2CBalancer_digilent_jstk2_0_0
+     port map (
+      aclk => clk_wiz_0_clk_out1,
+      aresetn => proc_sys_reset_0_peripheral_aresetn(0),
+      btn_jstk => NLW_digilent_jstk2_0_btn_jstk_UNCONNECTED,
+      btn_trigger => digilent_jstk2_0_btn_trigger,
+      jstk_x(9 downto 0) => NLW_digilent_jstk2_0_jstk_x_UNCONNECTED(9 downto 0),
+      jstk_y(9 downto 0) => NLW_digilent_jstk2_0_jstk_y_UNCONNECTED(9 downto 0),
+      led_b(7 downto 0) => stub_0_b(7 downto 0),
+      led_g(7 downto 0) => stub_0_g(7 downto 0),
+      led_r(7 downto 0) => stub_0_r(7 downto 0),
+      m_axis_tdata(7 downto 0) => digilent_jstk2_0_m_axis_TDATA(7 downto 0),
+      m_axis_tready => digilent_jstk2_0_m_axis_TREADY,
+      m_axis_tvalid => digilent_jstk2_0_m_axis_TVALID,
+      s_axis_tdata(7 downto 0) => axi4stream_spi_master_0_M_AXIS_TDATA(7 downto 0),
+      s_axis_tvalid => axi4stream_spi_master_0_M_AXIS_TVALID
+    );
+mute_0: component I2CBalancer_mute_0_0
+     port map (
+      m_axis_tdata(23 downto 0) => mute_0_m_axis_TDATA(23 downto 0),
+      m_axis_tlast => mute_0_m_axis_TLAST,
+      m_axis_tready => mute_0_m_axis_TREADY,
+      m_axis_tvalid => mute_0_m_axis_TVALID,
+      mute_enable => stub_0_mute_enable,
+      s_axis_tdata(23 downto 0) => axis_dual_i2s_0_m_axis_TDATA(23 downto 0),
+      s_axis_tlast => axis_dual_i2s_0_m_axis_TLAST,
+      s_axis_tready => axis_dual_i2s_0_m_axis_TREADY,
+      s_axis_tvalid => axis_dual_i2s_0_m_axis_TVALID
     );
 proc_sys_reset_0: component I2CBalancer_proc_sys_reset_0_0
      port map (
@@ -192,5 +371,13 @@ proc_sys_reset_1: component I2CBalancer_proc_sys_reset_0_1
       peripheral_aresetn(0) => proc_sys_reset_1_peripheral_aresetn(0),
       peripheral_reset(0) => NLW_proc_sys_reset_1_peripheral_reset_UNCONNECTED(0),
       slowest_sync_clk => clk_wiz_0_clk_out2
+    );
+stub_0: component I2CBalancer_stub_0_0
+     port map (
+      b(7 downto 0) => stub_0_b(7 downto 0),
+      en => digilent_jstk2_0_btn_trigger,
+      g(7 downto 0) => stub_0_g(7 downto 0),
+      mute_enable => stub_0_mute_enable,
+      r(7 downto 0) => stub_0_r(7 downto 0)
     );
 end STRUCTURE;
