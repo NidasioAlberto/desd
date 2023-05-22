@@ -55,7 +55,6 @@ begin
         if (reset = '1') then
             state <= DISABLED;
             last_input <= '0';
-            output_signal <= '0'; -- is this needed? does it create a glitch when resetting?
         elsif rising_edge(clk) then
             if (last_input /= input_signal and last_input = '0') then
                 if (state = DISABLED) then

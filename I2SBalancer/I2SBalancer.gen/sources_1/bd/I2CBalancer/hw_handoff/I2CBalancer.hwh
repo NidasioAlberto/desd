@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Wed May 17 23:34:38 2023" VIVADOVERSION="2020.2">
+<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Tue May 23 00:10:16 2023" VIVADOVERSION="2020.2">
 
   <SYSTEMINFO ARCH="artix7" DEVICE="7a35t" NAME="I2CBalancer" PACKAGE="cpg236" SPEEDGRADE="-1"/>
 
@@ -352,22 +352,22 @@
         </PORT>
         <PORT DIR="O" LEFT="23" NAME="m_axis_tdata" RIGHT="0" SIGIS="undef" SIGNAME="axis_dual_i2s_0_m_axis_tdata">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="mute_0" PORT="s_axis_tdata"/>
+            <CONNECTION INSTANCE="dual_moving_average_0" PORT="s_axis_tdata"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="O" NAME="m_axis_tvalid" SIGIS="undef" SIGNAME="axis_dual_i2s_0_m_axis_tvalid">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="mute_0" PORT="s_axis_tvalid"/>
+            <CONNECTION INSTANCE="dual_moving_average_0" PORT="s_axis_tvalid"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="I" NAME="m_axis_tready" SIGIS="undef" SIGNAME="axis_dual_i2s_0_m_axis_tready">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="mute_0" PORT="s_axis_tready"/>
+            <CONNECTION INSTANCE="dual_moving_average_0" PORT="s_axis_tready"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="O" NAME="m_axis_tlast" SIGIS="undef" SIGNAME="axis_dual_i2s_0_m_axis_tlast">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="mute_0" PORT="s_axis_tlast"/>
+            <CONNECTION INSTANCE="dual_moving_average_0" PORT="s_axis_tlast"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="O" NAME="tx_mclk" SIGIS="undef" SIGNAME="axis_dual_i2s_0_tx_mclk">
@@ -1050,6 +1050,11 @@
             <CONNECTION INSTANCE="axis_dual_i2s_0" PORT="aclk"/>
             <CONNECTION INSTANCE="digilent_jstk2_0" PORT="aclk"/>
             <CONNECTION INSTANCE="axi4stream_spi_master_0" PORT="aclk"/>
+            <CONNECTION INSTANCE="debouncer_1" PORT="clk"/>
+            <CONNECTION INSTANCE="debouncer_0" PORT="clk"/>
+            <CONNECTION INSTANCE="edge_detector_0" PORT="clk"/>
+            <CONNECTION INSTANCE="edge_detector_1" PORT="clk"/>
+            <CONNECTION INSTANCE="dual_moving_average_0" PORT="aclk"/>
           </CONNECTIONS>
         </PORT>
         <PORT CLKFREQUENCY="22580645" DIR="O" NAME="clk_out2" SIGIS="clk" SIGNAME="clk_wiz_0_clk_out2">
@@ -1062,6 +1067,68 @@
           <CONNECTIONS>
             <CONNECTION INSTANCE="proc_sys_reset_0" PORT="dcm_locked"/>
             <CONNECTION INSTANCE="proc_sys_reset_1" PORT="dcm_locked"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE COREREVISION="1" FULLNAME="/debouncer_0" HWVERSION="1.0" INSTANCE="debouncer_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="debouncer" VLNV="xilinx.com:module_ref:debouncer:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="BEBOUNCING_DEPTH" VALUE="5"/>
+        <PARAMETER NAME="Component_Name" VALUE="I2CBalancer_debouncer_0_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT CLKFREQUENCY="100000000" DIR="I" NAME="clk" SIGIS="clk" SIGNAME="clk_wiz_0_clk_out1">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="clk_wiz_0" PORT="clk_out1"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="input_signal" SIGIS="undef" SIGNAME="digilent_jstk2_0_btn_trigger">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="digilent_jstk2_0" PORT="btn_trigger"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="reset" POLARITY="ACTIVE_HIGH" SIGIS="rst" SIGNAME="proc_sys_reset_0_peripheral_reset">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="proc_sys_reset_0" PORT="peripheral_reset"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="debounced" SIGIS="undef" SIGNAME="debouncer_0_debounced">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="edge_detector_0" PORT="input_signal"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE COREREVISION="1" FULLNAME="/debouncer_1" HWVERSION="1.0" INSTANCE="debouncer_1" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="debouncer" VLNV="xilinx.com:module_ref:debouncer:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="BEBOUNCING_DEPTH" VALUE="5"/>
+        <PARAMETER NAME="Component_Name" VALUE="I2CBalancer_debouncer_0_1"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT CLKFREQUENCY="100000000" DIR="I" NAME="clk" SIGIS="clk" SIGNAME="clk_wiz_0_clk_out1">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="clk_wiz_0" PORT="clk_out1"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="input_signal" SIGIS="undef" SIGNAME="digilent_jstk2_0_btn_jstk">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="digilent_jstk2_0" PORT="btn_jstk"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="reset" POLARITY="ACTIVE_HIGH" SIGIS="rst" SIGNAME="proc_sys_reset_0_peripheral_reset">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="proc_sys_reset_0" PORT="peripheral_reset"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="debounced" SIGIS="undef" SIGNAME="debouncer_1_debounced">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="edge_detector_1" PORT="input_signal"/>
           </CONNECTIONS>
         </PORT>
       </PORTS>
@@ -1114,25 +1181,29 @@
         </PORT>
         <PORT DIR="O" LEFT="9" NAME="jstk_x" RIGHT="0" SIGIS="undef"/>
         <PORT DIR="O" LEFT="9" NAME="jstk_y" RIGHT="0" SIGIS="undef"/>
-        <PORT DIR="O" NAME="btn_jstk" SIGIS="undef"/>
+        <PORT DIR="O" NAME="btn_jstk" SIGIS="undef" SIGNAME="digilent_jstk2_0_btn_jstk">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="debouncer_1" PORT="input_signal"/>
+          </CONNECTIONS>
+        </PORT>
         <PORT DIR="O" NAME="btn_trigger" SIGIS="undef" SIGNAME="digilent_jstk2_0_btn_trigger">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="stub_0" PORT="en"/>
+            <CONNECTION INSTANCE="debouncer_0" PORT="input_signal"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" LEFT="7" NAME="led_r" RIGHT="0" SIGIS="undef" SIGNAME="stub_0_r">
+        <PORT DIR="I" LEFT="7" NAME="led_r" RIGHT="0" SIGIS="undef" SIGNAME="led_controller_0_r">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="stub_0" PORT="r"/>
+            <CONNECTION INSTANCE="led_controller_0" PORT="r"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" LEFT="7" NAME="led_g" RIGHT="0" SIGIS="undef" SIGNAME="stub_0_g">
+        <PORT DIR="I" LEFT="7" NAME="led_g" RIGHT="0" SIGIS="undef" SIGNAME="led_controller_0_g">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="stub_0" PORT="g"/>
+            <CONNECTION INSTANCE="led_controller_0" PORT="g"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" LEFT="7" NAME="led_b" RIGHT="0" SIGIS="undef" SIGNAME="stub_0_b">
+        <PORT DIR="I" LEFT="7" NAME="led_b" RIGHT="0" SIGIS="undef" SIGNAME="led_controller_0_b">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="stub_0" PORT="b"/>
+            <CONNECTION INSTANCE="led_controller_0" PORT="b"/>
           </CONNECTIONS>
         </PORT>
       </PORTS>
@@ -1178,6 +1249,212 @@
         </BUSINTERFACE>
       </BUSINTERFACES>
     </MODULE>
+    <MODULE COREREVISION="1" FULLNAME="/dual_moving_average_0" HWVERSION="1.0" INSTANCE="dual_moving_average_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="dual_moving_average" VLNV="xilinx.com:module_ref:dual_moving_average:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="FILTER_ORDER" VALUE="32"/>
+        <PARAMETER NAME="Component_Name" VALUE="I2CBalancer_dual_moving_average_0_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="O" NAME="m_axis_tvalid" SIGIS="undef" SIGNAME="dual_moving_average_0_m_axis_tvalid">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="mute_0" PORT="s_axis_tvalid"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="m_axis_tlast" SIGIS="undef" SIGNAME="dual_moving_average_0_m_axis_tlast">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="mute_0" PORT="s_axis_tlast"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="23" NAME="m_axis_tdata" RIGHT="0" SIGIS="undef" SIGNAME="dual_moving_average_0_m_axis_tdata">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="mute_0" PORT="s_axis_tdata"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="m_axis_tready" SIGIS="undef" SIGNAME="dual_moving_average_0_m_axis_tready">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="mute_0" PORT="s_axis_tready"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="s_axis_tvalid" SIGIS="undef" SIGNAME="axis_dual_i2s_0_m_axis_tvalid">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="axis_dual_i2s_0" PORT="m_axis_tvalid"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="s_axis_tlast" SIGIS="undef" SIGNAME="axis_dual_i2s_0_m_axis_tlast">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="axis_dual_i2s_0" PORT="m_axis_tlast"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="23" NAME="s_axis_tdata" RIGHT="0" SIGIS="undef" SIGNAME="axis_dual_i2s_0_m_axis_tdata">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="axis_dual_i2s_0" PORT="m_axis_tdata"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="s_axis_tready" SIGIS="undef" SIGNAME="axis_dual_i2s_0_m_axis_tready">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="axis_dual_i2s_0" PORT="m_axis_tready"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT CLKFREQUENCY="100000000" DIR="I" NAME="aclk" SIGIS="clk" SIGNAME="clk_wiz_0_clk_out1">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="clk_wiz_0" PORT="clk_out1"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="aresetn" POLARITY="ACTIVE_LOW" SIGIS="rst" SIGNAME="proc_sys_reset_0_peripheral_aresetn">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="proc_sys_reset_0" PORT="peripheral_aresetn"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="filter_enable" SIGIS="undef" SIGNAME="edge_detector_1_output_signal">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="edge_detector_1" PORT="output_signal"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES>
+        <BUSINTERFACE BUSNAME="dual_moving_average_0_m_axis" NAME="m_axis" TYPE="INITIATOR" VLNV="xilinx.com:interface:axis:1.0">
+          <PARAMETER NAME="TDATA_NUM_BYTES" VALUE="3"/>
+          <PARAMETER NAME="TDEST_WIDTH" VALUE="0"/>
+          <PARAMETER NAME="TID_WIDTH" VALUE="0"/>
+          <PARAMETER NAME="TUSER_WIDTH" VALUE="0"/>
+          <PARAMETER NAME="HAS_TREADY" VALUE="1"/>
+          <PARAMETER NAME="HAS_TSTRB" VALUE="0"/>
+          <PARAMETER NAME="HAS_TKEEP" VALUE="0"/>
+          <PARAMETER NAME="HAS_TLAST" VALUE="1"/>
+          <PARAMETER NAME="FREQ_HZ" VALUE="100000000"/>
+          <PARAMETER NAME="PHASE" VALUE="0.0"/>
+          <PARAMETER NAME="CLK_DOMAIN" VALUE="/clk_wiz_0_clk_out1"/>
+          <PARAMETER NAME="LAYERED_METADATA" VALUE="undef"/>
+          <PARAMETER NAME="INSERT_VIP" VALUE="0"/>
+          <PORTMAPS>
+            <PORTMAP LOGICAL="TDATA" PHYSICAL="m_axis_tdata"/>
+            <PORTMAP LOGICAL="TLAST" PHYSICAL="m_axis_tlast"/>
+            <PORTMAP LOGICAL="TVALID" PHYSICAL="m_axis_tvalid"/>
+            <PORTMAP LOGICAL="TREADY" PHYSICAL="m_axis_tready"/>
+          </PORTMAPS>
+        </BUSINTERFACE>
+        <BUSINTERFACE BUSNAME="axis_dual_i2s_0_m_axis" NAME="s_axis" TYPE="TARGET" VLNV="xilinx.com:interface:axis:1.0">
+          <PARAMETER NAME="TDATA_NUM_BYTES" VALUE="3"/>
+          <PARAMETER NAME="TDEST_WIDTH" VALUE="0"/>
+          <PARAMETER NAME="TID_WIDTH" VALUE="0"/>
+          <PARAMETER NAME="TUSER_WIDTH" VALUE="0"/>
+          <PARAMETER NAME="HAS_TREADY" VALUE="1"/>
+          <PARAMETER NAME="HAS_TSTRB" VALUE="0"/>
+          <PARAMETER NAME="HAS_TKEEP" VALUE="0"/>
+          <PARAMETER NAME="HAS_TLAST" VALUE="1"/>
+          <PARAMETER NAME="FREQ_HZ" VALUE="100000000"/>
+          <PARAMETER NAME="PHASE" VALUE="0.0"/>
+          <PARAMETER NAME="CLK_DOMAIN" VALUE="/clk_wiz_0_clk_out1"/>
+          <PARAMETER NAME="LAYERED_METADATA" VALUE="undef"/>
+          <PARAMETER NAME="INSERT_VIP" VALUE="0"/>
+          <PORTMAPS>
+            <PORTMAP LOGICAL="TDATA" PHYSICAL="s_axis_tdata"/>
+            <PORTMAP LOGICAL="TLAST" PHYSICAL="s_axis_tlast"/>
+            <PORTMAP LOGICAL="TVALID" PHYSICAL="s_axis_tvalid"/>
+            <PORTMAP LOGICAL="TREADY" PHYSICAL="s_axis_tready"/>
+          </PORTMAPS>
+        </BUSINTERFACE>
+      </BUSINTERFACES>
+    </MODULE>
+    <MODULE COREREVISION="1" FULLNAME="/edge_detector_0" HWVERSION="1.0" INSTANCE="edge_detector_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="edge_detector" VLNV="xilinx.com:module_ref:edge_detector:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="Component_Name" VALUE="I2CBalancer_edge_detector_0_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT CLKFREQUENCY="100000000" DIR="I" NAME="clk" SIGIS="clk" SIGNAME="clk_wiz_0_clk_out1">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="clk_wiz_0" PORT="clk_out1"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="input_signal" SIGIS="undef" SIGNAME="debouncer_0_debounced">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="debouncer_0" PORT="debounced"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="reset" POLARITY="ACTIVE_HIGH" SIGIS="rst" SIGNAME="proc_sys_reset_0_peripheral_reset">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="proc_sys_reset_0" PORT="peripheral_reset"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="output_signal" SIGIS="undef" SIGNAME="edge_detector_0_output_signal">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="led_controller_0" PORT="mute_enable"/>
+            <CONNECTION INSTANCE="mute_0" PORT="mute_enable"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE COREREVISION="1" FULLNAME="/edge_detector_1" HWVERSION="1.0" INSTANCE="edge_detector_1" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="edge_detector" VLNV="xilinx.com:module_ref:edge_detector:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="Component_Name" VALUE="I2CBalancer_edge_detector_0_1"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT CLKFREQUENCY="100000000" DIR="I" NAME="clk" SIGIS="clk" SIGNAME="clk_wiz_0_clk_out1">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="clk_wiz_0" PORT="clk_out1"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="input_signal" SIGIS="undef" SIGNAME="debouncer_1_debounced">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="debouncer_1" PORT="debounced"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="reset" POLARITY="ACTIVE_HIGH" SIGIS="rst" SIGNAME="proc_sys_reset_0_peripheral_reset">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="proc_sys_reset_0" PORT="peripheral_reset"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="output_signal" SIGIS="undef" SIGNAME="edge_detector_1_output_signal">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="led_controller_0" PORT="filter_enable"/>
+            <CONNECTION INSTANCE="dual_moving_average_0" PORT="filter_enable"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE COREREVISION="1" FULLNAME="/led_controller_0" HWVERSION="1.0" INSTANCE="led_controller_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="led_controller" VLNV="xilinx.com:module_ref:led_controller:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="Component_Name" VALUE="I2CBalancer_led_controller_0_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" NAME="mute_enable" SIGIS="undef" SIGNAME="edge_detector_0_output_signal">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="edge_detector_0" PORT="output_signal"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="filter_enable" SIGIS="undef" SIGNAME="edge_detector_1_output_signal">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="edge_detector_1" PORT="output_signal"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="7" NAME="r" RIGHT="0" SIGIS="undef" SIGNAME="led_controller_0_r">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="digilent_jstk2_0" PORT="led_r"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="7" NAME="g" RIGHT="0" SIGIS="undef" SIGNAME="led_controller_0_g">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="digilent_jstk2_0" PORT="led_g"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="7" NAME="b" RIGHT="0" SIGIS="undef" SIGNAME="led_controller_0_b">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="digilent_jstk2_0" PORT="led_b"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
     <MODULE COREREVISION="1" FULLNAME="/mute_0" HWVERSION="1.0" INSTANCE="mute_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="mute" VLNV="xilinx.com:module_ref:mute:1.0">
       <DOCUMENTS/>
       <PARAMETERS>
@@ -1205,29 +1482,29 @@
             <CONNECTION INSTANCE="axis_dual_i2s_0" PORT="s_axis_tready"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" NAME="s_axis_tvalid" SIGIS="undef" SIGNAME="axis_dual_i2s_0_m_axis_tvalid">
+        <PORT DIR="I" NAME="s_axis_tvalid" SIGIS="undef" SIGNAME="dual_moving_average_0_m_axis_tvalid">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="axis_dual_i2s_0" PORT="m_axis_tvalid"/>
+            <CONNECTION INSTANCE="dual_moving_average_0" PORT="m_axis_tvalid"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" NAME="s_axis_tlast" SIGIS="undef" SIGNAME="axis_dual_i2s_0_m_axis_tlast">
+        <PORT DIR="I" NAME="s_axis_tlast" SIGIS="undef" SIGNAME="dual_moving_average_0_m_axis_tlast">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="axis_dual_i2s_0" PORT="m_axis_tlast"/>
+            <CONNECTION INSTANCE="dual_moving_average_0" PORT="m_axis_tlast"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" LEFT="23" NAME="s_axis_tdata" RIGHT="0" SIGIS="undef" SIGNAME="axis_dual_i2s_0_m_axis_tdata">
+        <PORT DIR="I" LEFT="23" NAME="s_axis_tdata" RIGHT="0" SIGIS="undef" SIGNAME="dual_moving_average_0_m_axis_tdata">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="axis_dual_i2s_0" PORT="m_axis_tdata"/>
+            <CONNECTION INSTANCE="dual_moving_average_0" PORT="m_axis_tdata"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" NAME="s_axis_tready" SIGIS="undef" SIGNAME="axis_dual_i2s_0_m_axis_tready">
+        <PORT DIR="O" NAME="s_axis_tready" SIGIS="undef" SIGNAME="dual_moving_average_0_m_axis_tready">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="axis_dual_i2s_0" PORT="m_axis_tready"/>
+            <CONNECTION INSTANCE="dual_moving_average_0" PORT="m_axis_tready"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" NAME="mute_enable" SIGIS="undef" SIGNAME="stub_0_mute_enable">
+        <PORT DIR="I" NAME="mute_enable" SIGIS="undef" SIGNAME="edge_detector_0_output_signal">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="stub_0" PORT="mute_enable"/>
+            <CONNECTION INSTANCE="edge_detector_0" PORT="output_signal"/>
           </CONNECTIONS>
         </PORT>
       </PORTS>
@@ -1253,7 +1530,7 @@
             <PORTMAP LOGICAL="TREADY" PHYSICAL="m_axis_tready"/>
           </PORTMAPS>
         </BUSINTERFACE>
-        <BUSINTERFACE BUSNAME="axis_dual_i2s_0_m_axis" NAME="s_axis" TYPE="TARGET" VLNV="xilinx.com:interface:axis:1.0">
+        <BUSINTERFACE BUSNAME="dual_moving_average_0_m_axis" NAME="s_axis" TYPE="TARGET" VLNV="xilinx.com:interface:axis:1.0">
           <PARAMETER NAME="TDATA_NUM_BYTES" VALUE="3"/>
           <PARAMETER NAME="TDEST_WIDTH" VALUE="0"/>
           <PARAMETER NAME="TID_WIDTH" VALUE="0"/>
@@ -1315,13 +1592,21 @@
         </PORT>
         <PORT DIR="O" NAME="mb_reset" POLARITY="ACTIVE_HIGH" SIGIS="rst"/>
         <PORT DIR="O" LEFT="0" NAME="bus_struct_reset" POLARITY="ACTIVE_HIGH" RIGHT="0" SIGIS="rst"/>
-        <PORT DIR="O" LEFT="0" NAME="peripheral_reset" POLARITY="ACTIVE_HIGH" RIGHT="0" SIGIS="rst"/>
+        <PORT DIR="O" LEFT="0" NAME="peripheral_reset" POLARITY="ACTIVE_HIGH" RIGHT="0" SIGIS="rst" SIGNAME="proc_sys_reset_0_peripheral_reset">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="debouncer_1" PORT="reset"/>
+            <CONNECTION INSTANCE="debouncer_0" PORT="reset"/>
+            <CONNECTION INSTANCE="edge_detector_0" PORT="reset"/>
+            <CONNECTION INSTANCE="edge_detector_1" PORT="reset"/>
+          </CONNECTIONS>
+        </PORT>
         <PORT DIR="O" LEFT="0" NAME="interconnect_aresetn" POLARITY="ACTIVE_LOW" RIGHT="0" SIGIS="rst"/>
         <PORT DIR="O" LEFT="0" NAME="peripheral_aresetn" POLARITY="ACTIVE_LOW" RIGHT="0" SIGIS="rst" SIGNAME="proc_sys_reset_0_peripheral_aresetn">
           <CONNECTIONS>
             <CONNECTION INSTANCE="axis_dual_i2s_0" PORT="aresetn"/>
             <CONNECTION INSTANCE="digilent_jstk2_0" PORT="aresetn"/>
             <CONNECTION INSTANCE="axi4stream_spi_master_0" PORT="aresetn"/>
+            <CONNECTION INSTANCE="dual_moving_average_0" PORT="aresetn"/>
           </CONNECTIONS>
         </PORT>
       </PORTS>
@@ -1371,41 +1656,6 @@
         <PORT DIR="O" LEFT="0" NAME="peripheral_aresetn" POLARITY="ACTIVE_LOW" RIGHT="0" SIGIS="rst" SIGNAME="proc_sys_reset_1_peripheral_aresetn">
           <CONNECTIONS>
             <CONNECTION INSTANCE="axis_dual_i2s_0" PORT="i2s_resetn"/>
-          </CONNECTIONS>
-        </PORT>
-      </PORTS>
-      <BUSINTERFACES/>
-    </MODULE>
-    <MODULE COREREVISION="1" FULLNAME="/stub_0" HWVERSION="1.0" INSTANCE="stub_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="stub" VLNV="xilinx.com:module_ref:stub:1.0">
-      <DOCUMENTS/>
-      <PARAMETERS>
-        <PARAMETER NAME="Component_Name" VALUE="I2CBalancer_stub_0_0"/>
-        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
-      </PARAMETERS>
-      <PORTS>
-        <PORT DIR="I" NAME="en" SIGIS="undef" SIGNAME="digilent_jstk2_0_btn_trigger">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="digilent_jstk2_0" PORT="btn_trigger"/>
-          </CONNECTIONS>
-        </PORT>
-        <PORT DIR="O" LEFT="7" NAME="r" RIGHT="0" SIGIS="undef" SIGNAME="stub_0_r">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="digilent_jstk2_0" PORT="led_r"/>
-          </CONNECTIONS>
-        </PORT>
-        <PORT DIR="O" LEFT="7" NAME="g" RIGHT="0" SIGIS="undef" SIGNAME="stub_0_g">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="digilent_jstk2_0" PORT="led_g"/>
-          </CONNECTIONS>
-        </PORT>
-        <PORT DIR="O" LEFT="7" NAME="b" RIGHT="0" SIGIS="undef" SIGNAME="stub_0_b">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="digilent_jstk2_0" PORT="led_b"/>
-          </CONNECTIONS>
-        </PORT>
-        <PORT DIR="O" NAME="mute_enable" SIGIS="undef" SIGNAME="stub_0_mute_enable">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="mute_0" PORT="mute_enable"/>
           </CONNECTIONS>
         </PORT>
       </PORTS>

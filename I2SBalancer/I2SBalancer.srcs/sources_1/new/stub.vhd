@@ -34,9 +34,6 @@ use IEEE.STD_LOGIC_1164.ALL;
 entity stub is
     Port (
         en: in std_logic;
-        r : out STD_LOGIC_VECTOR (7 downto 0);
-        g : out STD_LOGIC_VECTOR (7 downto 0);
-        b : out STD_LOGIC_VECTOR (7 downto 0);
         mute_enable : out std_logic
     );
 end stub;
@@ -45,18 +42,9 @@ architecture Behavioral of stub is
     type state_mute_type is (MUTED, NOT_MUTED);
     signal state_mute : state_mute_type := NOT_MUTED;
 begin
-    b <= (others => '0');
     with state_mute select mute_enable <=
         '0' when NOT_MUTED,
         '1' when MUTED;
-    
-    with state_mute select r <=
-        (others => '0') when NOT_MUTED,
-        (others => '1') when MUTED;
-    
-    with state_mute select g <=
-        (others => '1') when NOT_MUTED,
-        (others => '0') when MUTED;
         
     process (en)
     begin
