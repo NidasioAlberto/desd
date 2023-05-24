@@ -81,12 +81,6 @@
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PSRCDIR/sources_1/new/mute.vhd">
-        <FileInfo>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
       <File Path="$PSRCDIR/sources_1/new/led_controller.vhd">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
@@ -118,6 +112,12 @@
         </FileInfo>
       </File>
       <File Path="$PSRCDIR/sources_1/new/volume_controller.vhd">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/new/mute.vhd">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
@@ -165,8 +165,11 @@
         <CompFileExtendedInfo CompFileName="I2CBalancer.bd" FileRelPathName="ip/I2CBalancer_dual_moving_average_0_0/I2CBalancer_dual_moving_average_0_0.xci">
           <Proxy FileSetName="I2CBalancer_dual_moving_average_0_0"/>
         </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="I2CBalancer.bd" FileRelPathName="ip/I2CBalancer_mute_0_0/I2CBalancer_mute_0_0.xci">
-          <Proxy FileSetName="I2CBalancer_mute_0_0"/>
+        <CompFileExtendedInfo CompFileName="I2CBalancer.bd" FileRelPathName="ip/I2CBalancer_proc_sys_reset_0_0/I2CBalancer_proc_sys_reset_0_0.xci">
+          <Proxy FileSetName="I2CBalancer_proc_sys_reset_0_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="I2CBalancer.bd" FileRelPathName="ip/I2CBalancer_mute_0_2/I2CBalancer_mute_0_2.xci">
+          <Proxy FileSetName="I2CBalancer_mute_0_2"/>
         </CompFileExtendedInfo>
       </File>
       <File Path="$PGENDIR/sources_1/bd/I2CBalancer/hdl/I2CBalancer_wrapper.vhd">
@@ -247,12 +250,6 @@
         <Option Name="UseBlackboxStub" Val="1"/>
       </Config>
     </FileSet>
-    <FileSet Name="I2CBalancer_mute_0_0" Type="BlockSrcs" RelSrcDir="$PSRCDIR/I2CBalancer_mute_0_0" RelGenDir="$PGENDIR/I2CBalancer_mute_0_0">
-      <Config>
-        <Option Name="TopModule" Val="I2CBalancer_mute_0_0"/>
-        <Option Name="UseBlackboxStub" Val="1"/>
-      </Config>
-    </FileSet>
     <FileSet Name="I2CBalancer_led_controller_0_0" Type="BlockSrcs" RelSrcDir="$PSRCDIR/I2CBalancer_led_controller_0_0" RelGenDir="$PGENDIR/I2CBalancer_led_controller_0_0">
       <Config>
         <Option Name="TopModule" Val="I2CBalancer_led_controller_0_0"/>
@@ -283,9 +280,21 @@
         <Option Name="UseBlackboxStub" Val="1"/>
       </Config>
     </FileSet>
-    <FileSet Name="I2CBalancer_dual_moving_average_0_0" Type="BlockSrcs" RelSrcDir="$PSRCDIR/I2CBalancer_dual_moving_average_0_0" RelGenDir="$PGENDIR/I2CBalancer_dual_moving_average_0_0">
+    <FileSet Name="I2CBalancer_proc_sys_reset_0_0" Type="BlockSrcs" RelSrcDir="$PSRCDIR/I2CBalancer_proc_sys_reset_0_0" RelGenDir="$PGENDIR/I2CBalancer_proc_sys_reset_0_0">
       <Config>
-        <Option Name="TopModule" Val="I2CBalancer_dual_moving_average_0_0"/>
+        <Option Name="TopModule" Val="I2CBalancer_proc_sys_reset_0_0"/>
+        <Option Name="UseBlackboxStub" Val="1"/>
+      </Config>
+    </FileSet>
+    <FileSet Name="I2CBalancer_mute_0_2" Type="BlockSrcs" RelSrcDir="$PSRCDIR/I2CBalancer_mute_0_2" RelGenDir="$PGENDIR/I2CBalancer_mute_0_2">
+      <Config>
+        <Option Name="TopModule" Val="I2CBalancer_mute_0_2"/>
+        <Option Name="UseBlackboxStub" Val="1"/>
+      </Config>
+    </FileSet>
+    <FileSet Name="I2CBalancer_volume_controller_0_0" Type="BlockSrcs" RelSrcDir="$PSRCDIR/I2CBalancer_volume_controller_0_0" RelGenDir="$PGENDIR/I2CBalancer_volume_controller_0_0">
+      <Config>
+        <Option Name="TopModule" Val="I2CBalancer_volume_controller_0_0"/>
         <Option Name="UseBlackboxStub" Val="1"/>
       </Config>
     </FileSet>
@@ -295,9 +304,9 @@
         <Option Name="UseBlackboxStub" Val="1"/>
       </Config>
     </FileSet>
-    <FileSet Name="I2CBalancer_volume_controller_0_0" Type="BlockSrcs" RelSrcDir="$PSRCDIR/I2CBalancer_volume_controller_0_0" RelGenDir="$PGENDIR/I2CBalancer_volume_controller_0_0">
+    <FileSet Name="I2CBalancer_dual_moving_average_0_0" Type="BlockSrcs" RelSrcDir="$PSRCDIR/I2CBalancer_dual_moving_average_0_0" RelGenDir="$PGENDIR/I2CBalancer_dual_moving_average_0_0">
       <Config>
-        <Option Name="TopModule" Val="I2CBalancer_volume_controller_0_0"/>
+        <Option Name="TopModule" Val="I2CBalancer_dual_moving_average_0_0"/>
         <Option Name="UseBlackboxStub" Val="1"/>
       </Config>
     </FileSet>
@@ -371,16 +380,6 @@
       <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
       <RQSFiles/>
     </Run>
-    <Run Id="I2CBalancer_mute_0_0_synth_1" Type="Ft3:Synth" SrcSet="I2CBalancer_mute_0_0" Part="xc7a35tcpg236-1" ConstrsSet="I2CBalancer_mute_0_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/I2CBalancer_mute_0_0_synth_1" IncludeInArchive="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/I2CBalancer_mute_0_0_synth_1">
-      <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2020"/>
-        <Step Id="synth_design"/>
-      </Strategy>
-      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
-      <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2020"/>
-      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
-      <RQSFiles/>
-    </Run>
     <Run Id="I2CBalancer_led_controller_0_0_synth_1" Type="Ft3:Synth" SrcSet="I2CBalancer_led_controller_0_0" Part="xc7a35tcpg236-1" ConstrsSet="I2CBalancer_led_controller_0_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/I2CBalancer_led_controller_0_0_synth_1" IncludeInArchive="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/I2CBalancer_led_controller_0_0_synth_1">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2020"/>
@@ -431,9 +430,35 @@
       <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
       <RQSFiles/>
     </Run>
-    <Run Id="I2CBalancer_dual_moving_average_0_0_synth_1" Type="Ft3:Synth" SrcSet="I2CBalancer_dual_moving_average_0_0" Part="xc7a35tcpg236-1" ConstrsSet="I2CBalancer_dual_moving_average_0_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/I2CBalancer_dual_moving_average_0_0_synth_1" IncludeInArchive="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/I2CBalancer_dual_moving_average_0_0_synth_1">
+    <Run Id="I2CBalancer_proc_sys_reset_0_0_synth_1" Type="Ft3:Synth" SrcSet="I2CBalancer_proc_sys_reset_0_0" Part="xc7a35tcpg236-1" ConstrsSet="I2CBalancer_proc_sys_reset_0_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/I2CBalancer_proc_sys_reset_0_0_synth_1" IncludeInArchive="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/I2CBalancer_proc_sys_reset_0_0_synth_1">
       <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2020"/>
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2020">
+          <Desc>Vivado Synthesis Defaults</Desc>
+        </StratHandle>
+        <Step Id="synth_design"/>
+      </Strategy>
+      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
+      <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2020"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="I2CBalancer_mute_0_2_synth_1" Type="Ft3:Synth" SrcSet="I2CBalancer_mute_0_2" Part="xc7a35tcpg236-1" ConstrsSet="I2CBalancer_mute_0_2" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/I2CBalancer_mute_0_2_synth_1" IncludeInArchive="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/I2CBalancer_mute_0_2_synth_1">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2020">
+          <Desc>Vivado Synthesis Defaults</Desc>
+        </StratHandle>
+        <Step Id="synth_design"/>
+      </Strategy>
+      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
+      <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2020"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="I2CBalancer_volume_controller_0_0_synth_1" Type="Ft3:Synth" SrcSet="I2CBalancer_volume_controller_0_0" Part="xc7a35tcpg236-1" ConstrsSet="I2CBalancer_volume_controller_0_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/I2CBalancer_volume_controller_0_0_synth_1" IncludeInArchive="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/I2CBalancer_volume_controller_0_0_synth_1">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2020">
+          <Desc>Vivado Synthesis Defaults</Desc>
+        </StratHandle>
         <Step Id="synth_design"/>
       </Strategy>
       <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
@@ -453,7 +478,7 @@
       <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
       <RQSFiles/>
     </Run>
-    <Run Id="I2CBalancer_volume_controller_0_0_synth_1" Type="Ft3:Synth" SrcSet="I2CBalancer_volume_controller_0_0" Part="xc7a35tcpg236-1" ConstrsSet="I2CBalancer_volume_controller_0_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/I2CBalancer_volume_controller_0_0_synth_1" IncludeInArchive="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/I2CBalancer_volume_controller_0_0_synth_1">
+    <Run Id="I2CBalancer_dual_moving_average_0_0_synth_1" Type="Ft3:Synth" SrcSet="I2CBalancer_dual_moving_average_0_0" Part="xc7a35tcpg236-1" ConstrsSet="I2CBalancer_dual_moving_average_0_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/I2CBalancer_dual_moving_average_0_0_synth_1" IncludeInArchive="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/I2CBalancer_dual_moving_average_0_0_synth_1">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2020">
           <Desc>Vivado Synthesis Defaults</Desc>
@@ -535,23 +560,6 @@
       <RQSFiles/>
     </Run>
     <Run Id="I2CBalancer_digilent_jstk2_0_0_impl_1" Type="Ft2:EntireDesign" Part="xc7a35tcpg236-1" ConstrsSet="I2CBalancer_digilent_jstk2_0_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="I2CBalancer_digilent_jstk2_0_0_synth_1" IncludeInArchive="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/I2CBalancer_digilent_jstk2_0_0_impl_1">
-      <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2020"/>
-        <Step Id="init_design"/>
-        <Step Id="opt_design"/>
-        <Step Id="power_opt_design"/>
-        <Step Id="place_design"/>
-        <Step Id="post_place_power_opt_design"/>
-        <Step Id="phys_opt_design"/>
-        <Step Id="route_design"/>
-        <Step Id="post_route_phys_opt_design"/>
-        <Step Id="write_bitstream"/>
-      </Strategy>
-      <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2020"/>
-      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
-      <RQSFiles/>
-    </Run>
-    <Run Id="I2CBalancer_mute_0_0_impl_1" Type="Ft2:EntireDesign" Part="xc7a35tcpg236-1" ConstrsSet="I2CBalancer_mute_0_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="I2CBalancer_mute_0_0_synth_1" IncludeInArchive="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/I2CBalancer_mute_0_0_impl_1">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2020"/>
         <Step Id="init_design"/>
@@ -653,9 +661,49 @@
       <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
       <RQSFiles/>
     </Run>
-    <Run Id="I2CBalancer_dual_moving_average_0_0_impl_1" Type="Ft2:EntireDesign" Part="xc7a35tcpg236-1" ConstrsSet="I2CBalancer_dual_moving_average_0_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="I2CBalancer_dual_moving_average_0_0_synth_1" IncludeInArchive="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/I2CBalancer_dual_moving_average_0_0_impl_1">
+    <Run Id="I2CBalancer_proc_sys_reset_0_0_impl_1" Type="Ft2:EntireDesign" Part="xc7a35tcpg236-1" ConstrsSet="I2CBalancer_proc_sys_reset_0_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="I2CBalancer_proc_sys_reset_0_0_synth_1" IncludeInArchive="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/I2CBalancer_proc_sys_reset_0_0_impl_1">
       <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2020"/>
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2020">
+          <Desc>Default settings for Implementation.</Desc>
+        </StratHandle>
+        <Step Id="init_design"/>
+        <Step Id="opt_design"/>
+        <Step Id="power_opt_design"/>
+        <Step Id="place_design"/>
+        <Step Id="post_place_power_opt_design"/>
+        <Step Id="phys_opt_design"/>
+        <Step Id="route_design"/>
+        <Step Id="post_route_phys_opt_design"/>
+        <Step Id="write_bitstream"/>
+      </Strategy>
+      <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2020"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="I2CBalancer_mute_0_2_impl_1" Type="Ft2:EntireDesign" Part="xc7a35tcpg236-1" ConstrsSet="I2CBalancer_mute_0_2" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="I2CBalancer_mute_0_2_synth_1" IncludeInArchive="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/I2CBalancer_mute_0_2_impl_1">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2020">
+          <Desc>Default settings for Implementation.</Desc>
+        </StratHandle>
+        <Step Id="init_design"/>
+        <Step Id="opt_design"/>
+        <Step Id="power_opt_design"/>
+        <Step Id="place_design"/>
+        <Step Id="post_place_power_opt_design"/>
+        <Step Id="phys_opt_design"/>
+        <Step Id="route_design"/>
+        <Step Id="post_route_phys_opt_design"/>
+        <Step Id="write_bitstream"/>
+      </Strategy>
+      <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2020"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="I2CBalancer_volume_controller_0_0_impl_1" Type="Ft2:EntireDesign" Part="xc7a35tcpg236-1" ConstrsSet="I2CBalancer_volume_controller_0_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="I2CBalancer_volume_controller_0_0_synth_1" IncludeInArchive="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/I2CBalancer_volume_controller_0_0_impl_1">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2020">
+          <Desc>Default settings for Implementation.</Desc>
+        </StratHandle>
         <Step Id="init_design"/>
         <Step Id="opt_design"/>
         <Step Id="power_opt_design"/>
@@ -689,7 +737,7 @@
       <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
       <RQSFiles/>
     </Run>
-    <Run Id="I2CBalancer_volume_controller_0_0_impl_1" Type="Ft2:EntireDesign" Part="xc7a35tcpg236-1" ConstrsSet="I2CBalancer_volume_controller_0_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="I2CBalancer_volume_controller_0_0_synth_1" IncludeInArchive="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/I2CBalancer_volume_controller_0_0_impl_1">
+    <Run Id="I2CBalancer_dual_moving_average_0_0_impl_1" Type="Ft2:EntireDesign" Part="xc7a35tcpg236-1" ConstrsSet="I2CBalancer_dual_moving_average_0_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="I2CBalancer_dual_moving_average_0_0_synth_1" IncludeInArchive="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/I2CBalancer_dual_moving_average_0_0_impl_1">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2020">
           <Desc>Default settings for Implementation.</Desc>

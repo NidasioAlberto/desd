@@ -15,7 +15,7 @@
 -- Revision:
 -- Revision 0.01 - File Created
 -- Additional Comments:
--- 
+--
 ----------------------------------------------------------------------------------
 library IEEE;
 use IEEE.STD_LOGIC_1164.all;
@@ -32,7 +32,8 @@ use IEEE.math_real.all;
 
 entity balance_controller is
     generic (
-        SOMETHING : positive := 32
+        AMPLIFICATION_EXPONENT : positive := 6;
+        BITS_BALANCE           : positive := 10
     );
     port (
         -- Master interface (going to the balance controller module)
@@ -55,7 +56,8 @@ entity balance_controller is
 end balance_controller;
 
 architecture Behavioral of balance_controller is
-
+    constant mean_value_balance : positive := 2 ** BITS_BALANCE / 2;
+    constant amplification_step : positive := 2 ** AMPLIFICATION_EXPONENT;
 begin
     process (aclk, aresetn)
     begin
@@ -67,26 +69,18 @@ begin
             m_axis_tdata <= s_axis_tdata;
             if (s_axis_tlast = '0') then -- to be optimized deleting this if and leaving only the content?
                 -- decrease right value
-                if (unsigned(balance)    <= - 224 + 512) then
-                    m_axis_tdata             <= std_logic_vector(resize(signed(s_axis_tdata(23 downto 4)), 24));
-                elsif (unsigned(balance) <= - 160 + 512) then
-                    m_axis_tdata             <= std_logic_vector(resize(signed(s_axis_tdata(23 downto 3)), 24));
-                elsif (unsigned(balance) <= - 96 + 512) then
-                    m_axis_tdata             <= std_logic_vector(resize(signed(s_axis_tdata(23 downto 2)), 24));
-                elsif (unsigned(balance) <= - 32 + 512) then
-                    m_axis_tdata             <= std_logic_vector(resize(signed(s_axis_tdata(23 downto 1)), 24));
-                end if;
+                DECREASE_RIGHT_FOR : for i in 1 to integer(mean_value_balance / amplification_step) loop
+                    if ((i - 1) * amplification_step < unsigned(balance) and unsigned(balance) <= i * amplification_step) then
+                        m_axis_tdata                                                               <= std_logic_vector(resize(signed(s_axis_tdata(23 downto (mean_value_balance / amplification_step - i))), 24));
+                    end if;
+                end loop DECREASE_RIGHT_FOR;
             else
                 -- decrease left value
-                if (unsigned(balance) >= 224 + 512) then
-                    m_axis_tdata <= std_logic_vector(resize(signed(s_axis_tdata(23 downto 4)), 24));
-                elsif (unsigned(balance) >= 160 + 512) then
-                    m_axis_tdata <= std_logic_vector(resize(signed(s_axis_tdata(23 downto 3)), 24));
-                elsif (unsigned(balance) >= 96 + 512) then
-                    m_axis_tdata <= std_logic_vector(resize(signed(s_axis_tdata(23 downto 2)), 24));
-                elsif (unsigned(balance) >= 32 + 512) then
-                    m_axis_tdata <= std_logic_vector(resize(signed(s_axis_tdata(23 downto 1)), 24));
-                end if;
+                DECREASE_LEFT_FOR : for i in 1 to integer(mean_value_balance / amplification_step) loop
+                    if (mean_value_balance + (i - 1) * amplification_step < unsigned(balance) and unsigned(balance) <= mean_value_balance + i * amplification_step) then
+                        m_axis_tdata                                                                                    <= std_logic_vector(resize(signed(s_axis_tdata(23 downto i)), 24));
+                    end if;
+                end loop DECREASE_LEFT_FOR;
             end if;
         end if;
     end process;

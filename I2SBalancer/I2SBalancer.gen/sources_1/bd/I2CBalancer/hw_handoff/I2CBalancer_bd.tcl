@@ -174,7 +174,7 @@ proc create_root_design { parentCell } {
   set rx_mclk_0 [ create_bd_port -dir O rx_mclk_0 ]
   set rx_sclk_0 [ create_bd_port -dir O rx_sclk_0 ]
   set rx_sdin_0 [ create_bd_port -dir I rx_sdin_0 ]
-  set sys_clock [ create_bd_port -dir I -type clk sys_clock ]
+  set sys_clock [ create_bd_port -dir I -type clk -freq_hz 180000000 sys_clock ]
   set tx_lrck_0 [ create_bd_port -dir O tx_lrck_0 ]
   set tx_mclk_0 [ create_bd_port -dir O tx_mclk_0 ]
   set tx_sclk_0 [ create_bd_port -dir O tx_sclk_0 ]
@@ -183,6 +183,7 @@ proc create_root_design { parentCell } {
   # Create instance: axi4stream_spi_master_0, and set properties
   set axi4stream_spi_master_0 [ create_bd_cell -type ip -vlnv DigiLAB:ip:axi4stream_spi_master:1.0 axi4stream_spi_master_0 ]
   set_property -dict [ list \
+   CONFIG.c_clkfreq {180000000} \
    CONFIG.c_sclkfreq {66666} \
  ] $axi4stream_spi_master_0
 
@@ -203,15 +204,17 @@ proc create_root_design { parentCell } {
   # Create instance: clk_wiz_0, and set properties
   set clk_wiz_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:clk_wiz:6.0 clk_wiz_0 ]
   set_property -dict [ list \
-   CONFIG.CLKOUT1_JITTER {149.337} \
-   CONFIG.CLKOUT1_PHASE_ERROR {122.577} \
-   CONFIG.CLKOUT2_JITTER {201.826} \
-   CONFIG.CLKOUT2_PHASE_ERROR {122.577} \
+   CONFIG.CLKOUT1_JITTER {100.694} \
+   CONFIG.CLKOUT1_PHASE_ERROR {90.521} \
+   CONFIG.CLKOUT1_REQUESTED_OUT_FREQ {180.000} \
+   CONFIG.CLKOUT2_JITTER {152.806} \
+   CONFIG.CLKOUT2_PHASE_ERROR {90.521} \
    CONFIG.CLKOUT2_REQUESTED_OUT_FREQ {22.579} \
    CONFIG.CLKOUT2_USED {true} \
-   CONFIG.MMCM_CLKFBOUT_MULT_F {7.000} \
-   CONFIG.MMCM_CLKOUT0_DIVIDE_F {7.000} \
-   CONFIG.MMCM_CLKOUT1_DIVIDE {31} \
+   CONFIG.MMCM_CLKFBOUT_MULT_F {5.500} \
+   CONFIG.MMCM_CLKOUT0_DIVIDE_F {5.500} \
+   CONFIG.MMCM_CLKOUT1_DIVIDE {44} \
+   CONFIG.MMCM_DIVCLK_DIVIDE {1} \
    CONFIG.NUM_OUT_CLKS {2} \
  ] $clk_wiz_0
 
@@ -248,6 +251,7 @@ proc create_root_design { parentCell } {
      return 1
    }
     set_property -dict [ list \
+   CONFIG.CLKFREQ {180000000} \
    CONFIG.SPI_SCLKFREQ {66666} \
  ] $digilent_jstk2_0
 
@@ -341,7 +345,7 @@ proc create_root_design { parentCell } {
   connect_bd_net -net axis_dual_i2s_0_tx_mclk [get_bd_ports tx_mclk_0] [get_bd_pins axis_dual_i2s_0/tx_mclk]
   connect_bd_net -net axis_dual_i2s_0_tx_sclk [get_bd_ports tx_sclk_0] [get_bd_pins axis_dual_i2s_0/tx_sclk]
   connect_bd_net -net axis_dual_i2s_0_tx_sdout [get_bd_ports tx_sdout_0] [get_bd_pins axis_dual_i2s_0/tx_sdout]
-  connect_bd_net -net clk_in1_0_1 [get_bd_ports sys_clock] [get_bd_pins clk_wiz_0/clk_in1]
+  connect_bd_net -net clk_100MHz_1 [get_bd_ports sys_clock] [get_bd_pins clk_wiz_0/clk_in1]
   connect_bd_net -net clk_wiz_0_clk_out1 [get_bd_pins axi4stream_spi_master_0/aclk] [get_bd_pins axis_dual_i2s_0/aclk] [get_bd_pins balance_controller_0/aclk] [get_bd_pins clk_wiz_0/clk_out1] [get_bd_pins debouncer_0/clk] [get_bd_pins debouncer_1/clk] [get_bd_pins digilent_jstk2_0/aclk] [get_bd_pins dual_moving_average_0/aclk] [get_bd_pins edge_detector_0/clk] [get_bd_pins edge_detector_1/clk] [get_bd_pins proc_sys_reset_0/slowest_sync_clk] [get_bd_pins volume_controller_0/aclk]
   connect_bd_net -net clk_wiz_0_clk_out2 [get_bd_pins axis_dual_i2s_0/i2s_clk] [get_bd_pins clk_wiz_0/clk_out2] [get_bd_pins proc_sys_reset_1/slowest_sync_clk]
   connect_bd_net -net clk_wiz_0_locked [get_bd_pins clk_wiz_0/locked] [get_bd_pins proc_sys_reset_0/dcm_locked] [get_bd_pins proc_sys_reset_1/dcm_locked]

@@ -1,7 +1,7 @@
 // Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2020.2 (win64) Build 3064766 Wed Nov 18 09:12:45 MST 2020
-// Date        : Wed May 17 18:24:22 2023
+// Date        : Wed May 24 20:40:18 2023
 // Host        : DESKTOP-F4BLQ3F running 64-bit major release  (build 9200)
 // Command     : write_verilog -force -mode synth_stub {c:/Users/emili/OneDrive - Politecnico di
 //               Milano/Documenti/desd/I2SBalancer/I2SBalancer.gen/sources_1/bd/I2CBalancer/ip/I2CBalancer_clk_wiz_0_0/I2CBalancer_clk_wiz_0_0_stub.v}

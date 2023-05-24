@@ -1,7 +1,7 @@
 // Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2020.2 (win64) Build 3064766 Wed Nov 18 09:12:45 MST 2020
-// Date        : Wed May 24 11:35:52 2023
+// Date        : Wed May 24 22:48:32 2023
 // Host        : DESKTOP-F4BLQ3F running 64-bit major release  (build 9200)
 // Command     : write_verilog -force -mode funcsim {c:/Users/emili/OneDrive - Politecnico di
 //               Milano/Documenti/desd/I2SBalancer/I2SBalancer.gen/sources_1/bd/I2CBalancer/ip/I2CBalancer_balance_controller_0_0/I2CBalancer_balance_controller_0_0_sim_netlist.v}
@@ -27,15 +27,15 @@ module I2CBalancer_balance_controller_0_0
     aclk,
     aresetn,
     balance);
-  (* x_interface_info = "xilinx.com:interface:axis:1.0 m_axis TVALID" *) (* x_interface_parameter = "XIL_INTERFACENAME m_axis, TDATA_NUM_BYTES 3, TDEST_WIDTH 0, TID_WIDTH 0, TUSER_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 1, FREQ_HZ 100000000, PHASE 0.0, CLK_DOMAIN /clk_wiz_0_clk_out1, LAYERED_METADATA undef, INSERT_VIP 0" *) output m_axis_tvalid;
+  (* x_interface_info = "xilinx.com:interface:axis:1.0 m_axis TVALID" *) (* x_interface_parameter = "XIL_INTERFACENAME m_axis, TDATA_NUM_BYTES 3, TDEST_WIDTH 0, TID_WIDTH 0, TUSER_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 1, FREQ_HZ 180000000, PHASE 0.0, CLK_DOMAIN /clk_wiz_0_clk_out1, LAYERED_METADATA undef, INSERT_VIP 0" *) output m_axis_tvalid;
   (* x_interface_info = "xilinx.com:interface:axis:1.0 m_axis TLAST" *) output m_axis_tlast;
   (* x_interface_info = "xilinx.com:interface:axis:1.0 m_axis TDATA" *) output [23:0]m_axis_tdata;
   (* x_interface_info = "xilinx.com:interface:axis:1.0 m_axis TREADY" *) input m_axis_tready;
-  (* x_interface_info = "xilinx.com:interface:axis:1.0 s_axis TVALID" *) (* x_interface_parameter = "XIL_INTERFACENAME s_axis, TDATA_NUM_BYTES 3, TDEST_WIDTH 0, TID_WIDTH 0, TUSER_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 1, FREQ_HZ 100000000, PHASE 0.0, CLK_DOMAIN /clk_wiz_0_clk_out1, LAYERED_METADATA undef, INSERT_VIP 0" *) input s_axis_tvalid;
+  (* x_interface_info = "xilinx.com:interface:axis:1.0 s_axis TVALID" *) (* x_interface_parameter = "XIL_INTERFACENAME s_axis, TDATA_NUM_BYTES 3, TDEST_WIDTH 0, TID_WIDTH 0, TUSER_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 1, FREQ_HZ 180000000, PHASE 0.0, CLK_DOMAIN /clk_wiz_0_clk_out1, LAYERED_METADATA undef, INSERT_VIP 0" *) input s_axis_tvalid;
   (* x_interface_info = "xilinx.com:interface:axis:1.0 s_axis TLAST" *) input s_axis_tlast;
   (* x_interface_info = "xilinx.com:interface:axis:1.0 s_axis TDATA" *) input [23:0]s_axis_tdata;
   (* x_interface_info = "xilinx.com:interface:axis:1.0 s_axis TREADY" *) output s_axis_tready;
-  (* x_interface_info = "xilinx.com:signal:clock:1.0 aclk CLK" *) (* x_interface_parameter = "XIL_INTERFACENAME aclk, ASSOCIATED_BUSIF m_axis:s_axis, ASSOCIATED_RESET aresetn, FREQ_HZ 100000000, FREQ_TOLERANCE_HZ 0, PHASE 0.0, CLK_DOMAIN /clk_wiz_0_clk_out1, INSERT_VIP 0" *) input aclk;
+  (* x_interface_info = "xilinx.com:signal:clock:1.0 aclk CLK" *) (* x_interface_parameter = "XIL_INTERFACENAME aclk, ASSOCIATED_BUSIF m_axis:s_axis, ASSOCIATED_RESET aresetn, FREQ_HZ 180000000, FREQ_TOLERANCE_HZ 0, PHASE 0.0, CLK_DOMAIN /clk_wiz_0_clk_out1, INSERT_VIP 0" *) input aclk;
   (* x_interface_info = "xilinx.com:signal:reset:1.0 aresetn RST" *) (* x_interface_parameter = "XIL_INTERFACENAME aresetn, POLARITY ACTIVE_LOW, INSERT_VIP 0" *) input aresetn;
   input [0:9]balance;
 
@@ -63,62 +63,115 @@ endmodule
 (* ORIG_REF_NAME = "balance_controller" *) 
 module I2CBalancer_balance_controller_0_0_balance_controller
    (m_axis_tdata,
-    aresetn,
     s_axis_tdata,
-    aclk,
     balance,
-    s_axis_tlast);
+    s_axis_tlast,
+    aresetn,
+    aclk);
   output [23:0]m_axis_tdata;
-  input aresetn;
   input [23:0]s_axis_tdata;
-  input aclk;
   input [0:9]balance;
   input s_axis_tlast;
+  input aresetn;
+  input aclk;
 
   wire aclk;
   wire aresetn;
   wire [0:9]balance;
   wire [23:0]m_axis_tdata;
+  wire \m_axis_tdata[0]_i_10_n_0 ;
   wire \m_axis_tdata[0]_i_2_n_0 ;
   wire \m_axis_tdata[0]_i_3_n_0 ;
   wire \m_axis_tdata[0]_i_4_n_0 ;
   wire \m_axis_tdata[0]_i_5_n_0 ;
+  wire \m_axis_tdata[0]_i_6_n_0 ;
+  wire \m_axis_tdata[0]_i_7_n_0 ;
+  wire \m_axis_tdata[0]_i_8_n_0 ;
+  wire \m_axis_tdata[0]_i_9_n_0 ;
   wire \m_axis_tdata[10]_i_2_n_0 ;
   wire \m_axis_tdata[10]_i_3_n_0 ;
   wire \m_axis_tdata[10]_i_4_n_0 ;
   wire \m_axis_tdata[10]_i_5_n_0 ;
+  wire \m_axis_tdata[10]_i_6_n_0 ;
+  wire \m_axis_tdata[10]_i_7_n_0 ;
+  wire \m_axis_tdata[10]_i_8_n_0 ;
+  wire \m_axis_tdata[10]_i_9_n_0 ;
   wire \m_axis_tdata[11]_i_2_n_0 ;
   wire \m_axis_tdata[11]_i_3_n_0 ;
   wire \m_axis_tdata[11]_i_4_n_0 ;
   wire \m_axis_tdata[11]_i_5_n_0 ;
+  wire \m_axis_tdata[11]_i_6_n_0 ;
+  wire \m_axis_tdata[11]_i_7_n_0 ;
+  wire \m_axis_tdata[11]_i_8_n_0 ;
+  wire \m_axis_tdata[11]_i_9_n_0 ;
+  wire \m_axis_tdata[12]_i_10_n_0 ;
   wire \m_axis_tdata[12]_i_2_n_0 ;
   wire \m_axis_tdata[12]_i_3_n_0 ;
   wire \m_axis_tdata[12]_i_4_n_0 ;
   wire \m_axis_tdata[12]_i_5_n_0 ;
+  wire \m_axis_tdata[12]_i_6_n_0 ;
+  wire \m_axis_tdata[12]_i_7_n_0 ;
+  wire \m_axis_tdata[12]_i_8_n_0 ;
+  wire \m_axis_tdata[12]_i_9_n_0 ;
+  wire \m_axis_tdata[13]_i_10_n_0 ;
   wire \m_axis_tdata[13]_i_2_n_0 ;
   wire \m_axis_tdata[13]_i_3_n_0 ;
   wire \m_axis_tdata[13]_i_4_n_0 ;
   wire \m_axis_tdata[13]_i_5_n_0 ;
+  wire \m_axis_tdata[13]_i_6_n_0 ;
+  wire \m_axis_tdata[13]_i_7_n_0 ;
+  wire \m_axis_tdata[13]_i_8_n_0 ;
+  wire \m_axis_tdata[13]_i_9_n_0 ;
+  wire \m_axis_tdata[14]_i_10_n_0 ;
+  wire \m_axis_tdata[14]_i_11_n_0 ;
   wire \m_axis_tdata[14]_i_2_n_0 ;
   wire \m_axis_tdata[14]_i_3_n_0 ;
   wire \m_axis_tdata[14]_i_4_n_0 ;
   wire \m_axis_tdata[14]_i_5_n_0 ;
+  wire \m_axis_tdata[14]_i_6_n_0 ;
+  wire \m_axis_tdata[14]_i_7_n_0 ;
+  wire \m_axis_tdata[14]_i_8_n_0 ;
+  wire \m_axis_tdata[14]_i_9_n_0 ;
+  wire \m_axis_tdata[15]_i_10_n_0 ;
+  wire \m_axis_tdata[15]_i_11_n_0 ;
+  wire \m_axis_tdata[15]_i_12_n_0 ;
   wire \m_axis_tdata[15]_i_2_n_0 ;
   wire \m_axis_tdata[15]_i_3_n_0 ;
   wire \m_axis_tdata[15]_i_4_n_0 ;
   wire \m_axis_tdata[15]_i_5_n_0 ;
+  wire \m_axis_tdata[15]_i_6_n_0 ;
+  wire \m_axis_tdata[15]_i_7_n_0 ;
+  wire \m_axis_tdata[15]_i_8_n_0 ;
+  wire \m_axis_tdata[15]_i_9_n_0 ;
+  wire \m_axis_tdata[16]_i_10_n_0 ;
+  wire \m_axis_tdata[16]_i_11_n_0 ;
+  wire \m_axis_tdata[16]_i_12_n_0 ;
+  wire \m_axis_tdata[16]_i_13_n_0 ;
+  wire \m_axis_tdata[16]_i_14_n_0 ;
   wire \m_axis_tdata[16]_i_2_n_0 ;
   wire \m_axis_tdata[16]_i_3_n_0 ;
   wire \m_axis_tdata[16]_i_4_n_0 ;
   wire \m_axis_tdata[16]_i_5_n_0 ;
+  wire \m_axis_tdata[16]_i_6_n_0 ;
+  wire \m_axis_tdata[16]_i_7_n_0 ;
+  wire \m_axis_tdata[16]_i_8_n_0 ;
+  wire \m_axis_tdata[16]_i_9_n_0 ;
   wire \m_axis_tdata[17]_i_2_n_0 ;
   wire \m_axis_tdata[17]_i_3_n_0 ;
   wire \m_axis_tdata[17]_i_4_n_0 ;
   wire \m_axis_tdata[17]_i_5_n_0 ;
+  wire \m_axis_tdata[17]_i_6_n_0 ;
+  wire \m_axis_tdata[17]_i_7_n_0 ;
+  wire \m_axis_tdata[18]_i_10_n_0 ;
+  wire \m_axis_tdata[18]_i_11_n_0 ;
   wire \m_axis_tdata[18]_i_2_n_0 ;
   wire \m_axis_tdata[18]_i_3_n_0 ;
   wire \m_axis_tdata[18]_i_4_n_0 ;
   wire \m_axis_tdata[18]_i_5_n_0 ;
+  wire \m_axis_tdata[18]_i_6_n_0 ;
+  wire \m_axis_tdata[18]_i_7_n_0 ;
+  wire \m_axis_tdata[18]_i_8_n_0 ;
+  wire \m_axis_tdata[18]_i_9_n_0 ;
   wire \m_axis_tdata[19]_i_10_n_0 ;
   wire \m_axis_tdata[19]_i_2_n_0 ;
   wire \m_axis_tdata[19]_i_3_n_0 ;
@@ -128,1298 +181,2275 @@ module I2CBalancer_balance_controller_0_0_balance_controller
   wire \m_axis_tdata[19]_i_7_n_0 ;
   wire \m_axis_tdata[19]_i_8_n_0 ;
   wire \m_axis_tdata[19]_i_9_n_0 ;
+  wire \m_axis_tdata[1]_i_10_n_0 ;
   wire \m_axis_tdata[1]_i_2_n_0 ;
   wire \m_axis_tdata[1]_i_3_n_0 ;
   wire \m_axis_tdata[1]_i_4_n_0 ;
   wire \m_axis_tdata[1]_i_5_n_0 ;
+  wire \m_axis_tdata[1]_i_6_n_0 ;
+  wire \m_axis_tdata[1]_i_7_n_0 ;
+  wire \m_axis_tdata[1]_i_8_n_0 ;
+  wire \m_axis_tdata[1]_i_9_n_0 ;
   wire \m_axis_tdata[20]_i_2_n_0 ;
   wire \m_axis_tdata[20]_i_3_n_0 ;
   wire \m_axis_tdata[20]_i_4_n_0 ;
-  wire \m_axis_tdata[20]_i_5_n_0 ;
-  wire \m_axis_tdata[20]_i_6_n_0 ;
-  wire \m_axis_tdata[20]_i_7_n_0 ;
-  wire \m_axis_tdata[20]_i_8_n_0 ;
+  wire \m_axis_tdata[21]_i_10_n_0 ;
+  wire \m_axis_tdata[21]_i_11_n_0 ;
+  wire \m_axis_tdata[21]_i_12_n_0 ;
+  wire \m_axis_tdata[21]_i_13_n_0 ;
+  wire \m_axis_tdata[21]_i_14_n_0 ;
+  wire \m_axis_tdata[21]_i_15_n_0 ;
+  wire \m_axis_tdata[21]_i_16_n_0 ;
+  wire \m_axis_tdata[21]_i_17_n_0 ;
+  wire \m_axis_tdata[21]_i_18_n_0 ;
   wire \m_axis_tdata[21]_i_2_n_0 ;
   wire \m_axis_tdata[21]_i_3_n_0 ;
   wire \m_axis_tdata[21]_i_4_n_0 ;
   wire \m_axis_tdata[21]_i_5_n_0 ;
   wire \m_axis_tdata[21]_i_6_n_0 ;
+  wire \m_axis_tdata[21]_i_7_n_0 ;
+  wire \m_axis_tdata[21]_i_8_n_0 ;
+  wire \m_axis_tdata[21]_i_9_n_0 ;
   wire \m_axis_tdata[22]_i_2_n_0 ;
   wire \m_axis_tdata[22]_i_3_n_0 ;
   wire \m_axis_tdata[22]_i_4_n_0 ;
   wire \m_axis_tdata[22]_i_5_n_0 ;
   wire \m_axis_tdata[22]_i_6_n_0 ;
   wire \m_axis_tdata[22]_i_7_n_0 ;
+  wire \m_axis_tdata[2]_i_10_n_0 ;
   wire \m_axis_tdata[2]_i_2_n_0 ;
   wire \m_axis_tdata[2]_i_3_n_0 ;
   wire \m_axis_tdata[2]_i_4_n_0 ;
   wire \m_axis_tdata[2]_i_5_n_0 ;
+  wire \m_axis_tdata[2]_i_6_n_0 ;
+  wire \m_axis_tdata[2]_i_7_n_0 ;
+  wire \m_axis_tdata[2]_i_8_n_0 ;
+  wire \m_axis_tdata[2]_i_9_n_0 ;
+  wire \m_axis_tdata[3]_i_10_n_0 ;
   wire \m_axis_tdata[3]_i_2_n_0 ;
   wire \m_axis_tdata[3]_i_3_n_0 ;
   wire \m_axis_tdata[3]_i_4_n_0 ;
   wire \m_axis_tdata[3]_i_5_n_0 ;
+  wire \m_axis_tdata[3]_i_6_n_0 ;
+  wire \m_axis_tdata[3]_i_7_n_0 ;
+  wire \m_axis_tdata[3]_i_8_n_0 ;
+  wire \m_axis_tdata[3]_i_9_n_0 ;
+  wire \m_axis_tdata[4]_i_10_n_0 ;
   wire \m_axis_tdata[4]_i_2_n_0 ;
   wire \m_axis_tdata[4]_i_3_n_0 ;
   wire \m_axis_tdata[4]_i_4_n_0 ;
   wire \m_axis_tdata[4]_i_5_n_0 ;
+  wire \m_axis_tdata[4]_i_6_n_0 ;
+  wire \m_axis_tdata[4]_i_7_n_0 ;
+  wire \m_axis_tdata[4]_i_8_n_0 ;
+  wire \m_axis_tdata[4]_i_9_n_0 ;
+  wire \m_axis_tdata[5]_i_10_n_0 ;
   wire \m_axis_tdata[5]_i_2_n_0 ;
   wire \m_axis_tdata[5]_i_3_n_0 ;
   wire \m_axis_tdata[5]_i_4_n_0 ;
   wire \m_axis_tdata[5]_i_5_n_0 ;
+  wire \m_axis_tdata[5]_i_6_n_0 ;
+  wire \m_axis_tdata[5]_i_7_n_0 ;
+  wire \m_axis_tdata[5]_i_8_n_0 ;
+  wire \m_axis_tdata[5]_i_9_n_0 ;
+  wire \m_axis_tdata[6]_i_10_n_0 ;
   wire \m_axis_tdata[6]_i_2_n_0 ;
   wire \m_axis_tdata[6]_i_3_n_0 ;
   wire \m_axis_tdata[6]_i_4_n_0 ;
   wire \m_axis_tdata[6]_i_5_n_0 ;
+  wire \m_axis_tdata[6]_i_6_n_0 ;
+  wire \m_axis_tdata[6]_i_7_n_0 ;
+  wire \m_axis_tdata[6]_i_8_n_0 ;
+  wire \m_axis_tdata[6]_i_9_n_0 ;
   wire \m_axis_tdata[7]_i_2_n_0 ;
   wire \m_axis_tdata[7]_i_3_n_0 ;
   wire \m_axis_tdata[7]_i_4_n_0 ;
   wire \m_axis_tdata[7]_i_5_n_0 ;
+  wire \m_axis_tdata[7]_i_6_n_0 ;
+  wire \m_axis_tdata[7]_i_7_n_0 ;
+  wire \m_axis_tdata[7]_i_8_n_0 ;
+  wire \m_axis_tdata[7]_i_9_n_0 ;
+  wire \m_axis_tdata[8]_i_10_n_0 ;
   wire \m_axis_tdata[8]_i_2_n_0 ;
   wire \m_axis_tdata[8]_i_3_n_0 ;
   wire \m_axis_tdata[8]_i_4_n_0 ;
   wire \m_axis_tdata[8]_i_5_n_0 ;
+  wire \m_axis_tdata[8]_i_6_n_0 ;
+  wire \m_axis_tdata[8]_i_7_n_0 ;
+  wire \m_axis_tdata[8]_i_8_n_0 ;
+  wire \m_axis_tdata[8]_i_9_n_0 ;
+  wire \m_axis_tdata[9]_i_10_n_0 ;
   wire \m_axis_tdata[9]_i_2_n_0 ;
   wire \m_axis_tdata[9]_i_3_n_0 ;
   wire \m_axis_tdata[9]_i_4_n_0 ;
   wire \m_axis_tdata[9]_i_5_n_0 ;
+  wire \m_axis_tdata[9]_i_6_n_0 ;
+  wire \m_axis_tdata[9]_i_7_n_0 ;
+  wire \m_axis_tdata[9]_i_8_n_0 ;
+  wire \m_axis_tdata[9]_i_9_n_0 ;
   wire [22:0]p_1_in;
   wire [23:0]s_axis_tdata;
   wire s_axis_tlast;
 
   LUT6 #(
-    .INIT(64'hFFFFFFFFFFFFFFF8)) 
+    .INIT(64'hEFEE0000EFEEEFEE)) 
     \m_axis_tdata[0]_i_1 
-       (.I0(\m_axis_tdata[20]_i_3_n_0 ),
-        .I1(s_axis_tdata[2]),
-        .I2(\m_axis_tdata[0]_i_2_n_0 ),
-        .I3(\m_axis_tdata[0]_i_3_n_0 ),
-        .I4(\m_axis_tdata[0]_i_4_n_0 ),
-        .I5(\m_axis_tdata[0]_i_5_n_0 ),
+       (.I0(\m_axis_tdata[0]_i_2_n_0 ),
+        .I1(\m_axis_tdata[0]_i_3_n_0 ),
+        .I2(\m_axis_tdata[0]_i_4_n_0 ),
+        .I3(\m_axis_tdata[15]_i_5_n_0 ),
+        .I4(\m_axis_tdata[0]_i_5_n_0 ),
+        .I5(\m_axis_tdata[0]_i_6_n_0 ),
         .O(p_1_in[0]));
   LUT6 #(
-    .INIT(64'hE22E222200000000)) 
+    .INIT(64'h44F444F4FFFF44F4)) 
+    \m_axis_tdata[0]_i_10 
+       (.I0(\m_axis_tdata[16]_i_9_n_0 ),
+        .I1(s_axis_tdata[7]),
+        .I2(s_axis_tdata[8]),
+        .I3(\m_axis_tdata[16]_i_7_n_0 ),
+        .I4(s_axis_tdata[6]),
+        .I5(\m_axis_tdata[16]_i_8_n_0 ),
+        .O(\m_axis_tdata[0]_i_10_n_0 ));
+  LUT4 #(
+    .INIT(16'hFFAE)) 
     \m_axis_tdata[0]_i_2 
-       (.I0(\m_axis_tdata[20]_i_5_n_0 ),
-        .I1(balance[2]),
-        .I2(\m_axis_tdata[22]_i_7_n_0 ),
-        .I3(balance[3]),
-        .I4(\m_axis_tdata[21]_i_5_n_0 ),
-        .I5(s_axis_tdata[1]),
+       (.I0(\m_axis_tdata[0]_i_7_n_0 ),
+        .I1(s_axis_tdata[0]),
+        .I2(\m_axis_tdata[21]_i_9_n_0 ),
+        .I3(s_axis_tlast),
         .O(\m_axis_tdata[0]_i_2_n_0 ));
   LUT6 #(
-    .INIT(64'hFFFFFF4000000000)) 
+    .INIT(64'h22F2FFFF22F222F2)) 
     \m_axis_tdata[0]_i_3 
-       (.I0(\m_axis_tdata[22]_i_7_n_0 ),
-        .I1(balance[3]),
-        .I2(\m_axis_tdata[19]_i_6_n_0 ),
-        .I3(\m_axis_tdata[19]_i_7_n_0 ),
-        .I4(\m_axis_tdata[22]_i_5_n_0 ),
-        .I5(s_axis_tdata[0]),
+       (.I0(s_axis_tdata[4]),
+        .I1(\m_axis_tdata[21]_i_12_n_0 ),
+        .I2(s_axis_tdata[5]),
+        .I3(\m_axis_tdata[21]_i_13_n_0 ),
+        .I4(\m_axis_tdata[21]_i_14_n_0 ),
+        .I5(s_axis_tdata[3]),
         .O(\m_axis_tdata[0]_i_3_n_0 ));
   LUT6 #(
-    .INIT(64'hFF90009000000000)) 
+    .INIT(64'hAAAABBAFFFFFBBAF)) 
     \m_axis_tdata[0]_i_4 
-       (.I0(\m_axis_tdata[22]_i_7_n_0 ),
-        .I1(balance[3]),
-        .I2(\m_axis_tdata[21]_i_5_n_0 ),
-        .I3(balance[2]),
-        .I4(\m_axis_tdata[20]_i_5_n_0 ),
-        .I5(s_axis_tdata[3]),
+       (.I0(\m_axis_tdata[21]_i_17_n_0 ),
+        .I1(s_axis_tdata[0]),
+        .I2(s_axis_tdata[7]),
+        .I3(\m_axis_tdata[14]_i_8_n_0 ),
+        .I4(\m_axis_tdata[15]_i_9_n_0 ),
+        .I5(s_axis_tdata[6]),
         .O(\m_axis_tdata[0]_i_4_n_0 ));
   LUT6 #(
-    .INIT(64'hFBBBAAAA00000000)) 
+    .INIT(64'hFFFFFFFFFFF4FFFF)) 
     \m_axis_tdata[0]_i_5 
-       (.I0(\m_axis_tdata[19]_i_8_n_0 ),
-        .I1(balance[1]),
-        .I2(\m_axis_tdata[19]_i_9_n_0 ),
-        .I3(\m_axis_tdata[22]_i_7_n_0 ),
-        .I4(\m_axis_tdata[19]_i_10_n_0 ),
-        .I5(s_axis_tdata[4]),
+       (.I0(\m_axis_tdata[18]_i_11_n_0 ),
+        .I1(s_axis_tdata[4]),
+        .I2(\m_axis_tdata[0]_i_8_n_0 ),
+        .I3(\m_axis_tdata[0]_i_9_n_0 ),
+        .I4(s_axis_tlast),
+        .I5(\m_axis_tdata[0]_i_10_n_0 ),
         .O(\m_axis_tdata[0]_i_5_n_0 ));
   LUT6 #(
-    .INIT(64'hFFFFFFFFFFFFFFF8)) 
-    \m_axis_tdata[10]_i_1 
-       (.I0(\m_axis_tdata[20]_i_3_n_0 ),
-        .I1(s_axis_tdata[12]),
-        .I2(\m_axis_tdata[10]_i_2_n_0 ),
-        .I3(\m_axis_tdata[10]_i_3_n_0 ),
-        .I4(\m_axis_tdata[10]_i_4_n_0 ),
-        .I5(\m_axis_tdata[10]_i_5_n_0 ),
-        .O(p_1_in[10]));
+    .INIT(64'h101BB0BBFFFFFFFF)) 
+    \m_axis_tdata[0]_i_6 
+       (.I0(\m_axis_tdata[18]_i_8_n_0 ),
+        .I1(s_axis_tdata[2]),
+        .I2(\m_axis_tdata[18]_i_9_n_0 ),
+        .I3(s_axis_tdata[1]),
+        .I4(s_axis_tdata[0]),
+        .I5(\m_axis_tdata[21]_i_8_n_0 ),
+        .O(\m_axis_tdata[0]_i_6_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair16" *) 
+  LUT4 #(
+    .INIT(16'h4F44)) 
+    \m_axis_tdata[0]_i_7 
+       (.I0(\m_axis_tdata[21]_i_10_n_0 ),
+        .I1(s_axis_tdata[1]),
+        .I2(\m_axis_tdata[21]_i_11_n_0 ),
+        .I3(s_axis_tdata[2]),
+        .O(\m_axis_tdata[0]_i_7_n_0 ));
+  LUT2 #(
+    .INIT(4'h2)) 
+    \m_axis_tdata[0]_i_8 
+       (.I0(s_axis_tdata[3]),
+        .I1(\m_axis_tdata[19]_i_9_n_0 ),
+        .O(\m_axis_tdata[0]_i_8_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair13" *) 
+  LUT2 #(
+    .INIT(4'h2)) 
+    \m_axis_tdata[0]_i_9 
+       (.I0(s_axis_tdata[5]),
+        .I1(\m_axis_tdata[18]_i_10_n_0 ),
+        .O(\m_axis_tdata[0]_i_9_n_0 ));
   LUT6 #(
-    .INIT(64'hE22E222200000000)) 
+    .INIT(64'hEFEE0000EFEEEFEE)) 
+    \m_axis_tdata[10]_i_1 
+       (.I0(\m_axis_tdata[10]_i_2_n_0 ),
+        .I1(\m_axis_tdata[10]_i_3_n_0 ),
+        .I2(\m_axis_tdata[10]_i_4_n_0 ),
+        .I3(\m_axis_tdata[15]_i_5_n_0 ),
+        .I4(\m_axis_tdata[10]_i_5_n_0 ),
+        .I5(\m_axis_tdata[10]_i_6_n_0 ),
+        .O(p_1_in[10]));
+  (* SOFT_HLUTNM = "soft_lutpair28" *) 
+  LUT4 #(
+    .INIT(16'hFFAE)) 
     \m_axis_tdata[10]_i_2 
-       (.I0(\m_axis_tdata[20]_i_5_n_0 ),
-        .I1(balance[2]),
-        .I2(\m_axis_tdata[22]_i_7_n_0 ),
-        .I3(balance[3]),
-        .I4(\m_axis_tdata[21]_i_5_n_0 ),
-        .I5(s_axis_tdata[11]),
+       (.I0(\m_axis_tdata[10]_i_7_n_0 ),
+        .I1(s_axis_tdata[10]),
+        .I2(\m_axis_tdata[21]_i_9_n_0 ),
+        .I3(s_axis_tlast),
         .O(\m_axis_tdata[10]_i_2_n_0 ));
   LUT6 #(
-    .INIT(64'hFFFFFF4000000000)) 
+    .INIT(64'h22F2FFFF22F222F2)) 
     \m_axis_tdata[10]_i_3 
-       (.I0(\m_axis_tdata[22]_i_7_n_0 ),
-        .I1(balance[3]),
-        .I2(\m_axis_tdata[19]_i_6_n_0 ),
-        .I3(\m_axis_tdata[19]_i_7_n_0 ),
-        .I4(\m_axis_tdata[22]_i_5_n_0 ),
-        .I5(s_axis_tdata[10]),
+       (.I0(s_axis_tdata[14]),
+        .I1(\m_axis_tdata[21]_i_12_n_0 ),
+        .I2(s_axis_tdata[15]),
+        .I3(\m_axis_tdata[21]_i_13_n_0 ),
+        .I4(\m_axis_tdata[21]_i_14_n_0 ),
+        .I5(s_axis_tdata[13]),
         .O(\m_axis_tdata[10]_i_3_n_0 ));
   LUT6 #(
-    .INIT(64'hFF90009000000000)) 
+    .INIT(64'hAAAABBAFFFFFBBAF)) 
     \m_axis_tdata[10]_i_4 
-       (.I0(\m_axis_tdata[22]_i_7_n_0 ),
-        .I1(balance[3]),
-        .I2(\m_axis_tdata[21]_i_5_n_0 ),
-        .I3(balance[2]),
-        .I4(\m_axis_tdata[20]_i_5_n_0 ),
-        .I5(s_axis_tdata[13]),
+       (.I0(\m_axis_tdata[21]_i_17_n_0 ),
+        .I1(s_axis_tdata[10]),
+        .I2(s_axis_tdata[17]),
+        .I3(\m_axis_tdata[14]_i_8_n_0 ),
+        .I4(\m_axis_tdata[15]_i_9_n_0 ),
+        .I5(s_axis_tdata[16]),
         .O(\m_axis_tdata[10]_i_4_n_0 ));
-  LUT6 #(
-    .INIT(64'hFBBBAAAA00000000)) 
+  (* SOFT_HLUTNM = "soft_lutpair38" *) 
+  LUT3 #(
+    .INIT(8'hFB)) 
     \m_axis_tdata[10]_i_5 
-       (.I0(\m_axis_tdata[19]_i_8_n_0 ),
-        .I1(balance[1]),
-        .I2(\m_axis_tdata[19]_i_9_n_0 ),
-        .I3(\m_axis_tdata[22]_i_7_n_0 ),
-        .I4(\m_axis_tdata[19]_i_10_n_0 ),
-        .I5(s_axis_tdata[14]),
+       (.I0(\m_axis_tdata[10]_i_8_n_0 ),
+        .I1(s_axis_tlast),
+        .I2(\m_axis_tdata[10]_i_9_n_0 ),
         .O(\m_axis_tdata[10]_i_5_n_0 ));
   LUT6 #(
-    .INIT(64'hFFFFFFFFFFFFFFF8)) 
-    \m_axis_tdata[11]_i_1 
-       (.I0(\m_axis_tdata[20]_i_3_n_0 ),
-        .I1(s_axis_tdata[13]),
-        .I2(\m_axis_tdata[11]_i_2_n_0 ),
-        .I3(\m_axis_tdata[11]_i_3_n_0 ),
-        .I4(\m_axis_tdata[11]_i_4_n_0 ),
-        .I5(\m_axis_tdata[11]_i_5_n_0 ),
-        .O(p_1_in[11]));
+    .INIT(64'hBB0BBB0B0000BB0B)) 
+    \m_axis_tdata[10]_i_6 
+       (.I0(\m_axis_tdata[18]_i_10_n_0 ),
+        .I1(s_axis_tdata[15]),
+        .I2(s_axis_tdata[13]),
+        .I3(\m_axis_tdata[19]_i_9_n_0 ),
+        .I4(s_axis_tdata[14]),
+        .I5(\m_axis_tdata[18]_i_11_n_0 ),
+        .O(\m_axis_tdata[10]_i_6_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair29" *) 
+  LUT4 #(
+    .INIT(16'h4F44)) 
+    \m_axis_tdata[10]_i_7 
+       (.I0(\m_axis_tdata[21]_i_10_n_0 ),
+        .I1(s_axis_tdata[11]),
+        .I2(\m_axis_tdata[21]_i_11_n_0 ),
+        .I3(s_axis_tdata[12]),
+        .O(\m_axis_tdata[10]_i_7_n_0 ));
   LUT6 #(
-    .INIT(64'hE22E222200000000)) 
+    .INIT(64'hA8AAA82020AA2020)) 
+    \m_axis_tdata[10]_i_8 
+       (.I0(\m_axis_tdata[21]_i_8_n_0 ),
+        .I1(\m_axis_tdata[18]_i_8_n_0 ),
+        .I2(s_axis_tdata[12]),
+        .I3(\m_axis_tdata[18]_i_9_n_0 ),
+        .I4(s_axis_tdata[11]),
+        .I5(s_axis_tdata[10]),
+        .O(\m_axis_tdata[10]_i_8_n_0 ));
+  LUT6 #(
+    .INIT(64'h44F444F4FFFF44F4)) 
+    \m_axis_tdata[10]_i_9 
+       (.I0(\m_axis_tdata[16]_i_8_n_0 ),
+        .I1(s_axis_tdata[16]),
+        .I2(s_axis_tdata[18]),
+        .I3(\m_axis_tdata[16]_i_7_n_0 ),
+        .I4(s_axis_tdata[17]),
+        .I5(\m_axis_tdata[16]_i_9_n_0 ),
+        .O(\m_axis_tdata[10]_i_9_n_0 ));
+  LUT6 #(
+    .INIT(64'hE0EEEEEEE0EEE0EE)) 
+    \m_axis_tdata[11]_i_1 
+       (.I0(\m_axis_tdata[11]_i_2_n_0 ),
+        .I1(\m_axis_tdata[11]_i_3_n_0 ),
+        .I2(\m_axis_tdata[11]_i_4_n_0 ),
+        .I3(\m_axis_tdata[11]_i_5_n_0 ),
+        .I4(\m_axis_tdata[11]_i_6_n_0 ),
+        .I5(\m_axis_tdata[15]_i_5_n_0 ),
+        .O(p_1_in[11]));
+  (* SOFT_HLUTNM = "soft_lutpair38" *) 
+  LUT3 #(
+    .INIT(8'hFB)) 
     \m_axis_tdata[11]_i_2 
-       (.I0(\m_axis_tdata[20]_i_5_n_0 ),
-        .I1(balance[2]),
-        .I2(\m_axis_tdata[22]_i_7_n_0 ),
-        .I3(balance[3]),
-        .I4(\m_axis_tdata[21]_i_5_n_0 ),
-        .I5(s_axis_tdata[12]),
+       (.I0(\m_axis_tdata[11]_i_7_n_0 ),
+        .I1(s_axis_tlast),
+        .I2(\m_axis_tdata[11]_i_8_n_0 ),
         .O(\m_axis_tdata[11]_i_2_n_0 ));
   LUT6 #(
-    .INIT(64'hFFFFFF4000000000)) 
+    .INIT(64'h44F444F4FFFF44F4)) 
     \m_axis_tdata[11]_i_3 
-       (.I0(\m_axis_tdata[22]_i_7_n_0 ),
-        .I1(balance[3]),
-        .I2(\m_axis_tdata[19]_i_6_n_0 ),
-        .I3(\m_axis_tdata[19]_i_7_n_0 ),
-        .I4(\m_axis_tdata[22]_i_5_n_0 ),
-        .I5(s_axis_tdata[11]),
+       (.I0(\m_axis_tdata[18]_i_10_n_0 ),
+        .I1(s_axis_tdata[16]),
+        .I2(s_axis_tdata[14]),
+        .I3(\m_axis_tdata[19]_i_9_n_0 ),
+        .I4(s_axis_tdata[15]),
+        .I5(\m_axis_tdata[18]_i_11_n_0 ),
         .O(\m_axis_tdata[11]_i_3_n_0 ));
-  LUT6 #(
-    .INIT(64'hFF90009000000000)) 
+  (* SOFT_HLUTNM = "soft_lutpair30" *) 
+  LUT4 #(
+    .INIT(16'hFFAE)) 
     \m_axis_tdata[11]_i_4 
-       (.I0(\m_axis_tdata[22]_i_7_n_0 ),
-        .I1(balance[3]),
-        .I2(\m_axis_tdata[21]_i_5_n_0 ),
-        .I3(balance[2]),
-        .I4(\m_axis_tdata[20]_i_5_n_0 ),
-        .I5(s_axis_tdata[14]),
+       (.I0(\m_axis_tdata[11]_i_9_n_0 ),
+        .I1(s_axis_tdata[11]),
+        .I2(\m_axis_tdata[21]_i_9_n_0 ),
+        .I3(s_axis_tlast),
         .O(\m_axis_tdata[11]_i_4_n_0 ));
   LUT6 #(
-    .INIT(64'hFBBBAAAA00000000)) 
+    .INIT(64'hDD0DDD0D0000DD0D)) 
     \m_axis_tdata[11]_i_5 
-       (.I0(\m_axis_tdata[19]_i_8_n_0 ),
-        .I1(balance[1]),
-        .I2(\m_axis_tdata[19]_i_9_n_0 ),
-        .I3(\m_axis_tdata[22]_i_7_n_0 ),
-        .I4(\m_axis_tdata[19]_i_10_n_0 ),
-        .I5(s_axis_tdata[15]),
+       (.I0(s_axis_tdata[14]),
+        .I1(\m_axis_tdata[21]_i_14_n_0 ),
+        .I2(s_axis_tdata[15]),
+        .I3(\m_axis_tdata[21]_i_12_n_0 ),
+        .I4(s_axis_tdata[16]),
+        .I5(\m_axis_tdata[21]_i_13_n_0 ),
         .O(\m_axis_tdata[11]_i_5_n_0 ));
   LUT6 #(
-    .INIT(64'hFFFFFFFFFFFFFFF8)) 
+    .INIT(64'hAEBFAEBFAEAEBFBF)) 
+    \m_axis_tdata[11]_i_6 
+       (.I0(\m_axis_tdata[21]_i_17_n_0 ),
+        .I1(\m_axis_tdata[15]_i_9_n_0 ),
+        .I2(s_axis_tdata[17]),
+        .I3(s_axis_tdata[11]),
+        .I4(s_axis_tdata[18]),
+        .I5(\m_axis_tdata[14]_i_8_n_0 ),
+        .O(\m_axis_tdata[11]_i_6_n_0 ));
+  LUT6 #(
+    .INIT(64'hA8AAA82020AA2020)) 
+    \m_axis_tdata[11]_i_7 
+       (.I0(\m_axis_tdata[21]_i_8_n_0 ),
+        .I1(\m_axis_tdata[18]_i_8_n_0 ),
+        .I2(s_axis_tdata[13]),
+        .I3(\m_axis_tdata[18]_i_9_n_0 ),
+        .I4(s_axis_tdata[12]),
+        .I5(s_axis_tdata[11]),
+        .O(\m_axis_tdata[11]_i_7_n_0 ));
+  LUT6 #(
+    .INIT(64'h44F444F4FFFF44F4)) 
+    \m_axis_tdata[11]_i_8 
+       (.I0(\m_axis_tdata[16]_i_8_n_0 ),
+        .I1(s_axis_tdata[17]),
+        .I2(s_axis_tdata[18]),
+        .I3(\m_axis_tdata[16]_i_9_n_0 ),
+        .I4(s_axis_tdata[19]),
+        .I5(\m_axis_tdata[16]_i_7_n_0 ),
+        .O(\m_axis_tdata[11]_i_8_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair29" *) 
+  LUT4 #(
+    .INIT(16'h4F44)) 
+    \m_axis_tdata[11]_i_9 
+       (.I0(\m_axis_tdata[21]_i_10_n_0 ),
+        .I1(s_axis_tdata[12]),
+        .I2(\m_axis_tdata[21]_i_11_n_0 ),
+        .I3(s_axis_tdata[13]),
+        .O(\m_axis_tdata[11]_i_9_n_0 ));
+  LUT6 #(
+    .INIT(64'hAEAEAEAEAE00AEAE)) 
     \m_axis_tdata[12]_i_1 
-       (.I0(\m_axis_tdata[20]_i_3_n_0 ),
-        .I1(s_axis_tdata[14]),
-        .I2(\m_axis_tdata[12]_i_2_n_0 ),
+       (.I0(\m_axis_tdata[12]_i_2_n_0 ),
+        .I1(s_axis_tdata[12]),
+        .I2(\m_axis_tdata[22]_i_3_n_0 ),
         .I3(\m_axis_tdata[12]_i_3_n_0 ),
         .I4(\m_axis_tdata[12]_i_4_n_0 ),
         .I5(\m_axis_tdata[12]_i_5_n_0 ),
         .O(p_1_in[12]));
+  LUT5 #(
+    .INIT(32'hFF00B8B8)) 
+    \m_axis_tdata[12]_i_10 
+       (.I0(s_axis_tdata[19]),
+        .I1(\m_axis_tdata[15]_i_10_n_0 ),
+        .I2(s_axis_tdata[12]),
+        .I3(s_axis_tdata[18]),
+        .I4(\m_axis_tdata[15]_i_9_n_0 ),
+        .O(\m_axis_tdata[12]_i_10_n_0 ));
   LUT6 #(
-    .INIT(64'hE22E222200000000)) 
+    .INIT(64'hFFFFFFFFFF75FFFF)) 
     \m_axis_tdata[12]_i_2 
-       (.I0(\m_axis_tdata[20]_i_5_n_0 ),
-        .I1(balance[2]),
-        .I2(\m_axis_tdata[22]_i_7_n_0 ),
-        .I3(balance[3]),
-        .I4(\m_axis_tdata[21]_i_5_n_0 ),
-        .I5(s_axis_tdata[13]),
+       (.I0(\m_axis_tdata[12]_i_6_n_0 ),
+        .I1(\m_axis_tdata[18]_i_10_n_0 ),
+        .I2(s_axis_tdata[17]),
+        .I3(\m_axis_tdata[12]_i_7_n_0 ),
+        .I4(s_axis_tlast),
+        .I5(\m_axis_tdata[12]_i_8_n_0 ),
         .O(\m_axis_tdata[12]_i_2_n_0 ));
-  LUT6 #(
-    .INIT(64'hFFFFFF4000000000)) 
+  LUT4 #(
+    .INIT(16'hFFAE)) 
     \m_axis_tdata[12]_i_3 
-       (.I0(\m_axis_tdata[22]_i_7_n_0 ),
-        .I1(balance[3]),
-        .I2(\m_axis_tdata[19]_i_6_n_0 ),
-        .I3(\m_axis_tdata[19]_i_7_n_0 ),
-        .I4(\m_axis_tdata[22]_i_5_n_0 ),
-        .I5(s_axis_tdata[12]),
+       (.I0(\m_axis_tdata[12]_i_9_n_0 ),
+        .I1(s_axis_tdata[12]),
+        .I2(\m_axis_tdata[21]_i_9_n_0 ),
+        .I3(s_axis_tlast),
         .O(\m_axis_tdata[12]_i_3_n_0 ));
   LUT6 #(
-    .INIT(64'hFF90009000000000)) 
+    .INIT(64'hDD0DDD0D0000DD0D)) 
     \m_axis_tdata[12]_i_4 
-       (.I0(\m_axis_tdata[22]_i_7_n_0 ),
-        .I1(balance[3]),
-        .I2(\m_axis_tdata[21]_i_5_n_0 ),
-        .I3(balance[2]),
-        .I4(\m_axis_tdata[20]_i_5_n_0 ),
-        .I5(s_axis_tdata[15]),
+       (.I0(s_axis_tdata[15]),
+        .I1(\m_axis_tdata[21]_i_14_n_0 ),
+        .I2(s_axis_tdata[16]),
+        .I3(\m_axis_tdata[21]_i_12_n_0 ),
+        .I4(s_axis_tdata[17]),
+        .I5(\m_axis_tdata[21]_i_13_n_0 ),
         .O(\m_axis_tdata[12]_i_4_n_0 ));
-  LUT6 #(
-    .INIT(64'hFBBBAAAA00000000)) 
+  (* SOFT_HLUTNM = "soft_lutpair35" *) 
+  LUT3 #(
+    .INIT(8'h08)) 
     \m_axis_tdata[12]_i_5 
-       (.I0(\m_axis_tdata[19]_i_8_n_0 ),
-        .I1(balance[1]),
-        .I2(\m_axis_tdata[19]_i_9_n_0 ),
-        .I3(\m_axis_tdata[22]_i_7_n_0 ),
-        .I4(\m_axis_tdata[19]_i_10_n_0 ),
-        .I5(s_axis_tdata[16]),
+       (.I0(\m_axis_tdata[15]_i_5_n_0 ),
+        .I1(\m_axis_tdata[12]_i_10_n_0 ),
+        .I2(\m_axis_tdata[21]_i_17_n_0 ),
         .O(\m_axis_tdata[12]_i_5_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair12" *) 
+  LUT4 #(
+    .INIT(16'hB0BF)) 
+    \m_axis_tdata[12]_i_6 
+       (.I0(\m_axis_tdata[18]_i_9_n_0 ),
+        .I1(s_axis_tdata[13]),
+        .I2(\m_axis_tdata[18]_i_8_n_0 ),
+        .I3(s_axis_tdata[14]),
+        .O(\m_axis_tdata[12]_i_6_n_0 ));
+  LUT5 #(
+    .INIT(32'h10FF1010)) 
+    \m_axis_tdata[12]_i_7 
+       (.I0(\m_axis_tdata[21]_i_18_n_0 ),
+        .I1(\m_axis_tdata[16]_i_14_n_0 ),
+        .I2(s_axis_tdata[16]),
+        .I3(\m_axis_tdata[19]_i_9_n_0 ),
+        .I4(s_axis_tdata[15]),
+        .O(\m_axis_tdata[12]_i_7_n_0 ));
   LUT6 #(
-    .INIT(64'hFFFFFFFFFFFFFFF8)) 
+    .INIT(64'h44F444F4FFFF44F4)) 
+    \m_axis_tdata[12]_i_8 
+       (.I0(\m_axis_tdata[16]_i_9_n_0 ),
+        .I1(s_axis_tdata[19]),
+        .I2(s_axis_tdata[20]),
+        .I3(\m_axis_tdata[16]_i_7_n_0 ),
+        .I4(s_axis_tdata[18]),
+        .I5(\m_axis_tdata[16]_i_8_n_0 ),
+        .O(\m_axis_tdata[12]_i_8_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair31" *) 
+  LUT4 #(
+    .INIT(16'h4F44)) 
+    \m_axis_tdata[12]_i_9 
+       (.I0(\m_axis_tdata[21]_i_10_n_0 ),
+        .I1(s_axis_tdata[13]),
+        .I2(\m_axis_tdata[21]_i_11_n_0 ),
+        .I3(s_axis_tdata[14]),
+        .O(\m_axis_tdata[12]_i_9_n_0 ));
+  LUT6 #(
+    .INIT(64'hAEAEAEAEAE00AEAE)) 
     \m_axis_tdata[13]_i_1 
-       (.I0(\m_axis_tdata[20]_i_3_n_0 ),
-        .I1(s_axis_tdata[15]),
-        .I2(\m_axis_tdata[13]_i_2_n_0 ),
+       (.I0(\m_axis_tdata[13]_i_2_n_0 ),
+        .I1(s_axis_tdata[13]),
+        .I2(\m_axis_tdata[22]_i_3_n_0 ),
         .I3(\m_axis_tdata[13]_i_3_n_0 ),
         .I4(\m_axis_tdata[13]_i_4_n_0 ),
         .I5(\m_axis_tdata[13]_i_5_n_0 ),
         .O(p_1_in[13]));
+  LUT5 #(
+    .INIT(32'hFFE400E4)) 
+    \m_axis_tdata[13]_i_10 
+       (.I0(\m_axis_tdata[14]_i_8_n_0 ),
+        .I1(s_axis_tdata[20]),
+        .I2(s_axis_tdata[13]),
+        .I3(\m_axis_tdata[15]_i_9_n_0 ),
+        .I4(s_axis_tdata[19]),
+        .O(\m_axis_tdata[13]_i_10_n_0 ));
   LUT6 #(
-    .INIT(64'hE22E222200000000)) 
+    .INIT(64'hFFFFFFFFEFFFEFEF)) 
     \m_axis_tdata[13]_i_2 
-       (.I0(\m_axis_tdata[20]_i_5_n_0 ),
-        .I1(balance[2]),
-        .I2(\m_axis_tdata[22]_i_7_n_0 ),
-        .I3(balance[3]),
-        .I4(\m_axis_tdata[21]_i_5_n_0 ),
-        .I5(s_axis_tdata[14]),
+       (.I0(\m_axis_tdata[13]_i_6_n_0 ),
+        .I1(\m_axis_tdata[13]_i_7_n_0 ),
+        .I2(s_axis_tlast),
+        .I3(\m_axis_tdata[18]_i_10_n_0 ),
+        .I4(s_axis_tdata[18]),
+        .I5(\m_axis_tdata[13]_i_8_n_0 ),
         .O(\m_axis_tdata[13]_i_2_n_0 ));
-  LUT6 #(
-    .INIT(64'hFFFFFF4000000000)) 
+  LUT4 #(
+    .INIT(16'hFFAE)) 
     \m_axis_tdata[13]_i_3 
-       (.I0(\m_axis_tdata[22]_i_7_n_0 ),
-        .I1(balance[3]),
-        .I2(\m_axis_tdata[19]_i_6_n_0 ),
-        .I3(\m_axis_tdata[19]_i_7_n_0 ),
-        .I4(\m_axis_tdata[22]_i_5_n_0 ),
-        .I5(s_axis_tdata[13]),
+       (.I0(\m_axis_tdata[13]_i_9_n_0 ),
+        .I1(s_axis_tdata[13]),
+        .I2(\m_axis_tdata[21]_i_9_n_0 ),
+        .I3(s_axis_tlast),
         .O(\m_axis_tdata[13]_i_3_n_0 ));
   LUT6 #(
-    .INIT(64'hFF90009000000000)) 
+    .INIT(64'hDD0DDD0D0000DD0D)) 
     \m_axis_tdata[13]_i_4 
-       (.I0(\m_axis_tdata[22]_i_7_n_0 ),
-        .I1(balance[3]),
-        .I2(\m_axis_tdata[21]_i_5_n_0 ),
-        .I3(balance[2]),
-        .I4(\m_axis_tdata[20]_i_5_n_0 ),
-        .I5(s_axis_tdata[16]),
+       (.I0(s_axis_tdata[16]),
+        .I1(\m_axis_tdata[21]_i_14_n_0 ),
+        .I2(s_axis_tdata[17]),
+        .I3(\m_axis_tdata[21]_i_12_n_0 ),
+        .I4(s_axis_tdata[18]),
+        .I5(\m_axis_tdata[21]_i_13_n_0 ),
         .O(\m_axis_tdata[13]_i_4_n_0 ));
-  LUT6 #(
-    .INIT(64'hFBBBAAAA00000000)) 
-    \m_axis_tdata[13]_i_5 
-       (.I0(\m_axis_tdata[19]_i_8_n_0 ),
-        .I1(balance[1]),
-        .I2(\m_axis_tdata[19]_i_9_n_0 ),
-        .I3(\m_axis_tdata[22]_i_7_n_0 ),
-        .I4(\m_axis_tdata[19]_i_10_n_0 ),
-        .I5(s_axis_tdata[17]),
-        .O(\m_axis_tdata[13]_i_5_n_0 ));
-  LUT6 #(
-    .INIT(64'hFFFFFFFFFFFFFFF8)) 
-    \m_axis_tdata[14]_i_1 
-       (.I0(\m_axis_tdata[20]_i_3_n_0 ),
-        .I1(s_axis_tdata[16]),
-        .I2(\m_axis_tdata[14]_i_2_n_0 ),
-        .I3(\m_axis_tdata[14]_i_3_n_0 ),
-        .I4(\m_axis_tdata[14]_i_4_n_0 ),
-        .I5(\m_axis_tdata[14]_i_5_n_0 ),
-        .O(p_1_in[14]));
-  LUT6 #(
-    .INIT(64'hE22E222200000000)) 
-    \m_axis_tdata[14]_i_2 
-       (.I0(\m_axis_tdata[20]_i_5_n_0 ),
-        .I1(balance[2]),
-        .I2(\m_axis_tdata[22]_i_7_n_0 ),
-        .I3(balance[3]),
-        .I4(\m_axis_tdata[21]_i_5_n_0 ),
-        .I5(s_axis_tdata[15]),
-        .O(\m_axis_tdata[14]_i_2_n_0 ));
-  LUT6 #(
-    .INIT(64'hFFFFFF4000000000)) 
-    \m_axis_tdata[14]_i_3 
-       (.I0(\m_axis_tdata[22]_i_7_n_0 ),
-        .I1(balance[3]),
-        .I2(\m_axis_tdata[19]_i_6_n_0 ),
-        .I3(\m_axis_tdata[19]_i_7_n_0 ),
-        .I4(\m_axis_tdata[22]_i_5_n_0 ),
-        .I5(s_axis_tdata[14]),
-        .O(\m_axis_tdata[14]_i_3_n_0 ));
-  LUT6 #(
-    .INIT(64'hFF90009000000000)) 
-    \m_axis_tdata[14]_i_4 
-       (.I0(\m_axis_tdata[22]_i_7_n_0 ),
-        .I1(balance[3]),
-        .I2(\m_axis_tdata[21]_i_5_n_0 ),
-        .I3(balance[2]),
-        .I4(\m_axis_tdata[20]_i_5_n_0 ),
-        .I5(s_axis_tdata[17]),
-        .O(\m_axis_tdata[14]_i_4_n_0 ));
-  LUT6 #(
-    .INIT(64'hFBBBAAAA00000000)) 
-    \m_axis_tdata[14]_i_5 
-       (.I0(\m_axis_tdata[19]_i_8_n_0 ),
-        .I1(balance[1]),
-        .I2(\m_axis_tdata[19]_i_9_n_0 ),
-        .I3(\m_axis_tdata[22]_i_7_n_0 ),
-        .I4(\m_axis_tdata[19]_i_10_n_0 ),
-        .I5(s_axis_tdata[18]),
-        .O(\m_axis_tdata[14]_i_5_n_0 ));
-  LUT6 #(
-    .INIT(64'hFFFFFFFFFFFFFFF8)) 
-    \m_axis_tdata[15]_i_1 
-       (.I0(\m_axis_tdata[20]_i_3_n_0 ),
-        .I1(s_axis_tdata[17]),
-        .I2(\m_axis_tdata[15]_i_2_n_0 ),
-        .I3(\m_axis_tdata[15]_i_3_n_0 ),
-        .I4(\m_axis_tdata[15]_i_4_n_0 ),
-        .I5(\m_axis_tdata[15]_i_5_n_0 ),
-        .O(p_1_in[15]));
-  LUT6 #(
-    .INIT(64'hE22E222200000000)) 
-    \m_axis_tdata[15]_i_2 
-       (.I0(\m_axis_tdata[20]_i_5_n_0 ),
-        .I1(balance[2]),
-        .I2(\m_axis_tdata[22]_i_7_n_0 ),
-        .I3(balance[3]),
-        .I4(\m_axis_tdata[21]_i_5_n_0 ),
-        .I5(s_axis_tdata[16]),
-        .O(\m_axis_tdata[15]_i_2_n_0 ));
-  LUT6 #(
-    .INIT(64'hFFFFFF4000000000)) 
-    \m_axis_tdata[15]_i_3 
-       (.I0(\m_axis_tdata[22]_i_7_n_0 ),
-        .I1(balance[3]),
-        .I2(\m_axis_tdata[19]_i_6_n_0 ),
-        .I3(\m_axis_tdata[19]_i_7_n_0 ),
-        .I4(\m_axis_tdata[22]_i_5_n_0 ),
-        .I5(s_axis_tdata[15]),
-        .O(\m_axis_tdata[15]_i_3_n_0 ));
-  LUT6 #(
-    .INIT(64'hFF90009000000000)) 
-    \m_axis_tdata[15]_i_4 
-       (.I0(\m_axis_tdata[22]_i_7_n_0 ),
-        .I1(balance[3]),
-        .I2(\m_axis_tdata[21]_i_5_n_0 ),
-        .I3(balance[2]),
-        .I4(\m_axis_tdata[20]_i_5_n_0 ),
-        .I5(s_axis_tdata[18]),
-        .O(\m_axis_tdata[15]_i_4_n_0 ));
-  LUT6 #(
-    .INIT(64'hFBBBAAAA00000000)) 
-    \m_axis_tdata[15]_i_5 
-       (.I0(\m_axis_tdata[19]_i_8_n_0 ),
-        .I1(balance[1]),
-        .I2(\m_axis_tdata[19]_i_9_n_0 ),
-        .I3(\m_axis_tdata[22]_i_7_n_0 ),
-        .I4(\m_axis_tdata[19]_i_10_n_0 ),
-        .I5(s_axis_tdata[19]),
-        .O(\m_axis_tdata[15]_i_5_n_0 ));
-  LUT6 #(
-    .INIT(64'hFFFFFFFFFFFFFFF8)) 
-    \m_axis_tdata[16]_i_1 
-       (.I0(\m_axis_tdata[20]_i_3_n_0 ),
-        .I1(s_axis_tdata[18]),
-        .I2(\m_axis_tdata[16]_i_2_n_0 ),
-        .I3(\m_axis_tdata[16]_i_3_n_0 ),
-        .I4(\m_axis_tdata[16]_i_4_n_0 ),
-        .I5(\m_axis_tdata[16]_i_5_n_0 ),
-        .O(p_1_in[16]));
-  LUT6 #(
-    .INIT(64'hE22E222200000000)) 
-    \m_axis_tdata[16]_i_2 
-       (.I0(\m_axis_tdata[20]_i_5_n_0 ),
-        .I1(balance[2]),
-        .I2(\m_axis_tdata[22]_i_7_n_0 ),
-        .I3(balance[3]),
-        .I4(\m_axis_tdata[21]_i_5_n_0 ),
-        .I5(s_axis_tdata[17]),
-        .O(\m_axis_tdata[16]_i_2_n_0 ));
-  LUT6 #(
-    .INIT(64'hFFFFFF4000000000)) 
-    \m_axis_tdata[16]_i_3 
-       (.I0(\m_axis_tdata[22]_i_7_n_0 ),
-        .I1(balance[3]),
-        .I2(\m_axis_tdata[19]_i_6_n_0 ),
-        .I3(\m_axis_tdata[19]_i_7_n_0 ),
-        .I4(\m_axis_tdata[22]_i_5_n_0 ),
-        .I5(s_axis_tdata[16]),
-        .O(\m_axis_tdata[16]_i_3_n_0 ));
-  LUT6 #(
-    .INIT(64'hFF90009000000000)) 
-    \m_axis_tdata[16]_i_4 
-       (.I0(\m_axis_tdata[22]_i_7_n_0 ),
-        .I1(balance[3]),
-        .I2(\m_axis_tdata[21]_i_5_n_0 ),
-        .I3(balance[2]),
-        .I4(\m_axis_tdata[20]_i_5_n_0 ),
-        .I5(s_axis_tdata[19]),
-        .O(\m_axis_tdata[16]_i_4_n_0 ));
-  LUT6 #(
-    .INIT(64'hFBBBAAAA00000000)) 
-    \m_axis_tdata[16]_i_5 
-       (.I0(\m_axis_tdata[19]_i_8_n_0 ),
-        .I1(balance[1]),
-        .I2(\m_axis_tdata[19]_i_9_n_0 ),
-        .I3(\m_axis_tdata[22]_i_7_n_0 ),
-        .I4(\m_axis_tdata[19]_i_10_n_0 ),
-        .I5(s_axis_tdata[20]),
-        .O(\m_axis_tdata[16]_i_5_n_0 ));
-  LUT6 #(
-    .INIT(64'hFFFFFFFFFFFFFFF8)) 
-    \m_axis_tdata[17]_i_1 
-       (.I0(\m_axis_tdata[20]_i_3_n_0 ),
-        .I1(s_axis_tdata[19]),
-        .I2(\m_axis_tdata[17]_i_2_n_0 ),
-        .I3(\m_axis_tdata[17]_i_3_n_0 ),
-        .I4(\m_axis_tdata[17]_i_4_n_0 ),
-        .I5(\m_axis_tdata[17]_i_5_n_0 ),
-        .O(p_1_in[17]));
-  LUT6 #(
-    .INIT(64'hE22E222200000000)) 
-    \m_axis_tdata[17]_i_2 
-       (.I0(\m_axis_tdata[20]_i_5_n_0 ),
-        .I1(balance[2]),
-        .I2(\m_axis_tdata[22]_i_7_n_0 ),
-        .I3(balance[3]),
-        .I4(\m_axis_tdata[21]_i_5_n_0 ),
-        .I5(s_axis_tdata[18]),
-        .O(\m_axis_tdata[17]_i_2_n_0 ));
-  LUT6 #(
-    .INIT(64'hFFFFFF4000000000)) 
-    \m_axis_tdata[17]_i_3 
-       (.I0(\m_axis_tdata[22]_i_7_n_0 ),
-        .I1(balance[3]),
-        .I2(\m_axis_tdata[19]_i_6_n_0 ),
-        .I3(\m_axis_tdata[19]_i_7_n_0 ),
-        .I4(\m_axis_tdata[22]_i_5_n_0 ),
-        .I5(s_axis_tdata[17]),
-        .O(\m_axis_tdata[17]_i_3_n_0 ));
-  LUT6 #(
-    .INIT(64'hFF90009000000000)) 
-    \m_axis_tdata[17]_i_4 
-       (.I0(\m_axis_tdata[22]_i_7_n_0 ),
-        .I1(balance[3]),
-        .I2(\m_axis_tdata[21]_i_5_n_0 ),
-        .I3(balance[2]),
-        .I4(\m_axis_tdata[20]_i_5_n_0 ),
-        .I5(s_axis_tdata[20]),
-        .O(\m_axis_tdata[17]_i_4_n_0 ));
-  LUT6 #(
-    .INIT(64'hFBBBAAAA00000000)) 
-    \m_axis_tdata[17]_i_5 
-       (.I0(\m_axis_tdata[19]_i_8_n_0 ),
-        .I1(balance[1]),
-        .I2(\m_axis_tdata[19]_i_9_n_0 ),
-        .I3(\m_axis_tdata[22]_i_7_n_0 ),
-        .I4(\m_axis_tdata[19]_i_10_n_0 ),
-        .I5(s_axis_tdata[21]),
-        .O(\m_axis_tdata[17]_i_5_n_0 ));
-  LUT6 #(
-    .INIT(64'hFFFFFFFFFFFFFFF8)) 
-    \m_axis_tdata[18]_i_1 
-       (.I0(\m_axis_tdata[20]_i_3_n_0 ),
-        .I1(s_axis_tdata[20]),
-        .I2(\m_axis_tdata[18]_i_2_n_0 ),
-        .I3(\m_axis_tdata[18]_i_3_n_0 ),
-        .I4(\m_axis_tdata[18]_i_4_n_0 ),
-        .I5(\m_axis_tdata[18]_i_5_n_0 ),
-        .O(p_1_in[18]));
-  LUT6 #(
-    .INIT(64'hE22E222200000000)) 
-    \m_axis_tdata[18]_i_2 
-       (.I0(\m_axis_tdata[20]_i_5_n_0 ),
-        .I1(balance[2]),
-        .I2(\m_axis_tdata[22]_i_7_n_0 ),
-        .I3(balance[3]),
-        .I4(\m_axis_tdata[21]_i_5_n_0 ),
-        .I5(s_axis_tdata[19]),
-        .O(\m_axis_tdata[18]_i_2_n_0 ));
-  LUT6 #(
-    .INIT(64'hFFFFFF4000000000)) 
-    \m_axis_tdata[18]_i_3 
-       (.I0(\m_axis_tdata[22]_i_7_n_0 ),
-        .I1(balance[3]),
-        .I2(\m_axis_tdata[19]_i_6_n_0 ),
-        .I3(\m_axis_tdata[19]_i_7_n_0 ),
-        .I4(\m_axis_tdata[22]_i_5_n_0 ),
-        .I5(s_axis_tdata[18]),
-        .O(\m_axis_tdata[18]_i_3_n_0 ));
-  LUT6 #(
-    .INIT(64'hFF90009000000000)) 
-    \m_axis_tdata[18]_i_4 
-       (.I0(\m_axis_tdata[22]_i_7_n_0 ),
-        .I1(balance[3]),
-        .I2(\m_axis_tdata[21]_i_5_n_0 ),
-        .I3(balance[2]),
-        .I4(\m_axis_tdata[20]_i_5_n_0 ),
-        .I5(s_axis_tdata[21]),
-        .O(\m_axis_tdata[18]_i_4_n_0 ));
-  LUT6 #(
-    .INIT(64'hFBBBAAAA00000000)) 
-    \m_axis_tdata[18]_i_5 
-       (.I0(\m_axis_tdata[19]_i_8_n_0 ),
-        .I1(balance[1]),
-        .I2(\m_axis_tdata[19]_i_9_n_0 ),
-        .I3(\m_axis_tdata[22]_i_7_n_0 ),
-        .I4(\m_axis_tdata[19]_i_10_n_0 ),
-        .I5(s_axis_tdata[22]),
-        .O(\m_axis_tdata[18]_i_5_n_0 ));
-  LUT6 #(
-    .INIT(64'hFFFFFFFFFFFFFFF8)) 
-    \m_axis_tdata[19]_i_1 
-       (.I0(\m_axis_tdata[20]_i_3_n_0 ),
-        .I1(s_axis_tdata[21]),
-        .I2(\m_axis_tdata[19]_i_2_n_0 ),
-        .I3(\m_axis_tdata[19]_i_3_n_0 ),
-        .I4(\m_axis_tdata[19]_i_4_n_0 ),
-        .I5(\m_axis_tdata[19]_i_5_n_0 ),
-        .O(p_1_in[19]));
-  LUT2 #(
-    .INIT(4'h1)) 
-    \m_axis_tdata[19]_i_10 
-       (.I0(s_axis_tlast),
-        .I1(balance[0]),
-        .O(\m_axis_tdata[19]_i_10_n_0 ));
-  LUT6 #(
-    .INIT(64'hE22E222200000000)) 
-    \m_axis_tdata[19]_i_2 
-       (.I0(\m_axis_tdata[20]_i_5_n_0 ),
-        .I1(balance[2]),
-        .I2(\m_axis_tdata[22]_i_7_n_0 ),
-        .I3(balance[3]),
-        .I4(\m_axis_tdata[21]_i_5_n_0 ),
-        .I5(s_axis_tdata[20]),
-        .O(\m_axis_tdata[19]_i_2_n_0 ));
-  LUT6 #(
-    .INIT(64'hFFFFFF4000000000)) 
-    \m_axis_tdata[19]_i_3 
-       (.I0(\m_axis_tdata[22]_i_7_n_0 ),
-        .I1(balance[3]),
-        .I2(\m_axis_tdata[19]_i_6_n_0 ),
-        .I3(\m_axis_tdata[19]_i_7_n_0 ),
-        .I4(\m_axis_tdata[22]_i_5_n_0 ),
-        .I5(s_axis_tdata[19]),
-        .O(\m_axis_tdata[19]_i_3_n_0 ));
-  LUT6 #(
-    .INIT(64'hFF90009000000000)) 
-    \m_axis_tdata[19]_i_4 
-       (.I0(\m_axis_tdata[22]_i_7_n_0 ),
-        .I1(balance[3]),
-        .I2(\m_axis_tdata[21]_i_5_n_0 ),
-        .I3(balance[2]),
-        .I4(\m_axis_tdata[20]_i_5_n_0 ),
-        .I5(s_axis_tdata[22]),
-        .O(\m_axis_tdata[19]_i_4_n_0 ));
-  LUT6 #(
-    .INIT(64'hFBBBAAAA00000000)) 
-    \m_axis_tdata[19]_i_5 
-       (.I0(\m_axis_tdata[19]_i_8_n_0 ),
-        .I1(balance[1]),
-        .I2(\m_axis_tdata[19]_i_9_n_0 ),
-        .I3(\m_axis_tdata[22]_i_7_n_0 ),
-        .I4(\m_axis_tdata[19]_i_10_n_0 ),
-        .I5(s_axis_tdata[23]),
-        .O(\m_axis_tdata[19]_i_5_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair1" *) 
+  (* SOFT_HLUTNM = "soft_lutpair35" *) 
   LUT3 #(
     .INIT(8'h08)) 
-    \m_axis_tdata[19]_i_6 
-       (.I0(balance[1]),
-        .I1(balance[2]),
-        .I2(s_axis_tlast),
-        .O(\m_axis_tdata[19]_i_6_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair2" *) 
-  LUT2 #(
-    .INIT(4'h6)) 
-    \m_axis_tdata[19]_i_7 
-       (.I0(s_axis_tlast),
-        .I1(balance[0]),
-        .O(\m_axis_tdata[19]_i_7_n_0 ));
-  LUT6 #(
-    .INIT(64'hEAAA000000000000)) 
-    \m_axis_tdata[19]_i_8 
-       (.I0(balance[1]),
-        .I1(balance[2]),
-        .I2(balance[3]),
-        .I3(balance[4]),
-        .I4(balance[0]),
-        .I5(s_axis_tlast),
-        .O(\m_axis_tdata[19]_i_8_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair4" *) 
-  LUT2 #(
-    .INIT(4'h1)) 
-    \m_axis_tdata[19]_i_9 
-       (.I0(balance[3]),
-        .I1(balance[2]),
-        .O(\m_axis_tdata[19]_i_9_n_0 ));
-  LUT6 #(
-    .INIT(64'hFFFFFFFFFFFFFFF8)) 
-    \m_axis_tdata[1]_i_1 
-       (.I0(\m_axis_tdata[20]_i_3_n_0 ),
-        .I1(s_axis_tdata[3]),
-        .I2(\m_axis_tdata[1]_i_2_n_0 ),
-        .I3(\m_axis_tdata[1]_i_3_n_0 ),
-        .I4(\m_axis_tdata[1]_i_4_n_0 ),
-        .I5(\m_axis_tdata[1]_i_5_n_0 ),
-        .O(p_1_in[1]));
-  LUT6 #(
-    .INIT(64'hE22E222200000000)) 
-    \m_axis_tdata[1]_i_2 
-       (.I0(\m_axis_tdata[20]_i_5_n_0 ),
-        .I1(balance[2]),
-        .I2(\m_axis_tdata[22]_i_7_n_0 ),
-        .I3(balance[3]),
-        .I4(\m_axis_tdata[21]_i_5_n_0 ),
-        .I5(s_axis_tdata[2]),
-        .O(\m_axis_tdata[1]_i_2_n_0 ));
-  LUT6 #(
-    .INIT(64'hFFFFFF4000000000)) 
-    \m_axis_tdata[1]_i_3 
-       (.I0(\m_axis_tdata[22]_i_7_n_0 ),
-        .I1(balance[3]),
-        .I2(\m_axis_tdata[19]_i_6_n_0 ),
-        .I3(\m_axis_tdata[19]_i_7_n_0 ),
-        .I4(\m_axis_tdata[22]_i_5_n_0 ),
-        .I5(s_axis_tdata[1]),
-        .O(\m_axis_tdata[1]_i_3_n_0 ));
-  LUT6 #(
-    .INIT(64'hFF90009000000000)) 
-    \m_axis_tdata[1]_i_4 
-       (.I0(\m_axis_tdata[22]_i_7_n_0 ),
-        .I1(balance[3]),
-        .I2(\m_axis_tdata[21]_i_5_n_0 ),
-        .I3(balance[2]),
-        .I4(\m_axis_tdata[20]_i_5_n_0 ),
-        .I5(s_axis_tdata[4]),
-        .O(\m_axis_tdata[1]_i_4_n_0 ));
-  LUT6 #(
-    .INIT(64'hFBBBAAAA00000000)) 
-    \m_axis_tdata[1]_i_5 
-       (.I0(\m_axis_tdata[19]_i_8_n_0 ),
-        .I1(balance[1]),
-        .I2(\m_axis_tdata[19]_i_9_n_0 ),
-        .I3(\m_axis_tdata[22]_i_7_n_0 ),
-        .I4(\m_axis_tdata[19]_i_10_n_0 ),
-        .I5(s_axis_tdata[5]),
-        .O(\m_axis_tdata[1]_i_5_n_0 ));
-  LUT6 #(
-    .INIT(64'hFFFFFFFFFFF8F8F8)) 
-    \m_axis_tdata[20]_i_1 
-       (.I0(\m_axis_tdata[22]_i_3_n_0 ),
-        .I1(s_axis_tdata[20]),
-        .I2(\m_axis_tdata[20]_i_2_n_0 ),
-        .I3(s_axis_tdata[22]),
-        .I4(\m_axis_tdata[20]_i_3_n_0 ),
-        .I5(\m_axis_tdata[20]_i_4_n_0 ),
-        .O(p_1_in[20]));
-  LUT6 #(
-    .INIT(64'hE22E222200000000)) 
-    \m_axis_tdata[20]_i_2 
-       (.I0(\m_axis_tdata[20]_i_5_n_0 ),
-        .I1(balance[2]),
-        .I2(\m_axis_tdata[22]_i_7_n_0 ),
-        .I3(balance[3]),
-        .I4(\m_axis_tdata[21]_i_5_n_0 ),
-        .I5(s_axis_tdata[21]),
-        .O(\m_axis_tdata[20]_i_2_n_0 ));
-  LUT6 #(
-    .INIT(64'h00008F88F4440000)) 
-    \m_axis_tdata[20]_i_3 
-       (.I0(\m_axis_tdata[22]_i_7_n_0 ),
-        .I1(\m_axis_tdata[21]_i_5_n_0 ),
-        .I2(balance[4]),
-        .I3(\m_axis_tdata[21]_i_6_n_0 ),
-        .I4(balance[3]),
-        .I5(balance[2]),
-        .O(\m_axis_tdata[20]_i_3_n_0 ));
-  LUT6 #(
-    .INIT(64'hFFFFFFFFBABAAABA)) 
-    \m_axis_tdata[20]_i_4 
-       (.I0(\m_axis_tdata[20]_i_6_n_0 ),
-        .I1(balance[2]),
-        .I2(\m_axis_tdata[20]_i_7_n_0 ),
-        .I3(balance[3]),
-        .I4(\m_axis_tdata[22]_i_7_n_0 ),
-        .I5(\m_axis_tdata[20]_i_8_n_0 ),
-        .O(\m_axis_tdata[20]_i_4_n_0 ));
-  LUT5 #(
-    .INIT(32'h00404000)) 
-    \m_axis_tdata[20]_i_5 
-       (.I0(balance[1]),
-        .I1(s_axis_tlast),
-        .I2(balance[0]),
-        .I3(balance[3]),
-        .I4(balance[4]),
-        .O(\m_axis_tdata[20]_i_5_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair0" *) 
+    \m_axis_tdata[13]_i_5 
+       (.I0(\m_axis_tdata[15]_i_5_n_0 ),
+        .I1(\m_axis_tdata[13]_i_10_n_0 ),
+        .I2(\m_axis_tdata[21]_i_17_n_0 ),
+        .O(\m_axis_tdata[13]_i_5_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair12" *) 
   LUT4 #(
-    .INIT(16'h8100)) 
-    \m_axis_tdata[20]_i_6 
-       (.I0(balance[1]),
-        .I1(balance[0]),
-        .I2(s_axis_tlast),
-        .I3(s_axis_tdata[23]),
-        .O(\m_axis_tdata[20]_i_6_n_0 ));
+    .INIT(16'h2F20)) 
+    \m_axis_tdata[13]_i_6 
+       (.I0(s_axis_tdata[14]),
+        .I1(\m_axis_tdata[18]_i_9_n_0 ),
+        .I2(\m_axis_tdata[18]_i_8_n_0 ),
+        .I3(s_axis_tdata[15]),
+        .O(\m_axis_tdata[13]_i_6_n_0 ));
+  LUT6 #(
+    .INIT(64'h44F444F4FFFF44F4)) 
+    \m_axis_tdata[13]_i_7 
+       (.I0(\m_axis_tdata[16]_i_8_n_0 ),
+        .I1(s_axis_tdata[19]),
+        .I2(s_axis_tdata[21]),
+        .I3(\m_axis_tdata[16]_i_7_n_0 ),
+        .I4(s_axis_tdata[20]),
+        .I5(\m_axis_tdata[16]_i_9_n_0 ),
+        .O(\m_axis_tdata[13]_i_7_n_0 ));
   (* SOFT_HLUTNM = "soft_lutpair3" *) 
-  LUT3 #(
-    .INIT(8'h10)) 
-    \m_axis_tdata[20]_i_7 
-       (.I0(balance[0]),
-        .I1(s_axis_tlast),
-        .I2(s_axis_tdata[23]),
-        .O(\m_axis_tdata[20]_i_7_n_0 ));
+  LUT5 #(
+    .INIT(32'h10FF1010)) 
+    \m_axis_tdata[13]_i_8 
+       (.I0(\m_axis_tdata[21]_i_18_n_0 ),
+        .I1(\m_axis_tdata[16]_i_14_n_0 ),
+        .I2(s_axis_tdata[17]),
+        .I3(\m_axis_tdata[19]_i_9_n_0 ),
+        .I4(s_axis_tdata[16]),
+        .O(\m_axis_tdata[13]_i_8_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair31" *) 
+  LUT4 #(
+    .INIT(16'h4F44)) 
+    \m_axis_tdata[13]_i_9 
+       (.I0(\m_axis_tdata[21]_i_10_n_0 ),
+        .I1(s_axis_tdata[14]),
+        .I2(\m_axis_tdata[21]_i_11_n_0 ),
+        .I3(s_axis_tdata[15]),
+        .O(\m_axis_tdata[13]_i_9_n_0 ));
   LUT6 #(
-    .INIT(64'hA800000000000000)) 
-    \m_axis_tdata[20]_i_8 
-       (.I0(balance[2]),
-        .I1(balance[4]),
-        .I2(balance[3]),
-        .I3(s_axis_tdata[23]),
-        .I4(s_axis_tlast),
-        .I5(balance[0]),
-        .O(\m_axis_tdata[20]_i_8_n_0 ));
+    .INIT(64'hEFEE0000EFEEEFEE)) 
+    \m_axis_tdata[14]_i_1 
+       (.I0(\m_axis_tdata[14]_i_2_n_0 ),
+        .I1(\m_axis_tdata[14]_i_3_n_0 ),
+        .I2(\m_axis_tdata[14]_i_4_n_0 ),
+        .I3(\m_axis_tdata[15]_i_5_n_0 ),
+        .I4(\m_axis_tdata[14]_i_5_n_0 ),
+        .I5(\m_axis_tdata[14]_i_6_n_0 ),
+        .O(p_1_in[14]));
+  LUT2 #(
+    .INIT(4'h2)) 
+    \m_axis_tdata[14]_i_10 
+       (.I0(s_axis_tdata[19]),
+        .I1(\m_axis_tdata[18]_i_10_n_0 ),
+        .O(\m_axis_tdata[14]_i_10_n_0 ));
   LUT6 #(
-    .INIT(64'hFFFFFFFFFFFFF888)) 
-    \m_axis_tdata[21]_i_1 
-       (.I0(\m_axis_tdata[22]_i_3_n_0 ),
+    .INIT(64'h44F444F4FFFF44F4)) 
+    \m_axis_tdata[14]_i_11 
+       (.I0(\m_axis_tdata[16]_i_9_n_0 ),
         .I1(s_axis_tdata[21]),
         .I2(s_axis_tdata[22]),
-        .I3(\m_axis_tdata[21]_i_2_n_0 ),
-        .I4(\m_axis_tdata[21]_i_3_n_0 ),
-        .I5(\m_axis_tdata[21]_i_4_n_0 ),
-        .O(p_1_in[21]));
-  LUT6 #(
-    .INIT(64'h80802F208F802020)) 
-    \m_axis_tdata[21]_i_2 
-       (.I0(\m_axis_tdata[21]_i_5_n_0 ),
-        .I1(\m_axis_tdata[22]_i_7_n_0 ),
-        .I2(balance[2]),
-        .I3(\m_axis_tdata[21]_i_6_n_0 ),
-        .I4(balance[3]),
-        .I5(balance[4]),
-        .O(\m_axis_tdata[21]_i_2_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair0" *) 
-  LUT5 #(
-    .INIT(32'hE0070000)) 
-    \m_axis_tdata[21]_i_3 
-       (.I0(balance[1]),
-        .I1(balance[2]),
-        .I2(balance[0]),
+        .I3(\m_axis_tdata[16]_i_7_n_0 ),
+        .I4(s_axis_tdata[20]),
+        .I5(\m_axis_tdata[16]_i_8_n_0 ),
+        .O(\m_axis_tdata[14]_i_11_n_0 ));
+  LUT4 #(
+    .INIT(16'hFFAE)) 
+    \m_axis_tdata[14]_i_2 
+       (.I0(\m_axis_tdata[14]_i_7_n_0 ),
+        .I1(s_axis_tdata[14]),
+        .I2(\m_axis_tdata[21]_i_9_n_0 ),
         .I3(s_axis_tlast),
-        .I4(s_axis_tdata[23]),
-        .O(\m_axis_tdata[21]_i_3_n_0 ));
+        .O(\m_axis_tdata[14]_i_2_n_0 ));
   LUT6 #(
-    .INIT(64'hA0000000000000C0)) 
-    \m_axis_tdata[21]_i_4 
-       (.I0(balance[4]),
-        .I1(\m_axis_tdata[22]_i_7_n_0 ),
-        .I2(s_axis_tdata[23]),
-        .I3(s_axis_tlast),
-        .I4(balance[0]),
+    .INIT(64'h22F2FFFF22F222F2)) 
+    \m_axis_tdata[14]_i_3 
+       (.I0(s_axis_tdata[18]),
+        .I1(\m_axis_tdata[21]_i_12_n_0 ),
+        .I2(s_axis_tdata[19]),
+        .I3(\m_axis_tdata[21]_i_13_n_0 ),
+        .I4(\m_axis_tdata[21]_i_14_n_0 ),
+        .I5(s_axis_tdata[17]),
+        .O(\m_axis_tdata[14]_i_3_n_0 ));
+  LUT6 #(
+    .INIT(64'hAAAABBAFFFFFBBAF)) 
+    \m_axis_tdata[14]_i_4 
+       (.I0(\m_axis_tdata[21]_i_17_n_0 ),
+        .I1(s_axis_tdata[14]),
+        .I2(s_axis_tdata[21]),
+        .I3(\m_axis_tdata[14]_i_8_n_0 ),
+        .I4(\m_axis_tdata[15]_i_9_n_0 ),
+        .I5(s_axis_tdata[20]),
+        .O(\m_axis_tdata[14]_i_4_n_0 ));
+  LUT6 #(
+    .INIT(64'hFFFFFFFFFFF4FFFF)) 
+    \m_axis_tdata[14]_i_5 
+       (.I0(\m_axis_tdata[18]_i_11_n_0 ),
+        .I1(s_axis_tdata[18]),
+        .I2(\m_axis_tdata[14]_i_9_n_0 ),
+        .I3(\m_axis_tdata[14]_i_10_n_0 ),
+        .I4(s_axis_tlast),
+        .I5(\m_axis_tdata[14]_i_11_n_0 ),
+        .O(\m_axis_tdata[14]_i_5_n_0 ));
+  LUT6 #(
+    .INIT(64'h101BB0BBFFFFFFFF)) 
+    \m_axis_tdata[14]_i_6 
+       (.I0(\m_axis_tdata[18]_i_8_n_0 ),
+        .I1(s_axis_tdata[16]),
+        .I2(\m_axis_tdata[18]_i_9_n_0 ),
+        .I3(s_axis_tdata[15]),
+        .I4(s_axis_tdata[14]),
+        .I5(\m_axis_tdata[21]_i_8_n_0 ),
+        .O(\m_axis_tdata[14]_i_6_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair32" *) 
+  LUT4 #(
+    .INIT(16'h4F44)) 
+    \m_axis_tdata[14]_i_7 
+       (.I0(\m_axis_tdata[21]_i_10_n_0 ),
+        .I1(s_axis_tdata[15]),
+        .I2(\m_axis_tdata[21]_i_11_n_0 ),
+        .I3(s_axis_tdata[16]),
+        .O(\m_axis_tdata[14]_i_7_n_0 ));
+  LUT6 #(
+    .INIT(64'hFFF1FFFFFFF1FFF1)) 
+    \m_axis_tdata[14]_i_8 
+       (.I0(\m_axis_tdata[21]_i_15_n_0 ),
+        .I1(\m_axis_tdata[22]_i_6_n_0 ),
+        .I2(\m_axis_tdata[21]_i_16_n_0 ),
+        .I3(balance[2]),
+        .I4(\m_axis_tdata[22]_i_5_n_0 ),
         .I5(balance[3]),
-        .O(\m_axis_tdata[21]_i_4_n_0 ));
-  LUT3 #(
-    .INIT(8'h10)) 
-    \m_axis_tdata[21]_i_5 
-       (.I0(balance[0]),
-        .I1(s_axis_tlast),
-        .I2(balance[1]),
-        .O(\m_axis_tdata[21]_i_5_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair2" *) 
-  LUT3 #(
-    .INIT(8'h08)) 
-    \m_axis_tdata[21]_i_6 
-       (.I0(balance[0]),
-        .I1(s_axis_tlast),
-        .I2(balance[1]),
-        .O(\m_axis_tdata[21]_i_6_n_0 ));
-  LUT6 #(
-    .INIT(64'hFFFFFFFFFFE0E0E0)) 
-    \m_axis_tdata[22]_i_1 
-       (.I0(balance[4]),
-        .I1(balance[3]),
-        .I2(\m_axis_tdata[22]_i_2_n_0 ),
-        .I3(\m_axis_tdata[22]_i_3_n_0 ),
-        .I4(s_axis_tdata[22]),
-        .I5(\m_axis_tdata[22]_i_4_n_0 ),
-        .O(p_1_in[22]));
+        .O(\m_axis_tdata[14]_i_8_n_0 ));
   (* SOFT_HLUTNM = "soft_lutpair3" *) 
-  LUT3 #(
-    .INIT(8'h80)) 
-    \m_axis_tdata[22]_i_2 
-       (.I0(balance[0]),
-        .I1(s_axis_tlast),
-        .I2(s_axis_tdata[23]),
-        .O(\m_axis_tdata[22]_i_2_n_0 ));
+  LUT2 #(
+    .INIT(4'h2)) 
+    \m_axis_tdata[14]_i_9 
+       (.I0(s_axis_tdata[17]),
+        .I1(\m_axis_tdata[19]_i_9_n_0 ),
+        .O(\m_axis_tdata[14]_i_9_n_0 ));
   LUT6 #(
-    .INIT(64'hBEBEBEBEBEBFBEBE)) 
-    \m_axis_tdata[22]_i_3 
-       (.I0(\m_axis_tdata[22]_i_5_n_0 ),
-        .I1(s_axis_tlast),
-        .I2(balance[0]),
-        .I3(\m_axis_tdata[22]_i_6_n_0 ),
-        .I4(balance[3]),
-        .I5(\m_axis_tdata[22]_i_7_n_0 ),
-        .O(\m_axis_tdata[22]_i_3_n_0 ));
+    .INIT(64'hEFEE0000EFEEEFEE)) 
+    \m_axis_tdata[15]_i_1 
+       (.I0(\m_axis_tdata[15]_i_2_n_0 ),
+        .I1(\m_axis_tdata[15]_i_3_n_0 ),
+        .I2(\m_axis_tdata[15]_i_4_n_0 ),
+        .I3(\m_axis_tdata[15]_i_5_n_0 ),
+        .I4(\m_axis_tdata[15]_i_6_n_0 ),
+        .I5(\m_axis_tdata[15]_i_7_n_0 ),
+        .O(p_1_in[15]));
   LUT6 #(
-    .INIT(64'hFFFFFFFF000B0000)) 
-    \m_axis_tdata[22]_i_4 
-       (.I0(\m_axis_tdata[22]_i_7_n_0 ),
-        .I1(balance[3]),
-        .I2(balance[0]),
-        .I3(s_axis_tlast),
+    .INIT(64'h000D000D000D0000)) 
+    \m_axis_tdata[15]_i_10 
+       (.I0(balance[3]),
+        .I1(\m_axis_tdata[22]_i_5_n_0 ),
+        .I2(balance[2]),
+        .I3(\m_axis_tdata[21]_i_16_n_0 ),
+        .I4(\m_axis_tdata[22]_i_6_n_0 ),
+        .I5(\m_axis_tdata[21]_i_15_n_0 ),
+        .O(\m_axis_tdata[15]_i_10_n_0 ));
+  LUT6 #(
+    .INIT(64'hA8AAA82020AA2020)) 
+    \m_axis_tdata[15]_i_11 
+       (.I0(\m_axis_tdata[21]_i_8_n_0 ),
+        .I1(\m_axis_tdata[18]_i_8_n_0 ),
+        .I2(s_axis_tdata[17]),
+        .I3(\m_axis_tdata[18]_i_9_n_0 ),
+        .I4(s_axis_tdata[16]),
+        .I5(s_axis_tdata[15]),
+        .O(\m_axis_tdata[15]_i_11_n_0 ));
+  LUT6 #(
+    .INIT(64'h44F444F4FFFF44F4)) 
+    \m_axis_tdata[15]_i_12 
+       (.I0(\m_axis_tdata[16]_i_9_n_0 ),
+        .I1(s_axis_tdata[22]),
+        .I2(s_axis_tdata[21]),
+        .I3(\m_axis_tdata[16]_i_8_n_0 ),
         .I4(s_axis_tdata[23]),
-        .I5(\m_axis_tdata[21]_i_3_n_0 ),
-        .O(\m_axis_tdata[22]_i_4_n_0 ));
+        .I5(\m_axis_tdata[16]_i_7_n_0 ),
+        .O(\m_axis_tdata[15]_i_12_n_0 ));
+  LUT4 #(
+    .INIT(16'hFFAE)) 
+    \m_axis_tdata[15]_i_2 
+       (.I0(\m_axis_tdata[15]_i_8_n_0 ),
+        .I1(s_axis_tdata[15]),
+        .I2(\m_axis_tdata[21]_i_9_n_0 ),
+        .I3(s_axis_tlast),
+        .O(\m_axis_tdata[15]_i_2_n_0 ));
+  LUT6 #(
+    .INIT(64'h22F2FFFF22F222F2)) 
+    \m_axis_tdata[15]_i_3 
+       (.I0(s_axis_tdata[19]),
+        .I1(\m_axis_tdata[21]_i_12_n_0 ),
+        .I2(s_axis_tdata[20]),
+        .I3(\m_axis_tdata[21]_i_13_n_0 ),
+        .I4(\m_axis_tdata[21]_i_14_n_0 ),
+        .I5(s_axis_tdata[18]),
+        .O(\m_axis_tdata[15]_i_3_n_0 ));
+  LUT6 #(
+    .INIT(64'hAEAEAEBFBFBFAEBF)) 
+    \m_axis_tdata[15]_i_4 
+       (.I0(\m_axis_tdata[21]_i_17_n_0 ),
+        .I1(\m_axis_tdata[15]_i_9_n_0 ),
+        .I2(s_axis_tdata[21]),
+        .I3(s_axis_tdata[15]),
+        .I4(\m_axis_tdata[15]_i_10_n_0 ),
+        .I5(s_axis_tdata[22]),
+        .O(\m_axis_tdata[15]_i_4_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair10" *) 
+  LUT5 #(
+    .INIT(32'hFFFB0DFF)) 
+    \m_axis_tdata[15]_i_5 
+       (.I0(balance[3]),
+        .I1(\m_axis_tdata[22]_i_5_n_0 ),
+        .I2(balance[2]),
+        .I3(balance[1]),
+        .I4(balance[0]),
+        .O(\m_axis_tdata[15]_i_5_n_0 ));
+  LUT3 #(
+    .INIT(8'hFB)) 
+    \m_axis_tdata[15]_i_6 
+       (.I0(\m_axis_tdata[15]_i_11_n_0 ),
+        .I1(s_axis_tlast),
+        .I2(\m_axis_tdata[15]_i_12_n_0 ),
+        .O(\m_axis_tdata[15]_i_6_n_0 ));
+  LUT6 #(
+    .INIT(64'hBB0BBB0B0000BB0B)) 
+    \m_axis_tdata[15]_i_7 
+       (.I0(\m_axis_tdata[18]_i_10_n_0 ),
+        .I1(s_axis_tdata[20]),
+        .I2(s_axis_tdata[18]),
+        .I3(\m_axis_tdata[19]_i_9_n_0 ),
+        .I4(s_axis_tdata[19]),
+        .I5(\m_axis_tdata[18]_i_11_n_0 ),
+        .O(\m_axis_tdata[15]_i_7_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair32" *) 
+  LUT4 #(
+    .INIT(16'h4F44)) 
+    \m_axis_tdata[15]_i_8 
+       (.I0(\m_axis_tdata[21]_i_10_n_0 ),
+        .I1(s_axis_tdata[16]),
+        .I2(\m_axis_tdata[21]_i_11_n_0 ),
+        .I3(s_axis_tdata[17]),
+        .O(\m_axis_tdata[15]_i_8_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair6" *) 
+  LUT5 #(
+    .INIT(32'h00011000)) 
+    \m_axis_tdata[15]_i_9 
+       (.I0(balance[0]),
+        .I1(balance[1]),
+        .I2(balance[2]),
+        .I3(\m_axis_tdata[22]_i_5_n_0 ),
+        .I4(balance[3]),
+        .O(\m_axis_tdata[15]_i_9_n_0 ));
+  LUT6 #(
+    .INIT(64'hEFEFEFEFEFEFEFE0)) 
+    \m_axis_tdata[16]_i_1 
+       (.I0(\m_axis_tdata[16]_i_2_n_0 ),
+        .I1(\m_axis_tdata[16]_i_3_n_0 ),
+        .I2(s_axis_tlast),
+        .I3(\m_axis_tdata[16]_i_4_n_0 ),
+        .I4(\m_axis_tdata[16]_i_5_n_0 ),
+        .I5(\m_axis_tdata[16]_i_6_n_0 ),
+        .O(p_1_in[16]));
+  LUT5 #(
+    .INIT(32'h10FF1010)) 
+    \m_axis_tdata[16]_i_10 
+       (.I0(\m_axis_tdata[21]_i_18_n_0 ),
+        .I1(\m_axis_tdata[16]_i_14_n_0 ),
+        .I2(s_axis_tdata[20]),
+        .I3(\m_axis_tdata[19]_i_9_n_0 ),
+        .I4(s_axis_tdata[19]),
+        .O(\m_axis_tdata[16]_i_10_n_0 ));
+  LUT6 #(
+    .INIT(64'h4C40444CC04040C0)) 
+    \m_axis_tdata[16]_i_11 
+       (.I0(\m_axis_tdata[21]_i_18_n_0 ),
+        .I1(balance[0]),
+        .I2(balance[1]),
+        .I3(balance[3]),
+        .I4(\m_axis_tdata[22]_i_5_n_0 ),
+        .I5(balance[2]),
+        .O(\m_axis_tdata[16]_i_11_n_0 ));
+  LUT5 #(
+    .INIT(32'h535300F3)) 
+    \m_axis_tdata[16]_i_12 
+       (.I0(s_axis_tdata[16]),
+        .I1(s_axis_tdata[17]),
+        .I2(\m_axis_tdata[18]_i_9_n_0 ),
+        .I3(s_axis_tdata[18]),
+        .I4(\m_axis_tdata[18]_i_8_n_0 ),
+        .O(\m_axis_tdata[16]_i_12_n_0 ));
+  LUT6 #(
+    .INIT(64'h7707770700007707)) 
+    \m_axis_tdata[16]_i_13 
+       (.I0(\m_axis_tdata[15]_i_9_n_0 ),
+        .I1(s_axis_tdata[22]),
+        .I2(s_axis_tdata[16]),
+        .I3(\m_axis_tdata[21]_i_5_n_0 ),
+        .I4(s_axis_tdata[23]),
+        .I5(\m_axis_tdata[14]_i_8_n_0 ),
+        .O(\m_axis_tdata[16]_i_13_n_0 ));
   (* SOFT_HLUTNM = "soft_lutpair1" *) 
   LUT5 #(
-    .INIT(32'h00000010)) 
-    \m_axis_tdata[22]_i_5 
+    .INIT(32'h00DFFFFF)) 
+    \m_axis_tdata[16]_i_14 
+       (.I0(balance[2]),
+        .I1(\m_axis_tdata[22]_i_5_n_0 ),
+        .I2(balance[3]),
+        .I3(balance[1]),
+        .I4(balance[0]),
+        .O(\m_axis_tdata[16]_i_14_n_0 ));
+  LUT5 #(
+    .INIT(32'h5D0CFF0C)) 
+    \m_axis_tdata[16]_i_2 
+       (.I0(\m_axis_tdata[16]_i_7_n_0 ),
+        .I1(s_axis_tdata[22]),
+        .I2(\m_axis_tdata[16]_i_8_n_0 ),
+        .I3(s_axis_tdata[23]),
+        .I4(\m_axis_tdata[16]_i_9_n_0 ),
+        .O(\m_axis_tdata[16]_i_2_n_0 ));
+  LUT6 #(
+    .INIT(64'hAEAEAEFFAEAEAEAE)) 
+    \m_axis_tdata[16]_i_3 
+       (.I0(\m_axis_tdata[16]_i_10_n_0 ),
+        .I1(s_axis_tdata[21]),
+        .I2(\m_axis_tdata[18]_i_10_n_0 ),
+        .I3(\m_axis_tdata[16]_i_11_n_0 ),
+        .I4(\m_axis_tdata[16]_i_12_n_0 ),
+        .I5(\m_axis_tdata[19]_i_7_n_0 ),
+        .O(\m_axis_tdata[16]_i_3_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair37" *) 
+  LUT3 #(
+    .INIT(8'h02)) 
+    \m_axis_tdata[16]_i_4 
+       (.I0(\m_axis_tdata[15]_i_5_n_0 ),
+        .I1(\m_axis_tdata[16]_i_13_n_0 ),
+        .I2(\m_axis_tdata[21]_i_17_n_0 ),
+        .O(\m_axis_tdata[16]_i_4_n_0 ));
+  LUT6 #(
+    .INIT(64'h22F2FFFF22F222F2)) 
+    \m_axis_tdata[16]_i_5 
+       (.I0(s_axis_tdata[20]),
+        .I1(\m_axis_tdata[21]_i_12_n_0 ),
+        .I2(s_axis_tdata[21]),
+        .I3(\m_axis_tdata[21]_i_13_n_0 ),
+        .I4(\m_axis_tdata[21]_i_14_n_0 ),
+        .I5(s_axis_tdata[19]),
+        .O(\m_axis_tdata[16]_i_5_n_0 ));
+  LUT6 #(
+    .INIT(64'h44F444F4FFFF44F4)) 
+    \m_axis_tdata[16]_i_6 
+       (.I0(\m_axis_tdata[21]_i_9_n_0 ),
+        .I1(s_axis_tdata[16]),
+        .I2(s_axis_tdata[18]),
+        .I3(\m_axis_tdata[21]_i_11_n_0 ),
+        .I4(s_axis_tdata[17]),
+        .I5(\m_axis_tdata[21]_i_10_n_0 ),
+        .O(\m_axis_tdata[16]_i_6_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair11" *) 
+  LUT5 #(
+    .INIT(32'hDFFFFFFF)) 
+    \m_axis_tdata[16]_i_7 
+       (.I0(balance[2]),
+        .I1(\m_axis_tdata[22]_i_5_n_0 ),
+        .I2(balance[3]),
+        .I3(balance[0]),
+        .I4(balance[1]),
+        .O(\m_axis_tdata[16]_i_7_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair8" *) 
+  LUT5 #(
+    .INIT(32'hF7FFFF7F)) 
+    \m_axis_tdata[16]_i_8 
+       (.I0(balance[1]),
+        .I1(balance[0]),
+        .I2(balance[3]),
+        .I3(\m_axis_tdata[22]_i_5_n_0 ),
+        .I4(balance[2]),
+        .O(\m_axis_tdata[16]_i_8_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair7" *) 
+  LUT5 #(
+    .INIT(32'h7FFFFF7F)) 
+    \m_axis_tdata[16]_i_9 
+       (.I0(balance[1]),
+        .I1(balance[0]),
+        .I2(balance[2]),
+        .I3(\m_axis_tdata[22]_i_5_n_0 ),
+        .I4(balance[3]),
+        .O(\m_axis_tdata[16]_i_9_n_0 ));
+  LUT6 #(
+    .INIT(64'hAEAEAE00AEAEAEAE)) 
+    \m_axis_tdata[17]_i_1 
+       (.I0(\m_axis_tdata[17]_i_2_n_0 ),
+        .I1(\m_axis_tdata[17]_i_3_n_0 ),
+        .I2(\m_axis_tdata[17]_i_4_n_0 ),
+        .I3(\m_axis_tdata[19]_i_2_n_0 ),
+        .I4(\m_axis_tdata[17]_i_5_n_0 ),
+        .I5(\m_axis_tdata[17]_i_6_n_0 ),
+        .O(p_1_in[17]));
+  LUT4 #(
+    .INIT(16'hFFAE)) 
+    \m_axis_tdata[17]_i_2 
+       (.I0(\m_axis_tdata[17]_i_7_n_0 ),
+        .I1(s_axis_tdata[17]),
+        .I2(\m_axis_tdata[21]_i_9_n_0 ),
+        .I3(s_axis_tlast),
+        .O(\m_axis_tdata[17]_i_2_n_0 ));
+  LUT6 #(
+    .INIT(64'hFFF0CFCCAFAAEFEE)) 
+    \m_axis_tdata[17]_i_3 
+       (.I0(s_axis_tdata[21]),
+        .I1(s_axis_tdata[22]),
+        .I2(\m_axis_tdata[21]_i_14_n_0 ),
+        .I3(s_axis_tdata[20]),
+        .I4(\m_axis_tdata[21]_i_13_n_0 ),
+        .I5(\m_axis_tdata[21]_i_12_n_0 ),
+        .O(\m_axis_tdata[17]_i_3_n_0 ));
+  LUT5 #(
+    .INIT(32'h010DFFFF)) 
+    \m_axis_tdata[17]_i_4 
+       (.I0(s_axis_tdata[17]),
+        .I1(\m_axis_tdata[21]_i_5_n_0 ),
+        .I2(\m_axis_tdata[21]_i_17_n_0 ),
+        .I3(s_axis_tdata[23]),
+        .I4(\m_axis_tdata[15]_i_5_n_0 ),
+        .O(\m_axis_tdata[17]_i_4_n_0 ));
+  LUT6 #(
+    .INIT(64'h44F444F4FFFF44F4)) 
+    \m_axis_tdata[17]_i_5 
+       (.I0(\m_axis_tdata[18]_i_10_n_0 ),
+        .I1(s_axis_tdata[22]),
+        .I2(s_axis_tdata[20]),
+        .I3(\m_axis_tdata[19]_i_9_n_0 ),
+        .I4(s_axis_tdata[21]),
+        .I5(\m_axis_tdata[18]_i_11_n_0 ),
+        .O(\m_axis_tdata[17]_i_5_n_0 ));
+  LUT6 #(
+    .INIT(64'h101BB0BBFFFFFFFF)) 
+    \m_axis_tdata[17]_i_6 
+       (.I0(\m_axis_tdata[18]_i_8_n_0 ),
+        .I1(s_axis_tdata[19]),
+        .I2(\m_axis_tdata[18]_i_9_n_0 ),
+        .I3(s_axis_tdata[18]),
+        .I4(s_axis_tdata[17]),
+        .I5(\m_axis_tdata[21]_i_8_n_0 ),
+        .O(\m_axis_tdata[17]_i_6_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair33" *) 
+  LUT4 #(
+    .INIT(16'h4F44)) 
+    \m_axis_tdata[17]_i_7 
+       (.I0(\m_axis_tdata[21]_i_10_n_0 ),
+        .I1(s_axis_tdata[18]),
+        .I2(\m_axis_tdata[21]_i_11_n_0 ),
+        .I3(s_axis_tdata[19]),
+        .O(\m_axis_tdata[17]_i_7_n_0 ));
+  LUT6 #(
+    .INIT(64'hAEAEAE00AEAEAEAE)) 
+    \m_axis_tdata[18]_i_1 
+       (.I0(\m_axis_tdata[18]_i_2_n_0 ),
+        .I1(\m_axis_tdata[18]_i_3_n_0 ),
+        .I2(\m_axis_tdata[18]_i_4_n_0 ),
+        .I3(\m_axis_tdata[19]_i_2_n_0 ),
+        .I4(\m_axis_tdata[18]_i_5_n_0 ),
+        .I5(\m_axis_tdata[18]_i_6_n_0 ),
+        .O(p_1_in[18]));
+  (* SOFT_HLUTNM = "soft_lutpair5" *) 
+  LUT5 #(
+    .INIT(32'hFFFF6FFF)) 
+    \m_axis_tdata[18]_i_10 
+       (.I0(\m_axis_tdata[22]_i_5_n_0 ),
+        .I1(balance[3]),
+        .I2(balance[1]),
+        .I3(balance[0]),
+        .I4(balance[2]),
+        .O(\m_axis_tdata[18]_i_10_n_0 ));
+  LUT6 #(
+    .INIT(64'hFF00FFFFFFDFFFFF)) 
+    \m_axis_tdata[18]_i_11 
+       (.I0(balance[2]),
+        .I1(\m_axis_tdata[22]_i_5_n_0 ),
+        .I2(balance[3]),
+        .I3(\m_axis_tdata[21]_i_18_n_0 ),
+        .I4(balance[0]),
+        .I5(balance[1]),
+        .O(\m_axis_tdata[18]_i_11_n_0 ));
+  LUT4 #(
+    .INIT(16'hFFAE)) 
+    \m_axis_tdata[18]_i_2 
+       (.I0(\m_axis_tdata[18]_i_7_n_0 ),
+        .I1(s_axis_tdata[18]),
+        .I2(\m_axis_tdata[21]_i_9_n_0 ),
+        .I3(s_axis_tlast),
+        .O(\m_axis_tdata[18]_i_2_n_0 ));
+  LUT6 #(
+    .INIT(64'hFFF0CFCCAFAAEFEE)) 
+    \m_axis_tdata[18]_i_3 
+       (.I0(s_axis_tdata[22]),
+        .I1(s_axis_tdata[23]),
+        .I2(\m_axis_tdata[21]_i_14_n_0 ),
+        .I3(s_axis_tdata[21]),
+        .I4(\m_axis_tdata[21]_i_13_n_0 ),
+        .I5(\m_axis_tdata[21]_i_12_n_0 ),
+        .O(\m_axis_tdata[18]_i_3_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair0" *) 
+  LUT5 #(
+    .INIT(32'h010DFFFF)) 
+    \m_axis_tdata[18]_i_4 
+       (.I0(s_axis_tdata[18]),
+        .I1(\m_axis_tdata[21]_i_5_n_0 ),
+        .I2(\m_axis_tdata[21]_i_17_n_0 ),
+        .I3(s_axis_tdata[23]),
+        .I4(\m_axis_tdata[15]_i_5_n_0 ),
+        .O(\m_axis_tdata[18]_i_4_n_0 ));
+  LUT6 #(
+    .INIT(64'hA8AAA82020AA2020)) 
+    \m_axis_tdata[18]_i_5 
+       (.I0(\m_axis_tdata[21]_i_8_n_0 ),
+        .I1(\m_axis_tdata[18]_i_8_n_0 ),
+        .I2(s_axis_tdata[20]),
+        .I3(\m_axis_tdata[18]_i_9_n_0 ),
+        .I4(s_axis_tdata[19]),
+        .I5(s_axis_tdata[18]),
+        .O(\m_axis_tdata[18]_i_5_n_0 ));
+  LUT6 #(
+    .INIT(64'hBB0BBB0B0000BB0B)) 
+    \m_axis_tdata[18]_i_6 
+       (.I0(\m_axis_tdata[18]_i_10_n_0 ),
+        .I1(s_axis_tdata[23]),
+        .I2(s_axis_tdata[21]),
+        .I3(\m_axis_tdata[19]_i_9_n_0 ),
+        .I4(s_axis_tdata[22]),
+        .I5(\m_axis_tdata[18]_i_11_n_0 ),
+        .O(\m_axis_tdata[18]_i_6_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair33" *) 
+  LUT4 #(
+    .INIT(16'h4F44)) 
+    \m_axis_tdata[18]_i_7 
+       (.I0(\m_axis_tdata[21]_i_10_n_0 ),
+        .I1(s_axis_tdata[19]),
+        .I2(\m_axis_tdata[21]_i_11_n_0 ),
+        .I3(s_axis_tdata[20]),
+        .O(\m_axis_tdata[18]_i_7_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair6" *) 
+  LUT5 #(
+    .INIT(32'hFFFFE7FF)) 
+    \m_axis_tdata[18]_i_8 
+       (.I0(balance[2]),
+        .I1(\m_axis_tdata[22]_i_5_n_0 ),
+        .I2(balance[3]),
+        .I3(balance[0]),
+        .I4(balance[1]),
+        .O(\m_axis_tdata[18]_i_8_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair5" *) 
+  LUT5 #(
+    .INIT(32'hFBFFFFFB)) 
+    \m_axis_tdata[18]_i_9 
+       (.I0(balance[1]),
+        .I1(balance[0]),
+        .I2(balance[2]),
+        .I3(\m_axis_tdata[22]_i_5_n_0 ),
+        .I4(balance[3]),
+        .O(\m_axis_tdata[18]_i_9_n_0 ));
+  LUT6 #(
+    .INIT(64'hEEEEEEEEEEEEEEE0)) 
+    \m_axis_tdata[19]_i_1 
+       (.I0(\m_axis_tdata[19]_i_2_n_0 ),
+        .I1(\m_axis_tdata[19]_i_3_n_0 ),
+        .I2(\m_axis_tdata[19]_i_4_n_0 ),
+        .I3(\m_axis_tdata[19]_i_5_n_0 ),
+        .I4(s_axis_tlast),
+        .I5(\m_axis_tdata[19]_i_6_n_0 ),
+        .O(p_1_in[19]));
+  LUT6 #(
+    .INIT(64'hBEFFFFFF00DFFFFF)) 
+    \m_axis_tdata[19]_i_10 
+       (.I0(balance[2]),
+        .I1(\m_axis_tdata[22]_i_5_n_0 ),
+        .I2(balance[3]),
+        .I3(balance[1]),
+        .I4(balance[0]),
+        .I5(\m_axis_tdata[21]_i_18_n_0 ),
+        .O(\m_axis_tdata[19]_i_10_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair34" *) 
+  LUT3 #(
+    .INIT(8'h4F)) 
+    \m_axis_tdata[19]_i_2 
+       (.I0(\m_axis_tdata[19]_i_7_n_0 ),
+        .I1(s_axis_tdata[23]),
+        .I2(s_axis_tlast),
+        .O(\m_axis_tdata[19]_i_2_n_0 ));
+  LUT6 #(
+    .INIT(64'h4C404C40CCC00000)) 
+    \m_axis_tdata[19]_i_3 
+       (.I0(\m_axis_tdata[19]_i_8_n_0 ),
+        .I1(\m_axis_tdata[19]_i_7_n_0 ),
+        .I2(\m_axis_tdata[19]_i_9_n_0 ),
+        .I3(s_axis_tdata[22]),
+        .I4(s_axis_tdata[23]),
+        .I5(\m_axis_tdata[19]_i_10_n_0 ),
+        .O(\m_axis_tdata[19]_i_3_n_0 ));
+  LUT5 #(
+    .INIT(32'h2AFF2A2A)) 
+    \m_axis_tdata[19]_i_4 
+       (.I0(s_axis_tdata[23]),
+        .I1(\m_axis_tdata[21]_i_13_n_0 ),
+        .I2(\m_axis_tdata[21]_i_12_n_0 ),
+        .I3(\m_axis_tdata[21]_i_14_n_0 ),
+        .I4(s_axis_tdata[22]),
+        .O(\m_axis_tdata[19]_i_4_n_0 ));
+  LUT6 #(
+    .INIT(64'h22F2FFFF22F222F2)) 
+    \m_axis_tdata[19]_i_5 
+       (.I0(s_axis_tdata[21]),
+        .I1(\m_axis_tdata[21]_i_11_n_0 ),
+        .I2(s_axis_tdata[20]),
+        .I3(\m_axis_tdata[21]_i_10_n_0 ),
+        .I4(\m_axis_tdata[21]_i_9_n_0 ),
+        .I5(s_axis_tdata[19]),
+        .O(\m_axis_tdata[19]_i_5_n_0 ));
+  LUT5 #(
+    .INIT(32'h0000C808)) 
+    \m_axis_tdata[19]_i_6 
+       (.I0(s_axis_tdata[19]),
+        .I1(\m_axis_tdata[15]_i_5_n_0 ),
+        .I2(\m_axis_tdata[21]_i_5_n_0 ),
+        .I3(s_axis_tdata[23]),
+        .I4(\m_axis_tdata[21]_i_17_n_0 ),
+        .O(\m_axis_tdata[19]_i_6_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair11" *) 
+  LUT5 #(
+    .INIT(32'h45FFFFFF)) 
+    \m_axis_tdata[19]_i_7 
+       (.I0(balance[2]),
+        .I1(\m_axis_tdata[22]_i_5_n_0 ),
+        .I2(balance[3]),
+        .I3(balance[0]),
+        .I4(balance[1]),
+        .O(\m_axis_tdata[19]_i_7_n_0 ));
+  LUT5 #(
+    .INIT(32'h0531F531)) 
+    \m_axis_tdata[19]_i_8 
+       (.I0(s_axis_tdata[21]),
+        .I1(s_axis_tdata[20]),
+        .I2(\m_axis_tdata[18]_i_8_n_0 ),
+        .I3(\m_axis_tdata[18]_i_9_n_0 ),
+        .I4(s_axis_tdata[19]),
+        .O(\m_axis_tdata[19]_i_8_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair8" *) 
+  LUT5 #(
+    .INIT(32'hDFFDFFFF)) 
+    \m_axis_tdata[19]_i_9 
+       (.I0(balance[0]),
+        .I1(balance[1]),
+        .I2(balance[3]),
+        .I3(\m_axis_tdata[22]_i_5_n_0 ),
+        .I4(balance[2]),
+        .O(\m_axis_tdata[19]_i_9_n_0 ));
+  LUT6 #(
+    .INIT(64'hFEFEFEFEFE00FEFE)) 
+    \m_axis_tdata[1]_i_1 
+       (.I0(\m_axis_tdata[1]_i_2_n_0 ),
+        .I1(\m_axis_tdata[1]_i_3_n_0 ),
+        .I2(\m_axis_tdata[1]_i_4_n_0 ),
+        .I3(\m_axis_tdata[1]_i_5_n_0 ),
+        .I4(\m_axis_tdata[1]_i_6_n_0 ),
+        .I5(\m_axis_tdata[1]_i_7_n_0 ),
+        .O(p_1_in[1]));
+  LUT5 #(
+    .INIT(32'h44477477)) 
+    \m_axis_tdata[1]_i_10 
+       (.I0(s_axis_tdata[7]),
+        .I1(\m_axis_tdata[15]_i_9_n_0 ),
+        .I2(\m_axis_tdata[14]_i_8_n_0 ),
+        .I3(s_axis_tdata[8]),
+        .I4(s_axis_tdata[1]),
+        .O(\m_axis_tdata[1]_i_10_n_0 ));
+  LUT6 #(
+    .INIT(64'h44F444F4FFFF44F4)) 
+    \m_axis_tdata[1]_i_2 
+       (.I0(\m_axis_tdata[18]_i_10_n_0 ),
+        .I1(s_axis_tdata[6]),
+        .I2(s_axis_tdata[4]),
+        .I3(\m_axis_tdata[19]_i_9_n_0 ),
+        .I4(s_axis_tdata[5]),
+        .I5(\m_axis_tdata[18]_i_11_n_0 ),
+        .O(\m_axis_tdata[1]_i_2_n_0 ));
+  LUT6 #(
+    .INIT(64'hFFFFFFFF2E22FFFF)) 
+    \m_axis_tdata[1]_i_3 
+       (.I0(s_axis_tdata[3]),
+        .I1(\m_axis_tdata[18]_i_8_n_0 ),
+        .I2(\m_axis_tdata[18]_i_9_n_0 ),
+        .I3(s_axis_tdata[2]),
+        .I4(s_axis_tlast),
+        .I5(\m_axis_tdata[1]_i_8_n_0 ),
+        .O(\m_axis_tdata[1]_i_3_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair17" *) 
+  LUT2 #(
+    .INIT(4'h2)) 
+    \m_axis_tdata[1]_i_4 
+       (.I0(s_axis_tdata[1]),
+        .I1(\m_axis_tdata[22]_i_3_n_0 ),
+        .O(\m_axis_tdata[1]_i_4_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair17" *) 
+  LUT4 #(
+    .INIT(16'hFFAE)) 
+    \m_axis_tdata[1]_i_5 
+       (.I0(\m_axis_tdata[1]_i_9_n_0 ),
+        .I1(s_axis_tdata[1]),
+        .I2(\m_axis_tdata[21]_i_9_n_0 ),
+        .I3(s_axis_tlast),
+        .O(\m_axis_tdata[1]_i_5_n_0 ));
+  LUT6 #(
+    .INIT(64'hD0DD0000D0DDD0DD)) 
+    \m_axis_tdata[1]_i_6 
+       (.I0(s_axis_tdata[5]),
+        .I1(\m_axis_tdata[21]_i_12_n_0 ),
+        .I2(\m_axis_tdata[21]_i_13_n_0 ),
+        .I3(s_axis_tdata[6]),
+        .I4(\m_axis_tdata[21]_i_14_n_0 ),
+        .I5(s_axis_tdata[4]),
+        .O(\m_axis_tdata[1]_i_6_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair37" *) 
+  LUT3 #(
+    .INIT(8'h02)) 
+    \m_axis_tdata[1]_i_7 
+       (.I0(\m_axis_tdata[15]_i_5_n_0 ),
+        .I1(\m_axis_tdata[1]_i_10_n_0 ),
+        .I2(\m_axis_tdata[21]_i_17_n_0 ),
+        .O(\m_axis_tdata[1]_i_7_n_0 ));
+  LUT6 #(
+    .INIT(64'h44F444F4FFFF44F4)) 
+    \m_axis_tdata[1]_i_8 
+       (.I0(\m_axis_tdata[16]_i_9_n_0 ),
+        .I1(s_axis_tdata[8]),
+        .I2(s_axis_tdata[7]),
+        .I3(\m_axis_tdata[16]_i_8_n_0 ),
+        .I4(s_axis_tdata[9]),
+        .I5(\m_axis_tdata[16]_i_7_n_0 ),
+        .O(\m_axis_tdata[1]_i_8_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair16" *) 
+  LUT4 #(
+    .INIT(16'h4F44)) 
+    \m_axis_tdata[1]_i_9 
+       (.I0(\m_axis_tdata[21]_i_10_n_0 ),
+        .I1(s_axis_tdata[2]),
+        .I2(\m_axis_tdata[21]_i_11_n_0 ),
+        .I3(s_axis_tdata[3]),
+        .O(\m_axis_tdata[1]_i_9_n_0 ));
+  LUT6 #(
+    .INIT(64'hA8AAA8AAA8AAA8A8)) 
+    \m_axis_tdata[20]_i_1 
+       (.I0(\m_axis_tdata[20]_i_2_n_0 ),
+        .I1(\m_axis_tdata[21]_i_4_n_0 ),
+        .I2(\m_axis_tdata[20]_i_3_n_0 ),
+        .I3(\m_axis_tdata[21]_i_6_n_0 ),
+        .I4(\m_axis_tdata[21]_i_5_n_0 ),
+        .I5(s_axis_tdata[20]),
+        .O(p_1_in[20]));
+  (* SOFT_HLUTNM = "soft_lutpair15" *) 
+  LUT4 #(
+    .INIT(16'h5FDD)) 
+    \m_axis_tdata[20]_i_2 
+       (.I0(s_axis_tlast),
+        .I1(s_axis_tdata[23]),
+        .I2(\m_axis_tdata[20]_i_4_n_0 ),
+        .I3(\m_axis_tdata[21]_i_8_n_0 ),
+        .O(\m_axis_tdata[20]_i_2_n_0 ));
+  LUT6 #(
+    .INIT(64'h22F2FFFF22F222F2)) 
+    \m_axis_tdata[20]_i_3 
+       (.I0(s_axis_tdata[22]),
+        .I1(\m_axis_tdata[21]_i_11_n_0 ),
+        .I2(s_axis_tdata[21]),
+        .I3(\m_axis_tdata[21]_i_10_n_0 ),
+        .I4(\m_axis_tdata[21]_i_9_n_0 ),
+        .I5(s_axis_tdata[20]),
+        .O(\m_axis_tdata[20]_i_3_n_0 ));
+  LUT5 #(
+    .INIT(32'h535300F3)) 
+    \m_axis_tdata[20]_i_4 
+       (.I0(s_axis_tdata[20]),
+        .I1(s_axis_tdata[21]),
+        .I2(\m_axis_tdata[18]_i_9_n_0 ),
+        .I3(s_axis_tdata[22]),
+        .I4(\m_axis_tdata[18]_i_8_n_0 ),
+        .O(\m_axis_tdata[20]_i_4_n_0 ));
+  LUT6 #(
+    .INIT(64'hA8A8A8A8AAAAAAA8)) 
+    \m_axis_tdata[21]_i_1 
+       (.I0(\m_axis_tdata[21]_i_2_n_0 ),
+        .I1(\m_axis_tdata[21]_i_3_n_0 ),
+        .I2(\m_axis_tdata[21]_i_4_n_0 ),
+        .I3(\m_axis_tdata[21]_i_5_n_0 ),
+        .I4(s_axis_tdata[21]),
+        .I5(\m_axis_tdata[21]_i_6_n_0 ),
+        .O(p_1_in[21]));
+  (* SOFT_HLUTNM = "soft_lutpair9" *) 
+  LUT5 #(
+    .INIT(32'hBFFFFFBF)) 
+    \m_axis_tdata[21]_i_10 
+       (.I0(balance[0]),
+        .I1(balance[1]),
+        .I2(balance[2]),
+        .I3(\m_axis_tdata[22]_i_5_n_0 ),
+        .I4(balance[3]),
+        .O(\m_axis_tdata[21]_i_10_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair7" *) 
+  LUT5 #(
+    .INIT(32'hFFFDDFFF)) 
+    \m_axis_tdata[21]_i_11 
+       (.I0(balance[1]),
+        .I1(balance[0]),
+        .I2(balance[2]),
+        .I3(\m_axis_tdata[22]_i_5_n_0 ),
+        .I4(balance[3]),
+        .O(\m_axis_tdata[21]_i_11_n_0 ));
+  LUT6 #(
+    .INIT(64'hFFFFFFFFFF00FFDF)) 
+    \m_axis_tdata[21]_i_12 
+       (.I0(balance[2]),
+        .I1(\m_axis_tdata[22]_i_5_n_0 ),
+        .I2(balance[3]),
+        .I3(\m_axis_tdata[21]_i_18_n_0 ),
+        .I4(balance[1]),
+        .I5(balance[0]),
+        .O(\m_axis_tdata[21]_i_12_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair9" *) 
+  LUT5 #(
+    .INIT(32'hEFFFFFEF)) 
+    \m_axis_tdata[21]_i_13 
+       (.I0(balance[1]),
+        .I1(balance[0]),
+        .I2(balance[2]),
+        .I3(\m_axis_tdata[22]_i_5_n_0 ),
+        .I4(balance[3]),
+        .O(\m_axis_tdata[21]_i_13_n_0 ));
+  LUT5 #(
+    .INIT(32'hFFBAFFFF)) 
+    \m_axis_tdata[21]_i_14 
+       (.I0(balance[2]),
+        .I1(\m_axis_tdata[22]_i_5_n_0 ),
+        .I2(balance[3]),
+        .I3(balance[0]),
+        .I4(\m_axis_tdata[21]_i_18_n_0 ),
+        .O(\m_axis_tdata[21]_i_14_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair4" *) 
+  LUT4 #(
+    .INIT(16'hFFFE)) 
+    \m_axis_tdata[21]_i_15 
        (.I0(balance[4]),
         .I1(balance[3]),
-        .I2(s_axis_tlast),
+        .I2(balance[9]),
+        .I3(balance[2]),
+        .O(\m_axis_tdata[21]_i_15_n_0 ));
+  LUT2 #(
+    .INIT(4'hE)) 
+    \m_axis_tdata[21]_i_16 
+       (.I0(balance[1]),
+        .I1(balance[0]),
+        .O(\m_axis_tdata[21]_i_16_n_0 ));
+  LUT6 #(
+    .INIT(64'h070203070E0E020E)) 
+    \m_axis_tdata[21]_i_17 
+       (.I0(balance[1]),
+        .I1(\m_axis_tdata[21]_i_18_n_0 ),
+        .I2(balance[0]),
+        .I3(balance[3]),
+        .I4(\m_axis_tdata[22]_i_5_n_0 ),
+        .I5(balance[2]),
+        .O(\m_axis_tdata[21]_i_17_n_0 ));
+  LUT6 #(
+    .INIT(64'hAAAAAAAAAAAAAAA8)) 
+    \m_axis_tdata[21]_i_18 
+       (.I0(balance[1]),
+        .I1(balance[4]),
+        .I2(balance[3]),
+        .I3(balance[9]),
+        .I4(balance[2]),
+        .I5(\m_axis_tdata[22]_i_6_n_0 ),
+        .O(\m_axis_tdata[21]_i_18_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair15" *) 
+  LUT4 #(
+    .INIT(16'h77F3)) 
+    \m_axis_tdata[21]_i_2 
+       (.I0(\m_axis_tdata[21]_i_7_n_0 ),
+        .I1(s_axis_tlast),
+        .I2(s_axis_tdata[23]),
+        .I3(\m_axis_tdata[21]_i_8_n_0 ),
+        .O(\m_axis_tdata[21]_i_2_n_0 ));
+  LUT6 #(
+    .INIT(64'h44F444F4FFFF44F4)) 
+    \m_axis_tdata[21]_i_3 
+       (.I0(\m_axis_tdata[21]_i_9_n_0 ),
+        .I1(s_axis_tdata[21]),
+        .I2(s_axis_tdata[22]),
+        .I3(\m_axis_tdata[21]_i_10_n_0 ),
+        .I4(s_axis_tdata[23]),
+        .I5(\m_axis_tdata[21]_i_11_n_0 ),
+        .O(\m_axis_tdata[21]_i_3_n_0 ));
+  LUT5 #(
+    .INIT(32'hBFAAFFAA)) 
+    \m_axis_tdata[21]_i_4 
+       (.I0(s_axis_tlast),
+        .I1(\m_axis_tdata[21]_i_12_n_0 ),
+        .I2(\m_axis_tdata[21]_i_13_n_0 ),
+        .I3(s_axis_tdata[23]),
+        .I4(\m_axis_tdata[21]_i_14_n_0 ),
+        .O(\m_axis_tdata[21]_i_4_n_0 ));
+  LUT6 #(
+    .INIT(64'h000000000F00EEFE)) 
+    \m_axis_tdata[21]_i_5 
+       (.I0(\m_axis_tdata[21]_i_15_n_0 ),
+        .I1(\m_axis_tdata[22]_i_6_n_0 ),
+        .I2(balance[3]),
+        .I3(\m_axis_tdata[22]_i_5_n_0 ),
+        .I4(balance[2]),
+        .I5(\m_axis_tdata[21]_i_16_n_0 ),
+        .O(\m_axis_tdata[21]_i_5_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair0" *) 
+  LUT4 #(
+    .INIT(16'hBAFF)) 
+    \m_axis_tdata[21]_i_6 
+       (.I0(\m_axis_tdata[21]_i_17_n_0 ),
+        .I1(s_axis_tdata[23]),
+        .I2(\m_axis_tdata[21]_i_5_n_0 ),
+        .I3(\m_axis_tdata[15]_i_5_n_0 ),
+        .O(\m_axis_tdata[21]_i_6_n_0 ));
+  LUT5 #(
+    .INIT(32'h535300F3)) 
+    \m_axis_tdata[21]_i_7 
+       (.I0(s_axis_tdata[21]),
+        .I1(s_axis_tdata[22]),
+        .I2(\m_axis_tdata[18]_i_9_n_0 ),
+        .I3(s_axis_tdata[23]),
+        .I4(\m_axis_tdata[18]_i_8_n_0 ),
+        .O(\m_axis_tdata[21]_i_7_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair1" *) 
+  LUT5 #(
+    .INIT(32'h005DFFFF)) 
+    \m_axis_tdata[21]_i_8 
+       (.I0(balance[2]),
+        .I1(\m_axis_tdata[22]_i_5_n_0 ),
+        .I2(balance[3]),
+        .I3(balance[1]),
+        .I4(balance[0]),
+        .O(\m_axis_tdata[21]_i_8_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair10" *) 
+  LUT5 #(
+    .INIT(32'hFFDFFBFF)) 
+    \m_axis_tdata[21]_i_9 
+       (.I0(balance[2]),
+        .I1(balance[0]),
+        .I2(balance[1]),
+        .I3(\m_axis_tdata[22]_i_5_n_0 ),
+        .I4(balance[3]),
+        .O(\m_axis_tdata[21]_i_9_n_0 ));
+  LUT5 #(
+    .INIT(32'hFCFA3050)) 
+    \m_axis_tdata[22]_i_1 
+       (.I0(\m_axis_tdata[22]_i_2_n_0 ),
+        .I1(\m_axis_tdata[22]_i_3_n_0 ),
+        .I2(s_axis_tdata[22]),
+        .I3(s_axis_tlast),
+        .I4(s_axis_tdata[23]),
+        .O(p_1_in[22]));
+  LUT6 #(
+    .INIT(64'h0000FBFF0000FF5D)) 
+    \m_axis_tdata[22]_i_2 
+       (.I0(\m_axis_tdata[22]_i_4_n_0 ),
+        .I1(balance[3]),
+        .I2(\m_axis_tdata[22]_i_5_n_0 ),
+        .I3(balance[2]),
+        .I4(balance[0]),
+        .I5(balance[1]),
+        .O(\m_axis_tdata[22]_i_2_n_0 ));
+  LUT6 #(
+    .INIT(64'hAAAAAAAAAAAAAAA8)) 
+    \m_axis_tdata[22]_i_3 
+       (.I0(balance[0]),
+        .I1(balance[9]),
+        .I2(\m_axis_tdata[22]_i_6_n_0 ),
         .I3(balance[1]),
         .I4(balance[2]),
-        .O(\m_axis_tdata[22]_i_5_n_0 ));
+        .I5(\m_axis_tdata[22]_i_7_n_0 ),
+        .O(\m_axis_tdata[22]_i_3_n_0 ));
   (* SOFT_HLUTNM = "soft_lutpair4" *) 
-  LUT2 #(
-    .INIT(4'h7)) 
-    \m_axis_tdata[22]_i_6 
-       (.I0(balance[2]),
-        .I1(balance[1]),
-        .O(\m_axis_tdata[22]_i_6_n_0 ));
+  LUT5 #(
+    .INIT(32'h00000001)) 
+    \m_axis_tdata[22]_i_4 
+       (.I0(\m_axis_tdata[22]_i_6_n_0 ),
+        .I1(balance[2]),
+        .I2(balance[9]),
+        .I3(balance[3]),
+        .I4(balance[4]),
+        .O(\m_axis_tdata[22]_i_4_n_0 ));
   LUT6 #(
-    .INIT(64'h00000001FFFFFFFF)) 
-    \m_axis_tdata[22]_i_7 
+    .INIT(64'h0000000000000001)) 
+    \m_axis_tdata[22]_i_5 
+       (.I0(balance[5]),
+        .I1(balance[6]),
+        .I2(balance[4]),
+        .I3(balance[9]),
+        .I4(balance[8]),
+        .I5(balance[7]),
+        .O(\m_axis_tdata[22]_i_5_n_0 ));
+  LUT4 #(
+    .INIT(16'hFFFE)) 
+    \m_axis_tdata[22]_i_6 
        (.I0(balance[8]),
         .I1(balance[7]),
-        .I2(balance[5]),
-        .I3(balance[6]),
-        .I4(balance[9]),
-        .I5(balance[4]),
+        .I2(balance[6]),
+        .I3(balance[5]),
+        .O(\m_axis_tdata[22]_i_6_n_0 ));
+  LUT2 #(
+    .INIT(4'hE)) 
+    \m_axis_tdata[22]_i_7 
+       (.I0(balance[3]),
+        .I1(balance[4]),
         .O(\m_axis_tdata[22]_i_7_n_0 ));
   LUT6 #(
-    .INIT(64'hFFFFFFFFFFFFFFF8)) 
+    .INIT(64'hEFEE0000EFEEEFEE)) 
     \m_axis_tdata[2]_i_1 
-       (.I0(\m_axis_tdata[20]_i_3_n_0 ),
-        .I1(s_axis_tdata[4]),
-        .I2(\m_axis_tdata[2]_i_2_n_0 ),
-        .I3(\m_axis_tdata[2]_i_3_n_0 ),
-        .I4(\m_axis_tdata[2]_i_4_n_0 ),
-        .I5(\m_axis_tdata[2]_i_5_n_0 ),
+       (.I0(\m_axis_tdata[2]_i_2_n_0 ),
+        .I1(\m_axis_tdata[2]_i_3_n_0 ),
+        .I2(\m_axis_tdata[2]_i_4_n_0 ),
+        .I3(\m_axis_tdata[15]_i_5_n_0 ),
+        .I4(\m_axis_tdata[2]_i_5_n_0 ),
+        .I5(\m_axis_tdata[2]_i_6_n_0 ),
         .O(p_1_in[2]));
   LUT6 #(
-    .INIT(64'hE22E222200000000)) 
+    .INIT(64'h44F444F4FFFF44F4)) 
+    \m_axis_tdata[2]_i_10 
+       (.I0(\m_axis_tdata[16]_i_8_n_0 ),
+        .I1(s_axis_tdata[8]),
+        .I2(s_axis_tdata[9]),
+        .I3(\m_axis_tdata[16]_i_9_n_0 ),
+        .I4(s_axis_tdata[10]),
+        .I5(\m_axis_tdata[16]_i_7_n_0 ),
+        .O(\m_axis_tdata[2]_i_10_n_0 ));
+  LUT4 #(
+    .INIT(16'hFFAE)) 
     \m_axis_tdata[2]_i_2 
-       (.I0(\m_axis_tdata[20]_i_5_n_0 ),
-        .I1(balance[2]),
-        .I2(\m_axis_tdata[22]_i_7_n_0 ),
-        .I3(balance[3]),
-        .I4(\m_axis_tdata[21]_i_5_n_0 ),
-        .I5(s_axis_tdata[3]),
+       (.I0(\m_axis_tdata[2]_i_7_n_0 ),
+        .I1(s_axis_tdata[2]),
+        .I2(\m_axis_tdata[21]_i_9_n_0 ),
+        .I3(s_axis_tlast),
         .O(\m_axis_tdata[2]_i_2_n_0 ));
   LUT6 #(
-    .INIT(64'hFFFFFF4000000000)) 
+    .INIT(64'h22F2FFFF22F222F2)) 
     \m_axis_tdata[2]_i_3 
-       (.I0(\m_axis_tdata[22]_i_7_n_0 ),
-        .I1(balance[3]),
-        .I2(\m_axis_tdata[19]_i_6_n_0 ),
-        .I3(\m_axis_tdata[19]_i_7_n_0 ),
-        .I4(\m_axis_tdata[22]_i_5_n_0 ),
-        .I5(s_axis_tdata[2]),
+       (.I0(s_axis_tdata[6]),
+        .I1(\m_axis_tdata[21]_i_12_n_0 ),
+        .I2(s_axis_tdata[7]),
+        .I3(\m_axis_tdata[21]_i_13_n_0 ),
+        .I4(\m_axis_tdata[21]_i_14_n_0 ),
+        .I5(s_axis_tdata[5]),
         .O(\m_axis_tdata[2]_i_3_n_0 ));
   LUT6 #(
-    .INIT(64'hFF90009000000000)) 
+    .INIT(64'hAEAEAEBFBFBFAEBF)) 
     \m_axis_tdata[2]_i_4 
-       (.I0(\m_axis_tdata[22]_i_7_n_0 ),
-        .I1(balance[3]),
-        .I2(\m_axis_tdata[21]_i_5_n_0 ),
-        .I3(balance[2]),
-        .I4(\m_axis_tdata[20]_i_5_n_0 ),
-        .I5(s_axis_tdata[5]),
+       (.I0(\m_axis_tdata[21]_i_17_n_0 ),
+        .I1(\m_axis_tdata[15]_i_9_n_0 ),
+        .I2(s_axis_tdata[8]),
+        .I3(s_axis_tdata[2]),
+        .I4(\m_axis_tdata[15]_i_10_n_0 ),
+        .I5(s_axis_tdata[9]),
         .O(\m_axis_tdata[2]_i_4_n_0 ));
   LUT6 #(
-    .INIT(64'hFBBBAAAA00000000)) 
+    .INIT(64'hFFFFFFFFFFF4FFFF)) 
     \m_axis_tdata[2]_i_5 
-       (.I0(\m_axis_tdata[19]_i_8_n_0 ),
-        .I1(balance[1]),
-        .I2(\m_axis_tdata[19]_i_9_n_0 ),
-        .I3(\m_axis_tdata[22]_i_7_n_0 ),
-        .I4(\m_axis_tdata[19]_i_10_n_0 ),
-        .I5(s_axis_tdata[6]),
+       (.I0(\m_axis_tdata[18]_i_11_n_0 ),
+        .I1(s_axis_tdata[6]),
+        .I2(\m_axis_tdata[2]_i_8_n_0 ),
+        .I3(\m_axis_tdata[2]_i_9_n_0 ),
+        .I4(s_axis_tlast),
+        .I5(\m_axis_tdata[2]_i_10_n_0 ),
         .O(\m_axis_tdata[2]_i_5_n_0 ));
   LUT6 #(
-    .INIT(64'hFFFFFFFFFFFFFFF8)) 
-    \m_axis_tdata[3]_i_1 
-       (.I0(\m_axis_tdata[20]_i_3_n_0 ),
-        .I1(s_axis_tdata[5]),
-        .I2(\m_axis_tdata[3]_i_2_n_0 ),
-        .I3(\m_axis_tdata[3]_i_3_n_0 ),
-        .I4(\m_axis_tdata[3]_i_4_n_0 ),
-        .I5(\m_axis_tdata[3]_i_5_n_0 ),
-        .O(p_1_in[3]));
+    .INIT(64'h101BB0BBFFFFFFFF)) 
+    \m_axis_tdata[2]_i_6 
+       (.I0(\m_axis_tdata[18]_i_8_n_0 ),
+        .I1(s_axis_tdata[4]),
+        .I2(\m_axis_tdata[18]_i_9_n_0 ),
+        .I3(s_axis_tdata[3]),
+        .I4(s_axis_tdata[2]),
+        .I5(\m_axis_tdata[21]_i_8_n_0 ),
+        .O(\m_axis_tdata[2]_i_6_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair18" *) 
+  LUT4 #(
+    .INIT(16'h4F44)) 
+    \m_axis_tdata[2]_i_7 
+       (.I0(\m_axis_tdata[21]_i_10_n_0 ),
+        .I1(s_axis_tdata[3]),
+        .I2(\m_axis_tdata[21]_i_11_n_0 ),
+        .I3(s_axis_tdata[4]),
+        .O(\m_axis_tdata[2]_i_7_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair22" *) 
+  LUT2 #(
+    .INIT(4'h2)) 
+    \m_axis_tdata[2]_i_8 
+       (.I0(s_axis_tdata[5]),
+        .I1(\m_axis_tdata[19]_i_9_n_0 ),
+        .O(\m_axis_tdata[2]_i_8_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair24" *) 
+  LUT2 #(
+    .INIT(4'h2)) 
+    \m_axis_tdata[2]_i_9 
+       (.I0(s_axis_tdata[7]),
+        .I1(\m_axis_tdata[18]_i_10_n_0 ),
+        .O(\m_axis_tdata[2]_i_9_n_0 ));
   LUT6 #(
-    .INIT(64'hE22E222200000000)) 
+    .INIT(64'hFEFEFEFEFE00FEFE)) 
+    \m_axis_tdata[3]_i_1 
+       (.I0(\m_axis_tdata[3]_i_2_n_0 ),
+        .I1(\m_axis_tdata[3]_i_3_n_0 ),
+        .I2(\m_axis_tdata[3]_i_4_n_0 ),
+        .I3(\m_axis_tdata[3]_i_5_n_0 ),
+        .I4(\m_axis_tdata[3]_i_6_n_0 ),
+        .I5(\m_axis_tdata[3]_i_7_n_0 ),
+        .O(p_1_in[3]));
+  LUT5 #(
+    .INIT(32'hFFE400E4)) 
+    \m_axis_tdata[3]_i_10 
+       (.I0(\m_axis_tdata[14]_i_8_n_0 ),
+        .I1(s_axis_tdata[10]),
+        .I2(s_axis_tdata[3]),
+        .I3(\m_axis_tdata[15]_i_9_n_0 ),
+        .I4(s_axis_tdata[9]),
+        .O(\m_axis_tdata[3]_i_10_n_0 ));
+  LUT6 #(
+    .INIT(64'h44F444F4FFFF44F4)) 
     \m_axis_tdata[3]_i_2 
-       (.I0(\m_axis_tdata[20]_i_5_n_0 ),
-        .I1(balance[2]),
-        .I2(\m_axis_tdata[22]_i_7_n_0 ),
-        .I3(balance[3]),
-        .I4(\m_axis_tdata[21]_i_5_n_0 ),
-        .I5(s_axis_tdata[4]),
+       (.I0(\m_axis_tdata[18]_i_10_n_0 ),
+        .I1(s_axis_tdata[8]),
+        .I2(s_axis_tdata[6]),
+        .I3(\m_axis_tdata[19]_i_9_n_0 ),
+        .I4(s_axis_tdata[7]),
+        .I5(\m_axis_tdata[18]_i_11_n_0 ),
         .O(\m_axis_tdata[3]_i_2_n_0 ));
   LUT6 #(
-    .INIT(64'hFFFFFF4000000000)) 
+    .INIT(64'hFFFF22E2FFFFFFFF)) 
     \m_axis_tdata[3]_i_3 
-       (.I0(\m_axis_tdata[22]_i_7_n_0 ),
-        .I1(balance[3]),
-        .I2(\m_axis_tdata[19]_i_6_n_0 ),
-        .I3(\m_axis_tdata[19]_i_7_n_0 ),
-        .I4(\m_axis_tdata[22]_i_5_n_0 ),
-        .I5(s_axis_tdata[3]),
+       (.I0(s_axis_tdata[5]),
+        .I1(\m_axis_tdata[18]_i_8_n_0 ),
+        .I2(s_axis_tdata[4]),
+        .I3(\m_axis_tdata[18]_i_9_n_0 ),
+        .I4(\m_axis_tdata[3]_i_8_n_0 ),
+        .I5(s_axis_tlast),
         .O(\m_axis_tdata[3]_i_3_n_0 ));
-  LUT6 #(
-    .INIT(64'hFF90009000000000)) 
+  (* SOFT_HLUTNM = "soft_lutpair19" *) 
+  LUT2 #(
+    .INIT(4'h2)) 
     \m_axis_tdata[3]_i_4 
-       (.I0(\m_axis_tdata[22]_i_7_n_0 ),
-        .I1(balance[3]),
-        .I2(\m_axis_tdata[21]_i_5_n_0 ),
-        .I3(balance[2]),
-        .I4(\m_axis_tdata[20]_i_5_n_0 ),
-        .I5(s_axis_tdata[6]),
+       (.I0(s_axis_tdata[3]),
+        .I1(\m_axis_tdata[22]_i_3_n_0 ),
         .O(\m_axis_tdata[3]_i_4_n_0 ));
-  LUT6 #(
-    .INIT(64'hFBBBAAAA00000000)) 
+  (* SOFT_HLUTNM = "soft_lutpair19" *) 
+  LUT4 #(
+    .INIT(16'hFFAE)) 
     \m_axis_tdata[3]_i_5 
-       (.I0(\m_axis_tdata[19]_i_8_n_0 ),
-        .I1(balance[1]),
-        .I2(\m_axis_tdata[19]_i_9_n_0 ),
-        .I3(\m_axis_tdata[22]_i_7_n_0 ),
-        .I4(\m_axis_tdata[19]_i_10_n_0 ),
-        .I5(s_axis_tdata[7]),
+       (.I0(\m_axis_tdata[3]_i_9_n_0 ),
+        .I1(s_axis_tdata[3]),
+        .I2(\m_axis_tdata[21]_i_9_n_0 ),
+        .I3(s_axis_tlast),
         .O(\m_axis_tdata[3]_i_5_n_0 ));
   LUT6 #(
-    .INIT(64'hFFFFFFFFFFFFFFF8)) 
-    \m_axis_tdata[4]_i_1 
-       (.I0(\m_axis_tdata[20]_i_3_n_0 ),
-        .I1(s_axis_tdata[6]),
-        .I2(\m_axis_tdata[4]_i_2_n_0 ),
-        .I3(\m_axis_tdata[4]_i_3_n_0 ),
-        .I4(\m_axis_tdata[4]_i_4_n_0 ),
-        .I5(\m_axis_tdata[4]_i_5_n_0 ),
-        .O(p_1_in[4]));
+    .INIT(64'hDD0DDD0D0000DD0D)) 
+    \m_axis_tdata[3]_i_6 
+       (.I0(s_axis_tdata[6]),
+        .I1(\m_axis_tdata[21]_i_14_n_0 ),
+        .I2(s_axis_tdata[7]),
+        .I3(\m_axis_tdata[21]_i_12_n_0 ),
+        .I4(s_axis_tdata[8]),
+        .I5(\m_axis_tdata[21]_i_13_n_0 ),
+        .O(\m_axis_tdata[3]_i_6_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair36" *) 
+  LUT3 #(
+    .INIT(8'h08)) 
+    \m_axis_tdata[3]_i_7 
+       (.I0(\m_axis_tdata[15]_i_5_n_0 ),
+        .I1(\m_axis_tdata[3]_i_10_n_0 ),
+        .I2(\m_axis_tdata[21]_i_17_n_0 ),
+        .O(\m_axis_tdata[3]_i_7_n_0 ));
   LUT6 #(
-    .INIT(64'hE22E222200000000)) 
+    .INIT(64'h44F444F4FFFF44F4)) 
+    \m_axis_tdata[3]_i_8 
+       (.I0(\m_axis_tdata[16]_i_8_n_0 ),
+        .I1(s_axis_tdata[9]),
+        .I2(s_axis_tdata[10]),
+        .I3(\m_axis_tdata[16]_i_9_n_0 ),
+        .I4(s_axis_tdata[11]),
+        .I5(\m_axis_tdata[16]_i_7_n_0 ),
+        .O(\m_axis_tdata[3]_i_8_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair18" *) 
+  LUT4 #(
+    .INIT(16'h4F44)) 
+    \m_axis_tdata[3]_i_9 
+       (.I0(\m_axis_tdata[21]_i_10_n_0 ),
+        .I1(s_axis_tdata[4]),
+        .I2(\m_axis_tdata[21]_i_11_n_0 ),
+        .I3(s_axis_tdata[5]),
+        .O(\m_axis_tdata[3]_i_9_n_0 ));
+  LUT6 #(
+    .INIT(64'hEFEE0000EFEEEFEE)) 
+    \m_axis_tdata[4]_i_1 
+       (.I0(\m_axis_tdata[4]_i_2_n_0 ),
+        .I1(\m_axis_tdata[4]_i_3_n_0 ),
+        .I2(\m_axis_tdata[4]_i_4_n_0 ),
+        .I3(\m_axis_tdata[15]_i_5_n_0 ),
+        .I4(\m_axis_tdata[4]_i_5_n_0 ),
+        .I5(\m_axis_tdata[4]_i_6_n_0 ),
+        .O(p_1_in[4]));
+  (* SOFT_HLUTNM = "soft_lutpair2" *) 
+  LUT5 #(
+    .INIT(32'h10FF1010)) 
+    \m_axis_tdata[4]_i_10 
+       (.I0(\m_axis_tdata[21]_i_18_n_0 ),
+        .I1(\m_axis_tdata[16]_i_14_n_0 ),
+        .I2(s_axis_tdata[8]),
+        .I3(\m_axis_tdata[19]_i_9_n_0 ),
+        .I4(s_axis_tdata[7]),
+        .O(\m_axis_tdata[4]_i_10_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair20" *) 
+  LUT4 #(
+    .INIT(16'hFFAE)) 
     \m_axis_tdata[4]_i_2 
-       (.I0(\m_axis_tdata[20]_i_5_n_0 ),
-        .I1(balance[2]),
-        .I2(\m_axis_tdata[22]_i_7_n_0 ),
-        .I3(balance[3]),
-        .I4(\m_axis_tdata[21]_i_5_n_0 ),
-        .I5(s_axis_tdata[5]),
+       (.I0(\m_axis_tdata[4]_i_7_n_0 ),
+        .I1(s_axis_tdata[4]),
+        .I2(\m_axis_tdata[21]_i_9_n_0 ),
+        .I3(s_axis_tlast),
         .O(\m_axis_tdata[4]_i_2_n_0 ));
   LUT6 #(
-    .INIT(64'hFFFFFF4000000000)) 
+    .INIT(64'h22F2FFFF22F222F2)) 
     \m_axis_tdata[4]_i_3 
-       (.I0(\m_axis_tdata[22]_i_7_n_0 ),
-        .I1(balance[3]),
-        .I2(\m_axis_tdata[19]_i_6_n_0 ),
-        .I3(\m_axis_tdata[19]_i_7_n_0 ),
-        .I4(\m_axis_tdata[22]_i_5_n_0 ),
-        .I5(s_axis_tdata[4]),
+       (.I0(s_axis_tdata[8]),
+        .I1(\m_axis_tdata[21]_i_12_n_0 ),
+        .I2(s_axis_tdata[9]),
+        .I3(\m_axis_tdata[21]_i_13_n_0 ),
+        .I4(\m_axis_tdata[21]_i_14_n_0 ),
+        .I5(s_axis_tdata[7]),
         .O(\m_axis_tdata[4]_i_3_n_0 ));
   LUT6 #(
-    .INIT(64'hFF90009000000000)) 
+    .INIT(64'hAAAABBAFFFFFBBAF)) 
     \m_axis_tdata[4]_i_4 
-       (.I0(\m_axis_tdata[22]_i_7_n_0 ),
-        .I1(balance[3]),
-        .I2(\m_axis_tdata[21]_i_5_n_0 ),
-        .I3(balance[2]),
-        .I4(\m_axis_tdata[20]_i_5_n_0 ),
-        .I5(s_axis_tdata[7]),
+       (.I0(\m_axis_tdata[21]_i_17_n_0 ),
+        .I1(s_axis_tdata[4]),
+        .I2(s_axis_tdata[11]),
+        .I3(\m_axis_tdata[14]_i_8_n_0 ),
+        .I4(\m_axis_tdata[15]_i_9_n_0 ),
+        .I5(s_axis_tdata[10]),
         .O(\m_axis_tdata[4]_i_4_n_0 ));
   LUT6 #(
-    .INIT(64'hFBBBAAAA00000000)) 
+    .INIT(64'hFFFFFFFFEFFFEFEF)) 
     \m_axis_tdata[4]_i_5 
-       (.I0(\m_axis_tdata[19]_i_8_n_0 ),
-        .I1(balance[1]),
-        .I2(\m_axis_tdata[19]_i_9_n_0 ),
-        .I3(\m_axis_tdata[22]_i_7_n_0 ),
-        .I4(\m_axis_tdata[19]_i_10_n_0 ),
-        .I5(s_axis_tdata[8]),
+       (.I0(\m_axis_tdata[4]_i_8_n_0 ),
+        .I1(\m_axis_tdata[4]_i_9_n_0 ),
+        .I2(s_axis_tlast),
+        .I3(\m_axis_tdata[18]_i_10_n_0 ),
+        .I4(s_axis_tdata[9]),
+        .I5(\m_axis_tdata[4]_i_10_n_0 ),
         .O(\m_axis_tdata[4]_i_5_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair20" *) 
+  LUT2 #(
+    .INIT(4'hB)) 
+    \m_axis_tdata[4]_i_6 
+       (.I0(\m_axis_tdata[22]_i_3_n_0 ),
+        .I1(s_axis_tdata[4]),
+        .O(\m_axis_tdata[4]_i_6_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair21" *) 
+  LUT4 #(
+    .INIT(16'h4F44)) 
+    \m_axis_tdata[4]_i_7 
+       (.I0(\m_axis_tdata[21]_i_10_n_0 ),
+        .I1(s_axis_tdata[5]),
+        .I2(\m_axis_tdata[21]_i_11_n_0 ),
+        .I3(s_axis_tdata[6]),
+        .O(\m_axis_tdata[4]_i_7_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair13" *) 
+  LUT4 #(
+    .INIT(16'h2F20)) 
+    \m_axis_tdata[4]_i_8 
+       (.I0(s_axis_tdata[5]),
+        .I1(\m_axis_tdata[18]_i_9_n_0 ),
+        .I2(\m_axis_tdata[18]_i_8_n_0 ),
+        .I3(s_axis_tdata[6]),
+        .O(\m_axis_tdata[4]_i_8_n_0 ));
   LUT6 #(
-    .INIT(64'hFFFFFFFFFFFFFFF8)) 
+    .INIT(64'h44F444F4FFFF44F4)) 
+    \m_axis_tdata[4]_i_9 
+       (.I0(\m_axis_tdata[16]_i_9_n_0 ),
+        .I1(s_axis_tdata[11]),
+        .I2(s_axis_tdata[12]),
+        .I3(\m_axis_tdata[16]_i_7_n_0 ),
+        .I4(s_axis_tdata[10]),
+        .I5(\m_axis_tdata[16]_i_8_n_0 ),
+        .O(\m_axis_tdata[4]_i_9_n_0 ));
+  LUT6 #(
+    .INIT(64'hEFEE0000EFEEEFEE)) 
     \m_axis_tdata[5]_i_1 
-       (.I0(\m_axis_tdata[20]_i_3_n_0 ),
-        .I1(s_axis_tdata[7]),
-        .I2(\m_axis_tdata[5]_i_2_n_0 ),
-        .I3(\m_axis_tdata[5]_i_3_n_0 ),
-        .I4(\m_axis_tdata[5]_i_4_n_0 ),
-        .I5(\m_axis_tdata[5]_i_5_n_0 ),
+       (.I0(\m_axis_tdata[5]_i_2_n_0 ),
+        .I1(\m_axis_tdata[5]_i_3_n_0 ),
+        .I2(\m_axis_tdata[5]_i_4_n_0 ),
+        .I3(\m_axis_tdata[15]_i_5_n_0 ),
+        .I4(\m_axis_tdata[5]_i_5_n_0 ),
+        .I5(\m_axis_tdata[5]_i_6_n_0 ),
         .O(p_1_in[5]));
   LUT6 #(
-    .INIT(64'hE22E222200000000)) 
+    .INIT(64'h44F444F4FFFF44F4)) 
+    \m_axis_tdata[5]_i_10 
+       (.I0(\m_axis_tdata[16]_i_9_n_0 ),
+        .I1(s_axis_tdata[12]),
+        .I2(s_axis_tdata[11]),
+        .I3(\m_axis_tdata[16]_i_8_n_0 ),
+        .I4(s_axis_tdata[13]),
+        .I5(\m_axis_tdata[16]_i_7_n_0 ),
+        .O(\m_axis_tdata[5]_i_10_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair22" *) 
+  LUT4 #(
+    .INIT(16'hFFAE)) 
     \m_axis_tdata[5]_i_2 
-       (.I0(\m_axis_tdata[20]_i_5_n_0 ),
-        .I1(balance[2]),
-        .I2(\m_axis_tdata[22]_i_7_n_0 ),
-        .I3(balance[3]),
-        .I4(\m_axis_tdata[21]_i_5_n_0 ),
-        .I5(s_axis_tdata[6]),
+       (.I0(\m_axis_tdata[5]_i_7_n_0 ),
+        .I1(s_axis_tdata[5]),
+        .I2(\m_axis_tdata[21]_i_9_n_0 ),
+        .I3(s_axis_tlast),
         .O(\m_axis_tdata[5]_i_2_n_0 ));
   LUT6 #(
-    .INIT(64'hFFFFFF4000000000)) 
+    .INIT(64'h22F2FFFF22F222F2)) 
     \m_axis_tdata[5]_i_3 
-       (.I0(\m_axis_tdata[22]_i_7_n_0 ),
-        .I1(balance[3]),
-        .I2(\m_axis_tdata[19]_i_6_n_0 ),
-        .I3(\m_axis_tdata[19]_i_7_n_0 ),
-        .I4(\m_axis_tdata[22]_i_5_n_0 ),
-        .I5(s_axis_tdata[5]),
+       (.I0(s_axis_tdata[9]),
+        .I1(\m_axis_tdata[21]_i_12_n_0 ),
+        .I2(s_axis_tdata[10]),
+        .I3(\m_axis_tdata[21]_i_13_n_0 ),
+        .I4(\m_axis_tdata[21]_i_14_n_0 ),
+        .I5(s_axis_tdata[8]),
         .O(\m_axis_tdata[5]_i_3_n_0 ));
   LUT6 #(
-    .INIT(64'hFF90009000000000)) 
+    .INIT(64'hAAAABBAFFFFFBBAF)) 
     \m_axis_tdata[5]_i_4 
-       (.I0(\m_axis_tdata[22]_i_7_n_0 ),
-        .I1(balance[3]),
-        .I2(\m_axis_tdata[21]_i_5_n_0 ),
-        .I3(balance[2]),
-        .I4(\m_axis_tdata[20]_i_5_n_0 ),
-        .I5(s_axis_tdata[8]),
+       (.I0(\m_axis_tdata[21]_i_17_n_0 ),
+        .I1(s_axis_tdata[5]),
+        .I2(s_axis_tdata[12]),
+        .I3(\m_axis_tdata[14]_i_8_n_0 ),
+        .I4(\m_axis_tdata[15]_i_9_n_0 ),
+        .I5(s_axis_tdata[11]),
         .O(\m_axis_tdata[5]_i_4_n_0 ));
   LUT6 #(
-    .INIT(64'hFBBBAAAA00000000)) 
+    .INIT(64'hFFFFFFFFFFF4FFFF)) 
     \m_axis_tdata[5]_i_5 
-       (.I0(\m_axis_tdata[19]_i_8_n_0 ),
-        .I1(balance[1]),
-        .I2(\m_axis_tdata[19]_i_9_n_0 ),
-        .I3(\m_axis_tdata[22]_i_7_n_0 ),
-        .I4(\m_axis_tdata[19]_i_10_n_0 ),
-        .I5(s_axis_tdata[9]),
+       (.I0(\m_axis_tdata[18]_i_11_n_0 ),
+        .I1(s_axis_tdata[9]),
+        .I2(\m_axis_tdata[5]_i_8_n_0 ),
+        .I3(\m_axis_tdata[5]_i_9_n_0 ),
+        .I4(s_axis_tlast),
+        .I5(\m_axis_tdata[5]_i_10_n_0 ),
         .O(\m_axis_tdata[5]_i_5_n_0 ));
   LUT6 #(
-    .INIT(64'hFFFFFFFFFFFFFFF8)) 
+    .INIT(64'h101BB0BBFFFFFFFF)) 
+    \m_axis_tdata[5]_i_6 
+       (.I0(\m_axis_tdata[18]_i_8_n_0 ),
+        .I1(s_axis_tdata[7]),
+        .I2(\m_axis_tdata[18]_i_9_n_0 ),
+        .I3(s_axis_tdata[6]),
+        .I4(s_axis_tdata[5]),
+        .I5(\m_axis_tdata[21]_i_8_n_0 ),
+        .O(\m_axis_tdata[5]_i_6_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair21" *) 
+  LUT4 #(
+    .INIT(16'h4F44)) 
+    \m_axis_tdata[5]_i_7 
+       (.I0(\m_axis_tdata[21]_i_10_n_0 ),
+        .I1(s_axis_tdata[6]),
+        .I2(\m_axis_tdata[21]_i_11_n_0 ),
+        .I3(s_axis_tdata[7]),
+        .O(\m_axis_tdata[5]_i_7_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair2" *) 
+  LUT2 #(
+    .INIT(4'h2)) 
+    \m_axis_tdata[5]_i_8 
+       (.I0(s_axis_tdata[8]),
+        .I1(\m_axis_tdata[19]_i_9_n_0 ),
+        .O(\m_axis_tdata[5]_i_8_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair28" *) 
+  LUT2 #(
+    .INIT(4'h2)) 
+    \m_axis_tdata[5]_i_9 
+       (.I0(s_axis_tdata[10]),
+        .I1(\m_axis_tdata[18]_i_10_n_0 ),
+        .O(\m_axis_tdata[5]_i_9_n_0 ));
+  LUT6 #(
+    .INIT(64'hEFEE0000EFEEEFEE)) 
     \m_axis_tdata[6]_i_1 
-       (.I0(\m_axis_tdata[20]_i_3_n_0 ),
-        .I1(s_axis_tdata[8]),
-        .I2(\m_axis_tdata[6]_i_2_n_0 ),
-        .I3(\m_axis_tdata[6]_i_3_n_0 ),
-        .I4(\m_axis_tdata[6]_i_4_n_0 ),
-        .I5(\m_axis_tdata[6]_i_5_n_0 ),
+       (.I0(\m_axis_tdata[6]_i_2_n_0 ),
+        .I1(\m_axis_tdata[6]_i_3_n_0 ),
+        .I2(\m_axis_tdata[6]_i_4_n_0 ),
+        .I3(\m_axis_tdata[15]_i_5_n_0 ),
+        .I4(\m_axis_tdata[6]_i_5_n_0 ),
+        .I5(\m_axis_tdata[6]_i_6_n_0 ),
         .O(p_1_in[6]));
   LUT6 #(
-    .INIT(64'hE22E222200000000)) 
+    .INIT(64'h44F444F4FFFF44F4)) 
+    \m_axis_tdata[6]_i_10 
+       (.I0(\m_axis_tdata[16]_i_7_n_0 ),
+        .I1(s_axis_tdata[14]),
+        .I2(s_axis_tdata[12]),
+        .I3(\m_axis_tdata[16]_i_8_n_0 ),
+        .I4(s_axis_tdata[13]),
+        .I5(\m_axis_tdata[16]_i_9_n_0 ),
+        .O(\m_axis_tdata[6]_i_10_n_0 ));
+  LUT4 #(
+    .INIT(16'hFFAE)) 
     \m_axis_tdata[6]_i_2 
-       (.I0(\m_axis_tdata[20]_i_5_n_0 ),
-        .I1(balance[2]),
-        .I2(\m_axis_tdata[22]_i_7_n_0 ),
-        .I3(balance[3]),
-        .I4(\m_axis_tdata[21]_i_5_n_0 ),
-        .I5(s_axis_tdata[7]),
+       (.I0(\m_axis_tdata[6]_i_7_n_0 ),
+        .I1(s_axis_tdata[6]),
+        .I2(\m_axis_tdata[21]_i_9_n_0 ),
+        .I3(s_axis_tlast),
         .O(\m_axis_tdata[6]_i_2_n_0 ));
   LUT6 #(
-    .INIT(64'hFFFFFF4000000000)) 
+    .INIT(64'h22F2FFFF22F222F2)) 
     \m_axis_tdata[6]_i_3 
-       (.I0(\m_axis_tdata[22]_i_7_n_0 ),
-        .I1(balance[3]),
-        .I2(\m_axis_tdata[19]_i_6_n_0 ),
-        .I3(\m_axis_tdata[19]_i_7_n_0 ),
-        .I4(\m_axis_tdata[22]_i_5_n_0 ),
-        .I5(s_axis_tdata[6]),
+       (.I0(s_axis_tdata[10]),
+        .I1(\m_axis_tdata[21]_i_12_n_0 ),
+        .I2(s_axis_tdata[11]),
+        .I3(\m_axis_tdata[21]_i_13_n_0 ),
+        .I4(\m_axis_tdata[21]_i_14_n_0 ),
+        .I5(s_axis_tdata[9]),
         .O(\m_axis_tdata[6]_i_3_n_0 ));
   LUT6 #(
-    .INIT(64'hFF90009000000000)) 
+    .INIT(64'hAAAABBAFFFFFBBAF)) 
     \m_axis_tdata[6]_i_4 
-       (.I0(\m_axis_tdata[22]_i_7_n_0 ),
-        .I1(balance[3]),
-        .I2(\m_axis_tdata[21]_i_5_n_0 ),
-        .I3(balance[2]),
-        .I4(\m_axis_tdata[20]_i_5_n_0 ),
-        .I5(s_axis_tdata[9]),
+       (.I0(\m_axis_tdata[21]_i_17_n_0 ),
+        .I1(s_axis_tdata[6]),
+        .I2(s_axis_tdata[13]),
+        .I3(\m_axis_tdata[14]_i_8_n_0 ),
+        .I4(\m_axis_tdata[15]_i_9_n_0 ),
+        .I5(s_axis_tdata[12]),
         .O(\m_axis_tdata[6]_i_4_n_0 ));
   LUT6 #(
-    .INIT(64'hFBBBAAAA00000000)) 
+    .INIT(64'hFFFFFFFFFFF4FFFF)) 
     \m_axis_tdata[6]_i_5 
-       (.I0(\m_axis_tdata[19]_i_8_n_0 ),
-        .I1(balance[1]),
-        .I2(\m_axis_tdata[19]_i_9_n_0 ),
-        .I3(\m_axis_tdata[22]_i_7_n_0 ),
-        .I4(\m_axis_tdata[19]_i_10_n_0 ),
-        .I5(s_axis_tdata[10]),
+       (.I0(\m_axis_tdata[18]_i_11_n_0 ),
+        .I1(s_axis_tdata[10]),
+        .I2(\m_axis_tdata[6]_i_8_n_0 ),
+        .I3(\m_axis_tdata[6]_i_9_n_0 ),
+        .I4(s_axis_tlast),
+        .I5(\m_axis_tdata[6]_i_10_n_0 ),
         .O(\m_axis_tdata[6]_i_5_n_0 ));
   LUT6 #(
-    .INIT(64'hFFFFFFFFFFFFFFF8)) 
-    \m_axis_tdata[7]_i_1 
-       (.I0(\m_axis_tdata[20]_i_3_n_0 ),
-        .I1(s_axis_tdata[9]),
-        .I2(\m_axis_tdata[7]_i_2_n_0 ),
-        .I3(\m_axis_tdata[7]_i_3_n_0 ),
-        .I4(\m_axis_tdata[7]_i_4_n_0 ),
-        .I5(\m_axis_tdata[7]_i_5_n_0 ),
-        .O(p_1_in[7]));
+    .INIT(64'h101BB0BBFFFFFFFF)) 
+    \m_axis_tdata[6]_i_6 
+       (.I0(\m_axis_tdata[18]_i_8_n_0 ),
+        .I1(s_axis_tdata[8]),
+        .I2(\m_axis_tdata[18]_i_9_n_0 ),
+        .I3(s_axis_tdata[7]),
+        .I4(s_axis_tdata[6]),
+        .I5(\m_axis_tdata[21]_i_8_n_0 ),
+        .O(\m_axis_tdata[6]_i_6_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair23" *) 
+  LUT4 #(
+    .INIT(16'h4F44)) 
+    \m_axis_tdata[6]_i_7 
+       (.I0(\m_axis_tdata[21]_i_10_n_0 ),
+        .I1(s_axis_tdata[7]),
+        .I2(\m_axis_tdata[21]_i_11_n_0 ),
+        .I3(s_axis_tdata[8]),
+        .O(\m_axis_tdata[6]_i_7_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair27" *) 
+  LUT2 #(
+    .INIT(4'h2)) 
+    \m_axis_tdata[6]_i_8 
+       (.I0(s_axis_tdata[9]),
+        .I1(\m_axis_tdata[19]_i_9_n_0 ),
+        .O(\m_axis_tdata[6]_i_8_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair30" *) 
+  LUT2 #(
+    .INIT(4'h2)) 
+    \m_axis_tdata[6]_i_9 
+       (.I0(s_axis_tdata[11]),
+        .I1(\m_axis_tdata[18]_i_10_n_0 ),
+        .O(\m_axis_tdata[6]_i_9_n_0 ));
   LUT6 #(
-    .INIT(64'hE22E222200000000)) 
+    .INIT(64'hEFEE0000EFEEEFEE)) 
+    \m_axis_tdata[7]_i_1 
+       (.I0(\m_axis_tdata[7]_i_2_n_0 ),
+        .I1(\m_axis_tdata[7]_i_3_n_0 ),
+        .I2(\m_axis_tdata[7]_i_4_n_0 ),
+        .I3(\m_axis_tdata[15]_i_5_n_0 ),
+        .I4(\m_axis_tdata[7]_i_5_n_0 ),
+        .I5(\m_axis_tdata[7]_i_6_n_0 ),
+        .O(p_1_in[7]));
+  (* SOFT_HLUTNM = "soft_lutpair24" *) 
+  LUT4 #(
+    .INIT(16'hFFAE)) 
     \m_axis_tdata[7]_i_2 
-       (.I0(\m_axis_tdata[20]_i_5_n_0 ),
-        .I1(balance[2]),
-        .I2(\m_axis_tdata[22]_i_7_n_0 ),
-        .I3(balance[3]),
-        .I4(\m_axis_tdata[21]_i_5_n_0 ),
-        .I5(s_axis_tdata[8]),
+       (.I0(\m_axis_tdata[7]_i_7_n_0 ),
+        .I1(s_axis_tdata[7]),
+        .I2(\m_axis_tdata[21]_i_9_n_0 ),
+        .I3(s_axis_tlast),
         .O(\m_axis_tdata[7]_i_2_n_0 ));
   LUT6 #(
-    .INIT(64'hFFFFFF4000000000)) 
+    .INIT(64'h22F2FFFF22F222F2)) 
     \m_axis_tdata[7]_i_3 
-       (.I0(\m_axis_tdata[22]_i_7_n_0 ),
-        .I1(balance[3]),
-        .I2(\m_axis_tdata[19]_i_6_n_0 ),
-        .I3(\m_axis_tdata[19]_i_7_n_0 ),
-        .I4(\m_axis_tdata[22]_i_5_n_0 ),
-        .I5(s_axis_tdata[7]),
+       (.I0(s_axis_tdata[11]),
+        .I1(\m_axis_tdata[21]_i_12_n_0 ),
+        .I2(s_axis_tdata[12]),
+        .I3(\m_axis_tdata[21]_i_13_n_0 ),
+        .I4(\m_axis_tdata[21]_i_14_n_0 ),
+        .I5(s_axis_tdata[10]),
         .O(\m_axis_tdata[7]_i_3_n_0 ));
   LUT6 #(
-    .INIT(64'hFF90009000000000)) 
+    .INIT(64'hAAAABBAFFFFFBBAF)) 
     \m_axis_tdata[7]_i_4 
-       (.I0(\m_axis_tdata[22]_i_7_n_0 ),
-        .I1(balance[3]),
-        .I2(\m_axis_tdata[21]_i_5_n_0 ),
-        .I3(balance[2]),
-        .I4(\m_axis_tdata[20]_i_5_n_0 ),
-        .I5(s_axis_tdata[10]),
+       (.I0(\m_axis_tdata[21]_i_17_n_0 ),
+        .I1(s_axis_tdata[7]),
+        .I2(s_axis_tdata[14]),
+        .I3(\m_axis_tdata[14]_i_8_n_0 ),
+        .I4(\m_axis_tdata[15]_i_9_n_0 ),
+        .I5(s_axis_tdata[13]),
         .O(\m_axis_tdata[7]_i_4_n_0 ));
-  LUT6 #(
-    .INIT(64'hFBBBAAAA00000000)) 
+  (* SOFT_HLUTNM = "soft_lutpair34" *) 
+  LUT3 #(
+    .INIT(8'hFB)) 
     \m_axis_tdata[7]_i_5 
-       (.I0(\m_axis_tdata[19]_i_8_n_0 ),
-        .I1(balance[1]),
-        .I2(\m_axis_tdata[19]_i_9_n_0 ),
-        .I3(\m_axis_tdata[22]_i_7_n_0 ),
-        .I4(\m_axis_tdata[19]_i_10_n_0 ),
-        .I5(s_axis_tdata[11]),
+       (.I0(\m_axis_tdata[7]_i_8_n_0 ),
+        .I1(s_axis_tlast),
+        .I2(\m_axis_tdata[7]_i_9_n_0 ),
         .O(\m_axis_tdata[7]_i_5_n_0 ));
   LUT6 #(
-    .INIT(64'hFFFFFFFFFFFFFFF8)) 
-    \m_axis_tdata[8]_i_1 
-       (.I0(\m_axis_tdata[20]_i_3_n_0 ),
-        .I1(s_axis_tdata[10]),
-        .I2(\m_axis_tdata[8]_i_2_n_0 ),
-        .I3(\m_axis_tdata[8]_i_3_n_0 ),
-        .I4(\m_axis_tdata[8]_i_4_n_0 ),
-        .I5(\m_axis_tdata[8]_i_5_n_0 ),
-        .O(p_1_in[8]));
+    .INIT(64'hBB0BBB0B0000BB0B)) 
+    \m_axis_tdata[7]_i_6 
+       (.I0(\m_axis_tdata[18]_i_10_n_0 ),
+        .I1(s_axis_tdata[12]),
+        .I2(s_axis_tdata[10]),
+        .I3(\m_axis_tdata[19]_i_9_n_0 ),
+        .I4(s_axis_tdata[11]),
+        .I5(\m_axis_tdata[18]_i_11_n_0 ),
+        .O(\m_axis_tdata[7]_i_6_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair23" *) 
+  LUT4 #(
+    .INIT(16'h4F44)) 
+    \m_axis_tdata[7]_i_7 
+       (.I0(\m_axis_tdata[21]_i_10_n_0 ),
+        .I1(s_axis_tdata[8]),
+        .I2(\m_axis_tdata[21]_i_11_n_0 ),
+        .I3(s_axis_tdata[9]),
+        .O(\m_axis_tdata[7]_i_7_n_0 ));
   LUT6 #(
-    .INIT(64'hE22E222200000000)) 
+    .INIT(64'hA8AAA82020AA2020)) 
+    \m_axis_tdata[7]_i_8 
+       (.I0(\m_axis_tdata[21]_i_8_n_0 ),
+        .I1(\m_axis_tdata[18]_i_8_n_0 ),
+        .I2(s_axis_tdata[9]),
+        .I3(\m_axis_tdata[18]_i_9_n_0 ),
+        .I4(s_axis_tdata[8]),
+        .I5(s_axis_tdata[7]),
+        .O(\m_axis_tdata[7]_i_8_n_0 ));
+  LUT6 #(
+    .INIT(64'h44F444F4FFFF44F4)) 
+    \m_axis_tdata[7]_i_9 
+       (.I0(\m_axis_tdata[16]_i_8_n_0 ),
+        .I1(s_axis_tdata[13]),
+        .I2(s_axis_tdata[15]),
+        .I3(\m_axis_tdata[16]_i_7_n_0 ),
+        .I4(s_axis_tdata[14]),
+        .I5(\m_axis_tdata[16]_i_9_n_0 ),
+        .O(\m_axis_tdata[7]_i_9_n_0 ));
+  LUT6 #(
+    .INIT(64'hEFEE0000EFEEEFEE)) 
+    \m_axis_tdata[8]_i_1 
+       (.I0(\m_axis_tdata[8]_i_2_n_0 ),
+        .I1(\m_axis_tdata[8]_i_3_n_0 ),
+        .I2(\m_axis_tdata[8]_i_4_n_0 ),
+        .I3(\m_axis_tdata[15]_i_5_n_0 ),
+        .I4(\m_axis_tdata[8]_i_5_n_0 ),
+        .I5(\m_axis_tdata[8]_i_6_n_0 ),
+        .O(p_1_in[8]));
+  LUT5 #(
+    .INIT(32'h10FF1010)) 
+    \m_axis_tdata[8]_i_10 
+       (.I0(\m_axis_tdata[21]_i_18_n_0 ),
+        .I1(\m_axis_tdata[16]_i_14_n_0 ),
+        .I2(s_axis_tdata[12]),
+        .I3(\m_axis_tdata[19]_i_9_n_0 ),
+        .I4(s_axis_tdata[11]),
+        .O(\m_axis_tdata[8]_i_10_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair25" *) 
+  LUT4 #(
+    .INIT(16'hFFAE)) 
     \m_axis_tdata[8]_i_2 
-       (.I0(\m_axis_tdata[20]_i_5_n_0 ),
-        .I1(balance[2]),
-        .I2(\m_axis_tdata[22]_i_7_n_0 ),
-        .I3(balance[3]),
-        .I4(\m_axis_tdata[21]_i_5_n_0 ),
-        .I5(s_axis_tdata[9]),
+       (.I0(\m_axis_tdata[8]_i_7_n_0 ),
+        .I1(s_axis_tdata[8]),
+        .I2(\m_axis_tdata[21]_i_9_n_0 ),
+        .I3(s_axis_tlast),
         .O(\m_axis_tdata[8]_i_2_n_0 ));
   LUT6 #(
-    .INIT(64'hFFFFFF4000000000)) 
+    .INIT(64'h22F2FFFF22F222F2)) 
     \m_axis_tdata[8]_i_3 
-       (.I0(\m_axis_tdata[22]_i_7_n_0 ),
-        .I1(balance[3]),
-        .I2(\m_axis_tdata[19]_i_6_n_0 ),
-        .I3(\m_axis_tdata[19]_i_7_n_0 ),
-        .I4(\m_axis_tdata[22]_i_5_n_0 ),
-        .I5(s_axis_tdata[8]),
+       (.I0(s_axis_tdata[12]),
+        .I1(\m_axis_tdata[21]_i_12_n_0 ),
+        .I2(s_axis_tdata[13]),
+        .I3(\m_axis_tdata[21]_i_13_n_0 ),
+        .I4(\m_axis_tdata[21]_i_14_n_0 ),
+        .I5(s_axis_tdata[11]),
         .O(\m_axis_tdata[8]_i_3_n_0 ));
   LUT6 #(
-    .INIT(64'hFF90009000000000)) 
+    .INIT(64'hAAAABBAFFFFFBBAF)) 
     \m_axis_tdata[8]_i_4 
-       (.I0(\m_axis_tdata[22]_i_7_n_0 ),
-        .I1(balance[3]),
-        .I2(\m_axis_tdata[21]_i_5_n_0 ),
-        .I3(balance[2]),
-        .I4(\m_axis_tdata[20]_i_5_n_0 ),
-        .I5(s_axis_tdata[11]),
+       (.I0(\m_axis_tdata[21]_i_17_n_0 ),
+        .I1(s_axis_tdata[8]),
+        .I2(s_axis_tdata[15]),
+        .I3(\m_axis_tdata[14]_i_8_n_0 ),
+        .I4(\m_axis_tdata[15]_i_9_n_0 ),
+        .I5(s_axis_tdata[14]),
         .O(\m_axis_tdata[8]_i_4_n_0 ));
   LUT6 #(
-    .INIT(64'hFBBBAAAA00000000)) 
+    .INIT(64'hFFFFFFFFEFFFEFEF)) 
     \m_axis_tdata[8]_i_5 
-       (.I0(\m_axis_tdata[19]_i_8_n_0 ),
-        .I1(balance[1]),
-        .I2(\m_axis_tdata[19]_i_9_n_0 ),
-        .I3(\m_axis_tdata[22]_i_7_n_0 ),
-        .I4(\m_axis_tdata[19]_i_10_n_0 ),
-        .I5(s_axis_tdata[12]),
+       (.I0(\m_axis_tdata[8]_i_8_n_0 ),
+        .I1(\m_axis_tdata[8]_i_9_n_0 ),
+        .I2(s_axis_tlast),
+        .I3(\m_axis_tdata[18]_i_10_n_0 ),
+        .I4(s_axis_tdata[13]),
+        .I5(\m_axis_tdata[8]_i_10_n_0 ),
         .O(\m_axis_tdata[8]_i_5_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair25" *) 
+  LUT2 #(
+    .INIT(4'hB)) 
+    \m_axis_tdata[8]_i_6 
+       (.I0(\m_axis_tdata[22]_i_3_n_0 ),
+        .I1(s_axis_tdata[8]),
+        .O(\m_axis_tdata[8]_i_6_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair26" *) 
+  LUT4 #(
+    .INIT(16'h4F44)) 
+    \m_axis_tdata[8]_i_7 
+       (.I0(\m_axis_tdata[21]_i_10_n_0 ),
+        .I1(s_axis_tdata[9]),
+        .I2(\m_axis_tdata[21]_i_11_n_0 ),
+        .I3(s_axis_tdata[10]),
+        .O(\m_axis_tdata[8]_i_7_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair14" *) 
+  LUT4 #(
+    .INIT(16'h2F20)) 
+    \m_axis_tdata[8]_i_8 
+       (.I0(s_axis_tdata[9]),
+        .I1(\m_axis_tdata[18]_i_9_n_0 ),
+        .I2(\m_axis_tdata[18]_i_8_n_0 ),
+        .I3(s_axis_tdata[10]),
+        .O(\m_axis_tdata[8]_i_8_n_0 ));
   LUT6 #(
-    .INIT(64'hFFFFFFFFFFFFFFF8)) 
+    .INIT(64'h44F444F4FFFF44F4)) 
+    \m_axis_tdata[8]_i_9 
+       (.I0(\m_axis_tdata[16]_i_8_n_0 ),
+        .I1(s_axis_tdata[14]),
+        .I2(s_axis_tdata[15]),
+        .I3(\m_axis_tdata[16]_i_9_n_0 ),
+        .I4(s_axis_tdata[16]),
+        .I5(\m_axis_tdata[16]_i_7_n_0 ),
+        .O(\m_axis_tdata[8]_i_9_n_0 ));
+  LUT6 #(
+    .INIT(64'hAEAEAEAEAE00AEAE)) 
     \m_axis_tdata[9]_i_1 
-       (.I0(\m_axis_tdata[20]_i_3_n_0 ),
-        .I1(s_axis_tdata[11]),
-        .I2(\m_axis_tdata[9]_i_2_n_0 ),
+       (.I0(\m_axis_tdata[9]_i_2_n_0 ),
+        .I1(s_axis_tdata[9]),
+        .I2(\m_axis_tdata[22]_i_3_n_0 ),
         .I3(\m_axis_tdata[9]_i_3_n_0 ),
         .I4(\m_axis_tdata[9]_i_4_n_0 ),
         .I5(\m_axis_tdata[9]_i_5_n_0 ),
         .O(p_1_in[9]));
+  LUT5 #(
+    .INIT(32'hFF00E4E4)) 
+    \m_axis_tdata[9]_i_10 
+       (.I0(\m_axis_tdata[14]_i_8_n_0 ),
+        .I1(s_axis_tdata[16]),
+        .I2(s_axis_tdata[9]),
+        .I3(s_axis_tdata[15]),
+        .I4(\m_axis_tdata[15]_i_9_n_0 ),
+        .O(\m_axis_tdata[9]_i_10_n_0 ));
   LUT6 #(
-    .INIT(64'hE22E222200000000)) 
+    .INIT(64'hFFFFFFFFEFFFEFEF)) 
     \m_axis_tdata[9]_i_2 
-       (.I0(\m_axis_tdata[20]_i_5_n_0 ),
-        .I1(balance[2]),
-        .I2(\m_axis_tdata[22]_i_7_n_0 ),
-        .I3(balance[3]),
-        .I4(\m_axis_tdata[21]_i_5_n_0 ),
-        .I5(s_axis_tdata[10]),
+       (.I0(\m_axis_tdata[9]_i_6_n_0 ),
+        .I1(\m_axis_tdata[9]_i_7_n_0 ),
+        .I2(s_axis_tlast),
+        .I3(\m_axis_tdata[18]_i_10_n_0 ),
+        .I4(s_axis_tdata[14]),
+        .I5(\m_axis_tdata[9]_i_8_n_0 ),
         .O(\m_axis_tdata[9]_i_2_n_0 ));
-  LUT6 #(
-    .INIT(64'hFFFFFF4000000000)) 
+  (* SOFT_HLUTNM = "soft_lutpair27" *) 
+  LUT4 #(
+    .INIT(16'hFFAE)) 
     \m_axis_tdata[9]_i_3 
-       (.I0(\m_axis_tdata[22]_i_7_n_0 ),
-        .I1(balance[3]),
-        .I2(\m_axis_tdata[19]_i_6_n_0 ),
-        .I3(\m_axis_tdata[19]_i_7_n_0 ),
-        .I4(\m_axis_tdata[22]_i_5_n_0 ),
-        .I5(s_axis_tdata[9]),
+       (.I0(\m_axis_tdata[9]_i_9_n_0 ),
+        .I1(s_axis_tdata[9]),
+        .I2(\m_axis_tdata[21]_i_9_n_0 ),
+        .I3(s_axis_tlast),
         .O(\m_axis_tdata[9]_i_3_n_0 ));
   LUT6 #(
-    .INIT(64'hFF90009000000000)) 
+    .INIT(64'hDD0DDD0D0000DD0D)) 
     \m_axis_tdata[9]_i_4 
-       (.I0(\m_axis_tdata[22]_i_7_n_0 ),
-        .I1(balance[3]),
-        .I2(\m_axis_tdata[21]_i_5_n_0 ),
-        .I3(balance[2]),
-        .I4(\m_axis_tdata[20]_i_5_n_0 ),
-        .I5(s_axis_tdata[12]),
+       (.I0(s_axis_tdata[12]),
+        .I1(\m_axis_tdata[21]_i_14_n_0 ),
+        .I2(s_axis_tdata[13]),
+        .I3(\m_axis_tdata[21]_i_12_n_0 ),
+        .I4(s_axis_tdata[14]),
+        .I5(\m_axis_tdata[21]_i_13_n_0 ),
         .O(\m_axis_tdata[9]_i_4_n_0 ));
-  LUT6 #(
-    .INIT(64'hFBBBAAAA00000000)) 
+  (* SOFT_HLUTNM = "soft_lutpair36" *) 
+  LUT3 #(
+    .INIT(8'h08)) 
     \m_axis_tdata[9]_i_5 
-       (.I0(\m_axis_tdata[19]_i_8_n_0 ),
-        .I1(balance[1]),
-        .I2(\m_axis_tdata[19]_i_9_n_0 ),
-        .I3(\m_axis_tdata[22]_i_7_n_0 ),
-        .I4(\m_axis_tdata[19]_i_10_n_0 ),
-        .I5(s_axis_tdata[13]),
+       (.I0(\m_axis_tdata[15]_i_5_n_0 ),
+        .I1(\m_axis_tdata[9]_i_10_n_0 ),
+        .I2(\m_axis_tdata[21]_i_17_n_0 ),
         .O(\m_axis_tdata[9]_i_5_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair14" *) 
+  LUT4 #(
+    .INIT(16'h2F20)) 
+    \m_axis_tdata[9]_i_6 
+       (.I0(s_axis_tdata[10]),
+        .I1(\m_axis_tdata[18]_i_9_n_0 ),
+        .I2(\m_axis_tdata[18]_i_8_n_0 ),
+        .I3(s_axis_tdata[11]),
+        .O(\m_axis_tdata[9]_i_6_n_0 ));
+  LUT6 #(
+    .INIT(64'h44F444F4FFFF44F4)) 
+    \m_axis_tdata[9]_i_7 
+       (.I0(\m_axis_tdata[16]_i_7_n_0 ),
+        .I1(s_axis_tdata[17]),
+        .I2(s_axis_tdata[15]),
+        .I3(\m_axis_tdata[16]_i_8_n_0 ),
+        .I4(s_axis_tdata[16]),
+        .I5(\m_axis_tdata[16]_i_9_n_0 ),
+        .O(\m_axis_tdata[9]_i_7_n_0 ));
+  LUT5 #(
+    .INIT(32'h10FF1010)) 
+    \m_axis_tdata[9]_i_8 
+       (.I0(\m_axis_tdata[21]_i_18_n_0 ),
+        .I1(\m_axis_tdata[16]_i_14_n_0 ),
+        .I2(s_axis_tdata[13]),
+        .I3(\m_axis_tdata[19]_i_9_n_0 ),
+        .I4(s_axis_tdata[12]),
+        .O(\m_axis_tdata[9]_i_8_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair26" *) 
+  LUT4 #(
+    .INIT(16'h4F44)) 
+    \m_axis_tdata[9]_i_9 
+       (.I0(\m_axis_tdata[21]_i_10_n_0 ),
+        .I1(s_axis_tdata[10]),
+        .I2(\m_axis_tdata[21]_i_11_n_0 ),
+        .I3(s_axis_tdata[11]),
+        .O(\m_axis_tdata[9]_i_9_n_0 ));
   FDRE \m_axis_tdata_reg[0] 
        (.C(aclk),
         .CE(aresetn),

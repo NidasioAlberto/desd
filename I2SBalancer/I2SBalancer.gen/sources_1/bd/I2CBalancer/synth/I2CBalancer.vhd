@@ -1,7 +1,7 @@
 --Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2020.2 (win64) Build 3064766 Wed Nov 18 09:12:45 MST 2020
---Date        : Wed May 24 12:34:23 2023
+--Date        : Wed May 24 22:45:47 2023
 --Host        : DESKTOP-F4BLQ3F running 64-bit major release  (build 9200)
 --Command     : generate_target I2CBalancer.bd
 --Design      : I2CBalancer
@@ -37,7 +37,7 @@ entity I2CBalancer is
     tx_sdout_0 : out STD_LOGIC
   );
   attribute CORE_GENERATION_INFO : string;
-  attribute CORE_GENERATION_INFO of I2CBalancer : entity is "I2CBalancer,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=I2CBalancer,x_ipVersion=1.00.a,x_ipLanguage=VHDL,numBlks=15,numReposBlks=15,numNonXlnxBlks=2,numHierBlks=0,maxHierDepth=0,numSysgenBlks=0,numHlsBlks=0,numHdlrefBlks=10,numPkgbdBlks=0,bdsource=USER,da_board_cnt=3,synth_mode=OOC_per_IP}";
+  attribute CORE_GENERATION_INFO of I2CBalancer : entity is "I2CBalancer,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=I2CBalancer,x_ipVersion=1.00.a,x_ipLanguage=VHDL,numBlks=15,numReposBlks=15,numNonXlnxBlks=2,numHierBlks=0,maxHierDepth=0,numSysgenBlks=0,numHlsBlks=0,numHdlrefBlks=10,numPkgbdBlks=0,bdsource=USER,da_board_cnt=4,synth_mode=OOC_per_IP}";
   attribute HW_HANDOFF : string;
   attribute HW_HANDOFF of I2CBalancer : entity is "I2CBalancer.hwdef";
 end I2CBalancer;
@@ -145,19 +145,6 @@ architecture STRUCTURE of I2CBalancer is
     miso_t : out STD_LOGIC
   );
   end component I2CBalancer_axi4stream_spi_master_0_0;
-  component I2CBalancer_mute_0_0 is
-  port (
-    m_axis_tvalid : out STD_LOGIC;
-    m_axis_tlast : out STD_LOGIC;
-    m_axis_tdata : out STD_LOGIC_VECTOR ( 23 downto 0 );
-    m_axis_tready : in STD_LOGIC;
-    s_axis_tvalid : in STD_LOGIC;
-    s_axis_tlast : in STD_LOGIC;
-    s_axis_tdata : in STD_LOGIC_VECTOR ( 23 downto 0 );
-    s_axis_tready : out STD_LOGIC;
-    mute_enable : in STD_LOGIC
-  );
-  end component I2CBalancer_mute_0_0;
   component I2CBalancer_led_controller_0_0 is
   port (
     mute_enable : in STD_LOGIC;
@@ -199,7 +186,7 @@ architecture STRUCTURE of I2CBalancer is
     output_signal : out STD_LOGIC
   );
   end component I2CBalancer_edge_detector_0_1;
-  component I2CBalancer_dual_moving_average_0_0 is
+  component I2CBalancer_mute_0_2 is
   port (
     m_axis_tvalid : out STD_LOGIC;
     m_axis_tlast : out STD_LOGIC;
@@ -209,26 +196,9 @@ architecture STRUCTURE of I2CBalancer is
     s_axis_tlast : in STD_LOGIC;
     s_axis_tdata : in STD_LOGIC_VECTOR ( 23 downto 0 );
     s_axis_tready : out STD_LOGIC;
-    aclk : in STD_LOGIC;
-    aresetn : in STD_LOGIC;
-    filter_enable : in STD_LOGIC
+    mute_enable : in STD_LOGIC
   );
-  end component I2CBalancer_dual_moving_average_0_0;
-  component I2CBalancer_balance_controller_0_0 is
-  port (
-    m_axis_tvalid : out STD_LOGIC;
-    m_axis_tlast : out STD_LOGIC;
-    m_axis_tdata : out STD_LOGIC_VECTOR ( 23 downto 0 );
-    m_axis_tready : in STD_LOGIC;
-    s_axis_tvalid : in STD_LOGIC;
-    s_axis_tlast : in STD_LOGIC;
-    s_axis_tdata : in STD_LOGIC_VECTOR ( 23 downto 0 );
-    s_axis_tready : out STD_LOGIC;
-    aclk : in STD_LOGIC;
-    aresetn : in STD_LOGIC;
-    balance : in STD_LOGIC_VECTOR ( 0 to 9 )
-  );
-  end component I2CBalancer_balance_controller_0_0;
+  end component I2CBalancer_mute_0_2;
   component I2CBalancer_volume_controller_0_0 is
   port (
     m_axis_tvalid : out STD_LOGIC;
@@ -244,6 +214,36 @@ architecture STRUCTURE of I2CBalancer is
     balance : in STD_LOGIC_VECTOR ( 0 to 9 )
   );
   end component I2CBalancer_volume_controller_0_0;
+  component I2CBalancer_balance_controller_0_0 is
+  port (
+    m_axis_tvalid : out STD_LOGIC;
+    m_axis_tlast : out STD_LOGIC;
+    m_axis_tdata : out STD_LOGIC_VECTOR ( 23 downto 0 );
+    m_axis_tready : in STD_LOGIC;
+    s_axis_tvalid : in STD_LOGIC;
+    s_axis_tlast : in STD_LOGIC;
+    s_axis_tdata : in STD_LOGIC_VECTOR ( 23 downto 0 );
+    s_axis_tready : out STD_LOGIC;
+    aclk : in STD_LOGIC;
+    aresetn : in STD_LOGIC;
+    balance : in STD_LOGIC_VECTOR ( 0 to 9 )
+  );
+  end component I2CBalancer_balance_controller_0_0;
+  component I2CBalancer_dual_moving_average_0_0 is
+  port (
+    m_axis_tvalid : out STD_LOGIC;
+    m_axis_tlast : out STD_LOGIC;
+    m_axis_tdata : out STD_LOGIC_VECTOR ( 23 downto 0 );
+    m_axis_tready : in STD_LOGIC;
+    s_axis_tvalid : in STD_LOGIC;
+    s_axis_tlast : in STD_LOGIC;
+    s_axis_tdata : in STD_LOGIC_VECTOR ( 23 downto 0 );
+    s_axis_tready : out STD_LOGIC;
+    aclk : in STD_LOGIC;
+    aresetn : in STD_LOGIC;
+    filter_enable : in STD_LOGIC
+  );
+  end component I2CBalancer_dual_moving_average_0_0;
   signal axi4stream_spi_master_0_M_AXIS_TDATA : STD_LOGIC_VECTOR ( 7 downto 0 );
   signal axi4stream_spi_master_0_M_AXIS_TVALID : STD_LOGIC;
   signal axi4stream_spi_master_0_SPI_M_IO0_I : STD_LOGIC;
@@ -273,7 +273,7 @@ architecture STRUCTURE of I2CBalancer is
   signal balance_controller_0_m_axis_TLAST : STD_LOGIC;
   signal balance_controller_0_m_axis_TREADY : STD_LOGIC;
   signal balance_controller_0_m_axis_TVALID : STD_LOGIC;
-  signal clk_in1_0_1 : STD_LOGIC;
+  signal clk_100MHz_1 : STD_LOGIC;
   signal clk_wiz_0_clk_out1 : STD_LOGIC;
   signal clk_wiz_0_clk_out2 : STD_LOGIC;
   signal clk_wiz_0_locked : STD_LOGIC;
@@ -332,7 +332,7 @@ architecture STRUCTURE of I2CBalancer is
   attribute X_INTERFACE_PARAMETER : string;
   attribute X_INTERFACE_PARAMETER of reset : signal is "XIL_INTERFACENAME RST.RESET, INSERT_VIP 0, POLARITY ACTIVE_HIGH";
   attribute X_INTERFACE_INFO of sys_clock : signal is "xilinx.com:signal:clock:1.0 CLK.SYS_CLOCK CLK";
-  attribute X_INTERFACE_PARAMETER of sys_clock : signal is "XIL_INTERFACENAME CLK.SYS_CLOCK, CLK_DOMAIN I2CBalancer_sys_clock, FREQ_HZ 100000000, FREQ_TOLERANCE_HZ 0, INSERT_VIP 0, PHASE 0.000";
+  attribute X_INTERFACE_PARAMETER of sys_clock : signal is "XIL_INTERFACENAME CLK.SYS_CLOCK, CLK_DOMAIN I2CBalancer_clk_100MHz, FREQ_HZ 180000000, FREQ_TOLERANCE_HZ 0, INSERT_VIP 0, PHASE 0.000";
 begin
   SPI_M_0_io0_o <= axi4stream_spi_master_0_SPI_M_IO0_O;
   SPI_M_0_io0_t <= axi4stream_spi_master_0_SPI_M_IO0_T;
@@ -346,7 +346,7 @@ begin
   axi4stream_spi_master_0_SPI_M_IO1_I <= SPI_M_0_io1_i;
   axi4stream_spi_master_0_SPI_M_SCK_I <= SPI_M_0_sck_i;
   axi4stream_spi_master_0_SPI_M_SS_I <= SPI_M_0_ss_i;
-  clk_in1_0_1 <= sys_clock;
+  clk_100MHz_1 <= sys_clock;
   reset_0_1 <= reset;
   rx_lrck_0 <= axis_dual_i2s_0_rx_lrck;
   rx_mclk_0 <= axis_dual_i2s_0_rx_mclk;
@@ -426,7 +426,7 @@ balance_controller_0: component I2CBalancer_balance_controller_0_0
     );
 clk_wiz_0: component I2CBalancer_clk_wiz_0_0
      port map (
-      clk_in1 => clk_in1_0_1,
+      clk_in1 => clk_100MHz_1,
       clk_out1 => clk_wiz_0_clk_out1,
       clk_out2 => clk_wiz_0_clk_out2,
       locked => clk_wiz_0_locked,
@@ -499,7 +499,7 @@ led_controller_0: component I2CBalancer_led_controller_0_0
       mute_enable => edge_detector_0_output_signal,
       r(7 downto 0) => led_controller_0_r(7 downto 0)
     );
-mute_0: component I2CBalancer_mute_0_0
+mute_0: component I2CBalancer_mute_0_2
      port map (
       m_axis_tdata(23 downto 0) => mute_0_m_axis_TDATA(23 downto 0),
       m_axis_tlast => mute_0_m_axis_TLAST,
