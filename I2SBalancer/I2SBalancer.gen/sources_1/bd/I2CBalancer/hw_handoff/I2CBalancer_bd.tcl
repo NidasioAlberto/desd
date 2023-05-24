@@ -40,7 +40,7 @@ if { [string first $scripts_vivado_version $current_vivado_version] == -1 } {
 
 # The design that will be created by this Tcl script contains the following 
 # module references:
-# balance_controller, debouncer, debouncer, digilent_jstk2, dual_moving_average, edge_detector, edge_detector, led_controller, mute
+# balance_controller, debouncer, debouncer, digilent_jstk2, dual_moving_average, edge_detector, edge_detector, led_controller, mute, volume_controller
 
 # Please add the sources of those modules before sourcing this Tcl script.
 
@@ -312,14 +312,26 @@ proc create_root_design { parentCell } {
   # Create instance: proc_sys_reset_1, and set properties
   set proc_sys_reset_1 [ create_bd_cell -type ip -vlnv xilinx.com:ip:proc_sys_reset:5.0 proc_sys_reset_1 ]
 
+  # Create instance: volume_controller_0, and set properties
+  set block_name volume_controller
+  set block_cell_name volume_controller_0
+  if { [catch {set volume_controller_0 [create_bd_cell -type module -reference $block_name $block_cell_name] } errmsg] } {
+     catch {common::send_gid_msg -ssname BD::TCL -id 2095 -severity "ERROR" "Unable to add referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
+     return 1
+   } elseif { $volume_controller_0 eq "" } {
+     catch {common::send_gid_msg -ssname BD::TCL -id 2096 -severity "ERROR" "Unable to referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
+     return 1
+   }
+  
   # Create interface connections
   connect_bd_intf_net -intf_net axi4stream_spi_master_0_M_AXIS [get_bd_intf_pins axi4stream_spi_master_0/M_AXIS] [get_bd_intf_pins digilent_jstk2_0/s_axis]
   connect_bd_intf_net -intf_net axi4stream_spi_master_0_SPI_M [get_bd_intf_ports SPI_M_0] [get_bd_intf_pins axi4stream_spi_master_0/SPI_M]
   connect_bd_intf_net -intf_net axis_dual_i2s_0_m_axis [get_bd_intf_pins axis_dual_i2s_0/m_axis] [get_bd_intf_pins dual_moving_average_0/s_axis]
-  connect_bd_intf_net -intf_net balance_controller_0_m_axis [get_bd_intf_pins balance_controller_0/m_axis] [get_bd_intf_pins mute_0/s_axis]
+  connect_bd_intf_net -intf_net balance_controller_0_m_axis [get_bd_intf_pins balance_controller_0/m_axis] [get_bd_intf_pins volume_controller_0/s_axis]
   connect_bd_intf_net -intf_net digilent_jstk2_0_m_axis [get_bd_intf_pins axi4stream_spi_master_0/S_AXIS] [get_bd_intf_pins digilent_jstk2_0/m_axis]
   connect_bd_intf_net -intf_net dual_moving_average_0_m_axis [get_bd_intf_pins balance_controller_0/s_axis] [get_bd_intf_pins dual_moving_average_0/m_axis]
   connect_bd_intf_net -intf_net mute_0_m_axis [get_bd_intf_pins axis_dual_i2s_0/s_axis] [get_bd_intf_pins mute_0/m_axis]
+  connect_bd_intf_net -intf_net volume_controller_0_m_axis [get_bd_intf_pins mute_0/s_axis] [get_bd_intf_pins volume_controller_0/m_axis]
 
   # Create port connections
   connect_bd_net -net axis_dual_i2s_0_rx_lrck [get_bd_ports rx_lrck_0] [get_bd_pins axis_dual_i2s_0/rx_lrck]
@@ -330,7 +342,7 @@ proc create_root_design { parentCell } {
   connect_bd_net -net axis_dual_i2s_0_tx_sclk [get_bd_ports tx_sclk_0] [get_bd_pins axis_dual_i2s_0/tx_sclk]
   connect_bd_net -net axis_dual_i2s_0_tx_sdout [get_bd_ports tx_sdout_0] [get_bd_pins axis_dual_i2s_0/tx_sdout]
   connect_bd_net -net clk_in1_0_1 [get_bd_ports sys_clock] [get_bd_pins clk_wiz_0/clk_in1]
-  connect_bd_net -net clk_wiz_0_clk_out1 [get_bd_pins axi4stream_spi_master_0/aclk] [get_bd_pins axis_dual_i2s_0/aclk] [get_bd_pins balance_controller_0/aclk] [get_bd_pins clk_wiz_0/clk_out1] [get_bd_pins debouncer_0/clk] [get_bd_pins debouncer_1/clk] [get_bd_pins digilent_jstk2_0/aclk] [get_bd_pins dual_moving_average_0/aclk] [get_bd_pins edge_detector_0/clk] [get_bd_pins edge_detector_1/clk] [get_bd_pins proc_sys_reset_0/slowest_sync_clk]
+  connect_bd_net -net clk_wiz_0_clk_out1 [get_bd_pins axi4stream_spi_master_0/aclk] [get_bd_pins axis_dual_i2s_0/aclk] [get_bd_pins balance_controller_0/aclk] [get_bd_pins clk_wiz_0/clk_out1] [get_bd_pins debouncer_0/clk] [get_bd_pins debouncer_1/clk] [get_bd_pins digilent_jstk2_0/aclk] [get_bd_pins dual_moving_average_0/aclk] [get_bd_pins edge_detector_0/clk] [get_bd_pins edge_detector_1/clk] [get_bd_pins proc_sys_reset_0/slowest_sync_clk] [get_bd_pins volume_controller_0/aclk]
   connect_bd_net -net clk_wiz_0_clk_out2 [get_bd_pins axis_dual_i2s_0/i2s_clk] [get_bd_pins clk_wiz_0/clk_out2] [get_bd_pins proc_sys_reset_1/slowest_sync_clk]
   connect_bd_net -net clk_wiz_0_locked [get_bd_pins clk_wiz_0/locked] [get_bd_pins proc_sys_reset_0/dcm_locked] [get_bd_pins proc_sys_reset_1/dcm_locked]
   connect_bd_net -net debouncer_0_debounced [get_bd_pins debouncer_0/debounced] [get_bd_pins edge_detector_0/input_signal]
@@ -338,12 +350,13 @@ proc create_root_design { parentCell } {
   connect_bd_net -net digilent_jstk2_0_btn_jstk [get_bd_pins debouncer_1/input_signal] [get_bd_pins digilent_jstk2_0/btn_jstk]
   connect_bd_net -net digilent_jstk2_0_btn_trigger [get_bd_pins debouncer_0/input_signal] [get_bd_pins digilent_jstk2_0/btn_trigger]
   connect_bd_net -net digilent_jstk2_0_jstk_x [get_bd_pins balance_controller_0/balance] [get_bd_pins digilent_jstk2_0/jstk_x]
+  connect_bd_net -net digilent_jstk2_0_jstk_y [get_bd_pins digilent_jstk2_0/jstk_y] [get_bd_pins volume_controller_0/balance]
   connect_bd_net -net edge_detector_0_output_signal [get_bd_pins edge_detector_0/output_signal] [get_bd_pins led_controller_0/mute_enable] [get_bd_pins mute_0/mute_enable]
   connect_bd_net -net edge_detector_1_output_signal [get_bd_pins dual_moving_average_0/filter_enable] [get_bd_pins edge_detector_1/output_signal] [get_bd_pins led_controller_0/filter_enable]
   connect_bd_net -net led_controller_0_b [get_bd_pins digilent_jstk2_0/led_b] [get_bd_pins led_controller_0/b]
   connect_bd_net -net led_controller_0_g [get_bd_pins digilent_jstk2_0/led_g] [get_bd_pins led_controller_0/g]
   connect_bd_net -net led_controller_0_r [get_bd_pins digilent_jstk2_0/led_r] [get_bd_pins led_controller_0/r]
-  connect_bd_net -net proc_sys_reset_0_peripheral_aresetn [get_bd_pins axi4stream_spi_master_0/aresetn] [get_bd_pins axis_dual_i2s_0/aresetn] [get_bd_pins balance_controller_0/aresetn] [get_bd_pins digilent_jstk2_0/aresetn] [get_bd_pins dual_moving_average_0/aresetn] [get_bd_pins proc_sys_reset_0/peripheral_aresetn]
+  connect_bd_net -net proc_sys_reset_0_peripheral_aresetn [get_bd_pins axi4stream_spi_master_0/aresetn] [get_bd_pins axis_dual_i2s_0/aresetn] [get_bd_pins balance_controller_0/aresetn] [get_bd_pins digilent_jstk2_0/aresetn] [get_bd_pins dual_moving_average_0/aresetn] [get_bd_pins proc_sys_reset_0/peripheral_aresetn] [get_bd_pins volume_controller_0/aresetn]
   connect_bd_net -net proc_sys_reset_0_peripheral_reset [get_bd_pins debouncer_0/reset] [get_bd_pins debouncer_1/reset] [get_bd_pins edge_detector_0/reset] [get_bd_pins edge_detector_1/reset] [get_bd_pins proc_sys_reset_0/peripheral_reset]
   connect_bd_net -net proc_sys_reset_1_peripheral_aresetn [get_bd_pins axis_dual_i2s_0/i2s_resetn] [get_bd_pins proc_sys_reset_1/peripheral_aresetn]
   connect_bd_net -net reset_0_1 [get_bd_ports reset] [get_bd_pins clk_wiz_0/reset] [get_bd_pins proc_sys_reset_0/ext_reset_in] [get_bd_pins proc_sys_reset_1/ext_reset_in]

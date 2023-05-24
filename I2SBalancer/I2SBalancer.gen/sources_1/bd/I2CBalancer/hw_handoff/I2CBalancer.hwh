@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Tue May 23 14:14:59 2023" VIVADOVERSION="2020.2">
+<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Wed May 24 11:33:25 2023" VIVADOVERSION="2020.2">
 
   <SYSTEMINFO ARCH="artix7" DEVICE="7a35t" NAME="I2CBalancer" PACKAGE="cpg236" SPEEDGRADE="-1"/>
 
@@ -466,22 +466,22 @@
       <PORTS>
         <PORT DIR="O" NAME="m_axis_tvalid" SIGIS="undef" SIGNAME="balance_controller_0_m_axis_tvalid">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="mute_0" PORT="s_axis_tvalid"/>
+            <CONNECTION INSTANCE="volume_controller_0" PORT="s_axis_tvalid"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="O" NAME="m_axis_tlast" SIGIS="undef" SIGNAME="balance_controller_0_m_axis_tlast">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="mute_0" PORT="s_axis_tlast"/>
+            <CONNECTION INSTANCE="volume_controller_0" PORT="s_axis_tlast"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="O" LEFT="23" NAME="m_axis_tdata" RIGHT="0" SIGIS="undef" SIGNAME="balance_controller_0_m_axis_tdata">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="mute_0" PORT="s_axis_tdata"/>
+            <CONNECTION INSTANCE="volume_controller_0" PORT="s_axis_tdata"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="I" NAME="m_axis_tready" SIGIS="undef" SIGNAME="balance_controller_0_m_axis_tready">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="mute_0" PORT="s_axis_tready"/>
+            <CONNECTION INSTANCE="volume_controller_0" PORT="s_axis_tready"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="I" NAME="s_axis_tvalid" SIGIS="undef" SIGNAME="balance_controller_0_s_axis_tvalid">
@@ -1164,6 +1164,7 @@
             <CONNECTION INSTANCE="edge_detector_0" PORT="clk"/>
             <CONNECTION INSTANCE="edge_detector_1" PORT="clk"/>
             <CONNECTION INSTANCE="dual_moving_average_0" PORT="aclk"/>
+            <CONNECTION INSTANCE="volume_controller_0" PORT="aclk"/>
             <CONNECTION INSTANCE="balance_controller_0" PORT="aclk"/>
           </CONNECTIONS>
         </PORT>
@@ -1294,7 +1295,11 @@
             <CONNECTION INSTANCE="balance_controller_0" PORT="balance"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" LEFT="9" NAME="jstk_y" RIGHT="0" SIGIS="undef"/>
+        <PORT DIR="O" LEFT="9" NAME="jstk_y" RIGHT="0" SIGIS="undef" SIGNAME="digilent_jstk2_0_jstk_y">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="volume_controller_0" PORT="balance"/>
+          </CONNECTIONS>
+        </PORT>
         <PORT DIR="O" NAME="btn_jstk" SIGIS="undef" SIGNAME="digilent_jstk2_0_btn_jstk">
           <CONNECTIONS>
             <CONNECTION INSTANCE="debouncer_1" PORT="input_signal"/>
@@ -1596,24 +1601,24 @@
             <CONNECTION INSTANCE="axis_dual_i2s_0" PORT="s_axis_tready"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" NAME="s_axis_tvalid" SIGIS="undef" SIGNAME="balance_controller_0_m_axis_tvalid">
+        <PORT DIR="I" NAME="s_axis_tvalid" SIGIS="undef" SIGNAME="mute_0_s_axis_tvalid">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="balance_controller_0" PORT="m_axis_tvalid"/>
+            <CONNECTION INSTANCE="volume_controller_0" PORT="m_axis_tvalid"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" NAME="s_axis_tlast" SIGIS="undef" SIGNAME="balance_controller_0_m_axis_tlast">
+        <PORT DIR="I" NAME="s_axis_tlast" SIGIS="undef" SIGNAME="mute_0_s_axis_tlast">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="balance_controller_0" PORT="m_axis_tlast"/>
+            <CONNECTION INSTANCE="volume_controller_0" PORT="m_axis_tlast"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" LEFT="23" NAME="s_axis_tdata" RIGHT="0" SIGIS="undef" SIGNAME="balance_controller_0_m_axis_tdata">
+        <PORT DIR="I" LEFT="23" NAME="s_axis_tdata" RIGHT="0" SIGIS="undef" SIGNAME="mute_0_s_axis_tdata">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="balance_controller_0" PORT="m_axis_tdata"/>
+            <CONNECTION INSTANCE="volume_controller_0" PORT="m_axis_tdata"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" NAME="s_axis_tready" SIGIS="undef" SIGNAME="balance_controller_0_m_axis_tready">
+        <PORT DIR="O" NAME="s_axis_tready" SIGIS="undef" SIGNAME="mute_0_s_axis_tready">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="balance_controller_0" PORT="m_axis_tready"/>
+            <CONNECTION INSTANCE="volume_controller_0" PORT="m_axis_tready"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="I" NAME="mute_enable" SIGIS="undef" SIGNAME="edge_detector_0_output_signal">
@@ -1644,7 +1649,7 @@
             <PORTMAP LOGICAL="TREADY" PHYSICAL="m_axis_tready"/>
           </PORTMAPS>
         </BUSINTERFACE>
-        <BUSINTERFACE BUSNAME="balance_controller_0_m_axis" NAME="s_axis" TYPE="TARGET" VLNV="xilinx.com:interface:axis:1.0">
+        <BUSINTERFACE BUSNAME="volume_controller_0_m_axis" NAME="s_axis" TYPE="TARGET" VLNV="xilinx.com:interface:axis:1.0">
           <PARAMETER NAME="TDATA_NUM_BYTES" VALUE="3"/>
           <PARAMETER NAME="TDEST_WIDTH" VALUE="0"/>
           <PARAMETER NAME="TID_WIDTH" VALUE="0"/>
@@ -1721,6 +1726,7 @@
             <CONNECTION INSTANCE="digilent_jstk2_0" PORT="aresetn"/>
             <CONNECTION INSTANCE="axi4stream_spi_master_0" PORT="aresetn"/>
             <CONNECTION INSTANCE="dual_moving_average_0" PORT="aresetn"/>
+            <CONNECTION INSTANCE="volume_controller_0" PORT="aresetn"/>
             <CONNECTION INSTANCE="balance_controller_0" PORT="aresetn"/>
           </CONNECTIONS>
         </PORT>
@@ -1775,6 +1781,115 @@
         </PORT>
       </PORTS>
       <BUSINTERFACES/>
+    </MODULE>
+    <MODULE COREREVISION="1" FULLNAME="/volume_controller_0" HWVERSION="1.0" INSTANCE="volume_controller_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="volume_controller" VLNV="xilinx.com:module_ref:volume_controller:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="SOMETHING" VALUE="32"/>
+        <PARAMETER NAME="Component_Name" VALUE="I2CBalancer_volume_controller_0_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="O" NAME="m_axis_tvalid" SIGIS="undef" SIGNAME="mute_0_s_axis_tvalid">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="mute_0" PORT="s_axis_tvalid"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="m_axis_tlast" SIGIS="undef" SIGNAME="mute_0_s_axis_tlast">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="mute_0" PORT="s_axis_tlast"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="23" NAME="m_axis_tdata" RIGHT="0" SIGIS="undef" SIGNAME="mute_0_s_axis_tdata">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="mute_0" PORT="s_axis_tdata"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="m_axis_tready" SIGIS="undef" SIGNAME="mute_0_s_axis_tready">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="mute_0" PORT="s_axis_tready"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="s_axis_tvalid" SIGIS="undef" SIGNAME="balance_controller_0_m_axis_tvalid">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="balance_controller_0" PORT="m_axis_tvalid"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="s_axis_tlast" SIGIS="undef" SIGNAME="balance_controller_0_m_axis_tlast">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="balance_controller_0" PORT="m_axis_tlast"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="23" NAME="s_axis_tdata" RIGHT="0" SIGIS="undef" SIGNAME="balance_controller_0_m_axis_tdata">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="balance_controller_0" PORT="m_axis_tdata"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="s_axis_tready" SIGIS="undef" SIGNAME="balance_controller_0_m_axis_tready">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="balance_controller_0" PORT="m_axis_tready"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT CLKFREQUENCY="100000000" DIR="I" NAME="aclk" SIGIS="clk" SIGNAME="clk_wiz_0_clk_out1">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="clk_wiz_0" PORT="clk_out1"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="aresetn" POLARITY="ACTIVE_LOW" SIGIS="rst" SIGNAME="proc_sys_reset_0_peripheral_aresetn">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="proc_sys_reset_0" PORT="peripheral_aresetn"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="0" NAME="balance" RIGHT="9" SIGIS="undef" SIGNAME="digilent_jstk2_0_jstk_y">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="digilent_jstk2_0" PORT="jstk_y"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES>
+        <BUSINTERFACE BUSNAME="volume_controller_0_m_axis" NAME="m_axis" TYPE="INITIATOR" VLNV="xilinx.com:interface:axis:1.0">
+          <PARAMETER NAME="TDATA_NUM_BYTES" VALUE="3"/>
+          <PARAMETER NAME="TDEST_WIDTH" VALUE="0"/>
+          <PARAMETER NAME="TID_WIDTH" VALUE="0"/>
+          <PARAMETER NAME="TUSER_WIDTH" VALUE="0"/>
+          <PARAMETER NAME="HAS_TREADY" VALUE="1"/>
+          <PARAMETER NAME="HAS_TSTRB" VALUE="0"/>
+          <PARAMETER NAME="HAS_TKEEP" VALUE="0"/>
+          <PARAMETER NAME="HAS_TLAST" VALUE="1"/>
+          <PARAMETER NAME="FREQ_HZ" VALUE="100000000"/>
+          <PARAMETER NAME="PHASE" VALUE="0.0"/>
+          <PARAMETER NAME="CLK_DOMAIN" VALUE="/clk_wiz_0_clk_out1"/>
+          <PARAMETER NAME="LAYERED_METADATA" VALUE="undef"/>
+          <PARAMETER NAME="INSERT_VIP" VALUE="0"/>
+          <PORTMAPS>
+            <PORTMAP LOGICAL="TDATA" PHYSICAL="m_axis_tdata"/>
+            <PORTMAP LOGICAL="TLAST" PHYSICAL="m_axis_tlast"/>
+            <PORTMAP LOGICAL="TVALID" PHYSICAL="m_axis_tvalid"/>
+            <PORTMAP LOGICAL="TREADY" PHYSICAL="m_axis_tready"/>
+          </PORTMAPS>
+        </BUSINTERFACE>
+        <BUSINTERFACE BUSNAME="balance_controller_0_m_axis" NAME="s_axis" TYPE="TARGET" VLNV="xilinx.com:interface:axis:1.0">
+          <PARAMETER NAME="TDATA_NUM_BYTES" VALUE="3"/>
+          <PARAMETER NAME="TDEST_WIDTH" VALUE="0"/>
+          <PARAMETER NAME="TID_WIDTH" VALUE="0"/>
+          <PARAMETER NAME="TUSER_WIDTH" VALUE="0"/>
+          <PARAMETER NAME="HAS_TREADY" VALUE="1"/>
+          <PARAMETER NAME="HAS_TSTRB" VALUE="0"/>
+          <PARAMETER NAME="HAS_TKEEP" VALUE="0"/>
+          <PARAMETER NAME="HAS_TLAST" VALUE="1"/>
+          <PARAMETER NAME="FREQ_HZ" VALUE="100000000"/>
+          <PARAMETER NAME="PHASE" VALUE="0.0"/>
+          <PARAMETER NAME="CLK_DOMAIN" VALUE="/clk_wiz_0_clk_out1"/>
+          <PARAMETER NAME="LAYERED_METADATA" VALUE="undef"/>
+          <PARAMETER NAME="INSERT_VIP" VALUE="0"/>
+          <PORTMAPS>
+            <PORTMAP LOGICAL="TDATA" PHYSICAL="s_axis_tdata"/>
+            <PORTMAP LOGICAL="TLAST" PHYSICAL="s_axis_tlast"/>
+            <PORTMAP LOGICAL="TVALID" PHYSICAL="s_axis_tvalid"/>
+            <PORTMAP LOGICAL="TREADY" PHYSICAL="s_axis_tready"/>
+          </PORTMAPS>
+        </BUSINTERFACE>
+      </BUSINTERFACES>
     </MODULE>
   </MODULES>
 

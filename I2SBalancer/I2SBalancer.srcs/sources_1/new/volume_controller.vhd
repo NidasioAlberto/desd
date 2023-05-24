@@ -15,14 +15,14 @@
 -- Revision:
 -- Revision 0.01 - File Created
 -- Additional Comments:
--- 
+--
 ----------------------------------------------------------------------------------
 library IEEE;
 use IEEE.STD_LOGIC_1164.all;
 
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
-use IEEE.NUMERIC_STD.ALL;
+use IEEE.NUMERIC_STD.all;
 use IEEE.math_real.all;
 
 -- Uncomment the following library declaration if instantiating
@@ -55,7 +55,8 @@ entity volume_controller is
 end volume_controller;
 
 architecture Behavioral of volume_controller is
-
+    constant max_value_tdata : std_logic_vector(23 downto 0) := std_logic_vector(to_unsigned(2 ** 23 - 1, 24));
+    constant min_value_tdata : std_logic_vector(23 downto 0) := std_logic_vector(to_unsigned(2 ** 23, 24));
 begin
     process (aclk, aresetn)
     begin
@@ -65,22 +66,58 @@ begin
         s_axis_tready <= m_axis_tready;
         if aresetn = '0' then
         elsif rising_edge(aclk) then
-            if signed(balance) <- 224 then
-                m_axis_tdata <= s_axis_tdata(23) & s_axis_tdata(23 to 1);
-            elsif signed(balance) >= - 224 and signed(balance) <- 160 then
-                m_axis_tdata <= s_axis_tdata(23) & s_axis_tdata(23) & s_axis_tdata(23 to 2);
-            elsif signed(balance) >= - 160 and signed(balance) <- 96 then
-                m_axis_tdata <= s_axis_tdata(23) & s_axis_tdata(23) & s_axis_tdata(23) & s_axis_tdata(23 to 3);
-            elsif signed(balance) >= - 96 and signed(balance) <- 32 then
-                m_axis_tdata <= s_axis_tdata(23) & s_axis_tdata(23) & s_axis_tdata(23) & s_axis_tdata(23) & s_axis_tdata(23 to 4);
-            elsif signed(balance) >= 32 and signed(balance) < 96 then
-                m_axis_tdata <= s_axis_tdata(22 to 0) & "0"; -- consider round up
-            elsif signed(balance) >= 96 and signed(balance) < 160 then
-                m_axis_tdata <= s_axis_tdata(21 to 0) & "00"; -- consider round up
-            elsif signed(balance) >= 160 and signed(balance) < 224 then
-                m_axis_tdata <= s_axis_tdata(20 to 0) & "000"; -- consider round up
-            elsif signed(balance) >= 224 then
-                m_axis_tdata <= s_axis_tdata(19 to 0) & "0000"; -- consider round up
+            m_axis_tdata             <= s_axis_tdata;
+            -- decrease right value
+            if (unsigned(balance)    <= - 224 + 512) then
+                m_axis_tdata             <= std_logic_vector(resize(signed(s_axis_tdata(23 downto 4)), 24));
+            elsif (unsigned(balance) <= - 160 + 512) then
+                m_axis_tdata             <= std_logic_vector(resize(signed(s_axis_tdata(23 downto 3)), 24));
+            elsif (unsigned(balance) <= - 96 + 512) then
+                m_axis_tdata             <= std_logic_vector(resize(signed(s_axis_tdata(23 downto 2)), 24));
+            elsif (unsigned(balance) <= - 32 + 512) then
+                m_axis_tdata             <= std_logic_vector(resize(signed(s_axis_tdata(23 downto 1)), 24));
+            elsif (unsigned(balance) <= 32 + 512) then
+                m_axis_tdata             <= std_logic_vector(resize(signed(s_axis_tdata(23 downto 0)), 24));
+            elsif (unsigned(balance) <= 96 + 512) then
+                if (s_axis_tdata(23 downto 22) = "00" or s_axis_tdata(23 downto 22) = "11") then
+                    m_axis_tdata <= s_axis_tdata(22 downto 0) & "0";
+                else
+                    if (s_axis_tdata(23) = '0') then
+                        m_axis_tdata <= max_value_tdata; -- So that doesn't exceed the maximum
+                    else
+                        m_axis_tdata <= min_value_tdata; -- So that doesn't exceed the maximum
+                    end if;
+                end if;
+            elsif (unsigned(balance) <= 160 + 512) then
+                if (s_axis_tdata(23 downto 21) = "000" or s_axis_tdata(23 downto 21) = "111") then
+                    m_axis_tdata <= s_axis_tdata(21 downto 0) & "00";
+                else
+                    if (s_axis_tdata(23) = '0') then
+                        m_axis_tdata <= max_value_tdata; -- So that doesn't exceed the maximum
+                    else
+                        m_axis_tdata <= min_value_tdata; -- So that doesn't exceed the maximum
+                    end if;
+                end if;
+            elsif (unsigned(balance) <= 224 + 512) then
+                if (s_axis_tdata(23 downto 20) = "0000" or s_axis_tdata(23 downto 20) = "1111") then
+                    m_axis_tdata <= s_axis_tdata(20 downto 0) & "000";
+                else
+                    if (s_axis_tdata(23) = '0') then
+                        m_axis_tdata <= max_value_tdata; -- So that doesn't exceed the maximum
+                    else
+                        m_axis_tdata <= min_value_tdata; -- So that doesn't exceed the maximum
+                    end if;
+                end if;
+            elsif (unsigned(balance) > 224 + 512) then
+                if (s_axis_tdata(23 downto 19) = "00000" or s_axis_tdata(23 downto 19) = "11111") then
+                    m_axis_tdata <= s_axis_tdata(19 downto 0) & "0000";
+                else
+                    if (s_axis_tdata(23) = '0') then
+                        m_axis_tdata <= max_value_tdata; -- So that doesn't exceed the maximum
+                    else
+                        m_axis_tdata <= min_value_tdata; -- So that doesn't exceed the maximum
+                    end if;
+                end if;
             end if;
         end if;
     end process;

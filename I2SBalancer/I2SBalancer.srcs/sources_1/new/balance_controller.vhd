@@ -61,44 +61,33 @@ begin
     begin
         m_axis_tvalid <= s_axis_tvalid;
         m_axis_tlast  <= s_axis_tlast;
-        m_axis_tdata  <= s_axis_tdata;
         s_axis_tready <= m_axis_tready;
         if aresetn = '0' then
         elsif rising_edge(aclk) then
             m_axis_tdata <= s_axis_tdata;
-            if (s_axis_tlast = '1') then
+            if (s_axis_tlast = '0') then -- to be optimized deleting this if and leaving only the content?
                 -- decrease right value
-                if (signed(balance)    <= - 224) then
-                    m_axis_tdata           <= std_logic_vector(resize(signed(s_axis_tdata(23 downto 1)), 24));
-                elsif (signed(balance) <= - 160) then
-                    m_axis_tdata           <= std_logic_vector(resize(signed(s_axis_tdata(23 downto 2)), 24));
-                elsif (signed(balance) <= - 96) then
-                    m_axis_tdata           <= std_logic_vector(resize(signed(s_axis_tdata(23 downto 3)), 24));
-                elsif (signed(balance) <= - 32) then
-                    m_axis_tdata           <= std_logic_vector(resize(signed(s_axis_tdata(23 downto 4)), 24));
+                if (unsigned(balance)    <= - 224 + 512) then
+                    m_axis_tdata             <= std_logic_vector(resize(signed(s_axis_tdata(23 downto 4)), 24));
+                elsif (unsigned(balance) <= - 160 + 512) then
+                    m_axis_tdata             <= std_logic_vector(resize(signed(s_axis_tdata(23 downto 3)), 24));
+                elsif (unsigned(balance) <= - 96 + 512) then
+                    m_axis_tdata             <= std_logic_vector(resize(signed(s_axis_tdata(23 downto 2)), 24));
+                elsif (unsigned(balance) <= - 32 + 512) then
+                    m_axis_tdata             <= std_logic_vector(resize(signed(s_axis_tdata(23 downto 1)), 24));
                 end if;
             else
                 -- decrease left value
-                if (signed(balance) >= 224) then
-                    m_axis_tdata <= std_logic_vector(resize(signed(s_axis_tdata(23 downto 1)), 24));
-                elsif (signed(balance) >= 160) then
-                    m_axis_tdata <= std_logic_vector(resize(signed(s_axis_tdata(23 downto 2)), 24));
-                elsif (signed(balance) >= 96) then
-                    m_axis_tdata <= std_logic_vector(resize(signed(s_axis_tdata(23 downto 3)), 24));
-                elsif (signed(balance) >= 32) then
+                if (unsigned(balance) >= 224 + 512) then
                     m_axis_tdata <= std_logic_vector(resize(signed(s_axis_tdata(23 downto 4)), 24));
+                elsif (unsigned(balance) >= 160 + 512) then
+                    m_axis_tdata <= std_logic_vector(resize(signed(s_axis_tdata(23 downto 3)), 24));
+                elsif (unsigned(balance) >= 96 + 512) then
+                    m_axis_tdata <= std_logic_vector(resize(signed(s_axis_tdata(23 downto 2)), 24));
+                elsif (unsigned(balance) >= 32 + 512) then
+                    m_axis_tdata <= std_logic_vector(resize(signed(s_axis_tdata(23 downto 1)), 24));
                 end if;
             end if;
-
-            -- if (signed(balance) >= - 96 and signed(balance) <- 32 and s_axis_tlast = '1') or (signed(balance) >= 32 and signed(balance) < 96 and s_axis_tlast = '0') then
-            --     m_axis_tdata <= s_axis_tdata(23) & s_axis_tdata(23 downto 1);
-            -- elsif (signed(balance) >= - 160 and signed(balance) <- 96 and s_axis_tlast = '1') or (signed(balance) >= 96 and signed(balance) < 160 and s_axis_tlast = '0') then
-            --     m_axis_tdata <= s_axis_tdata(23) & s_axis_tdata(23) & s_axis_tdata(23 downto 2);
-            -- elsif (signed(balance) >= - 224 and signed(balance) <- 160 and s_axis_tlast = '1') or (signed(balance) >= 160 and signed(balance) < 224 and s_axis_tlast = '0') then
-            --     m_axis_tdata <= s_axis_tdata(23) & s_axis_tdata(23) & s_axis_tdata(23) & s_axis_tdata(23 downto 3);
-            -- elsif (signed(balance) <- 224 and s_axis_tlast = '1') or (signed(balance) >= 224 and s_axis_tlast = '0') then
-            --     m_axis_tdata <= s_axis_tdata(23) & s_axis_tdata(23) & s_axis_tdata(23) & s_axis_tdata(23) & s_axis_tdata(23 downto 4);
-            -- end if;
         end if;
     end process;
 end Behavioral;

@@ -1,7 +1,7 @@
 --Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2020.2 (win64) Build 3064766 Wed Nov 18 09:12:45 MST 2020
---Date        : Tue May 23 14:14:58 2023
+--Date        : Wed May 24 11:33:24 2023
 --Host        : DESKTOP-F4BLQ3F running 64-bit major release  (build 9200)
 --Command     : generate_target I2CBalancer.bd
 --Design      : I2CBalancer
@@ -37,7 +37,7 @@ entity I2CBalancer is
     tx_sdout_0 : out STD_LOGIC
   );
   attribute CORE_GENERATION_INFO : string;
-  attribute CORE_GENERATION_INFO of I2CBalancer : entity is "I2CBalancer,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=I2CBalancer,x_ipVersion=1.00.a,x_ipLanguage=VHDL,numBlks=14,numReposBlks=14,numNonXlnxBlks=2,numHierBlks=0,maxHierDepth=0,numSysgenBlks=0,numHlsBlks=0,numHdlrefBlks=9,numPkgbdBlks=0,bdsource=USER,da_board_cnt=3,synth_mode=OOC_per_IP}";
+  attribute CORE_GENERATION_INFO of I2CBalancer : entity is "I2CBalancer,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=I2CBalancer,x_ipVersion=1.00.a,x_ipLanguage=VHDL,numBlks=15,numReposBlks=15,numNonXlnxBlks=2,numHierBlks=0,maxHierDepth=0,numSysgenBlks=0,numHlsBlks=0,numHdlrefBlks=10,numPkgbdBlks=0,bdsource=USER,da_board_cnt=3,synth_mode=OOC_per_IP}";
   attribute HW_HANDOFF : string;
   attribute HW_HANDOFF of I2CBalancer : entity is "I2CBalancer.hwdef";
 end I2CBalancer;
@@ -214,6 +214,21 @@ architecture STRUCTURE of I2CBalancer is
     filter_enable : in STD_LOGIC
   );
   end component I2CBalancer_dual_moving_average_0_0;
+  component I2CBalancer_volume_controller_0_0 is
+  port (
+    m_axis_tvalid : out STD_LOGIC;
+    m_axis_tlast : out STD_LOGIC;
+    m_axis_tdata : out STD_LOGIC_VECTOR ( 23 downto 0 );
+    m_axis_tready : in STD_LOGIC;
+    s_axis_tvalid : in STD_LOGIC;
+    s_axis_tlast : in STD_LOGIC;
+    s_axis_tdata : in STD_LOGIC_VECTOR ( 23 downto 0 );
+    s_axis_tready : out STD_LOGIC;
+    aclk : in STD_LOGIC;
+    aresetn : in STD_LOGIC;
+    balance : in STD_LOGIC_VECTOR ( 0 to 9 )
+  );
+  end component I2CBalancer_volume_controller_0_0;
   component I2CBalancer_balance_controller_0_0 is
   port (
     m_axis_tvalid : out STD_LOGIC;
@@ -267,6 +282,7 @@ architecture STRUCTURE of I2CBalancer is
   signal digilent_jstk2_0_btn_jstk : STD_LOGIC;
   signal digilent_jstk2_0_btn_trigger : STD_LOGIC;
   signal digilent_jstk2_0_jstk_x : STD_LOGIC_VECTOR ( 9 downto 0 );
+  signal digilent_jstk2_0_jstk_y : STD_LOGIC_VECTOR ( 9 downto 0 );
   signal digilent_jstk2_0_m_axis_TDATA : STD_LOGIC_VECTOR ( 7 downto 0 );
   signal digilent_jstk2_0_m_axis_TREADY : STD_LOGIC;
   signal digilent_jstk2_0_m_axis_TVALID : STD_LOGIC;
@@ -288,7 +304,10 @@ architecture STRUCTURE of I2CBalancer is
   signal proc_sys_reset_1_peripheral_aresetn : STD_LOGIC_VECTOR ( 0 to 0 );
   signal reset_0_1 : STD_LOGIC;
   signal rx_sdin_0_1 : STD_LOGIC;
-  signal NLW_digilent_jstk2_0_jstk_y_UNCONNECTED : STD_LOGIC_VECTOR ( 9 downto 0 );
+  signal volume_controller_0_m_axis_TDATA : STD_LOGIC_VECTOR ( 23 downto 0 );
+  signal volume_controller_0_m_axis_TLAST : STD_LOGIC;
+  signal volume_controller_0_m_axis_TREADY : STD_LOGIC;
+  signal volume_controller_0_m_axis_TVALID : STD_LOGIC;
   signal NLW_proc_sys_reset_0_mb_reset_UNCONNECTED : STD_LOGIC;
   signal NLW_proc_sys_reset_0_bus_struct_reset_UNCONNECTED : STD_LOGIC_VECTOR ( 0 to 0 );
   signal NLW_proc_sys_reset_0_interconnect_aresetn_UNCONNECTED : STD_LOGIC_VECTOR ( 0 to 0 );
@@ -434,7 +453,7 @@ digilent_jstk2_0: component I2CBalancer_digilent_jstk2_0_0
       btn_jstk => digilent_jstk2_0_btn_jstk,
       btn_trigger => digilent_jstk2_0_btn_trigger,
       jstk_x(9 downto 0) => digilent_jstk2_0_jstk_x(9 downto 0),
-      jstk_y(9 downto 0) => NLW_digilent_jstk2_0_jstk_y_UNCONNECTED(9 downto 0),
+      jstk_y(9 downto 0) => digilent_jstk2_0_jstk_y(9 downto 0),
       led_b(7 downto 0) => led_controller_0_b(7 downto 0),
       led_g(7 downto 0) => led_controller_0_g(7 downto 0),
       led_r(7 downto 0) => led_controller_0_r(7 downto 0),
@@ -487,10 +506,10 @@ mute_0: component I2CBalancer_mute_0_0
       m_axis_tready => mute_0_m_axis_TREADY,
       m_axis_tvalid => mute_0_m_axis_TVALID,
       mute_enable => edge_detector_0_output_signal,
-      s_axis_tdata(23 downto 0) => balance_controller_0_m_axis_TDATA(23 downto 0),
-      s_axis_tlast => balance_controller_0_m_axis_TLAST,
-      s_axis_tready => balance_controller_0_m_axis_TREADY,
-      s_axis_tvalid => balance_controller_0_m_axis_TVALID
+      s_axis_tdata(23 downto 0) => volume_controller_0_m_axis_TDATA(23 downto 0),
+      s_axis_tlast => volume_controller_0_m_axis_TLAST,
+      s_axis_tready => volume_controller_0_m_axis_TREADY,
+      s_axis_tvalid => volume_controller_0_m_axis_TVALID
     );
 proc_sys_reset_0: component I2CBalancer_proc_sys_reset_0_0
      port map (
@@ -517,5 +536,28 @@ proc_sys_reset_1: component I2CBalancer_proc_sys_reset_0_1
       peripheral_aresetn(0) => proc_sys_reset_1_peripheral_aresetn(0),
       peripheral_reset(0) => NLW_proc_sys_reset_1_peripheral_reset_UNCONNECTED(0),
       slowest_sync_clk => clk_wiz_0_clk_out2
+    );
+volume_controller_0: component I2CBalancer_volume_controller_0_0
+     port map (
+      aclk => clk_wiz_0_clk_out1,
+      aresetn => proc_sys_reset_0_peripheral_aresetn(0),
+      balance(0) => digilent_jstk2_0_jstk_y(9),
+      balance(1) => digilent_jstk2_0_jstk_y(8),
+      balance(2) => digilent_jstk2_0_jstk_y(7),
+      balance(3) => digilent_jstk2_0_jstk_y(6),
+      balance(4) => digilent_jstk2_0_jstk_y(5),
+      balance(5) => digilent_jstk2_0_jstk_y(4),
+      balance(6) => digilent_jstk2_0_jstk_y(3),
+      balance(7) => digilent_jstk2_0_jstk_y(2),
+      balance(8) => digilent_jstk2_0_jstk_y(1),
+      balance(9) => digilent_jstk2_0_jstk_y(0),
+      m_axis_tdata(23 downto 0) => volume_controller_0_m_axis_TDATA(23 downto 0),
+      m_axis_tlast => volume_controller_0_m_axis_TLAST,
+      m_axis_tready => volume_controller_0_m_axis_TREADY,
+      m_axis_tvalid => volume_controller_0_m_axis_TVALID,
+      s_axis_tdata(23 downto 0) => balance_controller_0_m_axis_TDATA(23 downto 0),
+      s_axis_tlast => balance_controller_0_m_axis_TLAST,
+      s_axis_tready => balance_controller_0_m_axis_TREADY,
+      s_axis_tvalid => balance_controller_0_m_axis_TVALID
     );
 end STRUCTURE;
