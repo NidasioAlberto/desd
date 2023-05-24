@@ -74,7 +74,8 @@ ARCHITECTURE I2CBalancer_volume_controller_0_0_arch OF I2CBalancer_volume_contro
   ATTRIBUTE DowngradeIPIdentifiedWarnings OF I2CBalancer_volume_controller_0_0_arch: ARCHITECTURE IS "yes";
   COMPONENT volume_controller IS
     GENERIC (
-      SOMETHING : INTEGER
+      AMPLIFICATION_EXPONENT : INTEGER;
+      BITS_BALANCE : INTEGER
     );
     PORT (
       m_axis_tvalid : OUT STD_LOGIC;
@@ -95,7 +96,7 @@ ARCHITECTURE I2CBalancer_volume_controller_0_0_arch OF I2CBalancer_volume_contro
   ATTRIBUTE CHECK_LICENSE_TYPE : STRING;
   ATTRIBUTE CHECK_LICENSE_TYPE OF I2CBalancer_volume_controller_0_0_arch : ARCHITECTURE IS "I2CBalancer_volume_controller_0_0,volume_controller,{}";
   ATTRIBUTE CORE_GENERATION_INFO : STRING;
-  ATTRIBUTE CORE_GENERATION_INFO OF I2CBalancer_volume_controller_0_0_arch: ARCHITECTURE IS "I2CBalancer_volume_controller_0_0,volume_controller,{x_ipProduct=Vivado 2020.2,x_ipVendor=xilinx.com,x_ipLibrary=module_ref,x_ipName=volume_controller,x_ipVersion=1.0,x_ipCoreRevision=1,x_ipLanguage=VHDL,x_ipSimLanguage=MIXED,SOMETHING=32}";
+  ATTRIBUTE CORE_GENERATION_INFO OF I2CBalancer_volume_controller_0_0_arch: ARCHITECTURE IS "I2CBalancer_volume_controller_0_0,volume_controller,{x_ipProduct=Vivado 2020.2,x_ipVendor=xilinx.com,x_ipLibrary=module_ref,x_ipName=volume_controller,x_ipVersion=1.0,x_ipCoreRevision=1,x_ipLanguage=VHDL,x_ipSimLanguage=MIXED,AMPLIFICATION_EXPONENT=6,BITS_BALANCE=10}";
   ATTRIBUTE IP_DEFINITION_SOURCE : STRING;
   ATTRIBUTE IP_DEFINITION_SOURCE OF I2CBalancer_volume_controller_0_0_arch: ARCHITECTURE IS "module_ref";
   ATTRIBUTE X_INTERFACE_INFO : STRING;
@@ -117,7 +118,8 @@ ARCHITECTURE I2CBalancer_volume_controller_0_0_arch OF I2CBalancer_volume_contro
 BEGIN
   U0 : volume_controller
     GENERIC MAP (
-      SOMETHING => 32
+      AMPLIFICATION_EXPONENT => 6,
+      BITS_BALANCE => 10
     )
     PORT MAP (
       m_axis_tvalid => m_axis_tvalid,

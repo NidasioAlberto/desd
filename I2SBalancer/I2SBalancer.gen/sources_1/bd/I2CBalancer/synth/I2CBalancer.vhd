@@ -1,7 +1,7 @@
 --Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2020.2 (win64) Build 3064766 Wed Nov 18 09:12:45 MST 2020
---Date        : Wed May 24 11:33:24 2023
+--Date        : Wed May 24 12:34:23 2023
 --Host        : DESKTOP-F4BLQ3F running 64-bit major release  (build 9200)
 --Command     : generate_target I2CBalancer.bd
 --Design      : I2CBalancer
@@ -214,21 +214,6 @@ architecture STRUCTURE of I2CBalancer is
     filter_enable : in STD_LOGIC
   );
   end component I2CBalancer_dual_moving_average_0_0;
-  component I2CBalancer_volume_controller_0_0 is
-  port (
-    m_axis_tvalid : out STD_LOGIC;
-    m_axis_tlast : out STD_LOGIC;
-    m_axis_tdata : out STD_LOGIC_VECTOR ( 23 downto 0 );
-    m_axis_tready : in STD_LOGIC;
-    s_axis_tvalid : in STD_LOGIC;
-    s_axis_tlast : in STD_LOGIC;
-    s_axis_tdata : in STD_LOGIC_VECTOR ( 23 downto 0 );
-    s_axis_tready : out STD_LOGIC;
-    aclk : in STD_LOGIC;
-    aresetn : in STD_LOGIC;
-    balance : in STD_LOGIC_VECTOR ( 0 to 9 )
-  );
-  end component I2CBalancer_volume_controller_0_0;
   component I2CBalancer_balance_controller_0_0 is
   port (
     m_axis_tvalid : out STD_LOGIC;
@@ -244,6 +229,21 @@ architecture STRUCTURE of I2CBalancer is
     balance : in STD_LOGIC_VECTOR ( 0 to 9 )
   );
   end component I2CBalancer_balance_controller_0_0;
+  component I2CBalancer_volume_controller_0_0 is
+  port (
+    m_axis_tvalid : out STD_LOGIC;
+    m_axis_tlast : out STD_LOGIC;
+    m_axis_tdata : out STD_LOGIC_VECTOR ( 23 downto 0 );
+    m_axis_tready : in STD_LOGIC;
+    s_axis_tvalid : in STD_LOGIC;
+    s_axis_tlast : in STD_LOGIC;
+    s_axis_tdata : in STD_LOGIC_VECTOR ( 23 downto 0 );
+    s_axis_tready : out STD_LOGIC;
+    aclk : in STD_LOGIC;
+    aresetn : in STD_LOGIC;
+    balance : in STD_LOGIC_VECTOR ( 0 to 9 )
+  );
+  end component I2CBalancer_volume_controller_0_0;
   signal axi4stream_spi_master_0_M_AXIS_TDATA : STD_LOGIC_VECTOR ( 7 downto 0 );
   signal axi4stream_spi_master_0_M_AXIS_TVALID : STD_LOGIC;
   signal axi4stream_spi_master_0_SPI_M_IO0_I : STD_LOGIC;

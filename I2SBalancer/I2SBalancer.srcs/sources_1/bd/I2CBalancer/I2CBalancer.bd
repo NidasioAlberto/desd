@@ -24,8 +24,8 @@
       "edge_detector_0": "",
       "edge_detector_1": "",
       "dual_moving_average_0": "",
-      "volume_controller_0": "",
-      "balance_controller_0": ""
+      "balance_controller_0": "",
+      "volume_controller_0": ""
     },
     "interface_ports": {
       "SPI_M_0": {
@@ -947,14 +947,14 @@
           }
         }
       },
-      "volume_controller_0": {
-        "vlnv": "xilinx.com:module_ref:volume_controller:1.0",
-        "xci_name": "I2CBalancer_volume_controller_0_0",
-        "xci_path": "ip\\I2CBalancer_volume_controller_0_0\\I2CBalancer_volume_controller_0_0.xci",
-        "inst_hier_path": "volume_controller_0",
+      "balance_controller_0": {
+        "vlnv": "xilinx.com:module_ref:balance_controller:1.0",
+        "xci_name": "I2CBalancer_balance_controller_0_0",
+        "xci_path": "ip\\I2CBalancer_balance_controller_0_0\\I2CBalancer_balance_controller_0_0.xci",
+        "inst_hier_path": "balance_controller_0",
         "reference_info": {
           "ref_type": "hdl",
-          "ref_name": "volume_controller",
+          "ref_name": "balance_controller",
           "boundary_crc": "0x0"
         },
         "interface_ports": {
@@ -1143,14 +1143,14 @@
           }
         }
       },
-      "balance_controller_0": {
-        "vlnv": "xilinx.com:module_ref:balance_controller:1.0",
-        "xci_name": "I2CBalancer_balance_controller_0_0",
-        "xci_path": "ip\\I2CBalancer_balance_controller_0_0\\I2CBalancer_balance_controller_0_0.xci",
-        "inst_hier_path": "balance_controller_0",
+      "volume_controller_0": {
+        "vlnv": "xilinx.com:module_ref:volume_controller:1.0",
+        "xci_name": "I2CBalancer_volume_controller_0_0",
+        "xci_path": "ip\\I2CBalancer_volume_controller_0_0\\I2CBalancer_volume_controller_0_0.xci",
+        "inst_hier_path": "volume_controller_0",
         "reference_info": {
           "ref_type": "hdl",
-          "ref_name": "balance_controller",
+          "ref_name": "volume_controller",
           "boundary_crc": "0x0"
         },
         "interface_ports": {
@@ -1405,8 +1405,8 @@
           "digilent_jstk2_0/aresetn",
           "axi4stream_spi_master_0/aresetn",
           "dual_moving_average_0/aresetn",
-          "volume_controller_0/aresetn",
-          "balance_controller_0/aresetn"
+          "balance_controller_0/aresetn",
+          "volume_controller_0/aresetn"
         ]
       },
       "proc_sys_reset_1_peripheral_aresetn": {
@@ -1427,8 +1427,8 @@
           "edge_detector_0/clk",
           "edge_detector_1/clk",
           "dual_moving_average_0/aclk",
-          "volume_controller_0/aclk",
-          "balance_controller_0/aclk"
+          "balance_controller_0/aclk",
+          "volume_controller_0/aclk"
         ]
       },
       "clk_wiz_0_clk_out2": {

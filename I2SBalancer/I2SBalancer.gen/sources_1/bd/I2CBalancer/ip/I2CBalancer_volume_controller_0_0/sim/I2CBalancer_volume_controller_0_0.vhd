@@ -74,7 +74,8 @@ ARCHITECTURE I2CBalancer_volume_controller_0_0_arch OF I2CBalancer_volume_contro
   ATTRIBUTE DowngradeIPIdentifiedWarnings OF I2CBalancer_volume_controller_0_0_arch: ARCHITECTURE IS "yes";
   COMPONENT volume_controller IS
     GENERIC (
-      SOMETHING : INTEGER
+      AMPLIFICATION_EXPONENT : INTEGER;
+      BITS_BALANCE : INTEGER
     );
     PORT (
       m_axis_tvalid : OUT STD_LOGIC;
@@ -111,7 +112,8 @@ ARCHITECTURE I2CBalancer_volume_controller_0_0_arch OF I2CBalancer_volume_contro
 BEGIN
   U0 : volume_controller
     GENERIC MAP (
-      SOMETHING => 32
+      AMPLIFICATION_EXPONENT => 6,
+      BITS_BALANCE => 10
     )
     PORT MAP (
       m_axis_tvalid => m_axis_tvalid,

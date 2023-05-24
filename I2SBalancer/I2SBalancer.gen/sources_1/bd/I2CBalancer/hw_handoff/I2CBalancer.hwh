@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Wed May 24 11:33:25 2023" VIVADOVERSION="2020.2">
+<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Wed May 24 12:34:24 2023" VIVADOVERSION="2020.2">
 
   <SYSTEMINFO ARCH="artix7" DEVICE="7a35t" NAME="I2CBalancer" PACKAGE="cpg236" SPEEDGRADE="-1"/>
 
@@ -1164,8 +1164,8 @@
             <CONNECTION INSTANCE="edge_detector_0" PORT="clk"/>
             <CONNECTION INSTANCE="edge_detector_1" PORT="clk"/>
             <CONNECTION INSTANCE="dual_moving_average_0" PORT="aclk"/>
-            <CONNECTION INSTANCE="volume_controller_0" PORT="aclk"/>
             <CONNECTION INSTANCE="balance_controller_0" PORT="aclk"/>
+            <CONNECTION INSTANCE="volume_controller_0" PORT="aclk"/>
           </CONNECTIONS>
         </PORT>
         <PORT CLKFREQUENCY="22580645" DIR="O" NAME="clk_out2" SIGIS="clk" SIGNAME="clk_wiz_0_clk_out2">
@@ -1726,8 +1726,8 @@
             <CONNECTION INSTANCE="digilent_jstk2_0" PORT="aresetn"/>
             <CONNECTION INSTANCE="axi4stream_spi_master_0" PORT="aresetn"/>
             <CONNECTION INSTANCE="dual_moving_average_0" PORT="aresetn"/>
-            <CONNECTION INSTANCE="volume_controller_0" PORT="aresetn"/>
             <CONNECTION INSTANCE="balance_controller_0" PORT="aresetn"/>
+            <CONNECTION INSTANCE="volume_controller_0" PORT="aresetn"/>
           </CONNECTIONS>
         </PORT>
       </PORTS>
@@ -1785,7 +1785,8 @@
     <MODULE COREREVISION="1" FULLNAME="/volume_controller_0" HWVERSION="1.0" INSTANCE="volume_controller_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="volume_controller" VLNV="xilinx.com:module_ref:volume_controller:1.0">
       <DOCUMENTS/>
       <PARAMETERS>
-        <PARAMETER NAME="SOMETHING" VALUE="32"/>
+        <PARAMETER NAME="AMPLIFICATION_EXPONENT" VALUE="6"/>
+        <PARAMETER NAME="BITS_BALANCE" VALUE="10"/>
         <PARAMETER NAME="Component_Name" VALUE="I2CBalancer_volume_controller_0_0"/>
         <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
       </PARAMETERS>
