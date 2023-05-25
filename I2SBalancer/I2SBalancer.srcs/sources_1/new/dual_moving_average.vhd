@@ -1,33 +1,7 @@
-----------------------------------------------------------------------------------
--- Company: 
--- Engineer: 
--- 
--- Create Date: 19.05.2023 20:29:28
--- Design Name: 
--- Module Name: dual_moving_average - Behavioral
--- Project Name: 
--- Target Devices: 
--- Tool Versions: 
--- Description: 
--- 
--- Dependencies: 
--- 
--- Revision:
--- Revision 0.01 - File Created
--- Additional Comments:
---
-----------------------------------------------------------------------------------
-library IEEE;
-use IEEE.STD_LOGIC_1164.all;
-
--- Uncomment the following library declaration if using
--- arithmetic functions with Signed or Unsigned values
-use IEEE.NUMERIC_STD.all;
-use IEEE.math_real.all;
--- Uncomment the following library declaration if instantiating
--- any Xilinx leaf cells in this code.
---library UNISIM;
---use UNISIM.VComponents.all;
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+use ieee.math_real.all;
 
 entity dual_moving_average is
     generic (
@@ -54,68 +28,109 @@ entity dual_moving_average is
 end dual_moving_average;
 
 architecture Behavioral of dual_moving_average is
+    -- Left and write buffers
     subtype data_type is std_logic_vector(23 downto 0);
-    type matrix_type is array (0 to FILTER_ORDER) of data_type;
-    signal last_data_left  : matrix_type                   := (others => (others => '0'));
-    signal last_data_right : matrix_type                   := (others => (others => '0'));
+    type matrix_type is array (0 to FILTER_ORDER + 1) of data_type;
+    signal buffer_left  : matrix_type                   := (others => (others => '0'));
+    signal buffer_right : matrix_type                   := (others => (others => '0'));
 
-    signal avg_left        : std_logic_vector(23 downto 0) := (others => '0');
-    signal avg_right       : std_logic_vector(23 downto 0) := (others => '0');
+    -- Left and write averages
+    signal avg_left     : std_logic_vector(23 downto 0) := (others => '0');
+    signal avg_right    : std_logic_vector(23 downto 0) := (others => '0');
 
-    constant log_depth     : integer                       := integer(ceil(log2(real(FILTER_ORDER))));
+    -- Logaritmic value of the filter order
+    constant log_order  : integer                       := integer(ceil(log2(real(FILTER_ORDER))));
+
+    type state_type is (READ_LEFT, READ_RIGHT, COMPUTE_SUM, COMPUTE_SUB, WRITE_LEFT, WRITE_RIGHT);
+    signal state : state_type;
 begin
+    -- The master port has data to output only when in write states
+    with state select m_axis_tvalid <=
+        '0' when READ_LEFT,
+        '0' when READ_RIGHT,
+        '0' when COMPUTE_SUM,
+        '0' when COMPUTE_SUB,
+        '1' when WRITE_LEFT,
+        '1' when WRITE_RIGHT;
 
+    -- The slave port is ready only when reading
+    with state select s_axis_tready <=
+        '1' when READ_LEFT,
+        '1' when READ_RIGHT,
+        '0' when COMPUTE_SUM,
+        '0' when COMPUTE_SUB,
+        '0' when WRITE_LEFT,
+        '0' when WRITE_RIGHT;
+
+    -- tlast is 1 only when writing the right value
+    with state select m_axis_tlast <=
+        '0' when READ_LEFT,
+        '0' when READ_RIGHT,
+        '0' when COMPUTE_SUM,
+        '0' when COMPUTE_SUB,
+        '0' when WRITE_LEFT,
+        '1' when WRITE_RIGHT;
+
+    -- Main process
     moving_avg_proc : process (aclk, aresetn)
     begin
-        s_axis_tready <= m_axis_tready;
-        m_axis_tvalid <= s_axis_tvalid;
-        m_axis_tlast  <= s_axis_tlast;
-
         if aresetn = '0' then
-            last_data_left  <= (others => (others => '0'));
-            last_data_right <= (others => (others => '0'));
-
-            -- base behaviour is to reply all the signals in input
-            m_axis_tdata    <= s_axis_tdata;
+            -- On reset we zero the buffers and restart the state machine
+            buffer_left  <= (others => (others => '0'));
+            buffer_right <= (others => (others => '0'));
+            state        <= READ_LEFT;
         elsif rising_edge(aclk) then
-            if filter_enable = '1' then
-                if s_axis_tvalid = '1' then
-                    -- Receiving valid data
+            -- Note: This state machine can be made more efficient by combining the compute states
+            --       into the read and write states. Since the process runs at 180MHz we made it more
+            --       readable by leaving the compute states.
+            --       This two states adds two clock cycles of delay to the signal (11.1ns if clock is at 180MHz),
+            --       not a big deal considering that the audio clock is at 44.1KHz (22.6us)
 
-                    if m_axis_tready = '1' then
-                        -- Starting elaboration only when next module is ready
-
-                        if s_axis_tlast = '0' then -- left sample
-                            -- update the average for left samples
-                            avg_left <= std_logic_vector(signed(avg_left)
-                                + signed(s_axis_tdata(23 downto log_depth))
-                                - signed(last_data_left(FILTER_ORDER - 1)(23 downto log_depth)));
-
-                            m_axis_tdata <= std_logic_vector(signed(avg_left)
-                                + signed(s_axis_tdata(23 downto log_depth))
-                                - signed(last_data_left(FILTER_ORDER - 1)(23 downto log_depth)));
-
-                            last_data_left <= s_axis_tdata & last_data_left(0 to last_data_left'length - 2);
-
-                        else -- right sample
-                            -- update the average for right samples
-                            avg_right <= std_logic_vector(signed(avg_right)
-                                + signed(s_axis_tdata(23 downto log_depth))
-                                - signed(last_data_right(FILTER_ORDER - 1)(23 downto log_depth)));
-
-                            m_axis_tdata <= std_logic_vector(signed(avg_right)
-                                + signed(s_axis_tdata(23 downto log_depth))
-                                - signed(last_data_right(FILTER_ORDER - 1)(23 downto log_depth)));
-
-                            last_data_right <= s_axis_tdata & last_data_right(0 to last_data_right'length - 2);
-
-                        end if;
+            case state is
+                when READ_LEFT =>
+                    -- Receive the first value if data is valid and not last
+                    if s_axis_tvalid = '1' and s_axis_tlast = '0' then
+                        buffer_left <= s_axis_tdata & buffer_left(0 to buffer_right'length - 2);
+                        state       <= READ_RIGHT;
                     end if;
-                end if;
-            else
-                -- base behaviour is to reply all the signals in input
-                m_axis_tdata <= s_axis_tdata;
-            end if; -- filter_enable
+                when READ_RIGHT =>
+                    -- Receive the second value if data is valid and last
+                    if s_axis_tvalid = '1' and s_axis_tlast = '1' then
+                        buffer_right <= s_axis_tdata & buffer_right(0 to buffer_right'length - 2);
+                        state        <= COMPUTE_SUB;
+                    end if;
+                when COMPUTE_SUB =>
+                    -- Some of tdata bits are discarded such that we do not have to compute a division
+                    -- The filter order is always guaranteed to be a power of 2
+                    avg_left  <= std_logic_vector(signed(avg_left) - signed(buffer_left(FILTER_ORDER)(23 downto log_order)));
+                    avg_right <= std_logic_vector(signed(avg_right) - signed(buffer_right(FILTER_ORDER)(23 downto log_order)));
+                    state     <= COMPUTE_SUM;
+                when COMPUTE_SUM =>
+                    avg_left  <= std_logic_vector(signed(avg_left) + signed(buffer_left(0)(23 downto log_order)));
+                    avg_right <= std_logic_vector(signed(avg_right) + signed(buffer_right(0)(23 downto log_order)));
+                    state     <= WRITE_LEFT;
+                when WRITE_LEFT =>
+                    if m_axis_tready = '1' then
+                        if filter_enable = '1' then
+                            m_axis_tdata <= avg_left;
+                        else
+                            m_axis_tdata <= buffer_left(0);
+                        end if;
+
+                        state <= WRITE_RIGHT;
+                    end if;
+                when WRITE_RIGHT =>
+                    -- Write when slave is ready
+                    if m_axis_tready = '1' then
+                        if filter_enable = '1' then
+                            m_axis_tdata <= avg_right;
+                        else
+                            m_axis_tdata <= buffer_right(0);
+                        end if;
+
+                        state <= READ_LEFT;
+                    end if;
+            end case;
         end if;
-    end process; -- moving_avg_proc
+    end process;
 end Behavioral;

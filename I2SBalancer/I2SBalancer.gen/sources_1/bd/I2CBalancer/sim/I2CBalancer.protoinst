@@ -123,7 +123,7 @@
 						"TVALID": { "actual": "s_axis_tvalid"}
 					}
 				},
-				"/volume_controller_0/m_axis": {
+				"/volume_controller_1/m_axis": {
 					"interface": "xilinx.com:interface:axis:1.0",
 					"ports": {
 						"ACLK": { "actual": "aclk"},
@@ -134,7 +134,7 @@
 						"TVALID": { "actual": "m_axis_tvalid"}
 					}
 				},
-				"/volume_controller_0/s_axis": {
+				"/volume_controller_1/s_axis": {
 					"interface": "xilinx.com:interface:axis:1.0",
 					"ports": {
 						"ACLK": { "actual": "aclk"},

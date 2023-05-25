@@ -2,17 +2,17 @@
 <Root MajorVersion="0" MinorVersion="39">
   <CompositeFile CompositeFileTopName="I2CBalancer" CanBeSetAsTop="false" CanDisplayChildGraph="true">
     <Description>Composite Fileset</Description>
-    <Generation Name="SYNTHESIS" State="GENERATED" Timestamp="1685011262"/>
-    <Generation Name="IMPLEMENTATION" State="GENERATED" Timestamp="1685011262"/>
-    <Generation Name="SIMULATION" State="GENERATED" Timestamp="1685011262"/>
-    <Generation Name="HW_HANDOFF" State="GENERATED" Timestamp="1685011262"/>
+    <Generation Name="SYNTHESIS" State="GENERATED" Timestamp="1685057902"/>
+    <Generation Name="IMPLEMENTATION" State="GENERATED" Timestamp="1685057902"/>
+    <Generation Name="SIMULATION" State="GENERATED" Timestamp="1685057902"/>
+    <Generation Name="HW_HANDOFF" State="GENERATED" Timestamp="1685057902"/>
     <FileCollection Name="SOURCES" Type="SOURCES">
-      <File Name="synth\I2CBalancer.vhd" Type="VHDL">
+      <File Name="synth/I2CBalancer.vhd" Type="VHDL">
         <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="false" IsStatusTracked="false"/>
         <Library Name="xil_defaultlib"/>
         <UsedIn Val="SYNTHESIS"/>
       </File>
-      <File Name="sim\I2CBalancer.vhd" Type="VHDL">
+      <File Name="sim/I2CBalancer.vhd" Type="VHDL">
         <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="false" IsStatusTracked="false"/>
         <Library Name="xil_defaultlib"/>
         <UsedIn Val="SIMULATION"/>
@@ -24,7 +24,7 @@
         <UsedIn Val="IMPLEMENTATION"/>
         <UsedIn Val="OUT_OF_CONTEXT"/>
       </File>
-      <File Name="hw_handoff\I2CBalancer.hwh" Type="HwHandoff">
+      <File Name="hw_handoff/I2CBalancer.hwh" Type="HwHandoff">
         <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="false" IsStatusTracked="false"/>
         <Library Name="xil_defaultlib"/>
         <UsedIn Val="HW_HANDOFF"/>
@@ -34,17 +34,17 @@
         <Library Name="xil_defaultlib"/>
         <UsedIn Val="HW_HANDOFF"/>
       </File>
-      <File Name="hw_handoff\I2CBalancer_bd.tcl">
+      <File Name="hw_handoff/I2CBalancer_bd.tcl">
         <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="false" IsStatusTracked="false"/>
         <Library Name="xil_defaultlib"/>
         <UsedIn Val="HW_HANDOFF"/>
       </File>
-      <File Name="synth\I2CBalancer.hwdef">
+      <File Name="synth/I2CBalancer.hwdef">
         <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="false" IsStatusTracked="false"/>
         <Library Name="xil_defaultlib"/>
         <UsedIn Val="HW_HANDOFF"/>
       </File>
-      <File Name="sim\I2CBalancer.protoinst">
+      <File Name="sim/I2CBalancer.protoinst">
         <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="false" IsStatusTracked="false"/>
         <Library Name="xil_defaultlib"/>
         <UsedIn Val="SIMULATION"/>

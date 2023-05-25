@@ -1,33 +1,6 @@
-----------------------------------------------------------------------------------
--- Company: 
--- Engineer: 
--- 
--- Create Date: 18.05.2023 16:46:36
--- Design Name: 
--- Module Name: debouncer - Behavioral
--- Project Name: 
--- Target Devices: 
--- Tool Versions: 
--- Description: 
--- 
--- Dependencies: 
--- 
--- Revision:
--- Revision 0.01 - File Created
--- Additional Comments:
--- 
-----------------------------------------------------------------------------------
-library IEEE;
-use IEEE.STD_LOGIC_1164.all;
-
--- Uncomment the following library declaration if using
--- arithmetic functions with Signed or Unsigned values
-use IEEE.NUMERIC_STD.all;
-
--- Uncomment the following library declaration if instantiating
--- any Xilinx leaf cells in this code.
---library UNISIM;
---use UNISIM.VComponents.all;
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
 
 entity debouncer is
     generic (
@@ -42,19 +15,21 @@ entity debouncer is
 end debouncer;
 
 architecture Behavioral of debouncer is
-    signal last_inputs : std_logic_vector(0 to BEBOUNCING_DEPTH);
+    signal samples : std_logic_vector(BEBOUNCING_DEPTH - 1 downto 0);
 begin
     debouncing : process (clk, reset)
     begin
         if (reset = '1') then
-            last_inputs <= (others => '0');
-            debounced   <= '0';
+            samples   <= (others => '0');
+            debounced <= '0';
         elsif rising_edge(clk) then
-            last_inputs <= input_signal & last_inputs(0 to BEBOUNCING_DEPTH - 1);
-            if (signed(last_inputs) = to_signed(0, last_inputs'length)) then
-                -- signed(my_slv) = to_signed(-1, my_slv'length)
+            -- Read the input signal into the buffer
+            samples <= input_signal & samples(BEBOUNCING_DEPTH - 1 downto 1);
+
+            -- The output is set only if all the samples are the same
+            if (signed(samples) = to_signed(0, samples'length)) then
                 debounced <= '0';
-            elsif (signed(last_inputs) = to_signed(-1, last_inputs'length)) then
+            elsif (signed(samples) = to_signed(-1, samples'length)) then
                 debounced <= '1';
             end if;
         end if;
