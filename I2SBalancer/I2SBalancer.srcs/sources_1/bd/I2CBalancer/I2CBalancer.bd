@@ -737,9 +737,6 @@
               "HAS_TLAST": {
                 "value": "1",
                 "value_src": "constant"
-              },
-              "FREQ_HZ": {
-                "value": "180000000"
               }
             },
             "port_maps": {
@@ -1358,22 +1355,16 @@
       }
     },
     "interface_nets": {
-      "axi4stream_spi_master_0_M_AXIS": {
+      "balance_controller_0_m_axis": {
         "interface_ports": [
-          "axi4stream_spi_master_0/M_AXIS",
-          "digilent_jstk2_0/s_axis"
+          "balance_controller_0/m_axis",
+          "volume_controller_0/s_axis"
         ]
       },
-      "digilent_jstk2_0_m_axis": {
+      "volume_controller_0_m_axis": {
         "interface_ports": [
-          "digilent_jstk2_0/m_axis",
-          "axi4stream_spi_master_0/S_AXIS"
-        ]
-      },
-      "axi4stream_spi_master_0_SPI_M": {
-        "interface_ports": [
-          "SPI_M_0",
-          "axi4stream_spi_master_0/SPI_M"
+          "volume_controller_0/m_axis",
+          "mute_0/s_axis"
         ]
       },
       "dual_moving_average_0_m_axis": {
@@ -1394,16 +1385,22 @@
           "axis_dual_i2s_0/s_axis"
         ]
       },
-      "balance_controller_0_m_axis": {
+      "axi4stream_spi_master_0_M_AXIS": {
         "interface_ports": [
-          "balance_controller_0/m_axis",
-          "volume_controller_0/s_axis"
+          "axi4stream_spi_master_0/M_AXIS",
+          "digilent_jstk2_0/s_axis"
         ]
       },
-      "volume_controller_0_m_axis": {
+      "digilent_jstk2_0_m_axis": {
         "interface_ports": [
-          "volume_controller_0/m_axis",
-          "mute_0/s_axis"
+          "digilent_jstk2_0/m_axis",
+          "axi4stream_spi_master_0/S_AXIS"
+        ]
+      },
+      "axi4stream_spi_master_0_SPI_M": {
+        "interface_ports": [
+          "SPI_M_0",
+          "axi4stream_spi_master_0/SPI_M"
         ]
       }
     },

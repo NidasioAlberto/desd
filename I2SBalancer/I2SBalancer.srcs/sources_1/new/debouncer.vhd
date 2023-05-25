@@ -17,14 +17,12 @@
 -- Additional Comments:
 -- 
 ----------------------------------------------------------------------------------
-
-
 library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.STD_LOGIC_1164.all;
 
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
-use IEEE.NUMERIC_STD.ALL;
+use IEEE.NUMERIC_STD.all;
 
 -- Uncomment the following library declaration if instantiating
 -- any Xilinx leaf cells in this code.
@@ -35,29 +33,29 @@ entity debouncer is
     generic (
         BEBOUNCING_DEPTH : positive := 5
     );
-    Port ( 
-        clk : in STD_LOGIC;
-        input_signal : in STD_LOGIC;
-        reset : in STD_LOGIC;
-        debounced : out STD_LOGIC
+    port (
+        clk          : in std_logic;
+        input_signal : in std_logic;
+        reset        : in std_logic;
+        debounced    : out std_logic
     );
 end debouncer;
 
 architecture Behavioral of debouncer is
     signal last_inputs : std_logic_vector(0 to BEBOUNCING_DEPTH);
 begin
-    debouncing : process(clk, reset)
+    debouncing : process (clk, reset)
     begin
         if (reset = '1') then
             last_inputs <= (others => '0');
-            debounced <= '0';
+            debounced   <= '0';
         elsif rising_edge(clk) then
-            last_inputs <= input_signal & last_inputs(0 to BEBOUNCING_DEPTH-1);
+            last_inputs <= input_signal & last_inputs(0 to BEBOUNCING_DEPTH - 1);
             if (signed(last_inputs) = to_signed(0, last_inputs'length)) then
                 -- signed(my_slv) = to_signed(-1, my_slv'length)
                 debounced <= '0';
             elsif (signed(last_inputs) = to_signed(-1, last_inputs'length)) then
-                debounced <= '1';            
+                debounced <= '1';
             end if;
         end if;
     end process;

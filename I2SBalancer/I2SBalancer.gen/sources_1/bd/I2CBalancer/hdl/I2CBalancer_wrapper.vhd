@@ -1,7 +1,7 @@
 --Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2020.2 (win64) Build 3064766 Wed Nov 18 09:12:45 MST 2020
---Date        : Wed May 24 22:45:47 2023
+--Date        : Thu May 25 12:41:01 2023
 --Host        : DESKTOP-F4BLQ3F running 64-bit major release  (build 9200)
 --Command     : generate_target I2CBalancer_wrapper.bd
 --Design      : I2CBalancer_wrapper
@@ -42,6 +42,7 @@ architecture STRUCTURE of I2CBalancer_wrapper is
     tx_sclk_0 : out STD_LOGIC;
     tx_sdout_0 : out STD_LOGIC;
     reset : in STD_LOGIC;
+    sys_clock : in STD_LOGIC;
     SPI_M_0_sck_t : out STD_LOGIC;
     SPI_M_0_io1_o : out STD_LOGIC;
     SPI_M_0_ss_t : out STD_LOGIC;
@@ -53,8 +54,7 @@ architecture STRUCTURE of I2CBalancer_wrapper is
     SPI_M_0_sck_o : out STD_LOGIC;
     SPI_M_0_ss_i : in STD_LOGIC;
     SPI_M_0_io1_i : in STD_LOGIC;
-    SPI_M_0_io0_i : in STD_LOGIC;
-    sys_clock : in STD_LOGIC
+    SPI_M_0_io0_i : in STD_LOGIC
   );
   end component I2CBalancer;
   component IOBUF is
